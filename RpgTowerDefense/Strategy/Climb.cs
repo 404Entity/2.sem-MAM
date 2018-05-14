@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Content;
 
-namespace T_L_O_B_O
+namespace RpgTowerDefense
 {
     class Climb:IStrategy
     {

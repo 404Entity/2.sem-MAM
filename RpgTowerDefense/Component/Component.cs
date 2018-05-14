@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace T_L_O_B_O
+namespace RpgTowerDefense
 {
     
     abstract class Component

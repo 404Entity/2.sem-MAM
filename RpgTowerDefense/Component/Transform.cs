@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace T_L_O_B_O
+namespace RpgTowerDefense
 {
     class Transform : Component, IUpdateable
     {
