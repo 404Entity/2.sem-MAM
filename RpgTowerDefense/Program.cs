@@ -14,7 +14,7 @@ namespace RpgTowerDefense
         [STAThread]
         static void Main()
         {
-            using (var game = new GameWorld())
+            using (var game = GameWorld._Instance)
                 game.Run();
         }
     }

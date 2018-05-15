@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace RpgTowerDefense
 {
-    class Enemy : Component, ILoadable, IAnimateable, IUpdateable
+    class Enemy : Component, ILoadable, IAnimateable, IUpdate
     {
         #region Fields
         private float speed;

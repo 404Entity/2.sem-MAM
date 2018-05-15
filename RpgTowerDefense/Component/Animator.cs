@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 
 namespace RpgTowerDefense
 {
-    class Animator : Component, IUpdateable
+    class Animator : Component, IUpdate
     {
         private SpriteRenderer spriteRenderer;
         public SpriteRenderer SpriteRenderer
@@ -44,7 +44,7 @@ namespace RpgTowerDefense
 
         public void Update()
         {
-            timeElapsed += GameWorld.Instance.deltaTime;
+            timeElapsed += GameWorld._Instance.deltaTime;
             currentIndex = (int)(timeElapsed * fps);
 
             if (currentIndex > rectangles.Length - 1)
