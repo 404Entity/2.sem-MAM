@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RpgTowerDefense
 {
-    class GameObject : Component, IAnimateable, ICollisionStay, ICollisionEnter, ICollisionExit
+    class GameObject : Component, IAnimateable, ICollideStay, ICollideEnter, ICollideExit
     {
         //Fields
         private List<Component> components;
@@ -67,9 +67,9 @@ namespace RpgTowerDefense
         {
             foreach (Component component in components)
             {
-                if (component is IUpdateable)
+                if (component is IUpdate)
                 {
-                    (component as IUpdateable).Update();
+                    (component as IUpdate).Update();
                 }
             }
         }
@@ -99,9 +99,9 @@ namespace RpgTowerDefense
         {
             foreach (Component component in components)
             {
-                if (component is ICollisionStay)
+                if (component is ICollideStay)
                 {
-                    (component as ICollisionStay).OnCollisionStay(other);
+                    (component as ICollideStay).OnCollisionStay(other);
                 }
             }
         }
@@ -110,9 +110,9 @@ namespace RpgTowerDefense
         {
             foreach(Component component in components)
             {
-                if (component is ICollisionExit)
+                if (component is ICollideExit)
                 {
-                    (component as ICollisionExit).OnCollisionExit(other);
+                    (component as ICollideExit).OnCollisionExit(other);
                 }
             }
         }
@@ -121,9 +121,9 @@ namespace RpgTowerDefense
         {
             foreach (Component component in components)
             {
-                if (component is ICollisionEnter)
+                if (component is ICollideEnter)
                 {
-                    (component as ICollisionEnter).OnCollisionEnter(other);
+                    (component as ICollideEnter).OnCollisionEnter(other);
                 }
             }
         }
