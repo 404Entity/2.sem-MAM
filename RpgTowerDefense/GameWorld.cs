@@ -1,18 +1,23 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace RpgTowerDefense
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class GameWorld : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public Game1()
+        GameObject gameObject = new GameObject();
+
+        List<GameObject> gameObjects;
+
+        public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -28,6 +33,12 @@ namespace RpgTowerDefense
         {
             // TODO: Add your initialization logic here
 
+
+
+
+
+            gameObjects = new List<GameObject>();
+
             base.Initialize();
         }
 
@@ -39,8 +50,12 @@ namespace RpgTowerDefense
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            gameObject.LoadContent(Content);
             // TODO: use this.Content to load your game content here
+
+            
+
+
         }
 
         /// <summary>
@@ -50,6 +65,7 @@ namespace RpgTowerDefense
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+           
         }
 
         /// <summary>
@@ -63,6 +79,11 @@ namespace RpgTowerDefense
                 Exit();
 
             // TODO: Add your update logic here
+            
+            foreach (GameObject go in gameObjects)
+            {
+                gameObject.Update(gameTime);
+            }
 
             base.Update(gameTime);
         }
@@ -75,7 +96,16 @@ namespace RpgTowerDefense
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+
+            foreach (GameObject go in gameObjects)
+            {
+                gameObject.Draw(spriteBatch);
+            }
+
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

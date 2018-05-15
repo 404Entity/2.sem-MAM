@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-namespace T_L_O_B_O
+
+namespace RpgTowerDefense
 {
     class Walk : IStrategy
     {

@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace T_L_O_B_O
+namespace RpgTowerDefense
 {
     class GameObject : Component, IAnimateable, ICollisionStay, ICollisionEnter, ICollisionExit
     {
@@ -32,6 +32,7 @@ namespace T_L_O_B_O
         {
             components.Add(component);
         }
+
         public Component GetComponent(string component)
         {
             Component returnComponent = null;
@@ -45,6 +46,7 @@ namespace T_L_O_B_O
             }
             return returnComponent;
         }
+        //Loading in content on load
         public void LoadContent(ContentManager content)
         {
             if (!isLoaded)
@@ -60,6 +62,7 @@ namespace T_L_O_B_O
             }
             
         }
+        //Running updates on the loaded in content
         public void Update(GameTime gameTime)
         {
             foreach (Component component in components)
@@ -70,6 +73,7 @@ namespace T_L_O_B_O
                 }
             }
         }
+        //Draws the content
         public void Draw(SpriteBatch spriteBatch)
         {
             foreach (Component component in components)

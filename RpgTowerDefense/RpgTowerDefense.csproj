@@ -44,18 +44,16 @@
     <Compile Include="Builder\Director.cs" />
     <Compile Include="Builder\EnemyBuilder.cs" />
     <Compile Include="Builder\PlayerBuilder.cs" />
-    <Compile Include="Component.cs" />
     <Compile Include="Component\Animator.cs" />
-    <Compile Include="Component\ChestOfAThousandGrogs.cs" />
     <Compile Include="Component\Collider.cs" />
     <Compile Include="Component\Component.cs" />
     <Compile Include="Component\Enemy.cs" />
     <Compile Include="Component\Player.cs" />
     <Compile Include="Component\SpriteRenderer.cs" />
     <Compile Include="Component\Transform.cs" />
-    <Compile Include="Enemy.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="GameWorld.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="Interfaces\IBuilder.cs" />
     <Compile Include="obj\x86\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\x86\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\x86\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
@@ -91,7 +89,6 @@
   <ItemGroup>
     <Folder Include="bin\Windows\x86\Debug\" />
     <Folder Include="bin\Windows\x86\Release\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="obj\x86\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
