@@ -17,7 +17,7 @@ namespace RpgTowerDefense
             slime.AddComponent(new SpriteRenderer(slime, "SlimeSheet", 1, 0.5f));
             slime.AddComponent(new Animator(slime));
             slime.AddComponent(new Enemy(slime));
-            slime.LoadContent(GameWorld.Instance.Content);
+            slime.LoadContent(GameWorld._Instance.Content);
             slime.AddComponent(new Collider(slime, false, 0.5f));
             buildobject = slime;
         }

@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RpgTowerDefense
 {
-    class Transform : Component, IUpdateable
+    class Transform : Component, IUpdate
     {
         private Vector2 position;
         private Vector2 velocity;

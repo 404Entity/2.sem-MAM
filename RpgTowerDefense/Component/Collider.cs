@@ -9,11 +9,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RpgTowerDefense
 {
-    class Collider : Component, IDrawable, ILoadable, IUpdateable
+    class Collider : Component, IDrawable, ILoadable, IUpdate
     {
         #region Fields and properties
         private SpriteRenderer spriteRender;
-        private Tiles tiles;
+        //private Tiles tiles;
         private Texture2D texture2D;
         private bool isCollideWith;
         private List<Collider> ohterColliders;
@@ -60,8 +60,8 @@ namespace RpgTowerDefense
         {
             isCollideWith = false;
             doCollisionChecks = CheckCollision;
-            GameWorld.Instance.Colliders.Add(this);
-            LoadContent(GameWorld.Instance.Content);
+            GameWorld._Instance.Colliders.Add(this);
+            LoadContent(GameWorld._Instance.Content);
             ohterColliders = new List<Collider>();
             this.scale = scale;
         }
