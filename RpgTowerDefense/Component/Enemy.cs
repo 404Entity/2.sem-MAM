@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 
-namespace T_L_O_B_O
+namespace RpgTowerDefense
 {
     class Enemy : Component, ILoadable, IAnimateable, IUpdateable
     {

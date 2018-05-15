@@ -53,6 +53,7 @@
     <Compile Include="Component\Player.cs" />
     <Compile Include="Component\SpriteRenderer.cs" />
     <Compile Include="Component\Transform.cs" />
+    <Compile Include="Enemy.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="obj\x86\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
