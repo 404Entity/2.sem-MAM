@@ -52,12 +52,15 @@ namespace RpgTowerDefense
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
-
-
-
-
             gameObjects = new List<GameObject>();
+
+            Director dic = new Director(new PlayerBuilder());
+            Director dic2 = new Director(new EnemyBuilder());
+            GameObject player = dic.Construct(new Vector2(1,1));
+            GameObject enemy = dic2.Construct(new Vector2(30, 30));
+
+            gameObjects.Add(player);
+            gameObjects.Add(enemy);
 
             base.Initialize();
         }
@@ -70,10 +73,13 @@ namespace RpgTowerDefense
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            gameObject.LoadContent(Content);
+            foreach (GameObject go in gameObjects)
+            {
+                go.LoadContent(Content);
+            }
             // TODO: use this.Content to load your game content here
 
-            
+
 
 
         }
@@ -103,7 +109,7 @@ namespace RpgTowerDefense
             
             foreach (GameObject go in gameObjects)
             {
-                gameObject.Update(gameTime);
+                go.Update(gameTime);
             }
 
             base.Update(gameTime);
@@ -122,9 +128,8 @@ namespace RpgTowerDefense
 
             foreach (GameObject go in gameObjects)
             {
-                gameObject.Draw(spriteBatch);
+                go.Draw(spriteBatch);
             }
-
 
             spriteBatch.End();
 

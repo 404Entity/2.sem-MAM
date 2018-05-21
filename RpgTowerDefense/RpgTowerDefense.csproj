@@ -48,7 +48,6 @@
     <Compile Include="Component\Animator.cs" />
     <Compile Include="Component\Collider.cs" />
     <Compile Include="Component\Component.cs" />
-    <Compile Include="Component\Enemy.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Component\SpriteRenderer.cs" />
