@@ -71,10 +71,13 @@ namespace RpgTowerDefense
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            gameObject.LoadContent(Content);
+            foreach (GameObject go in gameObjects)
+            {
+                go.LoadContent(Content);
+            }
             // TODO: use this.Content to load your game content here
 
-            
+
 
 
         }
@@ -104,7 +107,7 @@ namespace RpgTowerDefense
             
             foreach (GameObject go in gameObjects)
             {
-                gameObject.Update(gameTime);
+                go.Update(gameTime);
             }
 
             base.Update(gameTime);
@@ -123,9 +126,8 @@ namespace RpgTowerDefense
 
             foreach (GameObject go in gameObjects)
             {
-                gameObject.Draw(spriteBatch);
+                go.Draw(spriteBatch);
             }
-
 
             spriteBatch.End();
 
