@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
+using System.Threading;
 
 namespace RpgTowerDefense
 {
@@ -15,6 +16,7 @@ namespace RpgTowerDefense
         private Animator animator;
         private IStrategy strategy;
         private DIRECTION direction;
+        bool threadStarted = false;
         #endregion
         #region Constructor
         public Enemy(GameObject gameobject) : base(gameobject)
@@ -64,11 +66,22 @@ namespace RpgTowerDefense
             {
 
             }
-            EnemyMovement();
+            if (threadStarted == false)
+            {
+                Thread enemyMovementThread = new Thread(EnemyMovement);
+                enemyMovementThread.Start();
+                threadStarted = true;
+                
+            }
+            
         }
         public void EnemyMovement()
         {
-            gameObject.Transform.Translate(new Vector2(+2, 0));
+            while (true)
+            {
+                gameObject.Transform.Translate(new Vector2(+2, 0));
+            }
+            
         }
         #endregion
     }
