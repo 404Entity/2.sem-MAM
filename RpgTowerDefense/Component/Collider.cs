@@ -59,7 +59,7 @@ namespace RpgTowerDefense
         {
             isCollideWith = false;
             doCollisionChecks = CheckCollision;
-            GameWorld._Instance.Colliders.Add(this);
+            //GameWorld._Instance.Colliders.Add(this);
             LoadContent(GameWorld._Instance.Content);
             ohterColliders = new List<Collider>();
             this.scale = scale;

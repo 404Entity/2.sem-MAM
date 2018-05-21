@@ -52,12 +52,13 @@ namespace RpgTowerDefense
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
-
-
-
-
             gameObjects = new List<GameObject>();
+
+            Director dic = new Director(new PlayerBuilder());
+            GameObject player = dic.Construct(new Vector2(1,1));
+
+            gameObjects.Add(player);
+
 
             base.Initialize();
         }
