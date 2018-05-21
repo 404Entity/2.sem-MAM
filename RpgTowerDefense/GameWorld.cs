@@ -55,10 +55,12 @@ namespace RpgTowerDefense
             gameObjects = new List<GameObject>();
 
             Director dic = new Director(new PlayerBuilder());
+            Director dic2 = new Director(new EnemyBuilder());
             GameObject player = dic.Construct(new Vector2(1,1));
+            GameObject enemy = dic2.Construct(new Vector2(30, 30));
 
             gameObjects.Add(player);
-
+            gameObjects.Add(enemy);
 
             base.Initialize();
         }

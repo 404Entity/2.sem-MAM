@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace RpgTowerDefense
 {
-    enum DIRECTION {  Right, Left };
+    enum DIRECTION {  Right, Left, Up, Down };
     class Player : Component, IUpdate, ILoadable, IAnimateable
     {
         
@@ -65,6 +65,19 @@ namespace RpgTowerDefense
                         direction = DIRECTION.Left;
                         translation += new Vector2(-2f, 0);
                     }
+
+                    else if (keyState.IsKeyDown(Keys.W))
+                    {
+                        direction = DIRECTION.Up;
+                        translation += new Vector2(0, -2f);
+                    }
+
+                    else if (keyState.IsKeyDown(Keys.S))
+                    {
+                        direction = DIRECTION.Down;
+                        translation += new Vector2(0, 2f);
+                    }
+
                     if (!(strategy is Walk) && !(strategy is Jump))
                     {
                         strategy = new Walk(animator, gameObject.Transform, speed);
