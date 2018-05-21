@@ -46,13 +46,6 @@ namespace RpgTowerDefense
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            //Der var fejl i rectangle, jeg har lavet cheat off da jeg har ingen ide om hvad der lige sker :D
-            string ChestImage = "ChestImage";
-            if (ChestImage == sprite.ToString())
-            {
-                rectangle.Height = sprite.Height;
-                rectangle.Width = sprite.Width;
-            }
             spriteBatch.Draw(sprite, GameObject.Transform.Position + offset,rectangle, Color.White,0,Vector2.Zero,scale,SpriteEffects.None,layerDepth);
         }
     }

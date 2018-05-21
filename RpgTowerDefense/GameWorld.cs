@@ -11,6 +11,7 @@ namespace RpgTowerDefense
     public class GameWorld : Game
     {
         static private GameWorld instance;
+        //Singleton
         static public GameWorld _Instance
         {
             get

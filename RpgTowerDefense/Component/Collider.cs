@@ -121,7 +121,7 @@ namespace RpgTowerDefense
                 }
                 //Genereate a optimized Temp list.  
                 List<Collider> OptimList = new List<Collider>();
-                OptimList.AddRange(GameWorld.Instance.Colliders);
+                OptimList.AddRange(GameWorld._Instance.Colliders);
                 foreach (Collider collider in ohterColliders)
                 {
                     OptimList.Remove(collider);
