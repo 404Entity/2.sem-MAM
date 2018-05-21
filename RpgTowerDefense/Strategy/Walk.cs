@@ -8,12 +8,12 @@ using Microsoft.Xna.Framework.Content;
 
 namespace RpgTowerDefense
 {
-    class Walk : IStrategy
+    class Detect : IStrategy
     {
         private Animator animator;
         private Transform transform;
         private float speed;
-        public Walk(Animator animator, Transform transform, float speed)
+        public Detect(Animator animator, Transform transform, float speed)
         {
             this.animator = animator;
             this.transform = transform;
@@ -21,19 +21,9 @@ namespace RpgTowerDefense
         }
         public void Execute(DIRECTION ref_direction)
         {
-          
-            if (ref_direction == DIRECTION.Right)
-            {
-   
-                animator.PlayAnimation("WalkRight");
-            }
-            if (ref_direction == DIRECTION.Left)
-            {
-        
-                animator.PlayAnimation("WalkLeft");
-            }
-            }
-       
-        
+
+        }
+
+
     }
 }
