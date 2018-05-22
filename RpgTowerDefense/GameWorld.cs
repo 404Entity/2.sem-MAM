@@ -10,6 +10,9 @@ namespace RpgTowerDefense
     /// </summary>
     public class GameWorld : Game
     {
+        Director dic;
+        Director dic2;
+
         static private GameWorld instance;
         //Singleton
         static public GameWorld _Instance
@@ -23,6 +26,30 @@ namespace RpgTowerDefense
                 return instance;
             }
         }
+
+        //dictates ammount of tiles for generation
+        int xTiles = 32;
+        float xWidth;
+        int yTiles = 18;
+        float yHeight;
+        public float[,] coordinateContains;
+        public Vector2[,] coordinatesTopLeft;
+
+        List<Enemy> mobList;
+        void UpdateMobList(Enemy mob, bool newMob)
+        {
+            //index 0, mob is new spawn
+            if(newMob)
+            {
+                mobList.Add(mob);
+            }
+            //index 1, mob is dead, remove from list
+            else
+            {
+                mobList.Remove(mob);
+            }
+        }
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -51,14 +78,30 @@ namespace RpgTowerDefense
         /// </summary>
         protected override void Initialize()
         {
+            coordinateContains = new float[xTiles, yTiles];
+            yHeight = graphics.GraphicsDevice.Viewport.Height / yTiles;
+            xWidth = graphics.GraphicsDevice.Viewport.Width / xTiles;
+            
+            for(int x = 0; x < xTiles - 1;)
+            {
+                for (int y = 0; x < yTiles - 1;)
+                {
+                    coordinatesTopLeft[x, y] = new Vector2(x * xWidth, y * yHeight);
+                    y++;
+                }
+                x++;
+            }
+
             // TODO: Add your initialization logic here
             gameObjects = new List<GameObject>();
 
-            Director dic = new Director(new PlayerBuilder());
+            dic = new Director(new PlayerBuilder());
+            dic2 = new Director(new EnemyBuilder());
             GameObject player = dic.Construct(new Vector2(1,1));
 
-            gameObjects.Add(player);
+            SpawnMob();
 
+            gameObjects.Add(player);
 
             base.Initialize();
         }
@@ -71,10 +114,13 @@ namespace RpgTowerDefense
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            gameObject.LoadContent(Content);
+            foreach (GameObject go in gameObjects)
+            {
+                go.LoadContent(Content);
+            }
             // TODO: use this.Content to load your game content here
 
-            
+
 
 
         }
@@ -104,7 +150,7 @@ namespace RpgTowerDefense
             
             foreach (GameObject go in gameObjects)
             {
-                gameObject.Update(gameTime);
+                go.Update(gameTime);
             }
 
             base.Update(gameTime);
@@ -123,13 +169,19 @@ namespace RpgTowerDefense
 
             foreach (GameObject go in gameObjects)
             {
-                gameObject.Draw(spriteBatch);
+                go.Draw(spriteBatch);
             }
-
 
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        public void SpawnMob()
+        {
+            Enemy mob = new Enemy(dic2.Construct(new Vector2(30, 30)));
+            UpdateMobList(mob, true);
+            
         }
     }
 }

@@ -1,7 +1,8 @@
 ﻿################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
-
+/.vs/RpgTowerDefense/obj/x86/Debug
+/.vs/RpgTowerDefense/v15
 /.vs/RpgTowerDefense/v15/Server/sqlite3/db.lock
 /.vs/RpgTowerDefense/v15/Server/sqlite3/storage.ide
 /.vs/RpgTowerDefense/v15/Server/sqlite3

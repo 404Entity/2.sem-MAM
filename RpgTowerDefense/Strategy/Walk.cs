@@ -21,19 +21,9 @@ namespace RpgTowerDefense
         }
         public void Execute(DIRECTION ref_direction)
         {
-          
-            if (ref_direction == DIRECTION.Right)
-            {
-   
-                animator.PlayAnimation("WalkRight");
-            }
-            if (ref_direction == DIRECTION.Left)
-            {
-        
-                animator.PlayAnimation("WalkLeft");
-            }
-            }
-       
-        
+
+        }
+
+
     }
 }
