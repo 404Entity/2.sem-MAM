@@ -8,12 +8,12 @@ using Microsoft.Xna.Framework.Content;
 
 namespace RpgTowerDefense
 {
-    class Detect : IStrategy
+    class Walk : IStrategy
     {
         private Animator animator;
         private Transform transform;
         private float speed;
-        public Detect(Animator animator, Transform transform, float speed)
+        public Walk(Animator animator, Transform transform, float speed)
         {
             this.animator = animator;
             this.transform = transform;
