@@ -39,7 +39,7 @@ namespace RpgTowerDefense
         void UpdateMobList(Enemy mob, bool newMob)
         {
             //index 0, mob is new spawn
-            if(newMob)
+            if (newMob)
             {
                 mobList.Add(mob);
             }
@@ -81,8 +81,8 @@ namespace RpgTowerDefense
             coordinateContains = new float[xTiles, yTiles];
             yHeight = graphics.GraphicsDevice.Viewport.Height / yTiles;
             xWidth = graphics.GraphicsDevice.Viewport.Width / xTiles;
-            
-            for(int x = 0; x < xTiles - 1;)
+
+            for (int x = 0; x < xTiles - 1;)
             {
                 for (int y = 0; x < yTiles - 1;)
                 {
@@ -181,7 +181,7 @@ namespace RpgTowerDefense
         {
             Enemy mob = new Enemy(dic2.Construct(new Vector2(30, 30)));
             UpdateMobList(mob, true);
-            
+
         }
     }
 }

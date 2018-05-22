@@ -99,3 +99,5 @@ C:\Users\Aldan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\
 C:\Users\Aldan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
 C:\Users\Aldan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\SharpDX.XInput.xml
 C:\Users\Aldan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Enemy.xnb
+C:\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefense.csprojResolveAssemblyReference.cache

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Aldan/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/Player.jpg</SourceFile>
-  <SourceTime>2018-05-21T19:18:06.1311667+02:00</SourceTime>
-  <DestFile>C:/Users/Aldan/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/bin/Windows/Player.xnb</DestFile>
-  <DestTime>2018-05-21T19:30:01.1854719+02:00</DestTime>
+  <SourceFile>C:/2.sem-MAM/RpgTowerDefense/Content/Player.jpg</SourceFile>
+  <SourceTime>2018-02-20T18:17:19.1831983+01:00</SourceTime>
+  <DestFile>C:/2.sem-MAM/RpgTowerDefense/Content/bin/Windows/Player.xnb</DestFile>
+  <DestTime>2018-05-22T10:32:47.4162684+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
