@@ -15,10 +15,10 @@ namespace RpgTowerDefense
         private AttackType attackType;
         private Enemy target;
 
-        public float AttackPower { get => attackPower; set => attackPower = value; }
-        public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
-        internal AttackType AttackType { get => attackType; set => attackType = value; }
-        internal Enemy Target { get => target; set => target = value; }
+        public float AttackPower { get { return attackPower; } set { attackPower = value; } }
+        public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
+        internal AttackType AttackType { get { return attackType; } set { attackType = value; } }
+        internal Enemy Target { get { return target; } set { target = value; } }
         #endregion
         public Tower(float attackpower,float attackspeed,AttackType attackType)
         {
