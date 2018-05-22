@@ -183,7 +183,7 @@ namespace RpgTowerDefense
 
         public void SpawnMob()
         {
-            GameObject mob = dic2.Construct(new Vector2(coordinatesX[3], coordinatesY[1]));
+            GameObject mob = dic2.Construct(new Vector2(coordinatesX[12], coordinatesY[5]));
             gameObjects.Add(mob);
             UpdateMobList(mob, true);
             
