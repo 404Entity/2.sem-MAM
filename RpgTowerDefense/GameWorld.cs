@@ -36,8 +36,8 @@ namespace RpgTowerDefense
         public float[] coordinatesX;
         public float[] coordinatesY;
 
-        List<Enemy> mobList = new List<Enemy>();
-        void UpdateMobList(Enemy mob, bool newMob)
+        internal List<GameObject> mobList = new List<GameObject>();
+        void UpdateMobList(GameObject mob, bool newMob)
         {
             //index 0, mob is new spawn
             if(newMob)
@@ -183,7 +183,8 @@ namespace RpgTowerDefense
 
         public void SpawnMob()
         {
-            Enemy mob = new Enemy(dic2.Construct(new Vector2(coordinatesX[3], coordinatesY[1])));
+            GameObject mob = dic2.Construct(new Vector2(coordinatesX[3], coordinatesY[1]));
+            gameObjects.Add(mob);
             UpdateMobList(mob, true);
             
         }
