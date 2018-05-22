@@ -45,10 +45,10 @@
     <Compile Include="Builder\Director.cs" />
     <Compile Include="Builder\EnemyBuilder.cs" />
     <Compile Include="Builder\PlayerBuilder.cs" />
+    <Compile Include="Builder\TowerBuilder.cs" />
     <Compile Include="Component\Animator.cs" />
     <Compile Include="Component\Collider.cs" />
     <Compile Include="Component\Component.cs" />
-    <Compile Include="Component\Enemy.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Component\SpriteRenderer.cs" />
@@ -70,8 +70,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strategy\Attack.cs" />
-    <Compile Include="Strategy\Climb.cs" />
-    <Compile Include="Strategy\Detect.cs" />
     <Compile Include="Strategy\Idle.cs" />
     <Compile Include="Strategy\Jump.cs" />
     <Compile Include="Strategy\Walk.cs" />

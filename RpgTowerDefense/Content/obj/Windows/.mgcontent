@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/Aldan/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/Player.jpg</File>
+    <File>C:/Users/Aldan/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/Enemy.jpg</File>
+  </SourceFiles>
+</SourceFileCollection>

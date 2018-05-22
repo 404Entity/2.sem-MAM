@@ -45,7 +45,6 @@ namespace RpgTowerDefense
                     (
                     (int)(GameObject.Transform.Position.X + spriteRender.Offset.X),
                     (int)(gameObject.Transform.Position.Y + spriteRender.Offset.Y),
-
                     (int)(spriteRender.Rectangle.Width * scale),
                     (int)(spriteRender.Rectangle.Height * scale)
                 );
@@ -60,7 +59,7 @@ namespace RpgTowerDefense
         {
             isCollideWith = false;
             doCollisionChecks = CheckCollision;
-            GameWorld._Instance.Colliders.Add(this);
+            //GameWorld._Instance.Colliders.Add(this);
             LoadContent(GameWorld._Instance.Content);
             ohterColliders = new List<Collider>();
             this.scale = scale;
@@ -121,7 +120,7 @@ namespace RpgTowerDefense
                 }
                 //Genereate a optimized Temp list.  
                 List<Collider> OptimList = new List<Collider>();
-                OptimList.AddRange(GameWorld.Instance.Colliders);
+                OptimList.AddRange(GameWorld._Instance.Colliders);
                 foreach (Collider collider in ohterColliders)
                 {
                     OptimList.Remove(collider);
@@ -143,18 +142,18 @@ namespace RpgTowerDefense
 
         private void CachePixels()
         {
-            foreach (KeyValuePair<string, Animation> pair in animator.MyAnimations)
-            {
-                Animation animation = pair.Value;
-                Color[][] colors = new Color[(int)animation.Fps][];
+            //foreach (KeyValuePair<string, Animation> pair in animator.MyAnimations)
+            //{
+            //    Animation animation = pair.Value;
+            //    Color[][] colors = new Color[(int)animation.GetFPS];
 
-                for (int i = 0; i < (int)animation.Fps; i++)
-                {
-                    colors[i] = new Color[animation.Rectangles[i].Width * animation.Rectangles[i].Height];
-                    spriteRender.Sprite.GetData(0, animation.Rectangles[i], colors[i], 0, animation.Rectangles[i].Width * animation.Rectangles[i].Height);
-                }
-                pixels.Add(pair.Key, colors);
-            }
+            //    for (int i = 0; i < (int)animation.Fps; i++)
+            //    {
+            //        colors[i] = new Color[animation.Rectangles[i].Width * animation.Rectangles[i].Height];
+            //        spriteRender.Sprite.GetData(0, animation.Rectangles[i], colors[i], 0, animation.Rectangles[i].Width * animation.Rectangles[i].Height);
+            //    }
+            //    pixels.Add(pair.Key, colors);
+            //}
         }
         #endregion
     }
