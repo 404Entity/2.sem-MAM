@@ -33,13 +33,14 @@ namespace RpgTowerDefense
         int yTiles = 18;
         float yHeight;
         public float[,] coordinateContains;
-        public Vector2[,] coordinatesTopLeft;
+        public float[] coordinatesX;
+        public float[] coordinatesY;
 
-        List<Enemy> mobList;
+        List<Enemy> mobList = new List<Enemy>();
         void UpdateMobList(Enemy mob, bool newMob)
         {
             //index 0, mob is new spawn
-            if (newMob)
+            if(newMob)
             {
                 mobList.Add(mob);
             }
@@ -78,15 +79,18 @@ namespace RpgTowerDefense
         /// </summary>
         protected override void Initialize()
         {
-            coordinateContains = new float[xTiles, yTiles];
+            //coordinateContains = new float[xTiles, yTiles];
             yHeight = graphics.GraphicsDevice.Viewport.Height / yTiles;
             xWidth = graphics.GraphicsDevice.Viewport.Width / xTiles;
+            coordinatesX = new float[xTiles];
+            coordinatesY = new float[yTiles];
 
             for (int x = 0; x < xTiles - 1;)
             {
-                for (int y = 0; x < yTiles - 1;)
+                for (int y = 0; y < yTiles - 1;)
                 {
-                    coordinatesTopLeft[x, y] = new Vector2(x * xWidth, y * yHeight);
+                    coordinatesX[x] = x * xWidth;
+                    coordinatesY[y] = y * yHeight; 
                     y++;
                 }
                 x++;
@@ -179,9 +183,9 @@ namespace RpgTowerDefense
 
         public void SpawnMob()
         {
-            Enemy mob = new Enemy(dic2.Construct(new Vector2(30, 30)));
+            Enemy mob = new Enemy(dic2.Construct(new Vector2(coordinatesX[3], coordinatesY[1])));
             UpdateMobList(mob, true);
-
+            
         }
     }
 }
