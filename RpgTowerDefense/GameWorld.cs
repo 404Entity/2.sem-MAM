@@ -38,16 +38,17 @@ namespace RpgTowerDefense
         List<Enemy> mobList;
         void UpdateMobList(Enemy mob, bool newMob)
         {
-            //index 0, mob is new spawn
-            if(newMob)
-            {
-                mobList.Add(mob);
-            }
-            //index 1, mob is dead, remove from list
-            else
-            {
-                mobList.Remove(mob);
-            }
+
+            ////index 0, mob is new spawn
+            //if(newMob)
+            //{
+            //    mobList.Add(mob);
+            //}
+            ////index 1, mob is dead, remove from list
+            //else
+            //{
+            //    mobList.Remove(mob);
+            //}
         }
 
         GraphicsDeviceManager graphics;
@@ -78,19 +79,20 @@ namespace RpgTowerDefense
         /// </summary>
         protected override void Initialize()
         {
-            coordinateContains = new float[xTiles, yTiles];
-            yHeight = graphics.GraphicsDevice.Viewport.Height / yTiles;
-            xWidth = graphics.GraphicsDevice.Viewport.Width / xTiles;
+
+            //coordinateContains = new float[xTiles, yTiles];
+            //yHeight = graphics.GraphicsDevice.Viewport.Height / yTiles;
+            //xWidth = graphics.GraphicsDevice.Viewport.Width / xTiles;
             
-            for(int x = 0; x < xTiles - 1;)
-            {
-                for (int y = 0; x < yTiles - 1;)
-                {
-                    coordinatesTopLeft[x, y] = new Vector2(x * xWidth, y * yHeight);
-                    y++;
-                }
-                x++;
-            }
+            //for(int x = 0; x < xTiles - 1;)
+            //{
+            //    for (int y = 0; x < yTiles - 1;)
+            //    {
+            //        coordinatesTopLeft[x, y] = new Vector2(x * xWidth, y * yHeight);
+            //        y++;
+            //    }
+            //    x++;
+            //}
 
             // TODO: Add your initialization logic here
             gameObjects = new List<GameObject>();
