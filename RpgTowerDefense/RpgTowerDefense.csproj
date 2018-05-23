@@ -74,6 +74,7 @@
     <Compile Include="Strategy\Jump.cs" />
     <Compile Include="Strategy\Walk.cs" />
     <Compile Include="Tower.cs" />
+    <Compile Include="UI\UIButton.cs" />
     <Compile Include="UI\UIComponent.cs" />
   </ItemGroup>
   <ItemGroup>

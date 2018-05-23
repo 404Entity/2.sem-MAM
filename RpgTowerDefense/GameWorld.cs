@@ -54,7 +54,9 @@ namespace RpgTowerDefense
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        GameObject gameObject = new GameObject();
+
+
+        GameObject gameObject = new GameObject(); //??
 
         List<GameObject> gameObjects;
         private List<Collider> colliders;
@@ -69,6 +71,8 @@ namespace RpgTowerDefense
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
+        private List<UIComponent> Uielements;
+
 
 
         /// <summary>
@@ -79,7 +83,7 @@ namespace RpgTowerDefense
         /// </summary>
         protected override void Initialize()
         {
-
+            IsMouseVisible = true;
             //coordinateContains = new float[xTiles, yTiles];
             //yHeight = graphics.GraphicsDevice.Viewport.Height / yTiles;
             //xWidth = graphics.GraphicsDevice.Viewport.Width / xTiles;
