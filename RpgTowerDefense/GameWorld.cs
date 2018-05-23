@@ -55,6 +55,7 @@ namespace RpgTowerDefense
         SpriteBatch spriteBatch;
 
         GameObject gameObject = new GameObject();
+        BackGround backGround = new BackGround();
 
         List<GameObject> gameObjects;
         private List<Collider> colliders;
@@ -124,7 +125,7 @@ namespace RpgTowerDefense
             }
             // TODO: use this.Content to load your game content here
 
-
+            backGround.LoadContent(Content);
 
 
         }
@@ -170,7 +171,7 @@ namespace RpgTowerDefense
 
             spriteBatch.Begin();
 
-
+            backGround.Draw(spriteBatch);
             foreach (GameObject go in gameObjects)
             {
                 go.Draw(spriteBatch);
