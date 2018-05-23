@@ -165,9 +165,10 @@ namespace RpgTowerDefense
             }
             while (true)
             {
+                //Denne kører bare i loop til vi har en implementering
                 gameObject.Transform.Translate(new Vector2(0, 0));
                 Thread.Sleep(threadSleep);
-
+                //Denne kører bare i loop til vi har en implementering
             }
 
         }
