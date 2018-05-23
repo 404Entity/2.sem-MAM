@@ -66,15 +66,19 @@ namespace RpgTowerDefense
             {
 
             }
+
+
+
+            //Enemy Movement Thread
             if (threadStarted == false)
             {
                 Thread enemyMovementThread = new Thread(EnemyMovement);
                 enemyMovementThread.Start();
                 threadStarted = true;
-                
             }
             
         }
+        //Enemy Movement Method
         public void EnemyMovement()
         {
             while (true)
