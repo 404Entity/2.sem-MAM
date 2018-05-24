@@ -83,6 +83,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\map_yingyang.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

@@ -10,6 +10,8 @@ namespace RpgTowerDefense
     /// </summary>
     public class GameWorld : Game
     {
+        float spawnTimer;
+
         Director dic;
         Director dic2;
 
@@ -32,9 +34,14 @@ namespace RpgTowerDefense
         float xWidth;
         int yTiles = 18;
         float yHeight;
-        public float[,] coordinateContains;
+        List<Vector2> buildSpots;
         public float[] coordinatesX;
         public float[] coordinatesY;
+        Vector2[] walkCoordinates = { new Vector2(2, 7), new Vector2(2, 1), new Vector2(8, 1), new Vector2(8, 4), new Vector2(5, 4), new Vector2(5, 7), new Vector2(11, 7), new Vector2(11, 1) };
+        Vector2[] walkdirection = { new Vector2(0,-1), new Vector2(1, 0), new Vector2(0, 1), new Vector2(-1, 0), new Vector2(0, 1), new Vector2(1, 0), new Vector2(0, -1), new Vector2(1, 0) };
+
+        Texture2D mapTexture;
+        Rectangle mapRect;
 
         internal List<GameObject> mobList = new List<GameObject>();
         void UpdateMobList(GameObject mob, bool newMob)
@@ -85,15 +92,21 @@ namespace RpgTowerDefense
             coordinatesX = new float[xTiles];
             coordinatesY = new float[yTiles];
 
-            for (int x = 0; x < xTiles - 1;)
+            for (int x = 0; x < xTiles;)
             {
-                for (int y = 0; y < yTiles - 1;)
+                for (int y = 0; y < yTiles;)
                 {
                     coordinatesX[x] = x * xWidth;
                     coordinatesY[y] = y * yHeight; 
                     y++;
                 }
                 x++;
+            }
+            for (int i = 0; i < walkCoordinates.Length;)
+            {
+                walkCoordinates[i].X = walkCoordinates[i].X * xWidth;
+                walkCoordinates[i].Y = walkCoordinates[i].Y * yHeight;
+                i++;
             }
 
             // TODO: Add your initialization logic here
@@ -123,8 +136,8 @@ namespace RpgTowerDefense
                 go.LoadContent(Content);
             }
             // TODO: use this.Content to load your game content here
-
-
+            mapTexture = Content.Load<Texture2D>("map_yingyang");
+            mapRect = new Rectangle(0, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
 
 
         }
@@ -150,13 +163,15 @@ namespace RpgTowerDefense
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            spawnTimer += deltaTime;
+
             // TODO: Add your update logic here
             
             foreach (GameObject go in gameObjects)
             {
                 go.Update(gameTime);
             }
-
+            if (spawnTimer >= 1.5f) { SpawnMob(); spawnTimer = 0; }
             base.Update(gameTime);
         }
 
@@ -170,7 +185,7 @@ namespace RpgTowerDefense
 
             spriteBatch.Begin();
 
-
+            spriteBatch.Draw(mapTexture, mapRect, Color.White);
             foreach (GameObject go in gameObjects)
             {
                 go.Draw(spriteBatch);
@@ -183,10 +198,10 @@ namespace RpgTowerDefense
 
         public void SpawnMob()
         {
-            GameObject mob = dic2.Construct(new Vector2(coordinatesX[12], coordinatesY[5]));
+            GameObject mob = dic2.Construct(new Vector2(coordinatesX[0], coordinatesY[14]));
             gameObjects.Add(mob);
             UpdateMobList(mob, true);
-            
+            //mob.GetComponent<Enemy>().
         }
     }
 }
