@@ -27,6 +27,7 @@ namespace RpgTowerDefense
             }
         }
 
+        //move to seperate class
         //dictates ammount of tiles for generation
         int xTiles = 32;
         float xWidth;
@@ -38,7 +39,6 @@ namespace RpgTowerDefense
         List<Enemy> mobList;
         void UpdateMobList(Enemy mob, bool newMob)
         {
-
             ////index 0, mob is new spawn
             //if(newMob)
             //{
@@ -87,7 +87,7 @@ namespace RpgTowerDefense
             //coordinateContains = new float[xTiles, yTiles];
             //yHeight = graphics.GraphicsDevice.Viewport.Height / yTiles;
             //xWidth = graphics.GraphicsDevice.Viewport.Width / xTiles;
-            
+
             //for(int x = 0; x < xTiles - 1;)
             //{
             //    for (int y = 0; x < yTiles - 1;)
@@ -100,10 +100,10 @@ namespace RpgTowerDefense
 
             // TODO: Add your initialization logic here
             gameObjects = new List<GameObject>();
-
+            
             dic = new Director(new PlayerBuilder());
             dic2 = new Director(new EnemyBuilder());
-            GameObject player = dic.Construct(new Vector2(1,1));
+            GameObject player = dic.Construct(new Vector2(1, 1));
 
             SpawnMob();
 
@@ -124,13 +124,30 @@ namespace RpgTowerDefense
             {
                 go.LoadContent(Content);
             }
+
+            var exitButton = new UIButton(Content.Load<Texture2D>("Controls/Button"), Content.Load<SpriteFont>("Fonts/UiFont"))
+            {
+                Position = new Vector2(0, 0),
+                Text = "Exit"
+
+            };
+
+            exitButton.Click += ExitButton_Click;
             // TODO: use this.Content to load your game content here
 
+            Uielements = new List<UIComponent>()
+            {
+                exitButton
+            };
 
 
 
         }
 
+        private void  ExitButton_Click(object sender,System.EventArgs e)
+        {
+            Exit();
+        }
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// game-specific content.
@@ -138,7 +155,7 @@ namespace RpgTowerDefense
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
-           
+
         }
 
         /// <summary>
@@ -153,10 +170,14 @@ namespace RpgTowerDefense
                 Exit();
 
             // TODO: Add your update logic here
-            
+
             foreach (GameObject go in gameObjects)
             {
                 go.Update(gameTime);
+            }
+            foreach (UIComponent component in Uielements)
+            {
+                component.Update(gameTime);
             }
 
             base.Update(gameTime);
@@ -178,6 +199,11 @@ namespace RpgTowerDefense
                 go.Draw(spriteBatch);
             }
 
+            foreach (UIComponent component in Uielements)
+            {
+                component.Draw(spriteBatch, gameTime);
+            }
+
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -187,7 +213,7 @@ namespace RpgTowerDefense
         {
             Enemy mob = new Enemy(dic2.Construct(new Vector2(30, 30)));
             UpdateMobList(mob, true);
-            
+
         }
     }
 }

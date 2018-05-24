@@ -128,3 +128,5 @@ C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefen
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefense.pdb
 C:\Users\MIKZU\Source\Repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Enemy.xnb
 C:\Users\MIKZU\Source\Repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Player.xnb
+C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Fonts\UiFont.xnb
+C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Controls\Button.xnb
