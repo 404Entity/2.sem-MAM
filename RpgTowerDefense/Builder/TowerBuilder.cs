@@ -19,7 +19,7 @@ namespace RpgTowerDefense
         {
             GameObject tower = new GameObject();
             tower.AddComponent(new Transform(tower, position));
-            tower.AddComponent(new SpriteRenderer(tower, "Tower_01", 1, 0.5f));
+            tower.AddComponent(new SpriteRenderer(tower, "Player", 1, 0.2f));
             //tower.AddComponent(new Animator(tower));
             if (id == 1)
             {

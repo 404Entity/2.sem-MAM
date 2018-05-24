@@ -41,7 +41,8 @@ namespace RpgTowerDefense
         }
         public void TowerAttack(Enemy target)
         {
-
+            Director director = new Director(new BulletBuilder());
+            director.Construct(gameObject.Transform.Position);
         }
 
         public void LoadContent(ContentManager content)
@@ -56,6 +57,20 @@ namespace RpgTowerDefense
         }
 
         public void Upgrade(int param)
+        {
+            //psudo kode
+            if (param ==1)
+            {
+                attackPower += 1;
+            }else if (param == 2)
+            {
+                attackSpeed += 1;
+            }else if (param == 3)
+            {
+                attackRadius += 1;
+            }
+        }
+        private void CreateAnimation()
         {
 
         }
