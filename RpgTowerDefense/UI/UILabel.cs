@@ -6,12 +6,23 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace RpgTowerDefense.UI
+namespace RpgTowerDefense
 {
     class UILabel : UIComponent
     {
+        private string text;
+        private Vector2 position;
+        private SpriteFont font;
+
+        public Vector2 Position { get => position; set => position = value; }
 
 
+        public UILabel(SpriteFont font, string text)
+        {
+            this.font = font;
+            this.text = text;
+        
+        }
         public override void Draw(SpriteBatch spriteBatch)
         {
             throw new NotImplementedException();
@@ -19,7 +30,10 @@ namespace RpgTowerDefense.UI
 
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(text))
+            {
+                spriteBatch.DrawString(font,text, position, Color.Black);
+            }
         }
 
         public override void Update()
