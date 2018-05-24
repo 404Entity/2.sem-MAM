@@ -74,8 +74,10 @@
     <Compile Include="Strategy\Jump.cs" />
     <Compile Include="Strategy\Walk.cs" />
     <Compile Include="Tower.cs" />
+    <Compile Include="UI\Circle.cs" />
     <Compile Include="UI\UIButton.cs" />
     <Compile Include="UI\UIComponent.cs" />
+    <Compile Include="UI\UILabel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

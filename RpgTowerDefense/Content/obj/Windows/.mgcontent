@@ -4,9 +4,8 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/MIKZ/source/repos/2.sem-MAM/RpgTowerDefense/Content/Player.jpg</File>
-    <File>C:/Users/MIKZ/source/repos/2.sem-MAM/RpgTowerDefense/Content/Enemy.jpg</File>
-    <File>C:/Users/MIKZ/source/repos/2.sem-MAM/RpgTowerDefense/Content/Controls/Button.png</File>
-    <File>C:/Users/MIKZ/source/repos/2.sem-MAM/RpgTowerDefense/Content/Fonts/UiFont.spritefont</File>
+    <File>C:/Users/MIKZU/Source/Repos/2.sem-MAM/RpgTowerDefense/Content/Player.jpg</File>
+    <File>C:/Users/MIKZU/Source/Repos/2.sem-MAM/RpgTowerDefense/Content/Enemy.jpg</File>
+    <File>C:/Users/MIKZU/Source/Repos/2.sem-MAM/RpgTowerDefense/Content/Controls/Button.png</File>
   </SourceFiles>
 </SourceFileCollection>

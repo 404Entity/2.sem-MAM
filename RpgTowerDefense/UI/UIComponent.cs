@@ -18,5 +18,6 @@ namespace RpgTowerDefense
         public abstract void Update();
 
         public abstract void Update(GameTime gameTime);
+
     }
 }

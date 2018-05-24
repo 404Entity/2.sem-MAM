@@ -16,6 +16,7 @@ namespace RpgTowerDefense
         private MouseState currentState;
         private MouseState previousState;
         private SpriteFont font;
+        private float scale;
         private bool ishovering;
         private Texture2D texture;
         private Color penColor;
@@ -30,15 +31,17 @@ namespace RpgTowerDefense
         {
             get
             {
-                return new Rectangle((int)Position.X, (int)position.Y, texture.Width, texture.Height);
+                return new Rectangle((int)Position.X, (int)position.Y, Texture.Width, Texture.Height);
             }
         }
         public string Text { get => text; set => text = value; }
+        public float Scale { get => scale; set => scale = value; }
+        public Texture2D Texture { get => texture; set => texture = value; }
         #endregion
         #region Methods
         public UIButton(Texture2D texture, SpriteFont font)
         {
-            this.texture = texture;
+            this.Texture = texture;
             this.font = font;
             this.PenColor = Color.Black;
         }
@@ -47,7 +50,7 @@ namespace RpgTowerDefense
         {
             throw new NotImplementedException();
         }
-
+        // an overload to the regular IDrawable
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             var color = Color.White;
@@ -55,7 +58,9 @@ namespace RpgTowerDefense
             {
                 color = Color.Gray;
             }
-            spriteBatch.Draw(texture, Rectangle, color);
+            spriteBatch.Draw(Texture, Rectangle, color);
+
+            // if the text field is not null draw the text
             if (!string.IsNullOrEmpty(text))
             {
                 var x = (Rectangle.X + (Rectangle.Width / 2) - (font.MeasureString(text).X / 2));
@@ -68,7 +73,7 @@ namespace RpgTowerDefense
         {
             previousState = currentState;
             currentState = Mouse.GetState();
-
+            
             var mouseRectangle = new Rectangle(currentState.X, currentState.Y, 1, 1);
 
             ishovering = false;
@@ -78,6 +83,7 @@ namespace RpgTowerDefense
                 ishovering = true;
                 if (currentState.LeftButton == ButtonState.Released && previousState.LeftButton == ButtonState.Pressed)
                 {
+                    // an elvis(aka the not null operator) operator to check if the button has been clicked
                     Click?.Invoke(this, new EventArgs());
                 }
             }
