@@ -34,7 +34,10 @@ namespace RpgTowerDefense
         #endregion
         public void FindTarget()
         {
+            if (target == null)
+            {
 
+            }
         }
         public void TowerAttack(Enemy target)
         {
@@ -48,9 +51,14 @@ namespace RpgTowerDefense
 
         public void Update()
         {
-            throw new NotImplementedException();
+            string varstring = "hello";
+
         }
 
+        public void Upgrade(int param)
+        {
+
+        }
         public void OnAnimationDone(string animationName)
         {
             throw new NotImplementedException();

@@ -48,6 +48,10 @@ namespace RpgTowerDefense
             KeyboardState keyState = Keyboard.GetState();
             if (canMove)
             {
+                if (keyState.IsKeyDown(Keys.F))
+                {
+                    BuildTower();
+                }
                 if (keyState.IsKeyDown(Keys.W) || keyState.IsKeyDown(Keys.D) || keyState.IsKeyDown(Keys.S) || keyState.IsKeyDown(Keys.A))
                 {
                     Vector2 translation = Vector2.Zero;
@@ -136,6 +140,17 @@ namespace RpgTowerDefense
             {
                 strategy = null;
             }
+        }
+
+        public void BuildTower()
+        {
+            Director dic = new Director(new TowerBuilder());
+            dic.Builder.BuildGameObject(gameObject.Transform.Position, 1);
+            GameWorld._Instance.AddGameObjects.Add(dic.Builder.GetResult());
+        }
+        public void destroyTower()
+        {
+
         }
         #endregion
     }

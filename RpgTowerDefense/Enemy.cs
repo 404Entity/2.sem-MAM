@@ -15,6 +15,7 @@ namespace RpgTowerDefense
         private Animator animator;
         private IStrategy strategy;
         private DIRECTION direction;
+        private int health;
         //Decides move direction
         Vector2 OpVector = new Vector2(0, -1);
         Vector2 NedVector = new Vector2(0, 1);
@@ -24,6 +25,8 @@ namespace RpgTowerDefense
         int threadSleep = 20;
         //Speed of enemy
         bool threadStarted = false;
+
+        public int Health { get => health; set => health = value; }
         #endregion
         #region Constructor
         public Enemy(GameObject gameobject) : base(gameobject)
@@ -60,6 +63,10 @@ namespace RpgTowerDefense
 
         public void Update()
         {
+            if (health <= 0)
+            {
+                GameWorld._Instance.RemoveGameObjects.Add(gameObject);
+            }
             if (strategy is Walk)
             {
 

@@ -54,15 +54,21 @@ namespace RpgTowerDefense
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        GameObject gameObject = new GameObject();
         BackGround backGround = new BackGround();
 
-        List<GameObject> gameObjects;
+        private List<GameObject> gameObjects;
+        private List<GameObject> addGameObjects;
+        private List<GameObject> removeGameObjects;
         private List<Collider> colliders;
         internal List<Collider> Colliders
         {
             get { return colliders; }
         }
+
+        internal List<GameObject> GameObjects { get => gameObjects; set => gameObjects = value; }
+        internal List<GameObject> AddGameObjects { get => addGameObjects; set => addGameObjects = value; }
+        internal List<GameObject> RemoveGameObjects { get => removeGameObjects; set => removeGameObjects = value; }
+
         public float deltaTime;
 
         public GameWorld()
@@ -98,14 +104,16 @@ namespace RpgTowerDefense
             }
 
             // TODO: Add your initialization logic here
-            gameObjects = new List<GameObject>();
+            GameObjects = new List<GameObject>();
+            addGameObjects = new List<GameObject>();
+            removeGameObjects = new List<GameObject>();
 
             dic = new Director(new PlayerBuilder());
             dic2 = new Director(new EnemyBuilder());
             GameObject player = dic.Construct(new Vector2(1,1));
             GameObject enemy = dic2.Construct(new Vector2(0, 280));
-            gameObjects.Add(player);
-            gameObjects.Add(enemy);
+            GameObjects.Add(player);
+            GameObjects.Add(enemy);
 
             base.Initialize();
         }
@@ -118,7 +126,7 @@ namespace RpgTowerDefense
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            foreach (GameObject go in gameObjects)
+            foreach (GameObject go in GameObjects)
             {
                 go.LoadContent(Content);
             }
@@ -151,15 +159,27 @@ namespace RpgTowerDefense
                 Exit();
 
             // TODO: Add your update logic here
-            
-            foreach (GameObject go in gameObjects)
+            foreach (GameObject go in addGameObjects)
+            {
+                GameObjects.Add(go);
+            }
+            foreach (GameObject go in removeGameObjects)
+            {
+                gameObjects.Remove(go);
+            }
+            CleanTemptList();
+            foreach (GameObject go in GameObjects)
             {
                 go.Update(gameTime);
             }
 
             base.Update(gameTime);
         }
-
+        private void CleanTemptList()
+        {
+            addGameObjects.Clear();
+            removeGameObjects.Clear();
+        }
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -171,7 +191,7 @@ namespace RpgTowerDefense
             spriteBatch.Begin();
 
             backGround.Draw(spriteBatch);
-            foreach (GameObject go in gameObjects)
+            foreach (GameObject go in GameObjects)
             {
                 go.Draw(spriteBatch);
             }
