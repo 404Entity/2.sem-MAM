@@ -24,11 +24,17 @@ namespace RpgTowerDefense
         int threadSleep = 20;
         //Speed of enemy
         bool threadStarted = false;
+
+        int walkIndex;
+        Vector2 moveTarget;
         #endregion
         #region Constructor
         public Enemy(GameObject gameobject) : base(gameobject)
         {
             animator = (gameobject.GetComponent("Animator")as Animator);
+
+            moveTarget = GameWorld._Instance.walkCoordinates[0];
+            gameObject.Transform.Position = new Vector2 (0,moveTarget.Y);
         }
         #endregion
         #region Methods
@@ -38,18 +44,18 @@ namespace RpgTowerDefense
         }
         public void CreateAnimation()
         {
-            animator.CreateAnimation("IdleFront", new Animation(1, 0, 0, 100, 100, 0, Vector2.Zero));
-            animator.CreateAnimation("IdleLeft", new Animation(1, 0, 1, 100, 100, 0, Vector2.Zero));
-            animator.CreateAnimation("IdleRight", new Animation(1, 0, 2, 100, 100, 0, Vector2.Zero));
-            animator.CreateAnimation("IdleBack", new Animation(1, 0, 3, 100, 100, 0, Vector2.Zero));
-            animator.CreateAnimation("WalkFront", new Animation(4, 100, 0, 100, 100, 5, Vector2.Zero));
-            animator.CreateAnimation("WalkBack", new Animation(4, 100, 4, 100, 100, 5, Vector2.Zero));
-            animator.CreateAnimation("WalkLeft", new Animation(4, 200, 0, 100, 100, 5, Vector2.Zero));
-            animator.CreateAnimation("WalkRight", new Animation(4, 200, 4, 100, 100, 5, Vector2.Zero));
-            animator.CreateAnimation("DieBack", new Animation(4, 300, 0, 100, 100, 5, Vector2.Zero));
-            animator.CreateAnimation("DieFront", new Animation(4, 300, 4, 100, 100, 5, Vector2.Zero));
-            animator.CreateAnimation("DieLeft", new Animation(4, 400, 0, 100, 100, 5, Vector2.Zero));
-            animator.CreateAnimation("DieRight", new Animation(4, 400, 4, 100, 100, 5, Vector2.Zero));
+            animator.CreateAnimation("IdleFront", new Animation(1, 0, 0, 25, 25, 0, Vector2.Zero));
+            animator.CreateAnimation("IdleLeft", new Animation(1, 0, 1, 25, 25, 0, Vector2.Zero));
+            animator.CreateAnimation("IdleRight", new Animation(1, 0, 2, 25, 25, 0, Vector2.Zero));
+            animator.CreateAnimation("IdleBack", new Animation(1, 0, 3, 25, 25, 0, Vector2.Zero));
+            animator.CreateAnimation("WalkFront", new Animation(4, 25, 0, 25, 25, 5, Vector2.Zero));
+            animator.CreateAnimation("WalkBack", new Animation(4, 25, 4, 25, 25, 5, Vector2.Zero));
+            animator.CreateAnimation("WalkLeft", new Animation(4, 50, 0, 25, 25, 5, Vector2.Zero));
+            animator.CreateAnimation("WalkRight", new Animation(4, 50, 4, 25, 25, 5, Vector2.Zero));
+            animator.CreateAnimation("DieBack", new Animation(4, 75, 0, 25, 25, 5, Vector2.Zero));
+            animator.CreateAnimation("DieFront", new Animation(4, 75, 4, 25, 25, 5, Vector2.Zero));
+            animator.CreateAnimation("DieLeft", new Animation(4, 100, 0, 25, 25, 5, Vector2.Zero));
+            animator.CreateAnimation("DieRight", new Animation(4, 100, 4, 25, 25, 5, Vector2.Zero));
             animator.PlayAnimation("IdleFront");
         }
 
@@ -73,7 +79,11 @@ namespace RpgTowerDefense
 
             }
 
-
+            if(gameObject.Transform.Position == moveTarget)
+            {
+                walkIndex++;
+                moveTarget = GameWorld._Instance.walkCoordinates[walkIndex];
+            }
             
             //Enemy Movement Thread
             if (threadStarted == false)
@@ -86,6 +96,17 @@ namespace RpgTowerDefense
         //Enemy Movement Method
         public void EnemyMovement(Object stateInfo)
         {
+            while (true)
+            {
+                Vector2 moveVector = moveTarget - gameObject.Transform.Position;
+                if (moveVector.Length() >= 1f)
+                {
+                    moveVector = Vector2.Normalize(moveVector);
+                }
+                gameObject.Transform.Translate(moveVector);
+                Thread.Sleep(threadSleep);
+            }
+            /*
             while (true)
             {
                 //Bevæger sig til hojre
@@ -170,6 +191,7 @@ namespace RpgTowerDefense
                 Thread.Sleep(threadSleep);
                 //Denne kører bare i loop til vi har en implementering
             }
+            */
 
         }
         #endregion
