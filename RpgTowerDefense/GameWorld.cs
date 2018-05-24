@@ -37,7 +37,7 @@ namespace RpgTowerDefense
         List<Vector2> buildSpots;
         public float[] coordinatesX;
         public float[] coordinatesY;
-        Vector2[] walkCoordinates = { new Vector2(2, 7), new Vector2(2, 1), new Vector2(8, 1), new Vector2(8, 4), new Vector2(5, 4), new Vector2(5, 7), new Vector2(11, 7), new Vector2(11, 1) };
+        public Vector2[] walkCoordinates = { new Vector2(5, 14), new Vector2(5, 2), new Vector2(17, 2), new Vector2(17, 8), new Vector2(11, 14), new Vector2(11, 14), new Vector2(23, 14), new Vector2(23, 2), new Vector2(32, 2) };
         Vector2[] walkdirection = { new Vector2(0,-1), new Vector2(1, 0), new Vector2(0, 1), new Vector2(-1, 0), new Vector2(0, 1), new Vector2(1, 0), new Vector2(0, -1), new Vector2(1, 0) };
 
         Texture2D mapTexture;
@@ -163,7 +163,7 @@ namespace RpgTowerDefense
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            spawnTimer += deltaTime;
+            //spawnTimer += deltaTime;
 
             // TODO: Add your update logic here
             
@@ -171,7 +171,7 @@ namespace RpgTowerDefense
             {
                 go.Update(gameTime);
             }
-            if (spawnTimer >= 1.5f) { SpawnMob(); spawnTimer = 0; }
+            //if (spawnTimer >= 1.5f) { SpawnMob(); spawnTimer = 0; }
             base.Update(gameTime);
         }
 
@@ -201,7 +201,6 @@ namespace RpgTowerDefense
             GameObject mob = dic2.Construct(new Vector2(coordinatesX[0], coordinatesY[14]));
             gameObjects.Add(mob);
             UpdateMobList(mob, true);
-            //mob.GetComponent<Enemy>().
         }
     }
 }

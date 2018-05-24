@@ -12,6 +12,8 @@ namespace RpgTowerDefense
     class Enemy : Component, ILoadable, IAnimateable, IUpdate
     {
         #region Fields
+        private Vector2 destination;
+
         private float speed;
         private Animator animator;
         private IStrategy strategy;
@@ -23,6 +25,7 @@ namespace RpgTowerDefense
         {
             speed = 50;
             animator = (gameobject.GetComponent("Animator")as Animator);
+            destination = GameWorld._Instance.walkCoordinates[0];
         }
         #endregion
         #region Methods
@@ -79,9 +82,15 @@ namespace RpgTowerDefense
         {
             while (true)
             {
-                gameObject.Transform.Translate(new Vector2(+2, 0));
+                Vector2 tempVector = new Vector2(destination.X - gameObject.Transform.Position.X, destination.Y - gameObject.Transform.Position.Y);
+                gameObject.Transform.Translate(Vector2.Normalize(tempVector));
             }
-            
+           
+        }
+        public Vector2 Destination(Vector2 location)
+        {
+            destination = location;
+            return destination;
         }
         #endregion
     }
