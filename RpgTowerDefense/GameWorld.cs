@@ -32,7 +32,8 @@ namespace RpgTowerDefense
         float xWidth;
         int yTiles = 18;
         float yHeight;
-        public float[,] coordinateContains;
+        Vector2[] buildSpotLocation;
+        bool[] buildSpotAvailable;
         public float[] coordinatesX;
         public float[] coordinatesY;
 
@@ -56,6 +57,8 @@ namespace RpgTowerDefense
 
         GameObject gameObject = new GameObject();
         BackGround backGround = new BackGround();
+        Texture2D yyMap;
+        Rectangle mapRect;
 
         List<GameObject> gameObjects;
         private List<Collider> colliders;
@@ -97,6 +100,8 @@ namespace RpgTowerDefense
                 x++;
             }
 
+            mapRect = new Rectangle (0, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
+
             // TODO: Add your initialization logic here
             gameObjects = new List<GameObject>();
 
@@ -125,7 +130,7 @@ namespace RpgTowerDefense
             // TODO: use this.Content to load your game content here
 
             backGround.LoadContent(Content);
-
+            yyMap = Content.Load<Texture2D>("BackGround");
 
         }
 
@@ -170,7 +175,8 @@ namespace RpgTowerDefense
 
             spriteBatch.Begin();
 
-            backGround.Draw(spriteBatch);
+            //backGround.Draw(spriteBatch);
+            spriteBatch.Draw(yyMap, mapRect, Color.White);
             foreach (GameObject go in gameObjects)
             {
                 go.Draw(spriteBatch);
