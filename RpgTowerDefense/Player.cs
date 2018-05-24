@@ -78,13 +78,13 @@ namespace RpgTowerDefense
                         translation += new Vector2(0, 2f);
                     }
 
-                    if (!(strategy is Walk) && !(strategy is Jump))
+                    if (!(strategy is Walk))
                     {
                         strategy = new Walk(animator, gameObject.Transform, speed);
                     }
                     gameObject.Transform.Translate(translation * GameWorld._Instance.deltaTime * speed);
                 }
-                else if (!(strategy is Jump))
+                else
                 {
                     strategy = new Idle(animator);
                     gameObject.Transform.stop();
@@ -95,15 +95,7 @@ namespace RpgTowerDefense
                     strategy = new Attack(animator);
                     canMove = false;
                 }
-                else if (isgrounded == true)
-                {
-                    if (keyState.IsKeyDown(Keys.Space))
-                    {
-                        //jump 
-                        strategy = new Jump(animator, this);
-                        
-                    }
-                }
+                
                 
                 strategy.Execute(direction);
             }

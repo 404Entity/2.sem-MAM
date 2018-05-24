@@ -71,7 +71,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strategy\Attack.cs" />
     <Compile Include="Strategy\Idle.cs" />
-    <Compile Include="Strategy\Jump.cs" />
     <Compile Include="Strategy\Walk.cs" />
     <Compile Include="Tower.cs" />
   </ItemGroup>
