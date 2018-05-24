@@ -125,5 +125,4 @@ C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTower
 C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefense.csproj.CoreCompileInputs.cache
 C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefense.exe
 C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefense.pdb
-C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Enemy.xnb
-C:\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefense.csprojResolveAssemblyReference.cache
+C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\BackGround.xnb
