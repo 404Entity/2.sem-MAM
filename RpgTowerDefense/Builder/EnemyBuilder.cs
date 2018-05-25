@@ -18,7 +18,7 @@ namespace RpgTowerDefense
             enemy.AddComponent(new Animator(enemy));
             enemy.AddComponent(new Enemy(enemy));
             enemy.LoadContent(GameWorld._Instance.Content);
-            //slime.AddComponent(new Collider(slime, false, 0.5f));
+            enemy.AddComponent(new Collider(enemy, false, 0.5f));
             buildobject = enemy;
         }
 

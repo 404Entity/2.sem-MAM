@@ -7,32 +7,25 @@ using Microsoft.Xna.Framework;
 
 namespace RpgTowerDefense
 {
-    class GateBuilder
+    class GateBuilder: IBuilder
     {
 
         private GameObject buildObject;
+
         public void BuildGameObject(Vector2 position)
         {
-
+            GameObject mainGate = new GameObject();
+            mainGate.AddComponent(new Transform(mainGate, position));
+            mainGate.AddComponent(new SpriteRenderer(mainGate, "Enemy", 1, 0.5f));
+            mainGate.AddComponent(new Animator(mainGate));
+            mainGate.AddComponent(new MainGate(mainGate));
+            //mainGate.AddComponent(new Collider(mainGate, false, 0.5f));
+            buildObject = mainGate;
         }
 
         public void BuildGameObject(Vector2 position, int id)
         {
-            GameObject tower = new GameObject();
-            tower.AddComponent(new Transform(tower, position));
-            tower.AddComponent(new SpriteRenderer(tower, "Tower", 1, 0.5f));
-            tower.AddComponent(new Animator(tower));
-            if (id == 1)
-            {
-                tower.AddComponent(new Tower(tower, 5, 4, AttackType.Light, 10));
-            }
-            else
-            {
-                tower.AddComponent(new Tower(tower, 10, 2, AttackType.heavy, 10));
-            }
-            tower.LoadContent(GameWorld._Instance.Content);
-            //slime.AddComponent(new Collider(slime, false, 0.5f));
-            buildObject = tower;
+            throw new NotImplementedException();
         }
 
         public GameObject GetResult()

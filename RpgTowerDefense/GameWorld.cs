@@ -12,6 +12,7 @@ namespace RpgTowerDefense
     {
         Director dic;
         Director dic2;
+        Director dic3;
 
         //testing mobspawn
         float spawntime;
@@ -148,10 +149,13 @@ namespace RpgTowerDefense
             ui = new UI();
             dic = new Director(new PlayerBuilder());
             dic2 = new Director(new EnemyBuilder());
+            dic3 = new Director(new GateBuilder());
             GameObject player = dic.Construct(new Vector2(1,1));
             GameObject enemy = dic2.Construct(new Vector2(0, 280));
+            GameObject cityGate = dic3.Construct(new Vector2(700, 700));
             gameObjects.Add(player);
             gameObjects.Add(enemy);
+            //gameObjects.Add(cityGate);
             
 
             //SpawnMob();

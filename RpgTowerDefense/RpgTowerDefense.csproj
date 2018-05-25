@@ -52,6 +52,7 @@
     <Compile Include="Component\Component.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Builder\GateBuilder.cs" />
+    <Compile Include="MainGate.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Component\SpriteRenderer.cs" />
     <Compile Include="Component\Transform.cs" />
@@ -90,6 +91,7 @@
     <Content Include="Content\BackGround_old.png" />
     <Content Include="Content\BackGround_WithPainted_spots.png" />
     <Content Include="Content\BuildSpot.png" />
+    <Content Include="Content\CityGate.jpg" />
     <Content Include="Content\Enemy.jpg" />
     <Content Include="Content\Player.jpg" />
     <Content Include="Icon.ico" />
