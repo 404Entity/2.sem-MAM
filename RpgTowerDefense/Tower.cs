@@ -26,9 +26,9 @@ namespace RpgTowerDefense
         #region Constructor
         public Tower(GameObject gameObject, float attackpower, float attackspeed, AttackType attackType, float attackRadius): base(gameObject)
         {
-            this.AttackPower = attackPower;
-            this.AttackSpeed = attackSpeed;
-            this.AttackType = attackType;
+            AttackPower = attackPower;
+            AttackSpeed = attackSpeed;
+            AttackType = attackType;
 
         }
         #endregion
