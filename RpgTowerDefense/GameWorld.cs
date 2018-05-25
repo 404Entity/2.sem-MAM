@@ -79,6 +79,7 @@ namespace RpgTowerDefense
         {
             get { return colliders; }
         }
+
         public float deltaTime;
 
         public GameWorld()
@@ -143,6 +144,7 @@ namespace RpgTowerDefense
             // TODO: Add your initialization logic here
             gameObjects = new List<GameObject>();
 
+            ui = new UI();
             dic = new Director(new PlayerBuilder());
             dic2 = new Director(new EnemyBuilder());
             GameObject player = dic.Construct(new Vector2(1,1));
@@ -211,7 +213,7 @@ namespace RpgTowerDefense
             {
                 go.Update(gameTime);
             }
-
+            ui.Update();
             base.Update(gameTime);
         }
 
@@ -226,12 +228,14 @@ namespace RpgTowerDefense
             spriteBatch.Begin();
 
             //backGround.Draw(spriteBatch);
+            
             spriteBatch.Draw(yyMap, mapRect, Color.White);
+            
             foreach (GameObject go in gameObjects)
             {
                 go.Draw(spriteBatch);
             }
-
+            ui.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
