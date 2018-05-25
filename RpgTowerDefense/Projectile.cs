@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,12 @@ namespace RpgTowerDefense
 {
     class Projectile : Component, IUpdate,ICollideEnter,ICollideStay,ICollideExit
     {
-        private int damage;
-       public Projectile(GameObject gameObject,int damage): base(gameObject)
+       private Vector2 directionVector;
+       private int damage;
+       public Projectile(GameObject gameObject,int damage,Vector2 directionVector): base(gameObject)
         {
             this.damage = damage;
+            this.directionVector = directionVector;
         }
 
         public void OnCollisionEnter(Collider other)
@@ -41,7 +44,7 @@ namespace RpgTowerDefense
 
         public void Update()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

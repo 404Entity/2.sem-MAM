@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RpgTowerDefense
 {
-    class SpriteRenderer: Component, ILoadable, IDrawable
+    class SpriteRenderer : Component, ILoadable, IDrawable
     {
         float scale;
         private Rectangle rectangle;
@@ -25,6 +25,7 @@ namespace RpgTowerDefense
             get { return sprite; }
             set { sprite = value; }
         }
+        private float rotation;
         private string spriteName;
         private float layerDepth;
 
@@ -33,20 +34,29 @@ namespace RpgTowerDefense
             get { return rectangle; }
             set { rectangle = value; }
         }
+
+        public float Rotation { get => rotation; set => rotation = value; }
+
         public SpriteRenderer(GameObject gameobject, string spriteName, float layerDepth, float scale) : base(gameobject)
         {
             this.layerDepth = layerDepth;
             this.spriteName = spriteName;
             this.scale = scale;
+            rotation = 0;
         }
         public void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>(spriteName);
-         
+
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, GameObject.Transform.Position + offset,rectangle, Color.White,0,Vector2.Zero,scale,SpriteEffects.None,layerDepth);
+            spriteBatch.Draw(sprite, GameObject.Transform.Position + offset, rectangle, Color.White, rotation, new Vector2((gameObject.Transform.Position.X + (sprite.Width / 2)) * scale, (gameObject.Transform.Position.Y + (sprite.Height / 2)) * scale +110), scale, SpriteEffects.None, layerDepth);
+        }
+
+        public void GetStaticRectangle()
+        {
+            rectangle = new Rectangle(0, 0, sprite.Width, sprite.Height);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
 namespace RpgTowerDefense
@@ -38,12 +39,28 @@ namespace RpgTowerDefense
             if (target == null)
             {
 
+                foreach (Enemy enemy in GameWorld._Instance.MobList)
+                {
+                    if (Vector2.Distance(enemy.GameObject.Transform.Position,GameObject.Transform.Position) < AttackRadius)
+                    {
+                        target = enemy;
+                        break;
+                    }
+                }
+
             }
         }
-        public void TowerAttack(Enemy target)
+        public void TowerAttack()
         {
-            Director director = new Director(new BulletBuilder());
-            director.Construct(gameObject.Transform.Position);
+            if (target != null)
+            {
+                Vector2 shootdirection = target.GameObject.Transform.Position - gameObject.Transform.Position;
+                Vector2 shootdirectonnormalized = Vector2.Normalize(shootdirection);
+                Director director = new Director(new BulletBuilder());
+                director.Construct(gameObject.Transform.Position, 1, shootdirectonnormalized);
+                GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
+            }
+      
         }
 
         public void LoadContent(ContentManager content)
@@ -53,10 +70,15 @@ namespace RpgTowerDefense
 
         public void Update()
         {
+            spin();
             string varstring = "hello";
-
+            TowerAttack();
         }
-
+        public void spin()
+        {
+            SpriteRenderer sp = gameObject.GetComponent("spriteRenderer") as SpriteRenderer;
+            sp.Rotation += 0.05f;
+        }
         public void Upgrade(int param)
         {
             //psudo kode

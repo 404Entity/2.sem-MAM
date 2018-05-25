@@ -37,18 +37,18 @@ namespace RpgTowerDefense
         public float[] coordinatesX;
         public float[] coordinatesY;
 
-        List<Enemy> mobList = new List<Enemy>();
+        private List<Enemy> mobList = new List<Enemy>();
         void UpdateMobList(Enemy mob, bool newMob)
         {
             //index 0, mob is new spawn
             if(newMob)
             {
-                mobList.Add(mob);
+                MobList.Add(mob);
             }
             //index 1, mob is dead, remove from list
             else
             {
-                mobList.Remove(mob);
+                MobList.Remove(mob);
             }
         }
 
@@ -71,6 +71,7 @@ namespace RpgTowerDefense
         internal List<GameObject> GameObjects { get => gameObjects; set => gameObjects = value; }
         internal List<GameObject> AddGameObjects { get => addGameObjects; set => addGameObjects = value; }
         internal List<GameObject> RemoveGameObjects { get => removeGameObjects; set => removeGameObjects = value; }
+        internal List<Enemy> MobList { get => mobList; set => mobList = value; }
 
         public float deltaTime;
 

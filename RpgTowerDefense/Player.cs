@@ -127,6 +127,7 @@ namespace RpgTowerDefense
 
         public void OnAnimationDone(string animationName)
         {
+            /*
             if (animationName == null)
             {
                 animationName = "Idle";
@@ -140,6 +141,7 @@ namespace RpgTowerDefense
             {
                 strategy = null;
             }
+            */
         }
 
         public void BuildTower()
