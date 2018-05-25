@@ -106,6 +106,7 @@ namespace RpgTowerDefense
             GameObject enemy = dic2.Construct(new Vector2(0, 280));
             gameObjects.Add(player);
             gameObjects.Add(enemy);
+            
 
             base.Initialize();
         }
