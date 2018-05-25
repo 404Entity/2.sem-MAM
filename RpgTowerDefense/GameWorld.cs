@@ -32,7 +32,8 @@ namespace RpgTowerDefense
         float xWidth;
         int yTiles = 18;
         float yHeight;
-        public float[,] coordinateContains;
+        Vector2[] buildSpotLocation;
+        bool[] buildSpotAvailable;
         public float[] coordinatesX;
         public float[] coordinatesY;
 
@@ -56,6 +57,11 @@ namespace RpgTowerDefense
 
         GameObject gameObject = new GameObject();
         BackGround backGround = new BackGround();
+
+        Texture2D yyMap;
+        Rectangle mapRect;
+        public Vector2[] walkCoordinates = { new Vector2(5, 15), new Vector2(5, 2), new Vector2(17, 2), new Vector2(17, 8), new Vector2(11, 8), new Vector2(11, 15), new Vector2(23, 15), new Vector2(23, 2), new Vector2(32, 2) };
+        Vector2[] walkdirection = { new Vector2(0, -1), new Vector2(1, 0), new Vector2(0, 1), new Vector2(-1, 0), new Vector2(0, 1), new Vector2(1, 0), new Vector2(0, -1), new Vector2(1, 0) };
 
         List<GameObject> gameObjects;
         private List<Collider> colliders;
@@ -97,6 +103,15 @@ namespace RpgTowerDefense
                 x++;
             }
 
+            for(int i = 0; i < walkCoordinates.Length;)
+            {
+                walkCoordinates[i].X = walkCoordinates[i].X * xWidth;
+                walkCoordinates[i].Y = walkCoordinates[i].Y * yHeight;
+                i++;
+            }
+
+            mapRect = new Rectangle (0, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
+
             // TODO: Add your initialization logic here
             gameObjects = new List<GameObject>();
 
@@ -125,7 +140,7 @@ namespace RpgTowerDefense
             // TODO: use this.Content to load your game content here
 
             backGround.LoadContent(Content);
-
+            yyMap = Content.Load<Texture2D>("BackGround");
 
         }
 
@@ -170,7 +185,8 @@ namespace RpgTowerDefense
 
             spriteBatch.Begin();
 
-            backGround.Draw(spriteBatch);
+            //backGround.Draw(spriteBatch);
+            spriteBatch.Draw(yyMap, mapRect, Color.White);
             foreach (GameObject go in gameObjects)
             {
                 go.Draw(spriteBatch);
