@@ -49,3 +49,10 @@
 /processorParam:TextureFormat=Color
 /build:BackGround.png
 
+#begin GoldDraw.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:GoldDraw.spritefont
+

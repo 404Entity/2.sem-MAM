@@ -21,13 +21,25 @@ namespace RpgTowerDefense
         private DIRECTION direction;
         private bool canMove;
         private bool isgrounded;
+        private int gold;
 
         public bool CanMove
         {
             get { return canMove; }
             set { canMove = value; }
         }
+
+
         #endregion
+
+        #region Property
+
+        
+
+        #endregion
+
+
+
         #region Constructor
         public Player(GameObject gameobject) : base(gameobject)
         {
@@ -37,6 +49,9 @@ namespace RpgTowerDefense
             isgrounded = false;
         }
         #endregion
+
+
+
         #region Methods
         public void LoadContent(ContentManager Content)
         {
@@ -136,6 +151,16 @@ namespace RpgTowerDefense
             {
                 strategy = null;
             }
+        }
+
+        public int GetGold()
+        {
+            return gold;
+        }
+
+        public void SetGold(int gold)
+        {
+            this.gold = gold;
         }
         #endregion
     }

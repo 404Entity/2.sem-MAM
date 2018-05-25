@@ -36,6 +36,8 @@ namespace RpgTowerDefense
         bool[] buildSpotAvailable;
         public float[] coordinatesX;
         public float[] coordinatesY;
+        private int gold;
+        UI ui;
 
         List<Enemy> mobList = new List<Enemy>();
         void UpdateMobList(Enemy mob, bool newMob)
@@ -57,6 +59,7 @@ namespace RpgTowerDefense
 
         GameObject gameObject = new GameObject();
         BackGround backGround = new BackGround();
+        
 
         Texture2D yyMap;
         Rectangle mapRect;
@@ -69,6 +72,9 @@ namespace RpgTowerDefense
         {
             get { return colliders; }
         }
+
+        public int Gold { get => gold; set => gold = value; }
+
         public float deltaTime;
 
         public GameWorld()
@@ -115,12 +121,15 @@ namespace RpgTowerDefense
             // TODO: Add your initialization logic here
             gameObjects = new List<GameObject>();
 
+            ui = new UI();
             dic = new Director(new PlayerBuilder());
             dic2 = new Director(new EnemyBuilder());
             GameObject player = dic.Construct(new Vector2(1,1));
             GameObject enemy = dic2.Construct(new Vector2(0, 280));
             gameObjects.Add(player);
             gameObjects.Add(enemy);
+
+            
 
             base.Initialize();
         }
@@ -139,7 +148,7 @@ namespace RpgTowerDefense
             }
             // TODO: use this.Content to load your game content here
 
-            backGround.LoadContent(Content);
+            ui.LoadContent(Content);
             yyMap = Content.Load<Texture2D>("BackGround");
 
         }
@@ -171,7 +180,7 @@ namespace RpgTowerDefense
             {
                 go.Update(gameTime);
             }
-
+            ui.Update(Gold);
             base.Update(gameTime);
         }
 
@@ -186,12 +195,14 @@ namespace RpgTowerDefense
             spriteBatch.Begin();
 
             //backGround.Draw(spriteBatch);
+            
             spriteBatch.Draw(yyMap, mapRect, Color.White);
+            
             foreach (GameObject go in gameObjects)
             {
                 go.Draw(spriteBatch);
             }
-
+            ui.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
