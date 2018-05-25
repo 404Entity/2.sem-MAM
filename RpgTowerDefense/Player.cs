@@ -19,15 +19,21 @@ namespace RpgTowerDefense
         private Animator animator;
         private IStrategy strategy;
         private DIRECTION direction;
+        private bool canMove;
         private bool isgrounded;
 
-        
+        public bool CanMove
+        {
+            get { return canMove; }
+            set { canMove = value; }
+        }
         #endregion
         #region Constructor
         public Player(GameObject gameobject) : base(gameobject)
         {
             speed = 100;
             animator = (gameobject.GetComponent("Animator") as Animator);
+            canMove = true;
             isgrounded = false;
         }
         #endregion
@@ -40,57 +46,59 @@ namespace RpgTowerDefense
         public void Update()
         {
             KeyboardState keyState = Keyboard.GetState();
-
-            if (keyState.IsKeyDown(Keys.W) || keyState.IsKeyDown(Keys.D) || keyState.IsKeyDown(Keys.S) || keyState.IsKeyDown(Keys.A))
+            if (canMove)
             {
-                Vector2 translation = Vector2.Zero;
-
-
-                if (keyState.IsKeyDown(Keys.D))
-
+                if (keyState.IsKeyDown(Keys.W) || keyState.IsKeyDown(Keys.D) || keyState.IsKeyDown(Keys.S) || keyState.IsKeyDown(Keys.A))
                 {
-                    direction = DIRECTION.Right;
-                    translation += new Vector2(2f, 0);
-                }
+                    Vector2 translation = Vector2.Zero;
 
-                else if (keyState.IsKeyDown(Keys.A))
-                {
-                    direction = DIRECTION.Left;
-                    translation += new Vector2(-2f, 0);
-                }
+                   
+                    if (keyState.IsKeyDown(Keys.D))
 
-                else if (keyState.IsKeyDown(Keys.W))
-                {
-                    direction = DIRECTION.Up;
-                    translation += new Vector2(0, -2f);
-                }
+                    {
+                        direction = DIRECTION.Right;
+                        translation += new Vector2(2f, 0);
+                    }
 
-                else if (keyState.IsKeyDown(Keys.S))
-                {
-                    direction = DIRECTION.Down;
-                    translation += new Vector2(0, 2f);
-                }
+                    else if (keyState.IsKeyDown(Keys.A))
+                    {
+                        direction = DIRECTION.Left;
+                        translation += new Vector2(-2f, 0);
+                    }
 
-                if (!(strategy is Walk))
-                {
-                    strategy = new Walk(animator, gameObject.Transform, speed);
+                    else if (keyState.IsKeyDown(Keys.W))
+                    {
+                        direction = DIRECTION.Up;
+                        translation += new Vector2(0, -2f);
+                    }
+
+                    else if (keyState.IsKeyDown(Keys.S))
+                    {
+                        direction = DIRECTION.Down;
+                        translation += new Vector2(0, 2f);
+                    }
+
+                    if (!(strategy is Walk))
+                    {
+                        strategy = new Walk(animator, gameObject.Transform, speed);
+                    }
+                    gameObject.Transform.Translate(translation * GameWorld._Instance.deltaTime * speed);
                 }
-                gameObject.Transform.Translate(translation * GameWorld._Instance.deltaTime * speed);
+                else
+                {
+                    strategy = new Idle(animator);
+                    gameObject.Transform.stop();
+                }
+                if (keyState.IsKeyDown(Keys.E))
+                {
+                    //attack stuff
+                    strategy = new Attack(animator);
+                    canMove = false;
+                }
+                
+                
+                strategy.Execute(direction);
             }
-            else
-            {
-                strategy = new Idle(animator);
-                gameObject.Transform.stop();
-            }
-            if (keyState.IsKeyDown(Keys.E))
-            {
-                //attack stuff
-                strategy = new Attack(animator);
-            }
-
-
-            strategy.Execute(direction);
-
         }
         public void CreateAnimation()
         {
@@ -121,7 +129,7 @@ namespace RpgTowerDefense
             }
             if (animationName.Contains("Attack"))
             {
-                
+                canMove = true;
 
             }
             if (animationName.Contains("Jump"))

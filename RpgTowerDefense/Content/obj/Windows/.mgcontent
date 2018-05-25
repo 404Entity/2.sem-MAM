@@ -4,8 +4,8 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/2.sem-MAM/RpgTowerDefense/Content/Player.jpg</File>
-    <File>C:/2.sem-MAM/RpgTowerDefense/Content/Enemy.jpg</File>
-    <File>C:/2.sem-MAM/RpgTowerDefense/Content/BackGround.png</File>
+    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/Player.jpg</File>
+    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/Enemy.jpg</File>
+    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/BackGround.png</File>
   </SourceFiles>
 </SourceFileCollection>
