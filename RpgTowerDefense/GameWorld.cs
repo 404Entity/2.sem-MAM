@@ -64,6 +64,7 @@ namespace RpgTowerDefense
 
         GameObject gameObject = new GameObject();
         BackGround backGround = new BackGround();
+        UI ui;
 
         //data for map, needs to be texture for scalability
         Texture2D yyMap;
@@ -171,7 +172,7 @@ namespace RpgTowerDefense
                 go.LoadContent(Content);
             }
             // TODO: use this.Content to load your game content here
-
+            ui.LoadContent(Content);
             backGround.LoadContent(Content);
             //yyMap = Content.Load<Texture2D>("BackGround");
             yyMap = Content.Load<Texture2D>("BackGroundWithGrid");
