@@ -82,13 +82,13 @@ namespace RpgTowerDefense
 
                     else if (keyState.IsKeyDown(Keys.W))
                     {
-                        direction = DIRECTION.Up;
+                        //direction = DIRECTION.Up;
                         translation += new Vector2(0, -2f);
                     }
 
                     else if (keyState.IsKeyDown(Keys.S))
                     {
-                        direction = DIRECTION.Down;
+                        //direction = DIRECTION.Down;
                         translation += new Vector2(0, 2f);
                     }
 
