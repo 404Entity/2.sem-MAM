@@ -29,10 +29,10 @@ namespace RpgTowerDefense
 
         //dictates ammount of tiles for generation
         int xTiles = 32;
-        float xWidth;
+        public float xWidth;
         int yTiles = 18;
-        float yHeight;
-        Vector2[] buildSpotLocation;
+        public float yHeight;
+        Vector2[] buildSpotLocation = { new Vector2(3,12),new Vector2(6,14),new Vector2(7,3),new Vector2(12,12),new Vector2(14,3),new Vector2(16,6),new Vector2(21,12),new Vector2(24,6),new Vector2(28,1) };
         bool[] buildSpotAvailable;
         public float[] coordinatesX;
         public float[] coordinatesY;
@@ -60,7 +60,7 @@ namespace RpgTowerDefense
 
         Texture2D yyMap;
         Rectangle mapRect;
-        public Vector2[] walkCoordinates = { new Vector2(5, 15), new Vector2(5, 2), new Vector2(17, 2), new Vector2(17, 8), new Vector2(11, 8), new Vector2(11, 15), new Vector2(23, 15), new Vector2(23, 2), new Vector2(32, 2) };
+        public Vector2[] walkCoordinates = { new Vector2(5, 14), new Vector2(5, 2), new Vector2(17, 2), new Vector2(17, 8), new Vector2(11, 8), new Vector2(11, 14), new Vector2(23, 14), new Vector2(23, 2), new Vector2(32, 2) };
         Vector2[] walkdirection = { new Vector2(0, -1), new Vector2(1, 0), new Vector2(0, 1), new Vector2(-1, 0), new Vector2(0, 1), new Vector2(1, 0), new Vector2(0, -1), new Vector2(1, 0) };
 
         List<GameObject> gameObjects;
@@ -102,8 +102,16 @@ namespace RpgTowerDefense
                 }
                 x++;
             }
+            
+            for (int i = 0; i < buildSpotLocation.Length;)
+            {
+                buildSpotLocation[i].X = buildSpotLocation[i].X * xWidth;
+                buildSpotLocation[i].Y = buildSpotLocation[i].Y * yHeight;
+                i++;
+            }
+            buildSpotAvailable = new bool[buildSpotLocation.Length];
 
-            for(int i = 0; i < walkCoordinates.Length;)
+            for (int i = 0; i < walkCoordinates.Length;)
             {
                 walkCoordinates[i].X = walkCoordinates[i].X * xWidth;
                 walkCoordinates[i].Y = walkCoordinates[i].Y * yHeight;
