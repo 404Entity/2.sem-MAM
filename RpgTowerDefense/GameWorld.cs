@@ -36,7 +36,6 @@ namespace RpgTowerDefense
         bool[] buildSpotAvailable;
         public float[] coordinatesX;
         public float[] coordinatesY;
-        private int gold;
         UI ui;
 
         List<Enemy> mobList = new List<Enemy>();
@@ -72,8 +71,6 @@ namespace RpgTowerDefense
         {
             get { return colliders; }
         }
-
-        public int Gold { get => gold; set => gold = value; }
 
         public float deltaTime;
 
@@ -180,7 +177,7 @@ namespace RpgTowerDefense
             {
                 go.Update(gameTime);
             }
-            ui.Update(Gold);
+            ui.Update();
             base.Update(gameTime);
         }
 

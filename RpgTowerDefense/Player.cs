@@ -21,7 +21,6 @@ namespace RpgTowerDefense
         private DIRECTION direction;
         private bool canMove;
         private bool isgrounded;
-        private int gold;
 
         public bool CanMove
         {
@@ -153,15 +152,7 @@ namespace RpgTowerDefense
             }
         }
 
-        public int GetGold()
-        {
-            return gold;
-        }
-
-        public void SetGold(int gold)
-        {
-            this.gold = gold;
-        }
+        
         #endregion
     }
 }

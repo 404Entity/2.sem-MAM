@@ -19,6 +19,7 @@ namespace RpgTowerDefense
         Vector2 OpVector = new Vector2(0, -1);
         Vector2 NedVector = new Vector2(0, 1);
         Vector2 HojreVector = new Vector2(1, 0);
+        UI uI = new UI();
         //Decides move direction
         //Speed of enemy
         int threadSleep = 20;
@@ -192,7 +193,6 @@ namespace RpgTowerDefense
                 //Denne kører bare i loop til vi har en implementering
             }
             */
-
         }
         #endregion
     }
