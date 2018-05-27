@@ -12,6 +12,7 @@ namespace RpgTowerDefense
     {
         Director dic;
         Director dic2;
+        Director dic3;
 
         //testing mobspawn
         float spawntime;
@@ -64,6 +65,7 @@ namespace RpgTowerDefense
 
         GameObject gameObject = new GameObject();
         BackGround backGround = new BackGround();
+        UI ui;
 
         //data for map, needs to be texture for scalability
         Texture2D yyMap;
@@ -79,6 +81,7 @@ namespace RpgTowerDefense
         {
             get { return colliders; }
         }
+
         public float deltaTime;
 
         public GameWorld()
@@ -143,12 +146,17 @@ namespace RpgTowerDefense
             // TODO: Add your initialization logic here
             gameObjects = new List<GameObject>();
 
+            ui = new UI();
             dic = new Director(new PlayerBuilder());
             dic2 = new Director(new EnemyBuilder());
+            dic3 = new Director(new GateBuilder());
             GameObject player = dic.Construct(new Vector2(1,1));
             GameObject enemy = dic2.Construct(new Vector2(0, 280));
+            GameObject cityGate = dic3.Construct(new Vector2(700, 700));
             gameObjects.Add(player);
             gameObjects.Add(enemy);
+            //gameObjects.Add(cityGate);
+            
 
             //SpawnMob();
 
@@ -168,7 +176,7 @@ namespace RpgTowerDefense
                 go.LoadContent(Content);
             }
             // TODO: use this.Content to load your game content here
-
+            ui.LoadContent(Content);
             backGround.LoadContent(Content);
             //yyMap = Content.Load<Texture2D>("BackGround");
             yyMap = Content.Load<Texture2D>("BackGroundWithGrid");
@@ -210,7 +218,7 @@ namespace RpgTowerDefense
             {
                 go.Update(gameTime);
             }
-
+            ui.Update();
             base.Update(gameTime);
         }
 
@@ -225,12 +233,14 @@ namespace RpgTowerDefense
             spriteBatch.Begin();
 
             //backGround.Draw(spriteBatch);
+            
             spriteBatch.Draw(yyMap, mapRect, Color.White);
+            
             foreach (GameObject go in gameObjects)
             {
                 go.Draw(spriteBatch);
             }
-
+            ui.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
