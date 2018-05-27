@@ -91,6 +91,9 @@ namespace RpgTowerDefense
         protected override void Initialize()
         {
             //coordinateContains = new float[xTiles, yTiles];
+            graphics.IsFullScreen = true;
+            Window.AllowUserResizing = true;
+            IsMouseVisible = true;
             yHeight = graphics.GraphicsDevice.Viewport.Height / yTiles;
             xWidth = graphics.GraphicsDevice.Viewport.Width / xTiles;
             coordinatesX = new float[xTiles];
