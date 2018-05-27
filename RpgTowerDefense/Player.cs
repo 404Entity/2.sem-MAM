@@ -154,6 +154,11 @@ namespace RpgTowerDefense
         {
 
         }
+
+        public void Shoot()
+        {
+
+        }
         #endregion
     }
 }
