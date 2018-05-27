@@ -155,7 +155,7 @@ namespace RpgTowerDefense
             GameObject cityGate = dic3.Construct(new Vector2(700, 700));
             gameObjects.Add(player);
             gameObjects.Add(enemy);
-            //gameObjects.Add(cityGate);
+            gameObjects.Add(cityGate);
             
 
             //SpawnMob();

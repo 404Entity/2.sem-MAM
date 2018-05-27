@@ -15,6 +15,11 @@ namespace RpgTowerDefense
         SpriteFont spriteFont;
         int playerGold;
         String text;
+        String text2;
+        
+
+
+
 
         public int PlayerGold { get => playerGold; set => playerGold = value; }
         
