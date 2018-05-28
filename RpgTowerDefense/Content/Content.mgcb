@@ -87,7 +87,7 @@
 /processorParam:TextureFormat=Compressed
 /build:GateHealth.spritefont
 
-#begin CityGate.jpg
+#begin Gate.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -97,5 +97,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:CityGate.jpg
+/build:Gate.jpg
 
