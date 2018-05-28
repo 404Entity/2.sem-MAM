@@ -16,8 +16,8 @@ namespace RpgTowerDefense
         {
             GameObject mainGate = new GameObject();
             mainGate.AddComponent(new Transform(mainGate, position));
-            mainGate.AddComponent(new SpriteRenderer(mainGate, "CityGate", 1, 0.5f));
-            mainGate.AddComponent(new Animator(mainGate));
+            mainGate.AddComponent(new SpriteRenderer(mainGate, "Gate", 1, 0.5f));
+            //mainGate.AddComponent(new Animator(mainGate));
             mainGate.AddComponent(new MainGate(mainGate));
             mainGate.AddComponent(new Collider(mainGate, false, 0.5f));
             buildObject = mainGate;
