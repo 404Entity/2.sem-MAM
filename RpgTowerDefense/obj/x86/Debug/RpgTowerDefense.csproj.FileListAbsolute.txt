@@ -128,3 +128,11 @@ C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTower
 C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\BackGround.xnb
 C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\BackGround.xnb
 C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\yingyang tile buildspot.xnb
+C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\BuildSpot.xnb
+C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\BackGroundWithGrid.xnb
+C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\yingyang tile buildspot.xnb
+C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\BackGroundWithGrid.xnb
+C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\BuildSpot.xnb
+C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Gold.xnb
+C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\CityGate.xnb
+C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\GateHealth.xnb

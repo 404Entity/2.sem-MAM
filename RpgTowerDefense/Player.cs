@@ -27,7 +27,18 @@ namespace RpgTowerDefense
             get { return canMove; }
             set { canMove = value; }
         }
+
+
         #endregion
+
+        #region Property
+
+        
+
+        #endregion
+
+
+
         #region Constructor
         public Player(GameObject gameobject) : base(gameobject)
         {
@@ -37,6 +48,9 @@ namespace RpgTowerDefense
             isgrounded = false;
         }
         #endregion
+
+
+
         #region Methods
         public void LoadContent(ContentManager Content)
         {
@@ -68,13 +82,13 @@ namespace RpgTowerDefense
 
                     else if (keyState.IsKeyDown(Keys.W))
                     {
-                        direction = DIRECTION.Up;
+                        //direction = DIRECTION.Up;
                         translation += new Vector2(0, -2f);
                     }
 
                     else if (keyState.IsKeyDown(Keys.S))
                     {
-                        direction = DIRECTION.Down;
+                        //direction = DIRECTION.Down;
                         translation += new Vector2(0, 2f);
                     }
 
@@ -137,6 +151,8 @@ namespace RpgTowerDefense
                 strategy = null;
             }
         }
+
+        
         #endregion
     }
 }
