@@ -50,7 +50,7 @@ namespace RpgTowerDefense
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(GateHealth, text, new Vector2(800f, 100), Color.White);
+            //(spriteBatch.DrawString(GateHealth, text, new Vector2(800f, 100), Color.White);
         }
 
         

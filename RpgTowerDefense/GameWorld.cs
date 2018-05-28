@@ -65,7 +65,7 @@ namespace RpgTowerDefense
 
         BackGround backGround = new BackGround();
         UI ui;
-
+        //Allan ryd op i dit lort plzzz du clutter gameworld alt for meget
         //data for map, needs to be texture for scalability
         Texture2D yyMap;
         Rectangle mapRect;
@@ -86,7 +86,7 @@ namespace RpgTowerDefense
         internal List<GameObject> GameObjects { get => gameObjects; set => gameObjects = value; }
         internal List<GameObject> AddGameObjects { get => addGameObjects; set => addGameObjects = value; }
         internal List<GameObject> RemoveGameObjects { get => removeGameObjects; set => removeGameObjects = value; }
-        internal List<Enemy> MobList { get => mobList; set => mobList = value; }
+        internal List<GameObject> MobList { get => mobList; set => mobList = value; }
 
         public float deltaTime;
 
@@ -105,6 +105,7 @@ namespace RpgTowerDefense
         /// </summary>
         protected override void Initialize()
         {
+            IsMouseVisible = true;
             graphics.PreferredBackBufferWidth = 1600;
             graphics.PreferredBackBufferHeight = 900;
             graphics.ApplyChanges();
@@ -158,18 +159,19 @@ namespace RpgTowerDefense
             dic = new Director(new PlayerBuilder());
             dic2 = new Director(new EnemyBuilder());
             dic3 = new Director(new GateBuilder());
+            //dic3 = new Director(new GateBuilder());
             GameObject player = dic.Construct(new Vector2(1,1));
             GameObject enemy = dic2.Construct(new Vector2(0, 280));
-            dic3.Construct(new Vector2(300, 200),1);
-            GameObject tower = dic3.Builder.GetResult();
+            GameObject cityGate = dic3.Construct(new Vector2(700, 700));
+            GameObject tower = dic.Builder.GetResult();
+            dic = new Director(new TowerBuilder());
+            dic.Construct(new Vector2(300, 200), 1);
             GameObjects.Add(player);
             GameObjects.Add(enemy);
             GameObjects.Add(tower);
 
-            GameObject cityGate = dic3.Construct(new Vector2(700, 700));
-            gameObjects.Add(player);
-            gameObjects.Add(enemy);
-            //gameObjects.Add(cityGate);
+           
+            gameObjects.Add(cityGate);
             
 
             //SpawnMob();

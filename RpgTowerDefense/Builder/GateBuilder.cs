@@ -17,13 +17,20 @@ namespace RpgTowerDefense
             GameObject mainGate = new GameObject();
             mainGate.AddComponent(new Transform(mainGate, position));
             mainGate.AddComponent(new SpriteRenderer(mainGate, "Enemy", 1, 0.5f));
-            mainGate.AddComponent(new Animator(mainGate));
+            mainGate.LoadContent(GameWorld._Instance.Content);
             mainGate.AddComponent(new MainGate(mainGate));
-            //mainGate.AddComponent(new Collider(mainGate, false, 0.5f));
+            mainGate.AddComponent(new Collider(mainGate, false, 0.5f));
             buildObject = mainGate;
+            SpriteRenderer sp = mainGate.GetComponent("SpriteRenderer") as SpriteRenderer;
+            sp.GetStaticRectangle();
         }
 
         public void BuildGameObject(Vector2 position, int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void BuildGameObject(Vector2 position, int id, Vector2 direction)
         {
             throw new NotImplementedException();
         }

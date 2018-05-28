@@ -16,13 +16,13 @@ namespace RpgTowerDefense
         private float attackSpeed;
         private float attackRadius;
         private AttackType attackType;
-        private Enemy target;
+        private GameObject target;
 
         public float AttackPower { get => attackPower; set => attackPower = value; }
         public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
         public float AttackRadius { get => attackRadius; set => attackRadius = value; }
         internal AttackType AttackType { get => attackType; set => attackType = value; }
-        internal Enemy Target { get => target; set => target = value; }
+        internal GameObject Target { get => target; set => target = value; }
         #endregion
         #region Constructor
         public Tower(GameObject gameObject, float attackpower, float attackspeed, AttackType attackType, float attackRadius): base(gameObject)
@@ -39,7 +39,7 @@ namespace RpgTowerDefense
             if (target == null)
             {
 
-                foreach (Enemy enemy in GameWorld._Instance.MobList)
+                foreach (GameObject enemy in GameWorld._Instance.MobList)
                 {
                     if (Vector2.Distance(enemy.GameObject.Transform.Position,GameObject.Transform.Position) < AttackRadius)
                     {

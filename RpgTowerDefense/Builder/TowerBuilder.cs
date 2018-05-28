@@ -42,6 +42,7 @@ namespace RpgTowerDefense
             buildObject = tower;
             SpriteRenderer sp = tower.GetComponent("SpriteRenderer") as SpriteRenderer;
             sp.GetStaticRectangle();
+            sp.Origin = new Vector2((tower.Transform.Position.X + (sp.Sprite.Width / 2)) * sp.Scale, (tower.Transform.Position.Y + (sp.Sprite.Height / 2)) * sp.Scale + 130);
         }
 
         public void BuildGameObject(Vector2 position, int id, Vector2 direction)
