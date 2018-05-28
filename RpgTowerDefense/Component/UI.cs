@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RpgTowerDefense
 {
-    class UI : Component, IDrawable, ILoadable, IUpdate
+    class UI
     {
         Texture2D UIPicture;
         SpriteFont spriteFont;
