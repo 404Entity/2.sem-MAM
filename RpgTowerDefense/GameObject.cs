@@ -15,15 +15,11 @@ namespace RpgTowerDefense
         private List<Component> components;
         private bool isLoaded;
         private Transform transform;
-        int GateHealth = 100;
         public Transform Transform
         {
             get { return transform; }
             set { transform = value; }
         }
-
-        public int GateHealth1 { get => GateHealth; set => GateHealth -= value; }
-
         //Constructor
         public GameObject()
         {

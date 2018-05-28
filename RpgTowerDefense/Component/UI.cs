@@ -15,11 +15,6 @@ namespace RpgTowerDefense
         SpriteFont spriteFont;
         int playerGold;
         String text;
-        String text2;
-        
-
-
-
 
         public int PlayerGold { get => playerGold; set => playerGold = value; }
         
@@ -38,7 +33,7 @@ namespace RpgTowerDefense
         public void Draw(SpriteBatch spriteBatch)
         {
             
-            spriteBatch.DrawString(spriteFont, text, new Vector2(500f, 100), Color.White);
+            spriteBatch.DrawString(spriteFont, text, new Vector2(600f, 10), Color.White);
         }
     }
 }

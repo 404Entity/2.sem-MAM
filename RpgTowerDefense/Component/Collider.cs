@@ -13,6 +13,7 @@ namespace RpgTowerDefense
     {
         #region Fields and properties
         private SpriteRenderer spriteRender;
+        //private Tiles tiles;
         private Texture2D texture2D;
         private bool isCollideWith;
         private List<Collider> ohterColliders;

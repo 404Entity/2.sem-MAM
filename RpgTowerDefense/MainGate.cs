@@ -13,20 +13,15 @@ namespace RpgTowerDefense
     class MainGate : Component, IUpdate, IDrawable, ILoadable
     {
         #region Fields
-        int health;
+        int health = 100;
 
-        SpriteFont TextGateHealth;
+        SpriteFont GateHealth;
         String text;
         #endregion
 
 
-        #region Properties
-        public int Health { get => health;}
-
-        public void TakeDmg(int health)
-        {
-            this.health -= health;
-        }
+        #region Propertys
+        public int Health { get => health; set => health -= value; }
 
         #endregion
 
@@ -34,7 +29,6 @@ namespace RpgTowerDefense
         #region Constructer
         public MainGate(GameObject gameObject): base(gameObject)
         {
-            health = 100;
         }
 
 
@@ -46,7 +40,7 @@ namespace RpgTowerDefense
 
         public void LoadContent(ContentManager content)
         {
-            TextGateHealth = content.Load<SpriteFont>("GateHealth");
+            GateHealth = content.Load<SpriteFont>("GateHealth");
         }
 
         public void Update()
@@ -56,7 +50,7 @@ namespace RpgTowerDefense
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(TextGateHealth, text, new Vector2(800f, 100), Color.White);
+            spriteBatch.DrawString(GateHealth, text, new Vector2(830f, 10), Color.White);
         }
 
         

@@ -91,6 +91,7 @@
     <Content Include="Content\BackGround_old.png" />
     <Content Include="Content\BackGround_WithPainted_spots.png" />
     <Content Include="Content\BuildSpot.png" />
+    <Content Include="Content\CityGate.jpg" />
     <Content Include="Content\Enemy.jpg" />
     <Content Include="Content\Player.jpg" />
     <Content Include="Icon.ico" />

@@ -23,7 +23,7 @@ namespace RpgTowerDefense
 
         public void GetStaticRectangle()
         {
-            rectangle = new Rectangle(0, 0, sprite.Width, Sprite.Height);
+            rectangle = new Rectangle(0, 0, sprite.Width, sprite.Height);
         }
 
         public Texture2D Sprite
@@ -31,7 +31,6 @@ namespace RpgTowerDefense
             get { return sprite; }
             set { sprite = value; }
         }
-
         private string spriteName;
         private float layerDepth;
 
@@ -40,20 +39,17 @@ namespace RpgTowerDefense
             get { return rectangle; }
             set { rectangle = value; }
         }
-
         public SpriteRenderer(GameObject gameobject, string spriteName, float layerDepth, float scale) : base(gameobject)
         {
             this.layerDepth = layerDepth;
             this.spriteName = spriteName;
             this.scale = scale;
         }
-        
         public void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>(spriteName);
          
         }
-
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(sprite, GameObject.Transform.Position + offset,rectangle, Color.White,0,Vector2.Zero,scale,SpriteEffects.None,layerDepth);
