@@ -114,11 +114,12 @@ namespace RpgTowerDefense
             gameObjects.Add(player);
             dic2 = new Director(new EnemyBuilder());
             GameObject enemy = dic2.Construct(new Vector2(0, 280));
-            gameObjects.Add(enemy);
+            
 
-            //gameObjects.Add(cityGate);
 
             worldBuilder.SetupData();
+
+
 
             dic = new Director(new GateBuilder());
             GameObject cityGate = dic.Construct(new Vector2(1385, 15));
@@ -216,7 +217,7 @@ namespace RpgTowerDefense
         //spawns enemy and adds to both gameobjects and moblist
         public void SpawnMob()
         {
-            GameObject mob = dic2.Construct(new Vector2(0, 280));
+            GameObject mob = dic2.Construct(new Vector2(0, 270));
             UpdateMobList(mob, true);
             gameObjects.Add(mob);
 
