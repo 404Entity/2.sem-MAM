@@ -26,10 +26,6 @@ namespace RpgTowerDefense
             set { offset = value; }
         }
 
-        public void GetStaticRectangle()
-        {
-            rectangle = new Rectangle(0, 0, sprite.Width, sprite.Height);
-        }
 
         public Texture2D Sprite
         {

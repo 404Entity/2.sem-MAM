@@ -65,14 +65,6 @@ namespace RpgTowerDefense
 
         BackGround backGround = new BackGround();
         UI ui;
-        //Allan ryd op i dit lort plzzz du clutter gameworld alt for meget
-        //data for map, needs to be texture for scalability
-        Texture2D yyMap;
-        Rectangle mapRect;
-        //keeps track of coordinates for enemy pathing
-        public Vector2[] walkCoordinates = { new Vector2(5, 14), new Vector2(5, 2), new Vector2(17, 2), new Vector2(17, 8), new Vector2(11, 8), new Vector2(11, 14), new Vector2(23, 14), new Vector2(23, 2), new Vector2(32, 2) };
-        //list of vectors to indicate what direction enemy will be facing 
-        Vector2[] walkdirection = { new Vector2(0, -1), new Vector2(1, 0), new Vector2(0, 1), new Vector2(-1, 0), new Vector2(0, 1), new Vector2(1, 0), new Vector2(0, -1), new Vector2(1, 0) };
         private int screenWidth;
         private int screenHeigth;
         private List<GameObject> gameObjects;
@@ -87,6 +79,10 @@ namespace RpgTowerDefense
         {
             get { return colliders; }
         }
+
+        public int ScreenWidth { get => screenWidth; set => screenWidth = value; }
+        public int ScreenHeigth { get => screenHeigth; set => screenHeigth = value; }
+
         public float deltaTime;
         public GameWorld()
         {
@@ -129,8 +125,6 @@ namespace RpgTowerDefense
             dic3 = new Director(new GateBuilder());
             //dic3 = new Director(new GateBuilder());
             GameObject player = dic.Construct(new Vector2(1,1));
-            GameObject enemy = dic2.Construct(new Vector2(0, 280));
-            gameObjects.Add(enemy);
 
             //gameObjects.Add(cityGate);
 

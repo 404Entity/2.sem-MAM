@@ -26,7 +26,7 @@ namespace RpgTowerDefense
             ///<summary>
             ///Calculate Transform using target parameters.
             /// </summary>
-            var offset = Matrix.CreateTranslation(GameWorld.ScreenWidth / 2, GameWorld.ScreenHeight / 2, 0);
+            var offset = Matrix.CreateTranslation(GameWorld._Instance.ScreenWidth / 2, GameWorld._Instance.ScreenHeigth / 2, 0);
             var position = Matrix.CreateTranslation(
                 -target.Transform.Position.X - (targetColisionbox.CollisionBox.Width / 2),
                 -target.Transform.Position.Y - (targetColisionbox.CollisionBox.Height / 2),
@@ -37,4 +37,4 @@ namespace RpgTowerDefense
         }
     }
 }
-}
+
