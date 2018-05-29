@@ -73,23 +73,21 @@ namespace RpgTowerDefense
         public Vector2[] walkCoordinates = { new Vector2(5, 14), new Vector2(5, 2), new Vector2(17, 2), new Vector2(17, 8), new Vector2(11, 8), new Vector2(11, 14), new Vector2(23, 14), new Vector2(23, 2), new Vector2(32, 2) };
         //list of vectors to indicate what direction enemy will be facing 
         Vector2[] walkdirection = { new Vector2(0, -1), new Vector2(1, 0), new Vector2(0, 1), new Vector2(-1, 0), new Vector2(0, 1), new Vector2(1, 0), new Vector2(0, -1), new Vector2(1, 0) };
-
+        private int screenWidth;
+        private int screenHeigth;
         private List<GameObject> gameObjects;
         private List<GameObject> addGameObjects;
         private List<GameObject> removeGameObjects;
         private List<Collider> colliders;
-        internal List<Collider> Colliders
-        {
-            get { return colliders; }
-        }
-
         internal List<GameObject> GameObjects { get => gameObjects; set => gameObjects = value; }
         internal List<GameObject> AddGameObjects { get => addGameObjects; set => addGameObjects = value; }
         internal List<GameObject> RemoveGameObjects { get => removeGameObjects; set => removeGameObjects = value; }
         internal List<GameObject> MobList { get => mobList; set => mobList = value; }
-
+        internal List<Collider> Colliders
+        {
+            get { return colliders; }
+        }
         public float deltaTime;
-
         public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
