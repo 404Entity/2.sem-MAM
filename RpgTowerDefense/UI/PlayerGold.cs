@@ -9,15 +9,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RpgTowerDefense
 {
-    class UI : Component, IDrawable, ILoadable, IUpdate
+    class PlayerGold : UI
     {
-        Texture2D UIPicture;
+
         SpriteFont spriteFont;
         int playerGold;
         String text;
 
-        public int PlayerGold { get => playerGold; set => playerGold = value; }
-        
+        public int PlayerGoldProperty { get => playerGold; set => playerGold = value; }
 
         public void LoadContent(ContentManager content)
         {
@@ -27,13 +26,13 @@ namespace RpgTowerDefense
 
         public void Update()
         {
-            text = "Gold Amount:  " + PlayerGold.ToString();
+            text = "Gold Amount:  " + PlayerGoldProperty.ToString();
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            
-            spriteBatch.DrawString(spriteFont, text, new Vector2(500f, 100), Color.White);
+
+            spriteBatch.DrawString(spriteFont, text, new Vector2(600f, 10), Color.White);
         }
     }
 }
