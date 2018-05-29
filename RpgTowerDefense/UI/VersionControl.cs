@@ -22,18 +22,11 @@ namespace RpgTowerDefense
             this.vector2 = vector2;
         }
 
-
-
-
+        
 
         public void LoadContent(ContentManager content)
         {
             spriteFont = content.Load<SpriteFont>("Gold");
-        }
-
-        public void Update()
-        {
-            
         }
 
         public void Draw(SpriteBatch spriteBatch)

@@ -68,7 +68,7 @@ namespace RpgTowerDefense
 
         
         List<GameObject> gameObjects;
-        private List<Collider> colliders;
+        private List<Collider> colliders = new List<Collider>();
         internal List<Collider> Colliders
         {
             get { return colliders; }
@@ -122,7 +122,7 @@ namespace RpgTowerDefense
 
 
             dic = new Director(new GateBuilder());
-            GameObject cityGate = dic.Construct(new Vector2(1385, 15));
+            GameObject cityGate = dic.Construct(new Vector2(1350, 0));
             gameObjects.Add(cityGate);
 
             base.Initialize();
