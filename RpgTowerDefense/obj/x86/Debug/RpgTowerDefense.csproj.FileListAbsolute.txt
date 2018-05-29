@@ -140,4 +140,4 @@ C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\
 C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Gold.xnb
 C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Mine.xnb
 C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefense.csprojResolveAssemblyReference.cache
-
+C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Mine.xnb

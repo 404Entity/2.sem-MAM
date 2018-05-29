@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
@@ -9,18 +11,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RpgTowerDefense
 {
-    class PlayerGold : UI
+    class VersionControl
     {
-
+        string text = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion+"       Under Development";
         SpriteFont spriteFont;
-        int playerGold;
-        String text;
         Vector2 vector2;
 
-
-
-
-        public PlayerGold(Vector2 vector2)
+        public VersionControl(Vector2 vector2)
         {
             this.vector2 = vector2;
         }
@@ -29,26 +26,18 @@ namespace RpgTowerDefense
 
 
 
-        public int PlayerGoldProperty { get => playerGold; set => playerGold = value; }
-
-
-
-
-
-        public new void LoadContent(ContentManager content)
+        public void LoadContent(ContentManager content)
         {
-            //UIPicture = content.Load<Texture2D>("Picture Name");
             spriteFont = content.Load<SpriteFont>("Gold");
         }
 
-        public new void Update()
+        public void Update()
         {
-            text = "Gold Amount:  " + PlayerGoldProperty.ToString();
+            
         }
 
-        public new void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
-
             spriteBatch.DrawString(spriteFont, text, vector2, Color.White);
         }
     }

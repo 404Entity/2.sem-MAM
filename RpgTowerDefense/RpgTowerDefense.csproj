@@ -80,6 +80,7 @@
     <Compile Include="Strategy\Walk.cs" />
     <Compile Include="Tower.cs" />
     <Compile Include="UI\UI.cs" />
+    <Compile Include="UI\VersionControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
