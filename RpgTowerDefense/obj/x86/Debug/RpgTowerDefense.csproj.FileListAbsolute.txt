@@ -69,7 +69,6 @@ C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Win
 C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
 C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\SharpDX.XInput.xml
 C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
-C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefense.csprojResolveAssemblyReference.cache
 C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefense.csproj.CoreCompileInputs.cache
 C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefense.exe
 C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefense.pdb
@@ -136,7 +135,11 @@ C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Win
 C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Gold.xnb
 C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\CityGate.xnb
 C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\GateHealth.xnb
+<<<<<<< HEAD
 C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\CityGate.xnb
 C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\GateHealth.xnb
 C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Gold.xnb
 C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Mine.xnb
+=======
+C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefense.csprojResolveAssemblyReference.cache
+>>>>>>> 38b02d13070cf51cb9fcb5776a2b13690b2434a2
