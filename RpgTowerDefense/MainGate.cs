@@ -14,6 +14,19 @@ namespace RpgTowerDefense
     {
         public MainGate(GameObject gameObject): base(gameObject)
         {
+            GateHealth gateHealth = new GateHealth();
+
+
+
+
+
+
+
+
+
+
+             
+
         }
     }
 }
