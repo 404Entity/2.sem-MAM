@@ -53,6 +53,7 @@
     <Compile Include="Component\Component.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Builder\GateBuilder.cs" />
+    <Compile Include="GameWorldBuilder.cs" />
     <Compile Include="UI\GateHealth.cs" />
     <Compile Include="MainGate.cs" />
     <Compile Include="Player.cs" />
@@ -98,6 +99,7 @@
     <Content Include="Content\BuildSpot.png" />
     <Content Include="Content\CityGate.jpg" />
     <Content Include="Content\Enemy.jpg" />
+    <Content Include="Content\Mine.png" />
     <Content Include="Content\Player.jpg" />
     <Content Include="Icon.ico" />
   </ItemGroup>

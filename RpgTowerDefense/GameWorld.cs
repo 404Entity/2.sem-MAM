@@ -18,6 +18,18 @@ namespace RpgTowerDefense
         float spawntime;
         float interval = 1.5f;
 
+        public GameWorldBuilder worldBuilder;
+
+        public Texture2D currentMap;
+        public Rectangle currentRect;
+
+        //list of locations on the grid where towers can be built
+        public Vector2[] buildSpotLocation = { new Vector2(3, 12), new Vector2(6, 14), new Vector2(7, 3), new Vector2(12, 12), new Vector2(14, 3), new Vector2(16, 6), new Vector2(21, 12), new Vector2(24, 6), new Vector2(28, 1) };
+        public bool[] buildSpotAvailable;
+        //keeps track of coordinates for enemy pathing
+        public Vector2[] walkCoordinates = { new Vector2(5, 14), new Vector2(5, 2), new Vector2(17, 2), new Vector2(17, 8), new Vector2(11, 8), new Vector2(11, 14), new Vector2(23, 14), new Vector2(23, 2), new Vector2(32, 2) };
+
+
         static private GameWorld instance;
         //Singleton
         static public GameWorld _Instance
@@ -32,18 +44,6 @@ namespace RpgTowerDefense
             }
         }
 
-        //dictates ammount of tiles for generation
-        int xTiles = 32;
-        int yTiles = 18;
-        //indicates the dimensions of the tiles
-        public float xWidth;
-        public float yHeight;
-        //list of locations on the grid where towers can be built
-        Vector2[] buildSpotLocation = { new Vector2(3,12),new Vector2(6,14),new Vector2(7,3),new Vector2(12,12),new Vector2(14,3),new Vector2(16,6),new Vector2(21,12),new Vector2(24,6),new Vector2(28,1) };
-        bool[] buildSpotAvailable;
-        //list of coordinates on gird, curently not used
-        float[] coordinatesX;
-        float[] coordinatesY;
         //used to keep track of enemies seperately from other objects
         List<GameObject> mobList = new List<GameObject>();
 
@@ -104,49 +104,19 @@ namespace RpgTowerDefense
         protected override void Initialize()
         {
             IsMouseVisible = true;
+            worldBuilder = new GameWorldBuilder();
+
             graphics.PreferredBackBufferWidth = 1600;
             graphics.PreferredBackBufferHeight = 900;
             graphics.ApplyChanges();
 
             graphics.GraphicsDevice.Viewport = new Viewport(0, 0, 1600, 900);
 
-            //coordinateContains = new float[xTiles, yTiles];
-            //saves dimension of tiles as a result of the size of viewport, needed for scalability
-            yHeight = graphics.GraphicsDevice.Viewport.Height / yTiles;
-            xWidth = graphics.GraphicsDevice.Viewport.Width / xTiles;
-            coordinatesX = new float[xTiles];
-            coordinatesY = new float[yTiles];
+            worldBuilder.yHeight = graphics.GraphicsDevice.Viewport.Height / worldBuilder.yTiles;
+            worldBuilder.xWidth = graphics.GraphicsDevice.Viewport.Width / worldBuilder.xTiles;
+            worldBuilder.map1Rect = new Rectangle (0, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
+            worldBuilder.map2Rect = new Rectangle(0, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
 
-            //saves worldspace coordinates for the grid
-            for (int x = 0; x < xTiles - 1;)
-            {
-                for (int y = 0; y < yTiles - 1;)
-                {
-                    coordinatesX[x] = x * xWidth;
-                    coordinatesY[y] = y * yHeight; 
-                    y++;
-                }
-                x++;
-            }
-            
-            //saves worldspace coordinates for buildspots
-            for (int i = 0; i < buildSpotLocation.Length;)
-            {
-                buildSpotLocation[i].X = buildSpotLocation[i].X * xWidth;
-                buildSpotLocation[i].Y = buildSpotLocation[i].Y * yHeight;
-                i++;
-            }
-            buildSpotAvailable = new bool[buildSpotLocation.Length];
-
-            //saves worldspace coordinates for pathing 
-            for (int i = 0; i < walkCoordinates.Length;)
-            {
-                walkCoordinates[i].X = walkCoordinates[i].X * xWidth;
-                walkCoordinates[i].Y = walkCoordinates[i].Y * yHeight;
-                i++;
-            }
-
-            mapRect = new Rectangle (0, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
 
             // TODO: Add your initialization logic here
             GameObjects = new List<GameObject>();
@@ -160,15 +130,14 @@ namespace RpgTowerDefense
             //dic3 = new Director(new GateBuilder());
             GameObject player = dic.Construct(new Vector2(1,1));
             GameObject enemy = dic2.Construct(new Vector2(0, 280));
-            GameObject cityGate = dic3.Construct(new Vector2(700, 700));
-            GameObject tower = dic.Builder.GetResult();
-            dic = new Director(new TowerBuilder());
-            dic.Construct(new Vector2(300, 200), 1);
-            GameObjects.Add(player);
-            GameObjects.Add(enemy);
-            GameObjects.Add(tower);
+            gameObjects.Add(enemy);
 
-           
+            //gameObjects.Add(cityGate);
+
+            worldBuilder.SetupData();
+
+            dic = new Director(new GateBuilder());
+            GameObject cityGate = dic.Construct(new Vector2(1385, 15));
             gameObjects.Add(cityGate);
             
 
@@ -193,7 +162,9 @@ namespace RpgTowerDefense
             ui.LoadContent(Content);
             backGround.LoadContent(Content);
             //yyMap = Content.Load<Texture2D>("BackGround");
-            yyMap = Content.Load<Texture2D>("BackGroundWithGrid");
+            worldBuilder.yyMap = Content.Load<Texture2D>("BackGroundWithGrid");
+            worldBuilder.mineMap = Content.Load<Texture2D>("Mine");
+            worldBuilder.AssignWorld(0);
         }
 
         /// <summary>
@@ -260,7 +231,7 @@ namespace RpgTowerDefense
 
             //backGround.Draw(spriteBatch);
             
-            spriteBatch.Draw(yyMap, mapRect, Color.White);
+            spriteBatch.Draw(currentMap, currentRect, Color.White);
             
             foreach (GameObject go in gameObjects)
             {
