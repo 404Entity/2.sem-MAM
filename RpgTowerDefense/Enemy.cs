@@ -12,6 +12,8 @@ namespace RpgTowerDefense
     class Enemy : Component, ILoadable, IAnimateable, IUpdate
     {
         #region Fields
+        GameWorldBuilder worldBuilder;
+
         private Animator animator;
         private IStrategy strategy;
         private DIRECTION direction;
@@ -35,6 +37,8 @@ namespace RpgTowerDefense
         #region Constructor
         public Enemy(GameObject gameobject) : base(gameobject)
         {
+            worldBuilder = GameWorld._Instance.worldBuilder;
+
             animator = (gameobject.GetComponent("Animator")as Animator);
 
             //Sets pathing destination as the first saved coordinate in GameWorld
@@ -42,7 +46,7 @@ namespace RpgTowerDefense
             //makes enemy spawn on edge of screen on same y coordinate as first pathing destination
             gameObject.Transform.Position = new Vector2 (-TileSize,moveTarget.Y);
 
-            TileSize = (int)GameWorld._Instance.xWidth;
+            TileSize = (int)worldBuilder.xWidth;
         }
         #endregion
         #region Methods
