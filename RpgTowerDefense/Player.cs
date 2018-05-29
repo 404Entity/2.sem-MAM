@@ -21,7 +21,7 @@ namespace RpgTowerDefense
         private DIRECTION direction;
         private bool canMove;
         private bool isgrounded;
-
+        private MouseState previousMouseState; 
         public bool CanMove
         {
             get { return canMove; }
@@ -52,9 +52,18 @@ namespace RpgTowerDefense
 
         public void Update()
         {
+            MouseState mouseState = Mouse.GetState();
             KeyboardState keyState = Keyboard.GetState();
             if (canMove)
             {
+                if (keyState.IsKeyDown(Keys.F))
+                {
+                    BuildTower();
+                }
+                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
+                {
+                    Shoot();
+                }
                 if (keyState.IsKeyDown(Keys.W) || keyState.IsKeyDown(Keys.D) || keyState.IsKeyDown(Keys.S) || keyState.IsKeyDown(Keys.A))
                 {
                     Vector2 translation = Vector2.Zero;
@@ -102,8 +111,8 @@ namespace RpgTowerDefense
                     strategy = new Attack(animator);
                     canMove = false;
                 }
-                
-                
+
+                previousMouseState = mouseState;
                 strategy.Execute(direction);
             }
         }
@@ -130,6 +139,7 @@ namespace RpgTowerDefense
 
         public void OnAnimationDone(string animationName)
         {
+            /*
             if (animationName == null)
             {
                 animationName = "Idle";
@@ -143,6 +153,28 @@ namespace RpgTowerDefense
             {
                 strategy = null;
             }
+            */
+        }
+
+        public void BuildTower()
+        {
+            Director dic = new Director(new TowerBuilder());
+            dic.Builder.BuildGameObject(gameObject.Transform.Position, 1);
+            GameWorld._Instance.AddGameObjects.Add(dic.Builder.GetResult());
+        }
+        public void destroyTower()
+        {
+
+        }
+
+        public void Shoot()
+        {
+            Vector2 cursorPosition = new Vector2(Mouse.GetState().Position.X,Mouse.GetState().Position.Y);
+            Vector2 shootdirection = cursorPosition - gameObject.Transform.Position;
+            Vector2 shootdirectonnormalized = Vector2.Normalize(shootdirection);
+            Director director = new Director(new BulletBuilder());
+            director.Construct(gameObject.Transform.Position, 1, shootdirectonnormalized);
+            GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
         }
 
         

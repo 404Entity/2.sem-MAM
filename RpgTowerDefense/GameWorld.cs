@@ -12,6 +12,7 @@ namespace RpgTowerDefense
     {
         Director dic;
         Director dic2;
+        Director dic3;
 
         //testing mobspawn
         float spawntime;
@@ -51,31 +52,38 @@ namespace RpgTowerDefense
         {
             if(newMob)
             {
-                mobList.Add(mob);
+                MobList.Add(mob);
             }
             else
             {
-                mobList.Remove(mob);
+                MobList.Remove(mob);
             }
         }
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        GameObject gameObject = new GameObject();
         BackGround backGround = new BackGround();
         UI ui;
-
-        
-        List<GameObject> gameObjects;
-        private List<Collider> colliders = new List<Collider>();
+        private int screenWidth;
+        private int screenHeigth;
+        private List<GameObject> gameObjects;
+        private List<GameObject> addGameObjects;
+        private List<GameObject> removeGameObjects;
+        private List<Collider> colliders;
+        internal List<GameObject> GameObjects { get => gameObjects; set => gameObjects = value; }
+        internal List<GameObject> AddGameObjects { get => addGameObjects; set => addGameObjects = value; }
+        internal List<GameObject> RemoveGameObjects { get => removeGameObjects; set => removeGameObjects = value; }
+        internal List<GameObject> MobList { get => mobList; set => mobList = value; }
         internal List<Collider> Colliders
         {
             get { return colliders; }
         }
 
-        public float deltaTime;
+        public int ScreenWidth { get => screenWidth; set => screenWidth = value; }
+        public int ScreenHeigth { get => screenHeigth; set => screenHeigth = value; }
 
+        public float deltaTime;
         public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -91,6 +99,7 @@ namespace RpgTowerDefense
         /// </summary>
         protected override void Initialize()
         {
+            IsMouseVisible = true;
             worldBuilder = new GameWorldBuilder();
 
             graphics.PreferredBackBufferWidth = 1600;
@@ -106,15 +115,16 @@ namespace RpgTowerDefense
 
 
             // TODO: Add your initialization logic here
-            gameObjects = new List<GameObject>();
+            GameObjects = new List<GameObject>();
+            addGameObjects = new List<GameObject>();
+            removeGameObjects = new List<GameObject>();
 
             ui = new UI();
             dic = new Director(new PlayerBuilder());
-            GameObject player = dic.Construct(new Vector2(1, 1));
-            gameObjects.Add(player);
             dic2 = new Director(new EnemyBuilder());
-            GameObject enemy = dic2.Construct(new Vector2(0, 280));
-            
+            dic3 = new Director(new GateBuilder());
+            //dic3 = new Director(new GateBuilder());
+            GameObject player = dic.Construct(new Vector2(1,1));
 
 
             worldBuilder.SetupData();
@@ -124,6 +134,9 @@ namespace RpgTowerDefense
             dic = new Director(new GateBuilder());
             GameObject cityGate = dic.Construct(new Vector2(1350, 0));
             gameObjects.Add(cityGate);
+            
+
+            //SpawnMob();
 
             base.Initialize();
         }
@@ -136,7 +149,7 @@ namespace RpgTowerDefense
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            foreach (GameObject go in gameObjects)
+            foreach (GameObject go in GameObjects)
             {
                 go.LoadContent(Content);
             }
@@ -180,15 +193,27 @@ namespace RpgTowerDefense
 
 
             // TODO: Add your update logic here
-            
-            foreach (GameObject go in gameObjects)
+            foreach (GameObject go in addGameObjects)
+            {
+                GameObjects.Add(go);
+            }
+            foreach (GameObject go in removeGameObjects)
+            {
+                gameObjects.Remove(go);
+            }
+            CleanTemptList();
+            foreach (GameObject go in GameObjects)
             {
                 go.Update(gameTime);
             }
             ui.Update();
             base.Update(gameTime);
         }
-
+        private void CleanTemptList()
+        {
+            addGameObjects.Clear();
+            removeGameObjects.Clear();
+        }
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
