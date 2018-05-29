@@ -12,11 +12,22 @@ namespace RpgTowerDefense
     {
         Director dic;
         Director dic2;
-        Director dic3;
 
         //testing mobspawn
         float spawntime;
         float interval = 1.5f;
+
+        public GameWorldBuilder worldBuilder;
+
+        public Texture2D currentMap;
+        public Rectangle currentRect;
+
+        //list of locations on the grid where towers can be built
+        public Vector2[] buildSpotLocation = { new Vector2(3, 12), new Vector2(6, 14), new Vector2(7, 3), new Vector2(12, 12), new Vector2(14, 3), new Vector2(16, 6), new Vector2(21, 12), new Vector2(24, 6), new Vector2(28, 1) };
+        public bool[] buildSpotAvailable;
+        //keeps track of coordinates for enemy pathing
+        public Vector2[] walkCoordinates = { new Vector2(5, 14), new Vector2(5, 2), new Vector2(17, 2), new Vector2(17, 8), new Vector2(11, 8), new Vector2(11, 14), new Vector2(23, 14), new Vector2(23, 2), new Vector2(32, 2) };
+
 
         static private GameWorld instance;
         //Singleton
@@ -32,18 +43,6 @@ namespace RpgTowerDefense
             }
         }
 
-        //dictates ammount of tiles for generation
-        int xTiles = 32;
-        int yTiles = 18;
-        //indicates the dimensions of the tiles
-        public float xWidth;
-        public float yHeight;
-        //list of locations on the grid where towers can be built
-        Vector2[] buildSpotLocation = { new Vector2(3,12),new Vector2(6,14),new Vector2(7,3),new Vector2(12,12),new Vector2(14,3),new Vector2(16,6),new Vector2(21,12),new Vector2(24,6),new Vector2(28,1) };
-        bool[] buildSpotAvailable;
-        //list of coordinates on gird, curently not used
-        float[] coordinatesX;
-        float[] coordinatesY;
         //used to keep track of enemies seperately from other objects
         List<GameObject> mobList = new List<GameObject>();
 
@@ -67,16 +66,9 @@ namespace RpgTowerDefense
         BackGround backGround = new BackGround();
         UI ui;
 
-        //data for map, needs to be texture for scalability
-        Texture2D yyMap;
-        Rectangle mapRect;
-        //keeps track of coordinates for enemy pathing
-        public Vector2[] walkCoordinates = { new Vector2(5, 14), new Vector2(5, 2), new Vector2(17, 2), new Vector2(17, 8), new Vector2(11, 8), new Vector2(11, 14), new Vector2(23, 14), new Vector2(23, 2), new Vector2(32, 2) };
-        //list of vectors to indicate what direction enemy will be facing 
-        Vector2[] walkdirection = { new Vector2(0, -1), new Vector2(1, 0), new Vector2(0, 1), new Vector2(-1, 0), new Vector2(0, 1), new Vector2(1, 0), new Vector2(0, -1), new Vector2(1, 0) };
-
+        
         List<GameObject> gameObjects;
-        private List<Collider> colliders;
+        private List<Collider> colliders = new List<Collider>();
         internal List<Collider> Colliders
         {
             get { return colliders; }
@@ -99,66 +91,39 @@ namespace RpgTowerDefense
         /// </summary>
         protected override void Initialize()
         {
+            worldBuilder = new GameWorldBuilder();
+
             graphics.PreferredBackBufferWidth = 1600;
             graphics.PreferredBackBufferHeight = 900;
             graphics.ApplyChanges();
 
             graphics.GraphicsDevice.Viewport = new Viewport(0, 0, 1600, 900);
 
-            //coordinateContains = new float[xTiles, yTiles];
-            //saves dimension of tiles as a result of the size of viewport, needed for scalability
-            yHeight = graphics.GraphicsDevice.Viewport.Height / yTiles;
-            xWidth = graphics.GraphicsDevice.Viewport.Width / xTiles;
-            coordinatesX = new float[xTiles];
-            coordinatesY = new float[yTiles];
+            worldBuilder.yHeight = graphics.GraphicsDevice.Viewport.Height / worldBuilder.yTiles;
+            worldBuilder.xWidth = graphics.GraphicsDevice.Viewport.Width / worldBuilder.xTiles;
+            worldBuilder.map1Rect = new Rectangle (0, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
+            worldBuilder.map2Rect = new Rectangle(1600, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
 
-            //saves worldspace coordinates for the grid
-            for (int x = 0; x < xTiles - 1;)
-            {
-                for (int y = 0; y < yTiles - 1;)
-                {
-                    coordinatesX[x] = x * xWidth;
-                    coordinatesY[y] = y * yHeight; 
-                    y++;
-                }
-                x++;
-            }
-            
-            //saves worldspace coordinates for buildspots
-            for (int i = 0; i < buildSpotLocation.Length;)
-            {
-                buildSpotLocation[i].X = buildSpotLocation[i].X * xWidth;
-                buildSpotLocation[i].Y = buildSpotLocation[i].Y * yHeight;
-                i++;
-            }
-            buildSpotAvailable = new bool[buildSpotLocation.Length];
-
-            //saves worldspace coordinates for pathing 
-            for (int i = 0; i < walkCoordinates.Length;)
-            {
-                walkCoordinates[i].X = walkCoordinates[i].X * xWidth;
-                walkCoordinates[i].Y = walkCoordinates[i].Y * yHeight;
-                i++;
-            }
-
-            mapRect = new Rectangle (0, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
 
             // TODO: Add your initialization logic here
             gameObjects = new List<GameObject>();
 
             ui = new UI();
             dic = new Director(new PlayerBuilder());
-            dic2 = new Director(new EnemyBuilder());
-            dic3 = new Director(new GateBuilder());
-            GameObject player = dic.Construct(new Vector2(1,1));
-            GameObject enemy = dic2.Construct(new Vector2(0, 280));
-            GameObject cityGate = dic3.Construct(new Vector2(700, 700));
+            GameObject player = dic.Construct(new Vector2(1, 1));
             gameObjects.Add(player);
-            gameObjects.Add(enemy);
-            //gameObjects.Add(cityGate);
+            dic2 = new Director(new EnemyBuilder());
+            GameObject enemy = dic2.Construct(new Vector2(0, 280));
             
 
-            //SpawnMob();
+
+            worldBuilder.SetupData();
+
+
+
+            dic = new Director(new GateBuilder());
+            GameObject cityGate = dic.Construct(new Vector2(1350, 0));
+            gameObjects.Add(cityGate);
 
             base.Initialize();
         }
@@ -179,7 +144,9 @@ namespace RpgTowerDefense
             ui.LoadContent(Content);
             backGround.LoadContent(Content);
             //yyMap = Content.Load<Texture2D>("BackGround");
-            yyMap = Content.Load<Texture2D>("BackGroundWithGrid");
+            worldBuilder.yyMap = Content.Load<Texture2D>("BackGroundWithGrid");
+            worldBuilder.mineMap = Content.Load<Texture2D>("Mine");
+            worldBuilder.AssignWorld(0);
         }
 
         /// <summary>
@@ -234,8 +201,9 @@ namespace RpgTowerDefense
 
             //backGround.Draw(spriteBatch);
             
-            spriteBatch.Draw(yyMap, mapRect, Color.White);
-            
+            spriteBatch.Draw(worldBuilder.yyMap, worldBuilder.map1Rect, Color.White);
+            spriteBatch.Draw(worldBuilder.mineMap, worldBuilder.map2Rect, Color.White);
+
             foreach (GameObject go in gameObjects)
             {
                 go.Draw(spriteBatch);
@@ -249,7 +217,7 @@ namespace RpgTowerDefense
         //spawns enemy and adds to both gameobjects and moblist
         public void SpawnMob()
         {
-            GameObject mob = dic2.Construct(new Vector2(0, 280));
+            GameObject mob = dic2.Construct(new Vector2(0, 270));
             UpdateMobList(mob, true);
             gameObjects.Add(mob);
 
