@@ -52,6 +52,8 @@
     <Compile Include="Component\Component.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Builder\GateBuilder.cs" />
+    <Compile Include="GameWorldBuilder.cs" />
+    <Compile Include="UI\GateHealth.cs" />
     <Compile Include="MainGate.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Component\SpriteRenderer.cs" />
@@ -70,13 +72,14 @@
     <Compile Include="obj\x86\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\x86\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\x86\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="UI\PlayerGold.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strategy\Attack.cs" />
     <Compile Include="Strategy\Idle.cs" />
     <Compile Include="Strategy\Walk.cs" />
     <Compile Include="Tower.cs" />
-    <Compile Include="Component\UI.cs" />
+    <Compile Include="UI\UI.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -93,6 +96,7 @@
     <Content Include="Content\BuildSpot.png" />
     <Content Include="Content\CityGate.jpg" />
     <Content Include="Content\Enemy.jpg" />
+    <Content Include="Content\Mine.png" />
     <Content Include="Content\Player.jpg" />
     <Content Include="Icon.ico" />
   </ItemGroup>

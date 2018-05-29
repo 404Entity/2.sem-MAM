@@ -10,52 +10,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace RpgTowerDefense
 {
-    class MainGate : Component, IUpdate, IDrawable, ILoadable
+    class MainGate : Component
     {
-        #region Fields
-        int health;
-
-        SpriteFont GateHealth;
-        String text;
-        #endregion
-
-
-        #region Propertys
-        public int Health { get => health; set => health = value; }
-
-        #endregion
-
-
-        #region Constructer
         public MainGate(GameObject gameObject): base(gameObject)
         {
         }
-
-
-
-        #endregion
-
-
-        #region Methods
-
-        public void LoadContent(ContentManager content)
-        {
-            GateHealth = content.Load<SpriteFont>("GateHealth");
-        }
-
-        public void Update()
-        {
-            text = "Stronghold Health:  " + health.ToString();
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.DrawString(GateHealth, text, new Vector2(800f, 100), Color.White);
-        }
-
-        
-
-
-        #endregion
     }
 }
