@@ -115,15 +115,14 @@ namespace RpgTowerDefense
             dic2 = new Director(new EnemyBuilder());
             GameObject enemy = dic2.Construct(new Vector2(0, 280));
             gameObjects.Add(enemy);
-<<<<<<< HEAD
+
             //gameObjects.Add(cityGate);
 
             worldBuilder.SetupData();
-=======
+
             dic = new Director(new GateBuilder());
             GameObject cityGate = dic.Construct(new Vector2(1385, 15));
             gameObjects.Add(cityGate);
->>>>>>> 38b02d13070cf51cb9fcb5776a2b13690b2434a2
 
             base.Initialize();
         }
