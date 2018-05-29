@@ -16,6 +16,7 @@ namespace RpgTowerDefense
         string text;
         SpriteFont GateHealthFont;
         Vector2 vector2;
+        string text2 = "YOU SHALL NOT PASS";
 
         public GateHealth(Vector2 vector2)
         {
@@ -42,6 +43,7 @@ namespace RpgTowerDefense
         {
 
             spriteBatch.DrawString(GateHealthFont, text, vector2, Color.White);
+            spriteBatch.DrawString(GateHealthFont, text2, new Vector2(1390,10), Color.Red);
         }
 
 
