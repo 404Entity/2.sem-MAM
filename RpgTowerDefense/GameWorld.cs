@@ -102,7 +102,7 @@ namespace RpgTowerDefense
             worldBuilder.yHeight = graphics.GraphicsDevice.Viewport.Height / worldBuilder.yTiles;
             worldBuilder.xWidth = graphics.GraphicsDevice.Viewport.Width / worldBuilder.xTiles;
             worldBuilder.map1Rect = new Rectangle (0, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
-            worldBuilder.map2Rect = new Rectangle(0, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
+            worldBuilder.map2Rect = new Rectangle(1600, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
 
 
             // TODO: Add your initialization logic here
@@ -200,8 +200,9 @@ namespace RpgTowerDefense
 
             //backGround.Draw(spriteBatch);
             
-            spriteBatch.Draw(currentMap, currentRect, Color.White);
-            
+            spriteBatch.Draw(worldBuilder.yyMap, worldBuilder.map1Rect, Color.White);
+            spriteBatch.Draw(worldBuilder.mineMap, worldBuilder.map2Rect, Color.White);
+
             foreach (GameObject go in gameObjects)
             {
                 go.Draw(spriteBatch);
