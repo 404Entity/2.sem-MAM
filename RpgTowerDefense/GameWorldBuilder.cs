@@ -15,7 +15,7 @@ namespace RpgTowerDefense
         //indicates the dimensions of the tiles
         public float xWidth;
         public float yHeight;
-        //list of coordinates on gird, curently not used
+        //list of coordinates on grid, curently not used
         float[] coordinatesX;
         float[] coordinatesY;
 
