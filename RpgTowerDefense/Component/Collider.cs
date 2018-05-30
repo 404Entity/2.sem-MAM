@@ -120,22 +120,26 @@ namespace RpgTowerDefense
                 }
                 //Genereate a optimized Temp list.  
                 List<Collider> OptimList = new List<Collider>();
-                OptimList.AddRange(GameWorld._Instance.Colliders);
-                foreach (Collider collider in ohterColliders)
+                if (OptimList != null || OptimList.Count > 0)
                 {
-                    OptimList.Remove(collider);
+                    //OptimList.AddRange(GameWorld._Instance.Colliders);
+                    //foreach (Collider collider in ohterColliders)
+                    //{
+                    //    OptimList.Remove(collider);
+                    //}
+                    //foreach (Collider collider in OptimList)
+                    //{
+                    //    if (collider != this)
+                    //    {
+                    //        if (CollisionBox.Intersects(collider.CollisionBox))
+                    //        {
+                    //            gameObject.OnCollisionEnter(collider);
+                    //            ohterColliders.Add(collider);
+                    //        }
+                    //    }
+                    //}
                 }
-                foreach (Collider collider in OptimList)
-                {
-                    if (collider != this)
-                    {
-                        if (CollisionBox.Intersects(collider.CollisionBox))
-                        {
-                            gameObject.OnCollisionEnter(collider);
-                            ohterColliders.Add(collider);
-                        }
-                    }
-                }
+
             }
         }
 
