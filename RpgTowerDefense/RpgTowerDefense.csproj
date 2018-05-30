@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Animation.cs" />
+    <Compile Include="Builder\BulletBuilder.cs" />
     <Compile Include="Component\BackGround.cs" />
     <Compile Include="Builder\Director.cs" />
     <Compile Include="Builder\EnemyBuilder.cs" />
@@ -74,12 +75,15 @@
     <Compile Include="obj\x86\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="UI\PlayerGold.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Projectile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strategy\Attack.cs" />
+    <Compile Include="Camera.cs" />
     <Compile Include="Strategy\Idle.cs" />
     <Compile Include="Strategy\Walk.cs" />
     <Compile Include="Tower.cs" />
     <Compile Include="UI\UI.cs" />
+    <Compile Include="UI\VersionControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
