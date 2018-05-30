@@ -78,6 +78,7 @@ namespace RpgTowerDefense
         internal List<Collider> Colliders
         {
             get { return colliders; }
+            set { colliders = value; }
         }
 
         public int ScreenWidth { get => screenWidth; set => screenWidth = value; }
@@ -124,8 +125,8 @@ namespace RpgTowerDefense
             dic2 = new Director(new EnemyBuilder());
             dic3 = new Director(new GateBuilder());
             //dic3 = new Director(new GateBuilder());
-            GameObject player = dic.Construct(new Vector2(1,1));
-
+            GameObject player = dic.Construct(new Vector2(1600,1));
+            gameObjects.Add(player);
 
             worldBuilder.SetupData();
 
@@ -134,7 +135,7 @@ namespace RpgTowerDefense
             dic = new Director(new GateBuilder());
             GameObject cityGate = dic.Construct(new Vector2(1350, 0));
             gameObjects.Add(cityGate);
-            
+          
 
             //SpawnMob();
 
