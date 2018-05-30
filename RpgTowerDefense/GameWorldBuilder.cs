@@ -8,6 +8,7 @@ namespace RpgTowerDefense
 {
     public class GameWorldBuilder
     {
+        GameWorld gw = GameWorld._Instance;
         
         //dictates ammount of tiles for generation
         public int xTiles = 32;
@@ -56,18 +57,18 @@ namespace RpgTowerDefense
             }
 
             //World 1, maze
-            for (int i = 0; i < GameWorld._Instance.buildSpotLocation.Length;)
+            for (int i = 0; i < gw.buildSpotLocation.Length;)
             {
-                GameWorld._Instance.buildSpotLocation[i].X = GameWorld._Instance.buildSpotLocation[i].X * xWidth;
-                GameWorld._Instance.buildSpotLocation[i].Y = GameWorld._Instance.buildSpotLocation[i].Y * yHeight;
+                gw.buildSpotLocation[i].X = gw.buildSpotLocation[i].X * xWidth;
+                gw.buildSpotLocation[i].Y = gw.buildSpotLocation[i].Y * yHeight;
                 i++;
             }
-            GameWorld._Instance.buildSpotAvailable = new bool[GameWorld._Instance.buildSpotLocation.Length];
+            gw.buildSpotAvailable = new bool[gw.buildSpotLocation.Length];
 
-            for (int i = 0; i < GameWorld._Instance.walkCoordinates.Length;)
+            for (int i = 0; i < gw.walkCoordinates.Length;)
             {
-                GameWorld._Instance.walkCoordinates[i].X = GameWorld._Instance.walkCoordinates[i].X * xWidth;
-                GameWorld._Instance.walkCoordinates[i].Y = GameWorld._Instance.walkCoordinates[i].Y * yHeight;
+                gw.walkCoordinates[i].X = gw.walkCoordinates[i].X * xWidth;
+                gw.walkCoordinates[i].Y = gw.walkCoordinates[i].Y * yHeight;
                 i++;
             }
         }
@@ -76,8 +77,8 @@ namespace RpgTowerDefense
         {
             if (index == 0)
             {
-                GameWorld._Instance.currentMap = yyMap;
-                GameWorld._Instance.currentRect = map1Rect;
+                gw.currentMap = yyMap;
+                gw.currentRect = map1Rect;
             }
         }
             //World 2, mine

@@ -17,7 +17,10 @@ namespace RpgTowerDefense
         //testing mobspawn
         float spawntime;
         float interval = 1.5f;
+        float mineSpawntime;
+        float mineInterval = 15;
 
+        MineMonsterHandler mine;
         public GameWorldBuilder worldBuilder;
 
         public Texture2D currentMap;
@@ -101,13 +104,15 @@ namespace RpgTowerDefense
         protected override void Initialize()
         {
             IsMouseVisible = true;
+
+            mine = new MineMonsterHandler();
             worldBuilder = new GameWorldBuilder();
 
             graphics.PreferredBackBufferWidth = 1600;
             graphics.PreferredBackBufferHeight = 900;
-            graphics.ApplyChanges();
 
             graphics.GraphicsDevice.Viewport = new Viewport(0, 0, 1600, 900);
+            graphics.ApplyChanges();
 
             worldBuilder.yHeight = graphics.GraphicsDevice.Viewport.Height / worldBuilder.yTiles;
             worldBuilder.xWidth = graphics.GraphicsDevice.Viewport.Width / worldBuilder.xTiles;
@@ -191,6 +196,12 @@ namespace RpgTowerDefense
                 spawntime = 0;
                 SpawnMob();
             }
+            mineSpawntime += deltaTime;
+            if(mineSpawntime >= mineInterval)
+            {
+                mineSpawntime = 0;
+                mine.SpawnMob(3);
+            }
 
 
             // TODO: Add your update logic here
@@ -248,5 +259,14 @@ namespace RpgTowerDefense
             gameObjects.Add(mob);
 
         }
+
+        //remove /**/ to enable mob spawning in mine
+        /*public void SpawnMobMine(int yCoordinate)
+        {
+            GameObject mob = dic2.Construct(new Vector2(3200, yCoordinate));
+            UpdateMobList(mob, true);
+            gameObjects.Add(mob);
+
+        }*/
     }
 }

@@ -189,3 +189,5 @@ C:\Users\MIKZU\Source\Repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Cont
 C:\Users\MIKZU\Source\Repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Gold.xnb
 C:\Users\MIKZU\Source\Repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Mine.xnb
 C:\Users\MIKZU\Source\Repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Player.xnb
+C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Bullet.xnb
+C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\tower_01.xnb
