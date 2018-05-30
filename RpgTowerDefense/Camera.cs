@@ -15,11 +15,13 @@ namespace RpgTowerDefense
         /// </summary>
         private Matrix transform;
         private Matrix offset;
+        private int screenvalue;
         public Matrix Transform { get { return transform; } private set { transform = value; } }
 
         public Matrix Offset { get => offset; set => offset = value; }
+        public int Screenvalue { get => screenvalue; set => screenvalue = value; }
 
-        public void Follow(Vector2 target, int val)
+        public void Follow(Vector2 target)
         {
             ///<summary>
             ///Calculate Transform using target parameters.
@@ -31,17 +33,18 @@ namespace RpgTowerDefense
                 0);
 
             var offset = Matrix.CreateTranslation(0, 0, 0);
-            if (val == 0)
+            if (screenvalue == 1)
             {
-                offset = Matrix.CreateTranslation(0, 0, 0);
+                position = Matrix.CreateTranslation(0, 0, 0);
             }
-            else if (val == 1)
+            else if (screenvalue == 2)
             {
-                offset = Matrix.CreateTranslation(GameWorld._Instance.ScreenWidth, 0, 0);
+                position = Matrix.CreateTranslation(-GameWorld._Instance.ScreenWidth, 0, 0);
+                
             }
             else
             {
-                offset = Matrix.CreateTranslation(GameWorld._Instance.ScreenWidth * 2, 0, 0);
+                position = Matrix.CreateTranslation(-GameWorld._Instance.ScreenWidth * 2, 0, 0);
             }
             Transform = position * offset;
 
