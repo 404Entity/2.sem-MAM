@@ -14,24 +14,35 @@ namespace RpgTowerDefense
         /// The Camera class locks to a specified targer(Gameobject) and allows us to transform the render area, using the offset.
         /// </summary>
         private Matrix transform;
+        private Matrix offset;
         public Matrix Transform { get { return transform; } private set { transform = value; } }
 
+        public Matrix Offset { get => offset; set => offset = value; }
 
-        public void CameraLock()
-        {
-
-        }
-        public void Follow(GameObject target, Collider targetColisionbox)
+        public void Follow(Vector2 target, int val)
         {
             ///<summary>
             ///Calculate Transform using target parameters.
             /// </summary>
-            var offset = Matrix.CreateTranslation(GameWorld._Instance.ScreenWidth / 2, GameWorld._Instance.ScreenHeigth / 2, 0);
+            
             var position = Matrix.CreateTranslation(
-                -target.Transform.Position.X - (targetColisionbox.CollisionBox.Width / 2),
-                -target.Transform.Position.Y - (targetColisionbox.CollisionBox.Height / 2),
+                -target.X,
+                -target.Y,
                 0);
 
+            var offset = Matrix.CreateTranslation(0, 0, 0);
+            if (val == 0)
+            {
+                offset = Matrix.CreateTranslation(0, 0, 0);
+            }
+            else if (val == 1)
+            {
+                offset = Matrix.CreateTranslation(GameWorld._Instance.ScreenWidth, 0, 0);
+            }
+            else
+            {
+                offset = Matrix.CreateTranslation(GameWorld._Instance.ScreenWidth * 2, 0, 0);
+            }
             Transform = position * offset;
 
         }

@@ -18,6 +18,9 @@ namespace RpgTowerDefense
         float spawntime;
         float interval = 1.5f;
 
+        private Camera camera;
+
+
         public GameWorldBuilder worldBuilder;
 
         public Texture2D currentMap;
@@ -103,11 +106,15 @@ namespace RpgTowerDefense
             IsMouseVisible = true;
             worldBuilder = new GameWorldBuilder();
 
+            camera = new Camera();
+
             graphics.PreferredBackBufferWidth = 1600;
             graphics.PreferredBackBufferHeight = 900;
             graphics.ApplyChanges();
-
             graphics.GraphicsDevice.Viewport = new Viewport(0, 0, 1600, 900);
+
+            ScreenWidth = graphics.PreferredBackBufferWidth;
+            ScreenHeigth = graphics.PreferredBackBufferHeight;
 
             worldBuilder.yHeight = graphics.GraphicsDevice.Viewport.Height / worldBuilder.yTiles;
             worldBuilder.xWidth = graphics.GraphicsDevice.Viewport.Width / worldBuilder.xTiles;
