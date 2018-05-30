@@ -15,7 +15,7 @@ namespace RpgTowerDefense
             GameObject bullet = new GameObject();
             bullet.AddComponent(new Transform(bullet, position));
             bullet.AddComponent(new SpriteRenderer(bullet, "Bullet", 1, 0.2f));
-            //bullet.AddComponent(new Collider(bullet, true, 0.5f));
+            bullet.AddComponent(new Collider(bullet, true, 0.5f));
             bullet.AddComponent(new Projectile(bullet, 10,Vector2.Zero));
             bullet.LoadContent(GameWorld._Instance.Content);
             buildObject = bullet;
