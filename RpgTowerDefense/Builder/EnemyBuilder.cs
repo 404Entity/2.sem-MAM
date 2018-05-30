@@ -10,6 +10,8 @@ namespace RpgTowerDefense
     class EnemyBuilder : IBuilder
     {
         private GameObject buildobject;
+
+
         public void BuildGameObject(Vector2 position)
         {
             GameObject enemy = new GameObject();
@@ -36,5 +38,6 @@ namespace RpgTowerDefense
         {
             return buildobject;
         }
+
     }
 }

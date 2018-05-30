@@ -11,14 +11,14 @@ namespace RpgTowerDefense
     {
        private Vector2 directionVector;
        private int damage;
-       private int health;
-
+   
        public Projectile(GameObject gameObject,int damage,Vector2 directionVector): base(gameObject)
         {
-            this.damage = damage;
+            this.Damage = damage;
             this.directionVector = directionVector;
         }
-        public int Health { get => health; set => health = value; }
+
+        public int Damage { get => damage; set => damage = value; }
 
         public void OnCollisionEnter(Collider other)
         {
@@ -41,6 +41,7 @@ namespace RpgTowerDefense
         public void Update()
         {
             gameObject.Transform.Translate(directionVector * 2);
+            
         }
     }
 }

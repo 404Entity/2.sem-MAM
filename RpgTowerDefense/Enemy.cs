@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace RpgTowerDefense
 {
-    class Enemy : Component, ILoadable, IAnimateable, IUpdate
+    class Enemy : Component, ILoadable, IAnimateable, IUpdate, ICollideEnter,ICollideStay,ICollideExit
     {
         #region Fields
         GameWorldBuilder worldBuilder;
@@ -49,6 +49,7 @@ namespace RpgTowerDefense
             gameObject.Transform.Position = new Vector2 (-TileSize,moveTarget.Y);
 
             TileSize = (int)worldBuilder.xWidth;
+            Health = 20;
         }
         #endregion
         #region Methods
@@ -80,6 +81,10 @@ namespace RpgTowerDefense
 
         public void Update()
         {
+            if (Health <= 0)
+            {
+                GameWorld._Instance.RemoveGameObjects.Add(gameObject);
+            }
             if (strategy is Walk)
             {
 
@@ -106,7 +111,30 @@ namespace RpgTowerDefense
                 threadStarted = true;
             }
         }
-        
+
+        #region Collision
+        public void OnCollisionEnter(Collider other)
+        {
+            if ((Projectile)other.GameObject.GetComponent("Projectile") != null)
+            {
+                Projectile dmgObject = (Projectile)other.GameObject.GetComponent("Projectile");
+                this.Health -= dmgObject.Damage;
+                GameWorld._Instance.RemoveGameObjects.Add(other.GameObject);
+            }
+        }
+
+        public void OnCollisionExit(Collider other)
+        {
+            
+        }
+
+        public void OnCollisionStay(Collider other)
+        {
+
+        }
+        #endregion
+
+
         //Enemy Movement Method
         public void EnemyMovement(Object stateInfo)
         {
