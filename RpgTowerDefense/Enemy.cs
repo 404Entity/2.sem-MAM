@@ -33,6 +33,8 @@ namespace RpgTowerDefense
         //used to find and save destinations for pathing
         int walkIndex;
         Vector2 moveTarget;
+
+        public int Health { get; internal set; }
         #endregion
         #region Constructor
         public Enemy(GameObject gameobject) : base(gameobject)
