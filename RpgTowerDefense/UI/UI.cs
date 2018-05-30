@@ -13,13 +13,16 @@ namespace RpgTowerDefense
     {
         PlayerGold playerGold;
         GateHealth gateHealth;
+        VersionControl versionControl;
 
         public void LoadContent(ContentManager content)
         {
-            playerGold = new PlayerGold();
-            gateHealth = new GateHealth();
+            playerGold = new PlayerGold(new Vector2(600f, 10));
+            gateHealth = new GateHealth(new Vector2(840, 10));
+            versionControl = new VersionControl(new Vector2(1, 880));
             playerGold.LoadContent(content);
             gateHealth.LoadContent(content);
+            versionControl.LoadContent(content);
         }
 
         public void Update()
@@ -32,6 +35,7 @@ namespace RpgTowerDefense
         {
             playerGold.Draw(spriteBatch);
             gateHealth.Draw(spriteBatch);
+            versionControl.Draw(spriteBatch);
         }
     }
 }

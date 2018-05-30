@@ -12,28 +12,51 @@ namespace RpgTowerDefense
 {
     class GateHealth : UI
     {
+        #region fields
         int health = 100;
         string text;
         SpriteFont GateHealthFont;
+        Vector2 vector2;
+        string text2 = "YOU SHALL NOT PASS";
+
+        #endregion
+
+        #region Constructor
+        public GateHealth(Vector2 vector2)
+        {
+            this.vector2 = vector2;
+        }
+
+        public GateHealth()
+        {
+        }
+
+        #endregion
+        #region properties
 
         public int Health { get => health; set => health -= value; }
-        
-        public void LoadContent(ContentManager content)
+
+        #endregion
+
+
+        #region Methods
+        public new void LoadContent(ContentManager content)
         {
             GateHealthFont = content.Load<SpriteFont>("GateHealth");
         }
 
-        public void Update()
+        public new void Update()
         {
             text = "Gate Health:  " + Health.ToString();
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public new void Draw(SpriteBatch spriteBatch)
         {
 
-            spriteBatch.DrawString(GateHealthFont, text, new Vector2(840, 10), Color.White);
+            spriteBatch.DrawString(GateHealthFont, text, vector2, Color.White);
+            spriteBatch.DrawString(GateHealthFont, text2, new Vector2(1390,10), Color.Red);
         }
-
+        #endregion
 
 
 

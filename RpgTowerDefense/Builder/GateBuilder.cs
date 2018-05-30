@@ -16,7 +16,7 @@ namespace RpgTowerDefense
         {
             GameObject mainGate = new GameObject();
             mainGate.AddComponent(new Transform(mainGate, position));
-            mainGate.AddComponent(new SpriteRenderer(mainGate, "Enemy", 1, 0.5f));
+            mainGate.AddComponent(new SpriteRenderer(mainGate, "CityGate", 1, 0.5f));
             //mainGate.AddComponent(new Animator(mainGate));
             mainGate.AddComponent(new MainGate(mainGate));
             mainGate.LoadContent(GameWorld._Instance.Content);
@@ -27,6 +27,11 @@ namespace RpgTowerDefense
         }
 
         public void BuildGameObject(Vector2 position, int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void BuildGameObject(Vector2 position, int id, Vector2 direction)
         {
             throw new NotImplementedException();
         }
