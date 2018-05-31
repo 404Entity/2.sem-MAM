@@ -11,24 +11,24 @@ namespace RpgTowerDefense
 {
     class UI
     {
-        PlayerGold playerGold;
-        GateHealth gateHealth;
-        VersionControl versionControl;
+        PlayerGold playerGold = new PlayerGold(new Vector2(600f, 10));
+        GateHealth gateHealth = new GateHealth(new Vector2(840, 10));
+        VersionControl versionControl = new VersionControl(new Vector2(1, 880));
+        HighScore highScore = new HighScore(new Vector2(100, 50));
 
         public void LoadContent(ContentManager content)
         {
-            playerGold = new PlayerGold(new Vector2(600f, 10));
-            gateHealth = new GateHealth(new Vector2(840, 10));
-            versionControl = new VersionControl(new Vector2(1, 880));
             playerGold.LoadContent(content);
             gateHealth.LoadContent(content);
             versionControl.LoadContent(content);
+            highScore.LoadContent(content);
         }
 
         public void Update()
         {
             playerGold.Update();
             gateHealth.Update();
+            highScore.Update();
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -36,6 +36,7 @@ namespace RpgTowerDefense
             playerGold.Draw(spriteBatch);
             gateHealth.Draw(spriteBatch);
             versionControl.Draw(spriteBatch);
+            highScore.Draw(spriteBatch);
         }
     }
 }

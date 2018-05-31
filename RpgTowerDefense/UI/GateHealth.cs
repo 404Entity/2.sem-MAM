@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace RpgTowerDefense
 {
-    class GateHealth : UI
+    class GateHealth
     {
         #region fields
         int health = 100;
@@ -40,17 +40,17 @@ namespace RpgTowerDefense
 
 
         #region Methods
-        public new void LoadContent(ContentManager content)
+        public void LoadContent(ContentManager content)
         {
             GateHealthFont = content.Load<SpriteFont>("GateHealth");
         }
 
-        public new void Update()
+        public void Update()
         {
             text = "Gate Health:  " + Health.ToString();
         }
 
-        public new void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
 
             spriteBatch.DrawString(GateHealthFont, text, vector2, Color.White);

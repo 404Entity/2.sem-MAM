@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/MIKZU/Source/Repos/2.sem-MAM/RpgTowerDefense/Content/CityGate.jpg</SourceFile>
-  <SourceTime>2018-05-28T11:45:19.9603854+02:00</SourceTime>
-  <DestFile>C:/Users/MIKZU/Source/Repos/2.sem-MAM/RpgTowerDefense/Content/bin/Windows/CityGate.xnb</DestFile>
-  <DestTime>2018-05-30T22:21:23.6531679+02:00</DestTime>
+  <SourceFile>C:/2.sem-MAM/RpgTowerDefense/Content/CityGate.jpg</SourceFile>
+  <SourceTime>2018-05-28T09:17:00.2905056+02:00</SourceTime>
+  <DestFile>C:/2.sem-MAM/RpgTowerDefense/Content/bin/Windows/CityGate.xnb</DestFile>
+  <DestTime>2018-05-31T10:34:20.5190403+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
