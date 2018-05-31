@@ -13,7 +13,6 @@ namespace RpgTowerDefense
     class GateHealth
     {
         #region fields
-        int health = 100;
         string text;
         SpriteFont GateHealthFont;
         Vector2 vector2;
@@ -32,22 +31,17 @@ namespace RpgTowerDefense
         }
 
         #endregion
-        #region properties
-
-        public int Health { get => health; set => health -= value; }
-
-        #endregion
-
+       
 
         #region Methods
         public void LoadContent(ContentManager content)
         {
-            GateHealthFont = content.Load<SpriteFont>("GateHealth");
+            GateHealthFont = content.Load<SpriteFont>("Gold");
         }
 
         public void Update()
         {
-            text = "Gate Health:  " + Health.ToString();
+            text = "Gate Health:  " + GameWorld._Instance.GateHealth.ToString();
         }
 
         public void Draw(SpriteBatch spriteBatch)

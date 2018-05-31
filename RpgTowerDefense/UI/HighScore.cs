@@ -26,7 +26,7 @@ namespace RpgTowerDefense
         public void LoadContent(ContentManager content)
         {
             //UIPicture = content.Load<Texture2D>("Picture Name");
-            spriteFont = content.Load<SpriteFont>("Gold");
+            spriteFont = content.Load<SpriteFont>("GateHealth");
         }
 
         public void Update()
