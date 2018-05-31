@@ -21,7 +21,7 @@ namespace RpgTowerDefense
         Vector2 OpVector = new Vector2(0, -1);
         Vector2 NedVector = new Vector2(0, 1);
         Vector2 HojreVector = new Vector2(1, 0);
-        UI uI = new UI();
+
         //Decides move direction
         //Speed of enemy
         int threadSleep = 20;
@@ -113,6 +113,10 @@ namespace RpgTowerDefense
         }
 
         #region Collision
+        /// <summary>
+        /// When a enemy is hit by a bullet lose health and remove the bullet
+        /// </summary>
+        /// <param name="other"></param>
         public void OnCollisionEnter(Collider other)
         {
             if ((Projectile)other.GameObject.GetComponent("Projectile") != null)
@@ -123,12 +127,18 @@ namespace RpgTowerDefense
                 GameWorld._Instance.Colliders.Remove(other);
             }
         }
-
+        /// <summary>
+        /// not implementet yet
+        /// </summary>
+        /// <param name="other"></param>
         public void OnCollisionExit(Collider other)
         {
             
         }
-
+        /// <summary>
+        /// not implementet
+        /// </summary>
+        /// <param name="other"></param>
         public void OnCollisionStay(Collider other)
         {
 

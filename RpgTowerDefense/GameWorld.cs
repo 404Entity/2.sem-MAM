@@ -70,6 +70,7 @@ namespace RpgTowerDefense
         private List<GameObject> gameObjects;
         private List<GameObject> addGameObjects;
         private List<GameObject> removeGameObjects;
+        private List<GameObject> removeEnemy;
         private List<Collider> colliders;
 
 
@@ -85,6 +86,7 @@ namespace RpgTowerDefense
 
         public int ScreenWidth { get => screenWidth; set => screenWidth = value; }
         public int ScreenHeigth { get => screenHeigth; set => screenHeigth = value; }
+        internal List<GameObject> RemoveEnemy { get => removeEnemy; set => removeEnemy = value; }
 
         public float deltaTime;
 
@@ -122,6 +124,7 @@ namespace RpgTowerDefense
             GameObjects = new List<GameObject>();
             addGameObjects = new List<GameObject>();
             removeGameObjects = new List<GameObject>();
+            removeEnemy = new List<GameObject>();
             colliders = new List<Collider>();
             ui = new UI();
             dic = new Director(new PlayerBuilder());
@@ -203,6 +206,7 @@ namespace RpgTowerDefense
             foreach (GameObject go in removeGameObjects)
             {
                 gameObjects.Remove(go);
+                mobList.Remove(go);
             }
             CleanTemptList();
             foreach (GameObject go in GameObjects)
