@@ -16,13 +16,7 @@ namespace RpgTowerDefense
 
         private Animator animator;
         private IStrategy strategy;
-        private DIRECTION direction;
-        //Decides move direction
-        Vector2 OpVector = new Vector2(0, -1);
-        Vector2 NedVector = new Vector2(0, 1);
-        Vector2 HojreVector = new Vector2(1, 0);
 
-        //Decides move direction
         //Speed of enemy
         int threadSleep = 10;
         //Speed of enemy
