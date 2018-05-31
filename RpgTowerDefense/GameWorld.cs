@@ -13,6 +13,10 @@ namespace RpgTowerDefense
         Director dic;
         Director dic2;
 
+        int playerGold;
+        int highScore;
+        int gateHealth = 100;
+
         //testing mobspawn
         float spawntime;
         float interval = 1.5f;
@@ -25,6 +29,7 @@ namespace RpgTowerDefense
         //list of locations on the grid where towers can be built
         public Vector2[] buildSpotLocation = { new Vector2(3, 12), new Vector2(6, 14), new Vector2(7, 3), new Vector2(12, 12), new Vector2(14, 3), new Vector2(16, 6), new Vector2(21, 12), new Vector2(24, 6), new Vector2(28, 1) };
         public bool[] buildSpotAvailable;
+
         //keeps track of coordinates for enemy pathing
         public Vector2[] walkCoordinates = { new Vector2(5, 14), new Vector2(5, 2), new Vector2(17, 2), new Vector2(17, 8), new Vector2(11, 8), new Vector2(11, 14), new Vector2(23, 14), new Vector2(23, 2), new Vector2(32, 2) };
 
@@ -87,6 +92,9 @@ namespace RpgTowerDefense
         public int ScreenWidth { get => screenWidth; set => screenWidth = value; }
         public int ScreenHeigth { get => screenHeigth; set => screenHeigth = value; }
         internal List<GameObject> RemoveEnemy { get => removeEnemy; set => removeEnemy = value; }
+        public int PlayerGold { get => playerGold; set => playerGold = value; }
+        public int HighScore { get => highScore; set => highScore = value; }
+        public int GateHealth { get => gateHealth; set => gateHealth = value; }
 
         public float deltaTime;
 

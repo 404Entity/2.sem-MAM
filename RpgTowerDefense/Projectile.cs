@@ -25,9 +25,7 @@ namespace RpgTowerDefense
             if ((Enemy)other.GameObject.GetComponent("Enemy") != null)
             {
                 GameWorld._Instance.RemoveGameObjects.Add(other.GameObject);
-                GameWorld._Instance.GameObjects.Remove(other.GameObject);
                 GameWorld._Instance.RemoveGameObjects.Add(gameObject);
-                GameWorld._Instance.GameObjects.Remove(this.GameObject);
             }
             else
             {

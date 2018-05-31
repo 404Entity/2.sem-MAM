@@ -11,7 +11,7 @@ namespace RpgTowerDefense
     class Camera
     {
         /// <summary>
-        /// The Camera class locks to a specified targer(Gameobject) and allows us to transform the render area, using the offset.
+        /// The Camera class locks to a specified target(Gameobject) and allows us to transform the render area, using the offset.
         /// </summary>
         private Matrix transform;
         public Matrix Transform { get { return transform; } private set { transform = value; } }

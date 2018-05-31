@@ -21,6 +21,7 @@ namespace RpgTowerDefense
         int threadSleep = 10;
         //Speed of enemy
         bool threadStarted = false;
+        int dmg;
 
         //size of tiles, used to scale size of enemy
         int TileSize;
@@ -29,9 +30,10 @@ namespace RpgTowerDefense
         Vector2 moveTarget;
 
         public int Health { get; internal set; }
+        public int Dmg { get => dmg; set => dmg = value; }
         #endregion
         #region Constructor
-        public Enemy(GameObject gameobject) : base(gameobject)
+        public Enemy(GameObject gameobject, int dmg) : base(gameobject)
         {
             worldBuilder = GameWorld._Instance.worldBuilder;
 
@@ -44,6 +46,7 @@ namespace RpgTowerDefense
 
             TileSize = (int)worldBuilder.xWidth;
             Health = 20;
+            this.dmg = dmg;
         }
         #endregion
         #region Methods
@@ -78,6 +81,7 @@ namespace RpgTowerDefense
             if (Health <= 0)
             {
                 GameWorld._Instance.RemoveGameObjects.Add(gameObject);
+                GameWorld._Instance.HighScore += 10;
             }
             if (strategy is Walk)
             {
