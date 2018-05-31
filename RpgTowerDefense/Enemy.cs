@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace RpgTowerDefense
 {
-    class Enemy : Component, ILoadable, IAnimateable, IUpdate, ICollideEnter
+    class Enemy : Component, ILoadable, IAnimateable, IUpdate, ICollideEnter,ICollideStay,ICollideExit
     {
         #region Fields
         GameWorldBuilder worldBuilder;
@@ -49,6 +49,7 @@ namespace RpgTowerDefense
             gameObject.Transform.Position = new Vector2 (-TileSize,moveTarget.Y);
 
             TileSize = (int)worldBuilder.xWidth;
+            Health = 20;
         }
         #endregion
         #region Methods
@@ -80,6 +81,10 @@ namespace RpgTowerDefense
 
         public void Update()
         {
+            if (Health <= 0)
+            {
+                GameWorld._Instance.RemoveGameObjects.Add(gameObject);
+            }
             if (strategy is Walk)
             {
 
@@ -105,10 +110,31 @@ namespace RpgTowerDefense
                 ThreadPool.QueueUserWorkItem(EnemyMovement);
                 threadStarted = true;
             }
+        }
 
+        #region Collision
+        public void OnCollisionEnter(Collider other)
+        {
+            if ((Projectile)other.GameObject.GetComponent("Projectile") != null)
+            {
+                Projectile dmgObject = (Projectile)other.GameObject.GetComponent("Projectile");
+                this.Health -= dmgObject.Damage;
+                GameWorld._Instance.RemoveGameObjects.Add(other.GameObject);
+            }
+        }
+
+        public void OnCollisionExit(Collider other)
+        {
+            
+        }
+
+        public void OnCollisionStay(Collider other)
+        {
 
         }
-        
+        #endregion
+
+
         //Enemy Movement Method
         public void EnemyMovement(Object stateInfo)
         {
@@ -125,19 +151,92 @@ namespace RpgTowerDefense
                 gameObject.Transform.Translate(moveVector);
                 Thread.Sleep(threadSleep);
             }
-            
-        }
-
-        public void OnCollisionEnter(Collider other)
-        {
-            Collider collider = (Collider)gameObject.GetComponent("Collider");
-            if ((Enemy)other.GameObject.GetComponent("Enemy") != null || (Enemy)other.GameObject.GetComponent("Scissor") != null)
+            /*
+            while (true)
             {
-                GameWorld._Instance.RemoveGameObjects.Add(other.GameObject);
+                //Bevæger sig til hojre
+                gameObject.Transform.Translate(HojreVector);
+                Thread.Sleep(threadSleep);
+                if (gameObject.Transform.Position == new Vector2(115, 280))
+                {
+                    //Breaker hvis punktet er ramt
+                    break;
+                }
             }
-
-
-
+            while (true)
+            {
+                //Bevæger sig op
+                gameObject.Transform.Translate(OpVector);
+                Thread.Sleep(threadSleep);
+                if (gameObject.Transform.Position == new Vector2(115, 115))
+                {
+                    //Breaker hvis punktet er ramt
+                    break;
+                }
+            }
+            while (true)
+            {
+                //Bevæger sig til hojre
+                gameObject.Transform.Translate(HojreVector);
+                Thread.Sleep(threadSleep);
+                if (gameObject.Transform.Position == new Vector2(282, 115))
+                {
+                    //Breaker hvis punktet er ramt
+                    break;
+                }
+            }
+            while (true)
+            {
+                //Bevæger sig ned
+                gameObject.Transform.Translate(NedVector);
+                Thread.Sleep(threadSleep);
+                if (gameObject.Transform.Position == new Vector2(282, 340))
+                {
+                    //Breaker hvis punktet er ramt
+                    break;
+                }
+            }
+            while (true)
+            {
+                //Bevæger sig til hojre
+                gameObject.Transform.Translate(HojreVector);
+                Thread.Sleep(threadSleep);
+                if (gameObject.Transform.Position == new Vector2(507, 340))
+                {
+                    //Breaker hvis punktet er ramt
+                    break;
+                }
+            }
+            while (true)
+            {
+                //Bevæger sig Op 
+                gameObject.Transform.Translate(OpVector);
+                Thread.Sleep(threadSleep);
+                if (gameObject.Transform.Position == new Vector2(507, 226))
+                {
+                    //Breaker hvis punktet er ramt
+                    break;
+                }
+            }
+            while (true)
+            {
+                //Bevæger sig til hojre
+                gameObject.Transform.Translate(HojreVector);
+                Thread.Sleep(threadSleep);
+                if (gameObject.Transform.Position == new Vector2(750, 226))
+                {
+                    //Breaker hvis punktet er ramt
+                    break;
+                }
+            }
+            while (true)
+            {
+                //Denne kører bare i loop til vi har en implementering
+                gameObject.Transform.Translate(new Vector2(0, 0));
+                Thread.Sleep(threadSleep);
+                //Denne kører bare i loop til vi har en implementering
+            }
+            */
         }
         #endregion
     }

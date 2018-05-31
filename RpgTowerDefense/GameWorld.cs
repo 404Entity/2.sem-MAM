@@ -119,7 +119,7 @@ namespace RpgTowerDefense
             GameObjects = new List<GameObject>();
             addGameObjects = new List<GameObject>();
             removeGameObjects = new List<GameObject>();
-
+            colliders = new List<Collider>();
             ui = new UI();
             dic = new Director(new PlayerBuilder());
             GameObject player = dic.Construct(new Vector2(1, 1));

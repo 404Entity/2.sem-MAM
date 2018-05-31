@@ -20,13 +20,7 @@ namespace RpgTowerDefense
         private IStrategy strategy;
         private DIRECTION direction;
         private bool canMove;
-        private bool isgrounded;
         private MouseState previousMouseState; 
-        public bool CanMove
-        {
-            get { return canMove; }
-            set { canMove = value; }
-        }
 
 
         #endregion
@@ -41,7 +35,6 @@ namespace RpgTowerDefense
             speed = 100;
             animator = (gameobject.GetComponent("Animator") as Animator);
             canMove = true;
-            isgrounded = false;
         }
         #endregion
         #region Methods
