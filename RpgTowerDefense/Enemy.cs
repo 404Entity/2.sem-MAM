@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace RpgTowerDefense
 {
-    class Enemy : Component, ILoadable, IAnimateable, IUpdate
+    class Enemy : Component, ILoadable, IAnimateable, IUpdate, ICollideEnter
     {
         #region Fields
         GameWorldBuilder worldBuilder;
@@ -105,6 +105,8 @@ namespace RpgTowerDefense
                 ThreadPool.QueueUserWorkItem(EnemyMovement);
                 threadStarted = true;
             }
+
+
         }
         
         //Enemy Movement Method
@@ -123,92 +125,19 @@ namespace RpgTowerDefense
                 gameObject.Transform.Translate(moveVector);
                 Thread.Sleep(threadSleep);
             }
-            /*
-            while (true)
+            
+        }
+
+        public void OnCollisionEnter(Collider other)
+        {
+            Collider collider = (Collider)gameObject.GetComponent("Collider");
+            if ((Enemy)other.GameObject.GetComponent("Enemy") != null || (Enemy)other.GameObject.GetComponent("Scissor") != null)
             {
-                //Bevæger sig til hojre
-                gameObject.Transform.Translate(HojreVector);
-                Thread.Sleep(threadSleep);
-                if (gameObject.Transform.Position == new Vector2(115, 280))
-                {
-                    //Breaker hvis punktet er ramt
-                    break;
-                }
+                GameWorld._Instance.RemoveGameObjects.Add(other.GameObject);
             }
-            while (true)
-            {
-                //Bevæger sig op
-                gameObject.Transform.Translate(OpVector);
-                Thread.Sleep(threadSleep);
-                if (gameObject.Transform.Position == new Vector2(115, 115))
-                {
-                    //Breaker hvis punktet er ramt
-                    break;
-                }
-            }
-            while (true)
-            {
-                //Bevæger sig til hojre
-                gameObject.Transform.Translate(HojreVector);
-                Thread.Sleep(threadSleep);
-                if (gameObject.Transform.Position == new Vector2(282, 115))
-                {
-                    //Breaker hvis punktet er ramt
-                    break;
-                }
-            }
-            while (true)
-            {
-                //Bevæger sig ned
-                gameObject.Transform.Translate(NedVector);
-                Thread.Sleep(threadSleep);
-                if (gameObject.Transform.Position == new Vector2(282, 340))
-                {
-                    //Breaker hvis punktet er ramt
-                    break;
-                }
-            }
-            while (true)
-            {
-                //Bevæger sig til hojre
-                gameObject.Transform.Translate(HojreVector);
-                Thread.Sleep(threadSleep);
-                if (gameObject.Transform.Position == new Vector2(507, 340))
-                {
-                    //Breaker hvis punktet er ramt
-                    break;
-                }
-            }
-            while (true)
-            {
-                //Bevæger sig Op 
-                gameObject.Transform.Translate(OpVector);
-                Thread.Sleep(threadSleep);
-                if (gameObject.Transform.Position == new Vector2(507, 226))
-                {
-                    //Breaker hvis punktet er ramt
-                    break;
-                }
-            }
-            while (true)
-            {
-                //Bevæger sig til hojre
-                gameObject.Transform.Translate(HojreVector);
-                Thread.Sleep(threadSleep);
-                if (gameObject.Transform.Position == new Vector2(750, 226))
-                {
-                    //Breaker hvis punktet er ramt
-                    break;
-                }
-            }
-            while (true)
-            {
-                //Denne kører bare i loop til vi har en implementering
-                gameObject.Transform.Translate(new Vector2(0, 0));
-                Thread.Sleep(threadSleep);
-                //Denne kører bare i loop til vi har en implementering
-            }
-            */
+
+
+
         }
         #endregion
     }
