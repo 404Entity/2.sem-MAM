@@ -16,7 +16,7 @@ namespace RpgTowerDefense
         private Matrix transform;
         public Matrix Transform { get { return transform; } private set { transform = value; } }
 
-
+        
         public void CameraLock()
         {
 
