@@ -18,7 +18,7 @@ namespace RpgTowerDefense
         private IStrategy strategy;
 
         //Speed of enemy
-        int threadSleep = 10;
+        int threadSleep;
         //Speed of enemy
         bool threadStarted = false;
         int dmg;
@@ -33,7 +33,7 @@ namespace RpgTowerDefense
         public int Dmg { get => dmg; set => dmg = value; }
         #endregion
         #region Constructor
-        public Enemy(GameObject gameobject, int dmg) : base(gameobject)
+        public Enemy(GameObject gameobject, int dmg, int threadSleep, int health) : base(gameobject)
         {
             worldBuilder = GameWorld._Instance.worldBuilder;
 
@@ -45,8 +45,9 @@ namespace RpgTowerDefense
             gameObject.Transform.Position = new Vector2 (-TileSize,moveTarget.Y);
 
             TileSize = (int)worldBuilder.xWidth;
-            Health = 20;
+            this.Health = health;
             this.dmg = dmg;
+            this.threadSleep = threadSleep;
         }
         #endregion
         #region Methods
