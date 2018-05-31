@@ -24,7 +24,7 @@ namespace RpgTowerDefense
 
         //Decides move direction
         //Speed of enemy
-        int threadSleep = 20;
+        int threadSleep = 10;
         //Speed of enemy
         bool threadStarted = false;
 
