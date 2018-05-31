@@ -30,25 +30,19 @@ namespace RpgTowerDefense
             AttackPower = attackPower;
             AttackSpeed = attackSpeed;
             AttackType = attackType;
-
+            AttackRadius = attackRadius;
         }
         #endregion
         public void FindTarget()
         {
-
-            if (target == null)
-            {
-
                 foreach (GameObject enemy in GameWorld._Instance.MobList)
                 {
-                    if (Vector2.Distance(enemy.GameObject.Transform.Position,GameObject.Transform.Position) < AttackRadius)
+                    if (Vector2.Distance(enemy.GameObject.Transform.Position,this.gameObject.Transform.Position) < AttackRadius)
                     {
                         target = enemy;
                         break;
                     }
                 }
-
-            }
         }
         public void TowerAttack()
         {
@@ -70,7 +64,10 @@ namespace RpgTowerDefense
 
         public void Update()
         {
-            spin();
+            if (target == null)
+            {
+                FindTarget();
+            }
             string varstring = "hello";
             TowerAttack();
         }

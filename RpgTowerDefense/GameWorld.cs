@@ -12,7 +12,6 @@ namespace RpgTowerDefense
     {
         Director dic;
         Director dic2;
-        Director dic3;
 
         //testing mobspawn
         float spawntime;
@@ -67,10 +66,13 @@ namespace RpgTowerDefense
         UI ui;
         private int screenWidth;
         private int screenHeigth;
+
         private List<GameObject> gameObjects;
         private List<GameObject> addGameObjects;
         private List<GameObject> removeGameObjects;
         private List<Collider> colliders;
+
+
         internal List<GameObject> GameObjects { get => gameObjects; set => gameObjects = value; }
         internal List<GameObject> AddGameObjects { get => addGameObjects; set => addGameObjects = value; }
         internal List<GameObject> RemoveGameObjects { get => removeGameObjects; set => removeGameObjects = value; }
@@ -85,6 +87,7 @@ namespace RpgTowerDefense
         public int ScreenHeigth { get => screenHeigth; set => screenHeigth = value; }
 
         public float deltaTime;
+
         public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -242,10 +245,10 @@ namespace RpgTowerDefense
         //spawns enemy and adds to both gameobjects and moblist
         public void SpawnMob()
         {
-            GameObject mob = dic2.Construct(new Vector2(0, 270));
+            dic2.Construct(new Vector2(0, 270));
+            GameObject mob = dic2.Builder.GetResult();
             UpdateMobList(mob, true);
             gameObjects.Add(mob);
-
         }
     }
 }
