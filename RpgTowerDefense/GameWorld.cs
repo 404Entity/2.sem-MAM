@@ -13,9 +13,7 @@ namespace RpgTowerDefense
         Director dic;
         Director dic2;
 
-        int playerGold;
-        int highScore;
-        int gateHealth = 100;
+        int playerGold, GoldGainEachRound, highScore, gateHealth = 100;
 
         //testing mobspawn
         float spawntime;
@@ -77,7 +75,6 @@ namespace RpgTowerDefense
         private List<GameObject> removeGameObjects;
         private List<GameObject> removeEnemy;
         private List<Collider> colliders;
-
 
         internal List<GameObject> GameObjects { get => gameObjects; set => gameObjects = value; }
         internal List<GameObject> AddGameObjects { get => addGameObjects; set => addGameObjects = value; }
@@ -203,6 +200,8 @@ namespace RpgTowerDefense
             {
                 spawntime = 0;
                 SpawnMob();
+                //Giver spilleren 10+ guld hvert enemy spawn
+                PlayerGold += GoldGainEachRound;
             }
 
 

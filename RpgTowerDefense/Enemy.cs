@@ -17,11 +17,12 @@ namespace RpgTowerDefense
         private Animator animator;
         private IStrategy strategy;
 
-        //Speed of enemy
-        int threadSleep;
-        //Speed of enemy
+        //dmg = Damage of enemy
+        //PointGain = amount of points gained for killing an enemy
+        //GoldGain = Amount of gold gained for killing an enemy
+        //threadSleep = Speed of enemy
         bool threadStarted = false;
-        int dmg;
+        int dmg, pointGain, goldGainOnKill, threadSleep;
 
         //size of tiles, used to scale size of enemy
         int TileSize;
@@ -33,7 +34,7 @@ namespace RpgTowerDefense
         public int Dmg { get => dmg; set => dmg = value; }
         #endregion
         #region Constructor
-        public Enemy(GameObject gameobject, int dmg, int threadSleep, int health) : base(gameobject)
+        public Enemy(GameObject gameobject, int dmg, int threadSleep, int health, int pointGain, int goldGainOnKill) : base(gameobject)
         {
             worldBuilder = GameWorld._Instance.worldBuilder;
 
@@ -48,6 +49,8 @@ namespace RpgTowerDefense
             this.Health = health;
             this.dmg = dmg;
             this.threadSleep = threadSleep;
+            this.pointGain = pointGain;
+            this.goldGainOnKill = goldGainOnKill;
         }
         #endregion
         #region Methods
@@ -82,7 +85,10 @@ namespace RpgTowerDefense
             if (Health <= 0)
             {
                 GameWorld._Instance.RemoveGameObjects.Add(gameObject);
-                GameWorld._Instance.HighScore += 10;
+                //Giver spilleren points når en enemy dør
+                GameWorld._Instance.HighScore += pointGain;
+                //Giver spilleren guld hver gang en enemy dør
+                GameWorld._Instance.PlayerGold += goldGainOnKill;
             }
             if (strategy is Walk)
             {
@@ -161,92 +167,7 @@ namespace RpgTowerDefense
                 gameObject.Transform.Translate(moveVector);
                 Thread.Sleep(threadSleep);
             }
-            /*
-            while (true)
-            {
-                //Bevæger sig til hojre
-                gameObject.Transform.Translate(HojreVector);
-                Thread.Sleep(threadSleep);
-                if (gameObject.Transform.Position == new Vector2(115, 280))
-                {
-                    //Breaker hvis punktet er ramt
-                    break;
-                }
-            }
-            while (true)
-            {
-                //Bevæger sig op
-                gameObject.Transform.Translate(OpVector);
-                Thread.Sleep(threadSleep);
-                if (gameObject.Transform.Position == new Vector2(115, 115))
-                {
-                    //Breaker hvis punktet er ramt
-                    break;
-                }
-            }
-            while (true)
-            {
-                //Bevæger sig til hojre
-                gameObject.Transform.Translate(HojreVector);
-                Thread.Sleep(threadSleep);
-                if (gameObject.Transform.Position == new Vector2(282, 115))
-                {
-                    //Breaker hvis punktet er ramt
-                    break;
-                }
-            }
-            while (true)
-            {
-                //Bevæger sig ned
-                gameObject.Transform.Translate(NedVector);
-                Thread.Sleep(threadSleep);
-                if (gameObject.Transform.Position == new Vector2(282, 340))
-                {
-                    //Breaker hvis punktet er ramt
-                    break;
-                }
-            }
-            while (true)
-            {
-                //Bevæger sig til hojre
-                gameObject.Transform.Translate(HojreVector);
-                Thread.Sleep(threadSleep);
-                if (gameObject.Transform.Position == new Vector2(507, 340))
-                {
-                    //Breaker hvis punktet er ramt
-                    break;
-                }
-            }
-            while (true)
-            {
-                //Bevæger sig Op 
-                gameObject.Transform.Translate(OpVector);
-                Thread.Sleep(threadSleep);
-                if (gameObject.Transform.Position == new Vector2(507, 226))
-                {
-                    //Breaker hvis punktet er ramt
-                    break;
-                }
-            }
-            while (true)
-            {
-                //Bevæger sig til hojre
-                gameObject.Transform.Translate(HojreVector);
-                Thread.Sleep(threadSleep);
-                if (gameObject.Transform.Position == new Vector2(750, 226))
-                {
-                    //Breaker hvis punktet er ramt
-                    break;
-                }
-            }
-            while (true)
-            {
-                //Denne kører bare i loop til vi har en implementering
-                gameObject.Transform.Translate(new Vector2(0, 0));
-                Thread.Sleep(threadSleep);
-                //Denne kører bare i loop til vi har en implementering
-            }
-            */
+            
         }
         #endregion
     }
