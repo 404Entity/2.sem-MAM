@@ -55,8 +55,7 @@ namespace RpgTowerDefense
             {
                 if (enemy == target)
                 {
-                    target = target;
-                    break;
+                 break;
                 }
                 else
                 {

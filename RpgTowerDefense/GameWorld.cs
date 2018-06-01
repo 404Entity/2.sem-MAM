@@ -20,7 +20,6 @@ namespace RpgTowerDefense
         float interval = 1.5f;
 
         public GameWorldBuilder worldBuilder;
-
         public Texture2D currentMap;
         public Rectangle currentRect;
 
@@ -73,7 +72,6 @@ namespace RpgTowerDefense
         private List<GameObject> gameObjects;
         private List<GameObject> addGameObjects;
         private List<GameObject> removeGameObjects;
-        private List<GameObject> removeEnemy;
         private List<Collider> colliders;
 
         internal List<GameObject> GameObjects { get => gameObjects; set => gameObjects = value; }
@@ -88,7 +86,6 @@ namespace RpgTowerDefense
 
         public int ScreenWidth { get => screenWidth; set => screenWidth = value; }
         public int ScreenHeigth { get => screenHeigth; set => screenHeigth = value; }
-        internal List<GameObject> RemoveEnemy { get => removeEnemy; set => removeEnemy = value; }
         public int PlayerGold { get => playerGold; set => playerGold = value; }
         public int HighScore { get => highScore; set => highScore = value; }
         public int GateHealth { get => gateHealth; set => gateHealth = value; }
@@ -129,7 +126,6 @@ namespace RpgTowerDefense
             GameObjects = new List<GameObject>();
             addGameObjects = new List<GameObject>();
             removeGameObjects = new List<GameObject>();
-            removeEnemy = new List<GameObject>();
             colliders = new List<Collider>();
             ui = new UI();
             dic = new Director(new PlayerBuilder());
