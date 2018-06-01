@@ -21,7 +21,7 @@ class MineMonsterHandler
             for (int i = 0; i < ammount;)
             {
                 pos = rnd.Next(200, 651);
-                GameWorld._Instance.SpawnMobMine(pos);
+                //GameWorld._Instance.SpawnMobMine(pos);
                 i++;
             }
         }
