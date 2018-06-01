@@ -23,15 +23,15 @@ namespace RpgTowerDefense
             //tower.AddComponent(new Animator(tower));
             if (id == 1)
             {
-                tower.AddComponent(new Tower(tower,5,4,AttackType.Light,10));
+                tower.AddComponent(new Tower(tower, 1, 4, AttackType.Light, 1000));
             }
             else if (id == 2)
             {
-                tower.AddComponent(new Tower(tower,10,2,AttackType.heavy,10));
+                tower.AddComponent(new Tower(tower, 2, 2, AttackType.heavy, 100));
             }
             else if (id == 3)
             {
-                tower.AddComponent(new Tower(tower, 3, 5, AttackType.Tesla, 10));
+                tower.AddComponent(new Tower(tower, 3, 5, AttackType.Tesla, 100));
             }
             else
             {
