@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>C:/Users/MIKZU/Source/Repos/2.sem-MAM/RpgTowerDefense/Content/Gold.spritefont</SourceFile>
-  <SourceTime>2018-05-28T11:45:19.96539+02:00</SourceTime>
+  <SourceTime>2018-05-31T21:33:18.8439299+02:00</SourceTime>
   <DestFile>C:/Users/MIKZU/Source/Repos/2.sem-MAM/RpgTowerDefense/Content/bin/Windows/Gold.xnb</DestFile>
-  <DestTime>2018-05-31T15:52:26.263871+02:00</DestTime>
+  <DestTime>2018-06-01T09:53:22.9961188+02:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>
