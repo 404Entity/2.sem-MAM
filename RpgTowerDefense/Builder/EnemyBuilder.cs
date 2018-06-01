@@ -10,7 +10,7 @@ namespace RpgTowerDefense
     class EnemyBuilder : IBuilder
     {
         private GameObject buildobject;
-
+        
 
         public void BuildGameObject(Vector2 position)
         {
@@ -18,7 +18,7 @@ namespace RpgTowerDefense
             enemy.AddComponent(new Transform(enemy, position));
             enemy.AddComponent(new SpriteRenderer(enemy, "Enemy", 1, 0.5f));
             enemy.AddComponent(new Animator(enemy));
-            enemy.AddComponent(new Enemy(enemy, 10, 10, 20));
+            enemy.AddComponent(new Enemy(enemy, 10, 10, 20, 10, 7));
             enemy.LoadContent(GameWorld._Instance.Content);
             enemy.AddComponent(new Collider(enemy, true, 0.5f));
             buildobject = enemy;

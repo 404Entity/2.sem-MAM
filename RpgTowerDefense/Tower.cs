@@ -27,7 +27,7 @@ namespace RpgTowerDefense
         private int coolDown;
         #endregion
         #region Constructor
-        public Tower(GameObject gameObject, float attackpower, float attackspeed, AttackType attackType, float attackRadius): base(gameObject)
+        public Tower(GameObject gameObject, float attackpower, float attackspeed, AttackType attackType, float attackRadius) : base(gameObject)
         {
             AttackPower = attackPower;
             AttackSpeed = attackSpeed;
@@ -75,17 +75,29 @@ namespace RpgTowerDefense
                 GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
                 coolDown += 100;
             }
-      
+
         }
         public void LookAttarget()
         {
+            if (target != null)
+            {
+                SpriteRenderer sp = gameObject.GetComponent("spriteRenderer") as SpriteRenderer;
+                Vector2 cannonPosition = new Vector2(sp.Sprite.Width - 20, sp.Sprite.Height / 2);
+                sp.Rotation += (float)GetAngle(cannonPosition, target.Transform.Position);
+            }
+        }
+        private double GetAngle(Vector2 a, Vector2 b)
+        {
 
+            return Math.Atan2(b.Y - a.Y, b.X - a.X);
         }
         public void LoadContent(ContentManager content)
         {
 
         }
-
+        /// <summary>
+        ///  runs various checks in order to find a shoot targets
+        /// </summary>
         public void Update()
         {
             if (target == null)
@@ -102,6 +114,7 @@ namespace RpgTowerDefense
             }
             else
             {
+                LookAttarget();
                 TowerAttack();
             }
         }
@@ -113,13 +126,15 @@ namespace RpgTowerDefense
         public void Upgrade(int param)
         {
             //psudo kode
-            if (param ==1)
+            if (param == 1)
             {
                 attackPower += 1;
-            }else if (param == 2)
+            }
+            else if (param == 2)
             {
                 attackSpeed += 1;
-            }else if (param == 3)
+            }
+            else if (param == 3)
             {
                 attackRadius += 1;
             }
