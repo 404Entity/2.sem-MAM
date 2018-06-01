@@ -13,7 +13,7 @@ namespace RpgTowerDefense
         Director dic;
         Director dic2;
 
-        int playerGold, GoldGainEachRound, highScore, gateHealth = 100;
+        int playerGold, GoldGainEachRound = 10, highScore, gateHealth = 100;
 
         //testing mobspawn
         float spawntime;
