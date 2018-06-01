@@ -12,7 +12,6 @@ namespace RpgTowerDefense
     {
         Director dic;
         Director dic2;
-        Director dic3;
 
         int playerGold;
         int highScore;
@@ -72,10 +71,14 @@ namespace RpgTowerDefense
         UI ui;
         private int screenWidth;
         private int screenHeigth;
+
         private List<GameObject> gameObjects;
         private List<GameObject> addGameObjects;
         private List<GameObject> removeGameObjects;
+        private List<GameObject> removeEnemy;
         private List<Collider> colliders;
+
+
         internal List<GameObject> GameObjects { get => gameObjects; set => gameObjects = value; }
         internal List<GameObject> AddGameObjects { get => addGameObjects; set => addGameObjects = value; }
         internal List<GameObject> RemoveGameObjects { get => removeGameObjects; set => removeGameObjects = value; }
@@ -88,11 +91,13 @@ namespace RpgTowerDefense
 
         public int ScreenWidth { get => screenWidth; set => screenWidth = value; }
         public int ScreenHeigth { get => screenHeigth; set => screenHeigth = value; }
+        internal List<GameObject> RemoveEnemy { get => removeEnemy; set => removeEnemy = value; }
         public int PlayerGold { get => playerGold; set => playerGold = value; }
         public int HighScore { get => highScore; set => highScore = value; }
         public int GateHealth { get => gateHealth; set => gateHealth = value; }
 
         public float deltaTime;
+
         public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -127,6 +132,7 @@ namespace RpgTowerDefense
             GameObjects = new List<GameObject>();
             addGameObjects = new List<GameObject>();
             removeGameObjects = new List<GameObject>();
+            removeEnemy = new List<GameObject>();
             colliders = new List<Collider>();
             ui = new UI();
             dic = new Director(new PlayerBuilder());
@@ -208,6 +214,7 @@ namespace RpgTowerDefense
             foreach (GameObject go in removeGameObjects)
             {
                 gameObjects.Remove(go);
+                mobList.Remove(go);
             }
             CleanTemptList();
             foreach (GameObject go in GameObjects)
@@ -250,10 +257,10 @@ namespace RpgTowerDefense
         //spawns enemy and adds to both gameobjects and moblist
         public void SpawnMob()
         {
-            GameObject mob = dic2.Construct(new Vector2(0, 270));
+            dic2.Construct(new Vector2(0, 270));
+            GameObject mob = dic2.Builder.GetResult();
             UpdateMobList(mob, true);
             gameObjects.Add(mob);
-
         }
     }
 }

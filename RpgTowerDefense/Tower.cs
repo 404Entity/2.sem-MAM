@@ -23,6 +23,8 @@ namespace RpgTowerDefense
         public float AttackRadius { get => attackRadius; set => attackRadius = value; }
         internal AttackType AttackType { get => attackType; set => attackType = value; }
         internal GameObject Target { get => target; set => target = value; }
+
+        private int coolDown;
         #endregion
         #region Constructor
         public Tower(GameObject gameObject, float attackpower, float attackspeed, AttackType attackType, float attackRadius): base(gameObject)
@@ -30,39 +32,55 @@ namespace RpgTowerDefense
             AttackPower = attackPower;
             AttackSpeed = attackSpeed;
             AttackType = attackType;
-
+            AttackRadius = attackRadius;
+            coolDown = 0;
         }
         #endregion
         public void FindTarget()
         {
 
-            if (target == null)
+            foreach (GameObject enemy in GameWorld._Instance.MobList)
             {
-
-                foreach (GameObject enemy in GameWorld._Instance.MobList)
+                if (Vector2.Distance(enemy.Transform.Position, this.gameObject.Transform.Position) < AttackRadius)
                 {
-                    if (Vector2.Distance(enemy.GameObject.Transform.Position,GameObject.Transform.Position) < AttackRadius)
-                    {
-                        target = enemy;
-                        break;
-                    }
+                    target = enemy;
+                    break;
                 }
+            }
+        }
+        public void checkTarget()
+        {
 
+            foreach (GameObject enemy in GameWorld._Instance.MobList)
+            {
+                if (enemy == target)
+                {
+                    target = target;
+                    break;
+                }
+                else
+                {
+                    target = null;
+                }
             }
         }
         public void TowerAttack()
         {
             if (target != null)
             {
-                Vector2 shootdirection = target.GameObject.Transform.Position - gameObject.Transform.Position;
+                Vector2 shootdirection = target.Transform.Position - gameObject.Transform.Position;
                 Vector2 shootdirectonnormalized = Vector2.Normalize(shootdirection);
                 Director director = new Director(new BulletBuilder());
                 director.Construct(gameObject.Transform.Position, 1, shootdirectonnormalized);
                 GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
+                coolDown += 100;
             }
       
         }
+        public void LookAttarget()
+        {
 
+        }
         public void LoadContent(ContentManager content)
         {
 
@@ -70,9 +88,22 @@ namespace RpgTowerDefense
 
         public void Update()
         {
-            spin();
-            string varstring = "hello";
-            TowerAttack();
+            if (target == null)
+            {
+                FindTarget();
+            }
+            else
+            {
+                checkTarget();
+            }
+            if (coolDown != 0)
+            {
+                coolDown -= 1;
+            }
+            else
+            {
+                TowerAttack();
+            }
         }
         public void spin()
         {

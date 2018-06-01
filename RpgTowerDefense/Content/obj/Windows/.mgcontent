@@ -4,14 +4,14 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/2.sem-MAM/RpgTowerDefense/Content/Player.jpg</File>
-    <File>C:/2.sem-MAM/RpgTowerDefense/Content/Enemy.jpg</File>
-    <File>C:/2.sem-MAM/RpgTowerDefense/Content/BackGround.png</File>
-    <File>C:/2.sem-MAM/RpgTowerDefense/Content/BuildSpot.png</File>
-    <File>C:/2.sem-MAM/RpgTowerDefense/Content/BackGroundWithGrid.png</File>
-    <File>C:/2.sem-MAM/RpgTowerDefense/Content/Gold.spritefont</File>
-    <File>C:/2.sem-MAM/RpgTowerDefense/Content/GateHealth.spritefont</File>
-    <File>C:/2.sem-MAM/RpgTowerDefense/Content/CityGate.jpg</File>
-    <File>C:/2.sem-MAM/RpgTowerDefense/Content/Mine.png</File>
+    <File>C:/Users/MIKZ/source/repos/2.sem-MAM/RpgTowerDefense/Content/Player.jpg</File>
+    <File>C:/Users/MIKZ/source/repos/2.sem-MAM/RpgTowerDefense/Content/Enemy.jpg</File>
+    <File>C:/Users/MIKZ/source/repos/2.sem-MAM/RpgTowerDefense/Content/BackGround.png</File>
+    <File>C:/Users/MIKZ/source/repos/2.sem-MAM/RpgTowerDefense/Content/BuildSpot.png</File>
+    <File>C:/Users/MIKZ/source/repos/2.sem-MAM/RpgTowerDefense/Content/BackGroundWithGrid.png</File>
+    <File>C:/Users/MIKZ/source/repos/2.sem-MAM/RpgTowerDefense/Content/Gold.spritefont</File>
+    <File>C:/Users/MIKZ/source/repos/2.sem-MAM/RpgTowerDefense/Content/GateHealth.spritefont</File>
+    <File>C:/Users/MIKZ/source/repos/2.sem-MAM/RpgTowerDefense/Content/CityGate.jpg</File>
+    <File>C:/Users/MIKZ/source/repos/2.sem-MAM/RpgTowerDefense/Content/Mine.png</File>
   </SourceFiles>
 </SourceFileCollection>

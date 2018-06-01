@@ -16,12 +16,7 @@ namespace RpgTowerDefense
 
         private Animator animator;
         private IStrategy strategy;
-        private DIRECTION direction;
-        //Decides move direction
-        Vector2 OpVector = new Vector2(0, -1);
-        Vector2 NedVector = new Vector2(0, 1);
-        Vector2 HojreVector = new Vector2(1, 0);
-        //Decides move direction
+
         //Speed of enemy
         int threadSleep;
         //Speed of enemy
@@ -117,6 +112,10 @@ namespace RpgTowerDefense
         }
 
         #region Collision
+        /// <summary>
+        /// When a enemy is hit by a bullet lose health and remove the bullet
+        /// </summary>
+        /// <param name="other"></param>
         public void OnCollisionEnter(Collider other)
         {
             if ((Projectile)other.GameObject.GetComponent("Projectile") != null)
@@ -124,14 +123,21 @@ namespace RpgTowerDefense
                 Projectile dmgObject = (Projectile)other.GameObject.GetComponent("Projectile");
                 this.Health -= dmgObject.Damage;
                 GameWorld._Instance.RemoveGameObjects.Add(other.GameObject);
+                GameWorld._Instance.Colliders.Remove(other);
             }
         }
-
+        /// <summary>
+        /// not implementet yet
+        /// </summary>
+        /// <param name="other"></param>
         public void OnCollisionExit(Collider other)
         {
             
         }
-
+        /// <summary>
+        /// not implementet
+        /// </summary>
+        /// <param name="other"></param>
         public void OnCollisionStay(Collider other)
         {
 
