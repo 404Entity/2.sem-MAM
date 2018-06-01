@@ -38,7 +38,7 @@ namespace RpgTowerDefense
 
         public void Update()
         {
-            gameObject.Transform.Translate(directionVector * 2);
+            gameObject.Transform.Translate(directionVector * 5);
             
         }
     }
