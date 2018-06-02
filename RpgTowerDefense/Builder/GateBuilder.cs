@@ -22,7 +22,7 @@ namespace RpgTowerDefense
             mainGate.LoadContent(GameWorld._Instance.Content);
             SpriteRenderer sp = mainGate.GetComponent("SpriteRenderer") as SpriteRenderer;
             sp.GetStaticRectangle();
-            mainGate.AddComponent(new Collider(mainGate, false, 0.5f));
+            mainGate.AddComponent(new Collider(mainGate, true, 0.5f));
             buildObject = mainGate;
         }
 
