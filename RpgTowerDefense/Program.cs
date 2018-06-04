@@ -16,11 +16,14 @@ namespace RpgTowerDefense
         [STAThread]
         static void Main()
         {
-            if (!System.IO.File.Exists("C:\\TowerDefence\\TowerDefence.DB"))
+            if (!System.IO.File.Exists("C:\\TowerDefence\\TowerDefence.db"))
             {
                 System.IO.Directory.CreateDirectory("C:\\TowerDefence");
                 SQLiteConnection.CreateFile("C:\\TowerDefence\\TowerDefence.db");
             }
+            Database data = new Database();
+            data.CreateTables();
+
             using (var game = GameWorld._Instance)
                 game.Run();
         }
