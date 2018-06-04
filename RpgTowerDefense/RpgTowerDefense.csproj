@@ -103,10 +103,14 @@
     <Content Include="Content\BackGround_old.png" />
     <Content Include="Content\BackGround_WithPainted_spots.png" />
     <Content Include="Content\BuildSpot.png" />
+    <Content Include="Content\Bullet.png" />
     <Content Include="Content\CityGate.jpg" />
+    <Content Include="Content\Controls\Button.png" />
     <Content Include="Content\Enemy.jpg" />
+    <Content Include="Content\enemy_static.png" />
     <Content Include="Content\Mine.png" />
     <Content Include="Content\Player.jpg" />
+    <Content Include="Content\tower_01.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +122,8 @@
     <None Include="Content\bin\Windows\Enemy.xnb" />
     <None Include="Content\bin\Windows\Player.xnb" />
     <None Include="Content\bin\Windows\yingyang tile buildspot.xnb" />
+    <None Include="Content\Fonts\UiFont.spritefont" />
+    <None Include="Content\GateHealth.spritefont" />
     <None Include="Content\Gold.spritefont" />
     <None Include="Content\obj\Windows\.mgcontent" />
     <None Include="Content\obj\Windows\BackGround.mgcontent" />
