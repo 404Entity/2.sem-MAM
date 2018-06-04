@@ -31,7 +31,7 @@ namespace RpgTowerDefense
         {
             get
             {
-                return new Rectangle((int)Position.X, (int)position.Y, Texture.Width, Texture.Height);
+                return new Rectangle((int)Position.X, (int)position.Y, Texture.Width * (int)scale, Texture.Height* (int)scale);
             }
         }
         public string Text { get => text; set => text = value; }
@@ -66,7 +66,7 @@ namespace RpgTowerDefense
                 var x = (Rectangle.X + (Rectangle.Width / 2) - (font.MeasureString(text).X / 2));
                 var y = (Rectangle.Y + (Rectangle.Height / 2) - (font.MeasureString(text).Y / 2));
                 //spriteBatch.DrawString(font, Text, new Vector2(x, y), PenColor);
-                spriteBatch.DrawString(font, text, new Vector2(x, y), penColor, 0, Vector2.Zero, scale, SpriteEffects.None, 1);
+                spriteBatch.DrawString(font, text, new Vector2(x, y), penColor, 0, Vector2.Zero, Scale, SpriteEffects.None, 1);
             }
         }
 
@@ -74,7 +74,7 @@ namespace RpgTowerDefense
         {
             previousState = currentState;
             currentState = Mouse.GetState();
-            
+
             var mouseRectangle = new Rectangle(currentState.X, currentState.Y, 1, 1);
 
             ishovering = false;
@@ -90,7 +90,7 @@ namespace RpgTowerDefense
             }
 
         }
-    
+
         public override void Update()
         {
             throw new NotImplementedException();
