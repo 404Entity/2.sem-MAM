@@ -20,7 +20,7 @@ namespace RpgTowerDefense
         float interval = 1.5f;
 
         private Camera camera;
-
+        private GameObject selectedGameObject;
 
         public GameWorldBuilder worldBuilder;
         public Texture2D currentMap;
@@ -92,6 +92,8 @@ namespace RpgTowerDefense
         public int PlayerGold { get => playerGold; set => playerGold = value; }
         public int HighScore { get => highScore; set => highScore = value; }
         public int GateHealth { get => gateHealth; set => gateHealth = value; }
+
+        internal GameObject SelectedGameObject { get => selectedGameObject; set => selectedGameObject = value; }
 
         public float deltaTime;
 

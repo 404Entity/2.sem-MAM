@@ -23,6 +23,7 @@ namespace RpgTowerDefense
         private Vector2 position;
         private string text;
         private float textScale;
+        private bool isProxy;
 
         //Properties
         public EventHandler Click;
@@ -40,14 +41,16 @@ namespace RpgTowerDefense
 
         public Texture2D Texture { get => texture; set => texture = value; }
         public float TextScale { get => textScale; set => textScale = value; }
+        public bool IsProxy { get => isProxy; set => isProxy = value; }
         #endregion
 
         #region Methods
-        public UIButton(Texture2D texture, SpriteFont font)
+        public UIButton(Texture2D texture, SpriteFont font, bool isProxy)
         {
             this.texture = texture;
             this.font = font;
             this.PenColor = Color.Black;
+            this.isProxy = isProxy;
             TextScale = 1;
         }
 
@@ -58,7 +61,9 @@ namespace RpgTowerDefense
             {
                 color = Color.Gray;
             }
-            spriteBatch.Draw(Texture, Rectangle, color);
+
+                spriteBatch.Draw(Texture, Rectangle, color);
+
             //spriteBatch.Draw(Texture, Position, Rectangle, color, 0, Vector2.Zero, Scale, SpriteEffects.None, 1);
 
             // if the text field is not null draw the text
@@ -72,6 +77,10 @@ namespace RpgTowerDefense
         }
         public override void Update()
         {
+            if (isProxy)
+            {
+                position = new Vector2(Mouse.GetState().X - (texture.Width*Scale)/2, Mouse.GetState().Y - (texture.Height*scale)/2);
+            }
             previousState = currentState;
             currentState = Mouse.GetState();
 
