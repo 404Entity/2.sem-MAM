@@ -23,7 +23,7 @@ namespace RpgTowerDefense
             enemy.AddComponent(new Collider(enemy, true, 0.5f));
             buildobject = enemy;
         }
-
+        
         public void BuildGameObject(Vector2 position, int id)
         {
             throw new NotImplementedException();
