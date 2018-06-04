@@ -22,6 +22,7 @@ namespace RpgTowerDefense
         private Color penColor;
         private Vector2 position;
         private string text;
+        private float textScale;
 
         //Properties
         public EventHandler Click;
@@ -31,27 +32,26 @@ namespace RpgTowerDefense
         {
             get
             {
-                return new Rectangle((int)Position.X, (int)position.Y, Texture.Width, Texture.Height);
+                return new Rectangle((int)Position.X, (int)position.Y, (int)(Texture.Width * scale), (int)(Texture.Height * scale));
             }
         }
         public string Text { get => text; set => text = value; }
         public float Scale { get => scale; set => scale = value; }
+
         public Texture2D Texture { get => texture; set => texture = value; }
+        public float TextScale { get => textScale; set => textScale = value; }
         #endregion
+
         #region Methods
         public UIButton(Texture2D texture, SpriteFont font)
         {
-            this.Texture = texture;
+            this.texture = texture;
             this.font = font;
             this.PenColor = Color.Black;
+            TextScale = 1;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
-        {
-            throw new NotImplementedException();
-        }
-        // an overload to the regular IDrawable
-        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             var color = Color.White;
             if (ishovering)
@@ -59,21 +59,22 @@ namespace RpgTowerDefense
                 color = Color.Gray;
             }
             spriteBatch.Draw(Texture, Rectangle, color);
+            //spriteBatch.Draw(Texture, Position, Rectangle, color, 0, Vector2.Zero, Scale, SpriteEffects.None, 1);
 
             // if the text field is not null draw the text
             if (!string.IsNullOrEmpty(text))
             {
                 var x = (Rectangle.X + (Rectangle.Width / 2) - (font.MeasureString(text).X / 2));
                 var y = (Rectangle.Y + (Rectangle.Height / 2) - (font.MeasureString(text).Y / 2));
-                spriteBatch.DrawString(font, Text, new Vector2(x, y), PenColor);
+                //spriteBatch.DrawString(font, Text, new Vector2(x, y), PenColor);
+                spriteBatch.DrawString(font, text, new Vector2(x, y), penColor, 0, Vector2.Zero, TextScale, SpriteEffects.None, 1);
             }
         }
-
-        public override void Update(GameTime gameTime)
+        public override void Update()
         {
             previousState = currentState;
             currentState = Mouse.GetState();
-            
+
             var mouseRectangle = new Rectangle(currentState.X, currentState.Y, 1, 1);
 
             ishovering = false;
@@ -87,12 +88,6 @@ namespace RpgTowerDefense
                     Click?.Invoke(this, new EventArgs());
                 }
             }
-
-        }
-    
-        public override void Update()
-        {
-            throw new NotImplementedException();
         }
         #endregion
     }

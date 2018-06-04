@@ -13,7 +13,6 @@ namespace RpgTowerDefense
     {
         private Vector2 position;
         private Vector2 velocity;
-        int gravity;
         public Vector2 Position
         {
             get { return position; }
@@ -26,23 +25,9 @@ namespace RpgTowerDefense
             gameobject.Transform = this;
         
         }
-        public void Translate(Vector2 translation)
+        public void  Translate(Vector2 translation)
         {
-            ///<summary>
-            ///Move give gameObject by the given translation
-            ///this is pratialy not additive
-            ///(if multible inputs are made the final Translation only consist of the last one)
-            ///however this does not affect the gravity pull.
-            /// </summary>
-            velocity.X = translation.X;
-            if (translation.Y != 0)
-            {
-                velocity.Y = translation.Y;
-            }
-        }
-        public void  Translate2(Vector2 translation)
-        {
-            velocity += translation;
+            Position += translation;
         }
         public void ForceTranslate(Vector2 translation)
         {
@@ -59,11 +44,6 @@ namespace RpgTowerDefense
         }
         public void Update()
         {
-            //position.Y += gravity;
-            if (velocity.Y > 12)
-            {
-                velocity.Y = 10;
-            }
             position += velocity;
         }
     }

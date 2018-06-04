@@ -27,9 +27,15 @@ namespace RpgTowerDefense
         //overide that allows Tile IDing 
         public GameObject Construct(Vector2 position, int id)
         {
-            builder.BuildGameObject(position,id);
+            builder.BuildGameObject(position, id);
             return builder.GetResult();
         }
+        public GameObject Construct(Vector2 position, int id, Vector2 direction)
+        {
+            builder.BuildGameObject(position, id, direction);
+            return builder.GetResult();
+        }
+
 
     }
 }
