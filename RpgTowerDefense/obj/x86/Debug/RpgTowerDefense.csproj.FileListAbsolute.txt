@@ -200,7 +200,6 @@ C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Enemy.xnb
 C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\GateHealth.xnb
 C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Gold.xnb
 C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Mine.xnb
-C:\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefense.csprojResolveAssemblyReference.cache
 C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Bullet.xnb
 C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\tower_01.xnb
 C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Mine.xnb
@@ -210,3 +209,6 @@ C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Conte
 C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Bullet.xnb
 C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\tower_01.xnb
 C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\enemy_static.xnb
+C:\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefense.csprojResolveAssemblyReference.cache
+C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\System.Data.SQLite.dll
+C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\System.Data.SQLite.dll.config
