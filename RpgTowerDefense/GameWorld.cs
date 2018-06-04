@@ -106,7 +106,10 @@ namespace RpgTowerDefense
             IsMouseVisible = true;
             worldBuilder = new GameWorldBuilder();
 
+
+            //intialize camera
             camera = new Camera();
+            camera.Screenvalue = 1;
 
             graphics.PreferredBackBufferWidth = 1600;
             graphics.PreferredBackBufferHeight = 900;
