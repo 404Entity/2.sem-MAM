@@ -20,13 +20,14 @@ namespace RpgTowerDefense
         private IStrategy strategy;
         private DIRECTION direction;
         private bool canMove;
-        private bool isgrounded;
+        private MouseState previousMouseState; 
 
-        public bool CanMove
-        {
-            get { return canMove; }
-            set { canMove = value; }
-        }
+
+        #endregion
+        #region Property
+
+        
+
         #endregion
         #region Constructor
         public Player(GameObject gameobject) : base(gameobject)
@@ -34,7 +35,6 @@ namespace RpgTowerDefense
             speed = 100;
             animator = (gameobject.GetComponent("Animator") as Animator);
             canMove = true;
-            isgrounded = false;
         }
         #endregion
         #region Methods
@@ -45,9 +45,23 @@ namespace RpgTowerDefense
 
         public void Update()
         {
+            MouseState mouseState = Mouse.GetState();
             KeyboardState keyState = Keyboard.GetState();
             if (canMove)
             {
+                if (keyState.IsKeyDown(Keys.F))
+                {
+                    if (GameWorld._Instance.PlayerGold > 50)
+                    {
+                        GameWorld._Instance.PlayerGold -= 50;
+                        BuildTower();
+                    }
+                    
+                }
+                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
+                {
+                    Shoot();
+                }
                 if (keyState.IsKeyDown(Keys.W) || keyState.IsKeyDown(Keys.D) || keyState.IsKeyDown(Keys.S) || keyState.IsKeyDown(Keys.A))
                 {
                     Vector2 translation = Vector2.Zero;
@@ -68,23 +82,23 @@ namespace RpgTowerDefense
 
                     else if (keyState.IsKeyDown(Keys.W))
                     {
-                        direction = DIRECTION.Up;
+                        //direction = DIRECTION.Up;
                         translation += new Vector2(0, -2f);
                     }
 
                     else if (keyState.IsKeyDown(Keys.S))
                     {
-                        direction = DIRECTION.Down;
+                        //direction = DIRECTION.Down;
                         translation += new Vector2(0, 2f);
                     }
 
-                    if (!(strategy is Walk) && !(strategy is Jump))
+                    if (!(strategy is Walk))
                     {
                         strategy = new Walk(animator, gameObject.Transform, speed);
                     }
                     gameObject.Transform.Translate(translation * GameWorld._Instance.deltaTime * speed);
                 }
-                else if (!(strategy is Jump))
+                else
                 {
                     strategy = new Idle(animator);
                     gameObject.Transform.stop();
@@ -95,16 +109,8 @@ namespace RpgTowerDefense
                     strategy = new Attack(animator);
                     canMove = false;
                 }
-                else if (isgrounded == true)
-                {
-                    if (keyState.IsKeyDown(Keys.Space))
-                    {
-                        //jump 
-                        strategy = new Jump(animator, this);
-                        
-                    }
-                }
-                
+
+                previousMouseState = mouseState;
                 strategy.Execute(direction);
             }
         }
@@ -131,6 +137,7 @@ namespace RpgTowerDefense
 
         public void OnAnimationDone(string animationName)
         {
+            /*
             if (animationName == null)
             {
                 animationName = "Idle";
@@ -144,7 +151,31 @@ namespace RpgTowerDefense
             {
                 strategy = null;
             }
+            */
         }
+
+        public void BuildTower()
+        {
+            Director dic = new Director(new TowerBuilder());
+            dic.Builder.BuildGameObject(gameObject.Transform.Position, 1);
+            GameWorld._Instance.AddGameObjects.Add(dic.Builder.GetResult());
+        }
+        public void destroyTower()
+        {
+
+        }
+
+        public void Shoot()
+        {
+            Vector2 cursorPosition = new Vector2(Mouse.GetState().Position.X,Mouse.GetState().Position.Y);
+            Vector2 shootdirection = cursorPosition - gameObject.Transform.Position;
+            Vector2 shootdirectonnormalized = Vector2.Normalize(shootdirection);
+            Director director = new Director(new BulletBuilder());
+            director.Construct(gameObject.Transform.Position, 1, shootdirectonnormalized);
+            GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
+        }
+
+        
         #endregion
     }
 }

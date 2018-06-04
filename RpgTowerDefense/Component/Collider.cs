@@ -59,7 +59,7 @@ namespace RpgTowerDefense
         {
             isCollideWith = false;
             doCollisionChecks = CheckCollision;
-            //GameWorld._Instance.Colliders.Add(this);
+            GameWorld._Instance.Colliders.Add(this);
             LoadContent(GameWorld._Instance.Content);
             ohterColliders = new List<Collider>();
             this.scale = scale;
@@ -120,26 +120,33 @@ namespace RpgTowerDefense
                 }
                 //Genereate a optimized Temp list.  
                 List<Collider> OptimList = new List<Collider>();
-                OptimList.AddRange(GameWorld._Instance.Colliders);
-                foreach (Collider collider in ohterColliders)
+                if (OptimList != null || OptimList.Count > 0)
                 {
-                    OptimList.Remove(collider);
-                }
-                foreach (Collider collider in OptimList)
-                {
-                    if (collider != this)
+                    OptimList.AddRange(GameWorld._Instance.Colliders);
+                    foreach (Collider collider in ohterColliders)
                     {
-                        if (CollisionBox.Intersects(collider.CollisionBox))
+                        //removes currently collideing objects form the collision checklist
+                        OptimList.Remove(collider);
+                    }
+                    foreach (Collider collider in OptimList)
+                    {
+                        if (collider != this)
                         {
-                            gameObject.OnCollisionEnter(collider);
-                            ohterColliders.Add(collider);
+                            if (CollisionBox.Intersects(collider.CollisionBox))
+                            {
+                                gameObject.OnCollisionEnter(collider);
+                                ohterColliders.Add(collider);
+                            }
                         }
                     }
                 }
+
             }
         }
 
-
+        /// <summary>
+        /// preset for making pixel collision
+        /// </summary>
         private void CachePixels()
         {
             //foreach (KeyValuePair<string, Animation> pair in animator.MyAnimations)
