@@ -13,7 +13,7 @@ namespace RpgTowerDefense
 
 
 
-
+        #region ReadFrom
         public void ReadFromDatabase(string select)
         {
             //Read from database
@@ -33,11 +33,11 @@ namespace RpgTowerDefense
             sqlite2.Close();
 
         }
+        #endregion
 
 
 
-
-
+        #region AdMethods
         public void SaveGame()
         {
             sqlite2.Open();
@@ -77,7 +77,7 @@ namespace RpgTowerDefense
             command.ExecuteNonQuery();
             sqlite2.Close();
         }
-
+        #endregion
 
 
         #region CreateTables
