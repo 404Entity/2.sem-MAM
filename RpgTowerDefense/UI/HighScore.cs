@@ -9,9 +9,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RpgTowerDefense
 {
-    class PlayerGold
+    class HighScore
     {
-
         SpriteFont spriteFont;
         String text;
         Vector2 vector2;
@@ -19,7 +18,7 @@ namespace RpgTowerDefense
 
 
 
-        public PlayerGold(Vector2 vector2)
+        public HighScore(Vector2 vector2)
         {
             this.vector2 = vector2;
         }
@@ -27,12 +26,12 @@ namespace RpgTowerDefense
         public void LoadContent(ContentManager content)
         {
             //UIPicture = content.Load<Texture2D>("Picture Name");
-            spriteFont = content.Load<SpriteFont>("Gold");
+            spriteFont = content.Load<SpriteFont>("GateHealth");
         }
 
         public void Update()
         {
-            text = "Gold Amount:  " + GameWorld._Instance.PlayerGold.ToString();
+            text = "Score:  " + GameWorld._Instance.HighScore.ToString();
         }
 
         public void Draw(SpriteBatch spriteBatch)
