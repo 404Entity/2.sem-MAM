@@ -19,8 +19,10 @@ namespace RpgTowerDefense
         float spawntime;
         float interval = 1.5f;
 
-        public GameWorldBuilder worldBuilder;
+        private Camera camera;
 
+
+        public GameWorldBuilder worldBuilder;
         public Texture2D currentMap;
         public Rectangle currentRect;
 
@@ -73,7 +75,6 @@ namespace RpgTowerDefense
         private List<GameObject> gameObjects;
         private List<GameObject> addGameObjects;
         private List<GameObject> removeGameObjects;
-        private List<GameObject> removeEnemy;
         private List<Collider> colliders;
 
         internal List<GameObject> GameObjects { get => gameObjects; set => gameObjects = value; }
@@ -88,7 +89,6 @@ namespace RpgTowerDefense
 
         public int ScreenWidth { get => screenWidth; set => screenWidth = value; }
         public int ScreenHeigth { get => screenHeigth; set => screenHeigth = value; }
-        internal List<GameObject> RemoveEnemy { get => removeEnemy; set => removeEnemy = value; }
         public int PlayerGold { get => playerGold; set => playerGold = value; }
         public int HighScore { get => highScore; set => highScore = value; }
         public int GateHealth { get => gateHealth; set => gateHealth = value; }
@@ -113,11 +113,18 @@ namespace RpgTowerDefense
             IsMouseVisible = true;
             worldBuilder = new GameWorldBuilder();
 
+
+            //intialize camera
+            camera = new Camera();
+            camera.Screenvalue = 1;
+
             graphics.PreferredBackBufferWidth = 1600;
             graphics.PreferredBackBufferHeight = 900;
             graphics.ApplyChanges();
-
             graphics.GraphicsDevice.Viewport = new Viewport(0, 0, 1600, 900);
+
+            ScreenWidth = graphics.PreferredBackBufferWidth;
+            ScreenHeigth = graphics.PreferredBackBufferHeight;
 
             worldBuilder.yHeight = graphics.GraphicsDevice.Viewport.Height / worldBuilder.yTiles;
             worldBuilder.xWidth = graphics.GraphicsDevice.Viewport.Width / worldBuilder.xTiles;
@@ -129,7 +136,6 @@ namespace RpgTowerDefense
             GameObjects = new List<GameObject>();
             addGameObjects = new List<GameObject>();
             removeGameObjects = new List<GameObject>();
-            removeEnemy = new List<GameObject>();
             colliders = new List<Collider>();
             ui = new UI();
             dic = new Director(new PlayerBuilder());
@@ -193,7 +199,20 @@ namespace RpgTowerDefense
             deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D1))
+            {
+                
+                camera.Screenvalue = 1;
+            }
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D2))
+            {
+                Mouse.SetPosition(screenWidth, 0);
+                camera.Screenvalue = 2;
+            }
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D3))
+            {
+                camera.Screenvalue = 3;
+            }
             //test mob spawn
             spawntime += deltaTime;
             if(spawntime >= interval)
@@ -204,7 +223,7 @@ namespace RpgTowerDefense
                 PlayerGold += GoldGainEachRound;
             }
 
-
+           
             // TODO: Add your update logic here
             foreach (GameObject go in addGameObjects)
             {
@@ -221,6 +240,7 @@ namespace RpgTowerDefense
                 go.Update(gameTime);
             }
             ui.Update();
+            camera.Follow(new Vector2(0,0));
             base.Update(gameTime);
         }
         private void CleanTemptList()
@@ -228,6 +248,9 @@ namespace RpgTowerDefense
             addGameObjects.Clear();
             removeGameObjects.Clear();
         }
+
+
+
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -236,7 +259,7 @@ namespace RpgTowerDefense
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(transformMatrix:camera.Transform);
 
             //backGround.Draw(spriteBatch);
             
@@ -247,9 +270,11 @@ namespace RpgTowerDefense
             {
                 go.Draw(spriteBatch);
             }
+          
+            spriteBatch.End();
+            spriteBatch.Begin();
             ui.Draw(spriteBatch);
             spriteBatch.End();
-
             base.Draw(gameTime);
         }
 

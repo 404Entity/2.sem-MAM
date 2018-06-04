@@ -51,7 +51,12 @@ namespace RpgTowerDefense
             {
                 if (keyState.IsKeyDown(Keys.F))
                 {
-                    BuildTower();
+                    if (GameWorld._Instance.PlayerGold > 50)
+                    {
+                        GameWorld._Instance.PlayerGold -= 50;
+                        BuildTower();
+                    }
+                    
                 }
                 if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
                 {

@@ -24,7 +24,7 @@ namespace RpgTowerDefense
         internal AttackType AttackType { get => attackType; set => attackType = value; }
         internal GameObject Target { get => target; set => target = value; }
 
-        private int coolDown;
+        private float coolDown;
         #endregion
         #region Constructor
         public Tower(GameObject gameObject, float attackpower, float attackspeed, AttackType attackType, float attackRadius) : base(gameObject)
@@ -55,8 +55,7 @@ namespace RpgTowerDefense
             {
                 if (enemy == target)
                 {
-                    target = target;
-                    break;
+                 break;
                 }
                 else
                 {
@@ -73,7 +72,7 @@ namespace RpgTowerDefense
                 Director director = new Director(new BulletBuilder());
                 director.Construct(gameObject.Transform.Position, 1, shootdirectonnormalized);
                 GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
-                coolDown += 100;
+                coolDown += 2.5f;
             }
 
         }
@@ -83,7 +82,7 @@ namespace RpgTowerDefense
             {
                 SpriteRenderer sp = gameObject.GetComponent("spriteRenderer") as SpriteRenderer;
                 Vector2 cannonPosition = new Vector2(sp.Sprite.Width - 20, sp.Sprite.Height / 2);
-                sp.Rotation += (float)GetAngle(cannonPosition, target.Transform.Position);
+                sp.Rotation = (float)GetAngle(gameObject.Transform.Position, target.Transform.Position);
             }
         }
         private double GetAngle(Vector2 a, Vector2 b)
@@ -108,9 +107,9 @@ namespace RpgTowerDefense
             {
                 checkTarget();
             }
-            if (coolDown != 0)
+            if (coolDown > 0)
             {
-                coolDown -= 1;
+                coolDown -= GameWorld._Instance.deltaTime;
             }
             else
             {

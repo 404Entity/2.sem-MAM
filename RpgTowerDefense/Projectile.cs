@@ -7,15 +7,18 @@ using System.Threading.Tasks;
 
 namespace RpgTowerDefense
 {
-    class Projectile : Component, IUpdate,ICollideEnter
+    class Projectile : Component, IUpdate, ICollideEnter
     {
-       private Vector2 directionVector;
-       private int damage;
-   
-       public Projectile(GameObject gameObject,int damage,Vector2 directionVector): base(gameObject)
+        private Vector2 directionVector;
+        private int damage;
+        private int decay;
+        private int lifetime;
+        public Projectile(GameObject gameObject, int damage, Vector2 directionVector) : base(gameObject)
         {
             this.Damage = damage;
             this.directionVector = directionVector;
+            lifetime = 200;
+            decay = 0;
         }
 
         public int Damage { get => damage; set => damage = value; }
@@ -31,15 +34,21 @@ namespace RpgTowerDefense
             {
                 Collider collider = (Collider)gameObject.GetComponent("Collider");
 
-                
+
             }
-         
+
         }
 
         public void Update()
         {
+            if (decay > lifetime)
+            {
+                GameWorld._Instance.RemoveGameObjects.Add(gameObject);
+                Collider collider = gameObject.GetComponent("Collider") as Collider; 
+                GameWorld._Instance.Colliders.Remove(collider);
+            }
             gameObject.Transform.Translate(directionVector * 5);
-            
+            decay++;
         }
     }
 }
