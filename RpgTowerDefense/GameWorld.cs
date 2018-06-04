@@ -100,7 +100,7 @@ namespace RpgTowerDefense
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
-        private List<UIComponent> Uielements;
+
 
 
 
@@ -173,36 +173,6 @@ namespace RpgTowerDefense
                 go.LoadContent(Content);
             }
 
-            var exitButton = new UIButton(Content.Load<Texture2D>("Controls/Button"), Content.Load<SpriteFont>("Fonts/UiFont"))
-            {
-                Position = new Vector2(0, 0),
-                Text = "Exit"
-
-            };
-            var tower_01Button = new UIButton(Content.Load<Texture2D>("Controls/Button"), Content.Load<SpriteFont>("Fonts/UiFont"))
-            {
-                Position = new Vector2(0, 300),
-                Text = "Tower_01",
-                Scale = 0.5f
-            };
-            var tower_02Button = new UIButton(Content.Load<Texture2D>("Controls/Button"), Content.Load<SpriteFont>("Fonts/UiFont"))
-            {
-                Position = new Vector2(300, 300),
-                Text = "Tower_02",
-                Scale = 0.5f
-            };
-            var tower_03Button = new UIButton(Content.Load<Texture2D>("Controls/Button"), Content.Load<SpriteFont>("Fonts/UiFont"))
-            {
-                Position = new Vector2(600, 300),
-                Text = "Tower_03",
-                Scale = 0.5f
-            };
-
-            exitButton.Click += ExitButton_Click;
-
-            tower_01Button.Click += tower_01Button_Click;
-            tower_02Button.Click += tower_01Button_Click;
-            tower_03Button.Click += tower_01Button_Click;
             // TODO: use this.Content to load your game content here
             ui.LoadContent(Content);
             backGround.LoadContent(Content);
@@ -211,33 +181,11 @@ namespace RpgTowerDefense
             worldBuilder.mineMap = Content.Load<Texture2D>("Mine");
             worldBuilder.AssignWorld(0);
 
-            Uielements = new List<UIComponent>()
-            {
-                exitButton,
-                tower_01Button,
-                tower_02Button,
-                tower_03Button
-            };
 
 
 
         }
-        private void tower_01Button_Click(object sender, System.EventArgs e)
-        {
-            
-        }
-        private void tower_02Button_Click(object sender, System.EventArgs e)
-        {
 
-        }
-        private void tower_03Button_Click(object sender, System.EventArgs e)
-        {
-
-        }
-        private void  ExitButton_Click(object sender,System.EventArgs e)
-        {
-            Exit();
-        }
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// game-specific content.
@@ -298,10 +246,6 @@ namespace RpgTowerDefense
             {
                 go.Update(gameTime);
             }
-            foreach (UIComponent component in Uielements)
-            {
-                component.Update(gameTime);
-            }
 
             ui.Update();
             camera.Follow(new Vector2(0,0));
@@ -335,10 +279,6 @@ namespace RpgTowerDefense
                 go.Draw(spriteBatch);
             }
 
-            foreach (UIComponent component in Uielements)
-            {
-                component.Draw(spriteBatch, gameTime);
-            }
 
             spriteBatch.End();
             spriteBatch.Begin();

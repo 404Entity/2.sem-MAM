@@ -28,22 +28,10 @@ namespace RpgTowerDefense
             throw new NotImplementedException();
         }
 
-        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
-        {
-            if (string.IsNullOrEmpty(text))
-            {
-                spriteBatch.DrawString(font,text, position, Color.Black);
-            }
-        }
-
         public override void Update()
         {
             throw new NotImplementedException();
         }
 
-        public override void Update(GameTime gameTime)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
