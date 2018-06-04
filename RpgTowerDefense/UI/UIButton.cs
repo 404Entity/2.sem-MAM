@@ -58,14 +58,15 @@ namespace RpgTowerDefense
             {
                 color = Color.Gray;
             }
-            spriteBatch.Draw(Texture, Rectangle, color);
+            spriteBatch.Draw(Texture, Position, Rectangle, color, 0, Vector2.Zero, Scale, SpriteEffects.None, 1);
 
             // if the text field is not null draw the text
             if (!string.IsNullOrEmpty(text))
             {
                 var x = (Rectangle.X + (Rectangle.Width / 2) - (font.MeasureString(text).X / 2));
                 var y = (Rectangle.Y + (Rectangle.Height / 2) - (font.MeasureString(text).Y / 2));
-                spriteBatch.DrawString(font, Text, new Vector2(x, y), PenColor);
+                //spriteBatch.DrawString(font, Text, new Vector2(x, y), PenColor);
+                spriteBatch.DrawString(font, text, new Vector2(x, y), penColor, 0, Vector2.Zero, scale, SpriteEffects.None, 1);
             }
         }
 
