@@ -113,6 +113,10 @@ namespace RpgTowerDefense
             IsMouseVisible = true;
             worldBuilder = new GameWorldBuilder();
 
+            Database data = new Database();
+
+            data.AddHighScore("Morten", 1000);
+            data.AddAnalyse(100, 1000, 3, 10);
 
             //intialize camera
             camera = new Camera();
