@@ -13,7 +13,9 @@ namespace RpgTowerDefense
         Director dic;
         Director dic2;
 
-        int playerGold, GoldGainEachRound = 10, highScore, gateHealth = 100;
+
+        //player gold
+        private int playerGold, GoldGainEachRound = 10, highScore, gateHealth = 100;
 
         //testing mobspawn
         float spawntime;
@@ -21,6 +23,7 @@ namespace RpgTowerDefense
 
         private Camera camera;
         private GameObject selectedGameObject;
+        private MouseState previouseMouseState;
 
         public GameWorldBuilder worldBuilder;
         public Texture2D currentMap;
@@ -94,6 +97,7 @@ namespace RpgTowerDefense
         public int GateHealth { get => gateHealth; set => gateHealth = value; }
 
         internal GameObject SelectedGameObject { get => selectedGameObject; set => selectedGameObject = value; }
+        public MouseState PreviouseMouseState { get => previouseMouseState; set => previouseMouseState = value; }
 
         public float deltaTime;
 
@@ -205,22 +209,50 @@ namespace RpgTowerDefense
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            MouseState mouseState = Mouse.GetState();
+            var mouseRectangle = new Rectangle(mouseState.X, mouseState.Y, 50, 50);
             deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            //Change Camera position to screen 1
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D1))
             {
                 
                 camera.Screenvalue = 1;
             }
+            // Change Camera position to screen 2
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D2))
             {
                 Mouse.SetPosition(screenWidth, 0);
                 camera.Screenvalue = 2;
             }
+            // Change Camera position to screen 3
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D3))
             {
                 camera.Screenvalue = 3;
+            }
+            // Set the selected object to the object clicked on
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed && previouseMouseState.LeftButton == ButtonState.Released)
+            {
+                foreach (GameObject gameObject in GameObjects)
+                {
+                    //SpriteRenderer sr = gameObject.GetComponent("SpriteRenderer") as SpriteRenderer;
+                    if (mouseRectangle.Contains(gameObject.Transform.Position))
+                    {
+                        selectedGameObject = gameObject;
+                        break;
+                    }
+                    //if (sr.Rectangle.Intersects(mouseRectangle))
+                    //{
+                   
+                    //}
+                    //else
+                    //{
+                    //    selectedGameObject = null;
+                    //}
+
+                }
             }
             //test mob spawn
             spawntime += deltaTime;
@@ -251,6 +283,7 @@ namespace RpgTowerDefense
 
             ui.Update();
             camera.Follow(new Vector2(0,0));
+            previouseMouseState = mouseState;
             base.Update(gameTime);
         }
         private void CleanTemptList()

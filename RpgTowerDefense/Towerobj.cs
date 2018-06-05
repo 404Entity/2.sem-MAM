@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Content;
 namespace RpgTowerDefense
 {
     enum AttackType { heavy, Light, Tesla }
-    class Tower : Component, ILoadable, IUpdate, IAnimateable
+    class Towerobj : Component, ILoadable, IUpdate, IAnimateable
     {
         #region Fields And Properties
         private float attackPower;
@@ -27,7 +27,7 @@ namespace RpgTowerDefense
         private float coolDown;
         #endregion
         #region Constructor
-        public Tower(GameObject gameObject, float attackpower, float attackspeed, AttackType attackType, float attackRadius) : base(gameObject)
+        public Towerobj(GameObject gameObject, float attackpower, float attackspeed, AttackType attackType, float attackRadius) : base(gameObject)
         {
             AttackPower = attackPower;
             AttackSpeed = attackSpeed;

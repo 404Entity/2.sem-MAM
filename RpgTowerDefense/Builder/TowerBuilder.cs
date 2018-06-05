@@ -23,19 +23,19 @@ namespace RpgTowerDefense
             //tower.AddComponent(new Animator(tower));
             if (id == 1)
             {
-                tower.AddComponent(new Tower(tower, 1, 4, AttackType.Light, 200));
+                tower.AddComponent(new Towerobj(tower, 1, 4, AttackType.Light, 200));
             }
             else if (id == 2)
             {
-                tower.AddComponent(new Tower(tower, 2, 2, AttackType.heavy, 200));
+                tower.AddComponent(new Towerobj(tower, 2, 2, AttackType.heavy, 200));
             }
             else if (id == 3)
             {
-                tower.AddComponent(new Tower(tower, 3, 5, AttackType.Tesla, 100));
+                tower.AddComponent(new Towerobj(tower, 3, 5, AttackType.Tesla, 100));
             }
             else
             {
-                tower.AddComponent(new Tower(tower, 1, 1, AttackType.Light, 1));
+                tower.AddComponent(new Towerobj(tower, 1, 1, AttackType.Light, 1));
             }
             tower.LoadContent(GameWorld._Instance.Content);
 
