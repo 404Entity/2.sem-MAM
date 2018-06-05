@@ -39,6 +39,11 @@ namespace RpgTowerDefense
 
         #endregion
         #region LoadContent
+
+        /// <summary>
+        /// Loads ui Content into the game and instantiate it 
+        /// </summary>
+        /// <param name="content"></param>
         public void LoadContent(ContentManager content)
         {
             playerGold.LoadContent(content);
@@ -73,7 +78,18 @@ namespace RpgTowerDefense
                 Text = "Tower_03",
                 Scale = 0.5f
             };
+
             tower_01ProxyButton = new UIButton(content.Load<Texture2D>("tower_01"), content.Load<SpriteFont>("Fonts/UiFont"), true)
+            {
+                Position = new Vector2(500, 500),
+                Scale = 0.2f
+            };
+            tower_02ProxyButton = new UIButton(content.Load<Texture2D>("tower_01"), content.Load<SpriteFont>("Fonts/UiFont"), true)
+            {
+                Position = new Vector2(500, 500),
+                Scale = 0.2f
+            };
+            tower_03ProxyButton = new UIButton(content.Load<Texture2D>("tower_01"), content.Load<SpriteFont>("Fonts/UiFont"), true)
             {
                 Position = new Vector2(500, 500),
                 Scale = 0.2f
@@ -95,10 +111,13 @@ namespace RpgTowerDefense
             exitButton.Click += ExitButton_Click;
 
             tower_01Button.Click += Tower_01Button_Click;
-            tower_02Button.Click += Tower_01Button_Click;
-            tower_03Button.Click += Tower_01Button_Click;
+            tower_02Button.Click += Tower_02Button_Click;
+            tower_03Button.Click += Tower_03Button_Click;
+
 
             tower_01ProxyButton.Click += Tower_01ProxyButton_Click;
+            tower_02ProxyButton.Click += Tower_02ProxyButton_Click;
+            tower_03ProxyButton.Click += Tower_03ProxyButton_Click;
 
         }
         #endregion
@@ -125,6 +144,11 @@ namespace RpgTowerDefense
         }
         #endregion
         #region Draw
+
+        /// <summary>
+        /// Draws the Ui
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public void Draw(SpriteBatch spriteBatch)
         {
             playerGold.Draw(spriteBatch);
@@ -140,18 +164,42 @@ namespace RpgTowerDefense
         }
         #endregion
         #region Buttons
+
+        /// <summary>
+        ///  Add Proxy Button of tower_01 to active ui-elememts
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Tower_01Button_Click(object sender, System.EventArgs e)
         {
             addToActiveElements.Add(tower_01ProxyButton);
         }
+
+        /// <summary>
+        /// Add Proxy Button of tower_02 to active ui-elememts
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Tower_02Button_Click(object sender, System.EventArgs e)
         {
             addToActiveElements.Add(tower_02ProxyButton);
         }
+
+        /// <summary>
+        /// Add Proxy Button of tower_01 to active ui-elememts
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Tower_03Button_Click(object sender, System.EventArgs e)
         {
             addToActiveElements.Add(tower_03ProxyButton);
         }
+
+        /// <summary>
+        /// Proxy button at players mouse location when clicked add a tower whit tower_01 params and remove the button from the active ui-elements
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Tower_01ProxyButton_Click(object sender, System.EventArgs e)
         {
             if (GameWorld._Instance.PlayerGold >= 50)
@@ -163,16 +211,57 @@ namespace RpgTowerDefense
                 removeUIElements.Add(tower_01ProxyButton);
             }
         }
-  
+        /// <summary>
+        /// Proxy button at players mouse location when clicked add a tower whit tower_02 params and remove the button from the active ui-elements
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Tower_02ProxyButton_Click(object sender, System.EventArgs e)
+        {
+            if (GameWorld._Instance.PlayerGold >= 100 && Mouse.GetState().X < 1600)
+            {
+                Director dic = new Director(new TowerBuilder());
+                dic.Builder.BuildGameObject(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 2);
+                GameWorld._Instance.AddGameObjects.Add(dic.Builder.GetResult());
+                GameWorld._Instance.PlayerGold -= 100;
+                removeUIElements.Add(tower_02ProxyButton);
+            }
+        }
+        /// <summary>
+        /// Proxy button at players mouse location when clicked add a tower whit tower_03 params and remove the button from the active ui-elements
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Tower_03ProxyButton_Click(object sender, System.EventArgs e)
+        {
+            if (GameWorld._Instance.PlayerGold >= 150)
+            {
+                Director dic = new Director(new TowerBuilder());
+                dic.Builder.BuildGameObject(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 3);
+                GameWorld._Instance.AddGameObjects.Add(dic.Builder.GetResult());
+                GameWorld._Instance.PlayerGold -= 150;
+                removeUIElements.Add(tower_03ProxyButton);
+            }
+        }
+        /// <summary>
+        /// when button is clicked exit the game
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ExitButton_Click(object sender, System.EventArgs e)
         {
            GameWorld._Instance.Exit();
         }
+
+
+        #endregion
+        /// <summary>
+        /// clear the add and remove list for next update iteration
+        /// </summary>
         private void ClearTemplists()
         {
             addToActiveElements.Clear();
             removeUIElements.Clear();
         }
-        #endregion
     }
 }

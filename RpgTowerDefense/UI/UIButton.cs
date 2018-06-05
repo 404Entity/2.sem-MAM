@@ -59,11 +59,18 @@ namespace RpgTowerDefense
             var color = Color.White;
             if (ishovering)
             {
-                color = Color.Gray;
+                if (IsProxy)
+                {
+                    color = Color.Red;
+                }
+                else
+                {
+                    color = Color.Gray;
+                }
+                
             }
 
                 spriteBatch.Draw(Texture, Rectangle, color);
-
             //spriteBatch.Draw(Texture, Position, Rectangle, color, 0, Vector2.Zero, Scale, SpriteEffects.None, 1);
 
             // if the text field is not null draw the text

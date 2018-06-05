@@ -88,6 +88,7 @@ namespace RpgTowerDefense
             spriteRender = (SpriteRenderer)gameObject.GetComponent("SpriteRender");
             texture2D = Content.Load<Texture2D>("CollisionTexture");
         }
+
         public void Update()
         {
             CheckCollision();
