@@ -13,6 +13,7 @@ namespace RpgTowerDefense
         private int damage;
         private int decay;
         private int lifetime;
+        private AttackType attackType;
         public Projectile(GameObject gameObject, int damage, Vector2 directionVector) : base(gameObject)
         {
             this.Damage = damage;

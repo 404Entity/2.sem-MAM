@@ -17,8 +17,14 @@ namespace RpgTowerDefense
         GateHealth gateHealth = new GateHealth(new Vector2(840, 10));
         VersionControl versionControl = new VersionControl(new Vector2(1, 880));
         HighScore highScore = new HighScore(new Vector2(100, 50));
+
+
         UIButton tower_01Button;
         UIButton tower_01ProxyButton;
+        UIButton tower_02Button;
+        UIButton tower_02ProxyButton;
+        UIButton tower_03Button;
+        UIButton tower_03ProxyButton;
 
 
         private List<UIComponent> uielements;
@@ -70,7 +76,7 @@ namespace RpgTowerDefense
             tower_01ProxyButton = new UIButton(content.Load<Texture2D>("tower_01"), content.Load<SpriteFont>("Fonts/UiFont"), true)
             {
                 Position = new Vector2(500, 500),
-                Scale = 0.5f
+                Scale = 0.2f
             };
 
 
@@ -102,18 +108,20 @@ namespace RpgTowerDefense
             playerGold.Update();
             gateHealth.Update();
             highScore.Update();
-            foreach (UIComponent componet in addToActiveElements)
-            {
-                Uielements.Add(componet);
-            }
-            foreach(UIComponent componet in removeUIElements)
-            {
-                uielements.Remove(componet);
-            }
+
             foreach (UIComponent component in Uielements)
             {
                 component.Update();
             }
+            foreach (UIComponent componet in addToActiveElements)
+            {
+                Uielements.Add(componet);
+            }
+            foreach (UIComponent componet in removeUIElements)
+            {
+                uielements.Remove(componet);
+            }
+            ClearTemplists();
         }
         #endregion
         #region Draw
@@ -138,11 +146,11 @@ namespace RpgTowerDefense
         }
         private void Tower_02Button_Click(object sender, System.EventArgs e)
         {
-
+            addToActiveElements.Add(tower_02ProxyButton);
         }
         private void Tower_03Button_Click(object sender, System.EventArgs e)
         {
-
+            addToActiveElements.Add(tower_03ProxyButton);
         }
         private void Tower_01ProxyButton_Click(object sender, System.EventArgs e)
         {
@@ -160,7 +168,7 @@ namespace RpgTowerDefense
         {
            GameWorld._Instance.Exit();
         }
-        private void clearTemplists()
+        private void ClearTemplists()
         {
             addToActiveElements.Clear();
             removeUIElements.Clear();
