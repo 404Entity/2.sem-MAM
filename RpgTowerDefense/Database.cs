@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
-using System.Data;
 
 namespace RpgTowerDefense
 {
@@ -15,24 +14,26 @@ namespace RpgTowerDefense
 
 
         #region ReadFrom
-        public DataTable ReadFromDatabase(string select)
+        public List<object> ReadFromDatabase(string select)
         {
             //Read from database
             sqlite2.Open();
             string sql = select;
             //"select * from users" +
             //"order by score desc"
-            DataSet objDs = new DataSet();
+            List<object> tabel = new List<object>();
 
             SQLiteCommand command = new SQLiteCommand(sql, sqlite2);
-            SQLiteDataAdapter objDa = new SQLiteDataAdapter();
+            SQLiteDataReader reader = command.ExecuteReader();
 
-            objDa.Fill(objDs);
+            while (reader.Read())
+            {
+                tabel.Add(reader.GetValues());
+            }
+
             sqlite2.Close();
-
-            return objDs.Tables[0];
+            return tabel;
         }
-
         #endregion
 
 
