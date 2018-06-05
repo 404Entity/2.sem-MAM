@@ -12,7 +12,6 @@ namespace RpgTowerDefense
     class StartMenu
     {
         SpriteFont texture;
-        
 
         public void LoadContent(ContentManager content)
         {
@@ -35,11 +34,9 @@ namespace RpgTowerDefense
         {
             //HighScore Draw
             Database database = new Database();
-            //database.ReadHighScore("select * from highscore ORDER BY score DESC limit 10");
             Vector2 vec = new Vector2(200, 200);
             foreach (string t in database.ReadHighScore("select * from highscore ORDER BY score DESC limit 10"))
             {
-
                 spriteBatch.DrawString(texture, t, vec, Color.Red);
                 vec.Y += 20;
             }

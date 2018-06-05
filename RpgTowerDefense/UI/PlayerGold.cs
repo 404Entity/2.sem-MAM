@@ -37,9 +37,7 @@ namespace RpgTowerDefense
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
             spriteBatch.DrawString(spriteFont, text, vector2, Color.White);
-            spriteBatch.End();
         }
     }
 }

@@ -14,7 +14,8 @@ namespace RpgTowerDefense
         Director dic2;
 
         int playerGold, GoldGainEachRound = 10, highScore, gateHealth = 100;
-        bool gameState = true;
+        //Bestemmer om menu er på eller spillet kører
+        bool gameState = false;
 
         //testing mobspawn
         float spawntime;
@@ -114,13 +115,8 @@ namespace RpgTowerDefense
         {
             IsMouseVisible = true;
             worldBuilder = new GameWorldBuilder();
-
-            Database data = new Database();
+            
             startMenu = new StartMenu();
-
-            data.AddHighScore("Morten", 1000);
-            data.AddAnalyse(100, 1000, 3, 10);
-
             //intialize camera
             camera = new Camera();
             camera.Screenvalue = 1;
@@ -172,14 +168,10 @@ namespace RpgTowerDefense
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            if (GameState == true)
-            {
-                startMenu.LoadContent(Content);
-            }
-            else
-            {
+            
+            
                 // Create a new SpriteBatch, which can be used to draw textures.
-                
+                startMenu.LoadContent(Content);
                 foreach (GameObject go in GameObjects)
                 {
                     go.LoadContent(Content);
@@ -191,7 +183,7 @@ namespace RpgTowerDefense
                 worldBuilder.yyMap = Content.Load<Texture2D>("BackGroundWithGrid");
                 worldBuilder.mineMap = Content.Load<Texture2D>("Mine");
                 worldBuilder.AssignWorld(0);
-            }
+            
         }
 
         /// <summary>
@@ -303,8 +295,7 @@ namespace RpgTowerDefense
                     go.Draw(spriteBatch);
                 }
 
-                spriteBatch.End();
-                spriteBatch.Begin();
+                
                 ui.Draw(spriteBatch);
                 spriteBatch.End();
             }

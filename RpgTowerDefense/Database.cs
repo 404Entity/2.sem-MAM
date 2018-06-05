@@ -17,7 +17,7 @@ namespace RpgTowerDefense
         #region ReadFrom
         public List<string> ReadHighScore(string select)
         {
-            //Read from database
+            //Read highscore from database
             sqlite2.Open();
             string sql = select;
             //"select * from users" +
@@ -26,11 +26,10 @@ namespace RpgTowerDefense
 
             SQLiteCommand command = new SQLiteCommand(sql, sqlite2);
             SQLiteDataReader reader = command.ExecuteReader();
-
             
             while (reader.Read())
             {
-                string a = "" + reader.GetString(1) + " " + reader.GetInt32(2) + "";
+                string a = "" + reader.GetString(1) + "    " + reader.GetInt32(2) + "";
                 Score.Add(a);
             }
 
