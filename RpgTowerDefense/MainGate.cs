@@ -60,7 +60,7 @@ namespace RpgTowerDefense
         {
             if (GameWorld._Instance.GateHealth <= 1)
             {
-                
+                GameWorld._Instance.GameState = true;
             }
         }
 

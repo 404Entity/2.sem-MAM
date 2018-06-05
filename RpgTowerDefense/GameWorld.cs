@@ -93,6 +93,7 @@ namespace RpgTowerDefense
         public int PlayerGold { get => playerGold; set => playerGold = value; }
         public int HighScore { get => highScore; set => highScore = value; }
         public int GateHealth { get => gateHealth; set => gateHealth = value; }
+        public bool GameState { get => gameState; set => gameState = value; }
 
         public float deltaTime;
 
@@ -170,19 +171,27 @@ namespace RpgTowerDefense
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            foreach (GameObject go in GameObjects)
+            if (GameState == true)
             {
-                go.LoadContent(Content);
+                startMenu.LoadContent(Content);
             }
-            // TODO: use this.Content to load your game content here
-            ui.LoadContent(Content);
-            backGround.LoadContent(Content);
-            //yyMap = Content.Load<Texture2D>("BackGround");
-            worldBuilder.yyMap = Content.Load<Texture2D>("BackGroundWithGrid");
-            worldBuilder.mineMap = Content.Load<Texture2D>("Mine");
-            worldBuilder.AssignWorld(0);
+            else
+            {
+                // Create a new SpriteBatch, which can be used to draw textures.
+                
+                foreach (GameObject go in GameObjects)
+                {
+                    go.LoadContent(Content);
+                }
+                // TODO: use this.Content to load your game content here
+                ui.LoadContent(Content);
+                backGround.LoadContent(Content);
+                //yyMap = Content.Load<Texture2D>("BackGround");
+                worldBuilder.yyMap = Content.Load<Texture2D>("BackGroundWithGrid");
+                worldBuilder.mineMap = Content.Load<Texture2D>("Mine");
+                worldBuilder.AssignWorld(0);
+            }
         }
 
         /// <summary>
@@ -202,7 +211,7 @@ namespace RpgTowerDefense
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (gameState == true)
+            if (GameState == true)
             {
                 startMenu.Update();
             }
@@ -271,7 +280,7 @@ namespace RpgTowerDefense
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            if (gameState == true)
+            if (GameState == true)
             {
                 GraphicsDevice.Clear(Color.Blue);
                 spriteBatch.Begin();
