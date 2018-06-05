@@ -14,24 +14,25 @@ namespace RpgTowerDefense
 
 
         #region ReadFrom
-        public void ReadFromDatabase(string select)
+        public List<object> ReadFromDatabase(string select)
         {
             //Read from database
             sqlite2.Open();
             string sql = select;
-                //"select * from users" +
-                //"order by score desc"
+            //"select * from users" +
+            //"order by score desc"
+            List<object> tabel = new List<object>();
 
             SQLiteCommand command = new SQLiteCommand(sql, sqlite2);
             SQLiteDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
             {
-                Console.WriteLine("navn: " + reader["name"] + "\tPoint:" + reader["Score"]);
+                tabel.Add(reader.GetValues());
             }
 
             sqlite2.Close();
-
+            return tabel;
         }
         #endregion
 

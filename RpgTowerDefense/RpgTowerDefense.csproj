@@ -55,6 +55,7 @@
     <Compile Include="Enemy.cs" />
     <Compile Include="Builder\GateBuilder.cs" />
     <Compile Include="GameWorldBuilder.cs" />
+    <Compile Include="StartMenu.cs" />
     <Compile Include="UI\HighScore.cs" />
     <Compile Include="UI\GateHealth.cs" />
     <Compile Include="MainGate.cs" />
