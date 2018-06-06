@@ -46,7 +46,7 @@ namespace RpgTowerDefense
             sp.Origin = new Vector2(95, sp.Sprite.Height / 2);
         }
 
-        public void BuildGameObject(Vector2 position, int id, Vector2 direction)
+        public void BuildGameObject(Vector2 position, int id, Vector2 direction, float damage, AttackType attackType)
         {
             throw new NotImplementedException();
         }

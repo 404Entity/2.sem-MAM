@@ -127,7 +127,7 @@ namespace RpgTowerDefense
             if ((Projectile)other.GameObject.GetComponent("Projectile") != null)
             {
                 Projectile dmgObject = (Projectile)other.GameObject.GetComponent("Projectile");
-                this.Health -= dmgObject.Damage;
+                this.Health -= (int)dmgObject.Damage;
                 GameWorld._Instance.RemoveGameObjects.Add(other.GameObject);
                 GameWorld._Instance.Colliders.Remove(other);
             }

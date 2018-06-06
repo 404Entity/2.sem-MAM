@@ -8,7 +8,9 @@ using Microsoft.Xna.Framework.Content;
 
 namespace RpgTowerDefense
 {
+    #region Attacktype Enum
     enum AttackType { heavy, Light, Tesla }
+    #endregion
     class Towerobj : Component, ILoadable, IUpdate, IAnimateable
     {
         #region Fields And Properties
@@ -27,15 +29,19 @@ namespace RpgTowerDefense
         private float coolDown;
         #endregion
         #region Constructor
-        public Towerobj(GameObject gameObject, float attackpower, float attackspeed, AttackType attackType, float attackRadius) : base(gameObject)
+        public Towerobj(GameObject gameObject, float attackPower, float attackSpeed, AttackType attackType, float attackRadius) : base(gameObject)
         {
-            AttackPower = attackPower;
-            AttackSpeed = attackSpeed;
-            AttackType = attackType;
+            this.attackPower = attackPower;
+            this.attackSpeed = attackSpeed;
+            this.attackType = attackType;
             AttackRadius = attackRadius;
             coolDown = 0;
         }
         #endregion
+        #region Methods
+        /// <summary>
+        /// Find the first target in the list within tower range
+        /// </summary>
         public void FindTarget()
         {
 
@@ -48,6 +54,9 @@ namespace RpgTowerDefense
                 }
             }
         }
+        /// <summary>
+        /// Check if the target still is alive.
+        /// </summary>
         public void checkTarget()
         {
 
@@ -63,6 +72,10 @@ namespace RpgTowerDefense
                 }
             }
         }
+
+        /// <summary>
+        /// shoot bullet at target enemy
+        /// </summary>
         public void TowerAttack()
         {
             if (target != null)
@@ -70,12 +83,16 @@ namespace RpgTowerDefense
                 Vector2 shootdirection = target.Transform.Position - gameObject.Transform.Position;
                 Vector2 shootdirectonnormalized = Vector2.Normalize(shootdirection);
                 Director director = new Director(new BulletBuilder());
-                director.Construct(gameObject.Transform.Position, 1, shootdirectonnormalized);
+                director.Construct(gameObject.Transform.Position, 1, shootdirectonnormalized,AttackPower,AttackType);
                 GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
-                coolDown += 2.5f;
+                coolDown += 2.5f/attackSpeed;
             }
 
         }
+
+        /// <summary>
+        /// rotate the tower so it look at the enemy.
+        /// </summary>
         public void LookAttarget()
         {
             if (target != null)
@@ -85,6 +102,12 @@ namespace RpgTowerDefense
                 sp.Rotation = (float)GetAngle(gameObject.Transform.Position, target.Transform.Position);
             }
         }
+        /// <summary>
+        /// Claculate the angle between the point a and point b
+        /// </summary>
+        /// <param name="a">Position Vector of the Tower</param>
+        /// <param name="b">Position Vector of the Enemy</param>
+        /// <returns>this a returns an decimail value containing the angle between the two vectors</returns>
         private double GetAngle(Vector2 a, Vector2 b)
         {
 
@@ -107,7 +130,7 @@ namespace RpgTowerDefense
             {
                 checkTarget();
             }
-            if (coolDown > 0)
+            if (coolDown >= 0)
             {
                 coolDown -= GameWorld._Instance.deltaTime;
             }
@@ -117,26 +140,14 @@ namespace RpgTowerDefense
                 TowerAttack();
             }
         }
+        //test Metod
+        /// <summary>
+        /// a basic test metod for testing rotation of a tower to find the best Origin point.
+        /// </summary>
         public void spin()
         {
             SpriteRenderer sp = gameObject.GetComponent("spriteRenderer") as SpriteRenderer;
             sp.Rotation += 0.05f;
-        }
-        public void Upgrade(int param)
-        {
-            //psudo kode
-            if (param == 1)
-            {
-                attackPower += 1;
-            }
-            else if (param == 2)
-            {
-                attackSpeed += 1;
-            }
-            else if (param == 3)
-            {
-                attackRadius += 1;
-            }
         }
         private void CreateAnimation()
         {
@@ -146,5 +157,7 @@ namespace RpgTowerDefense
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
+
 }

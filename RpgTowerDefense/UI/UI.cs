@@ -18,7 +18,7 @@ namespace RpgTowerDefense
         VersionControl versionControl = new VersionControl(new Vector2(1, 880));
         HighScore highScore = new HighScore(new Vector2(100, 50));
 
-        //None Permenet Buttons
+        //None Permenet Buttons some what dynamic buttons.
         UIButton tower_01Button;
         UIButton tower_01ProxyButton;
         UIButton tower_02Button;
@@ -29,15 +29,16 @@ namespace RpgTowerDefense
         UIButton Upgrade_02Button;
         UIButton Upgrade_03Button;
 
+        GameObject previousGameObject;
 
         private List<UIComponent> uielements;
-
         private List<UIComponent> addUIElements;
         private List<UIComponent> removeUIElements;
 
         internal List<UIComponent> RemoveUIElements { get => removeUIElements; set => removeUIElements = value; }
-        internal List<UIComponent> Uielements { get => uielements; set => uielements = value; }
+        internal List<UIComponent> UIElements { get => uielements; set => uielements = value; }
         internal List<UIComponent> AddUIElements { get => addUIElements; set => addUIElements = value; }
+
 
         #endregion
         #region LoadContent
@@ -61,7 +62,7 @@ namespace RpgTowerDefense
                 Scale = 0.2f,
                 TextScale = 1f
             };
-     
+
             tower_01Button = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
             {
                 Position = new Vector2(1240, 780),
@@ -69,14 +70,14 @@ namespace RpgTowerDefense
                 Scale = 0.5f
             };
 
-             tower_02Button = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
+            tower_02Button = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
             {
                 Position = new Vector2(1360, 780),
                 Text = "Heavy Tower",
                 Scale = 0.5f
             };
 
-             tower_03Button = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
+            tower_03Button = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
             {
                 Position = new Vector2(1480, 780),
                 Text = "Tesla Tower",
@@ -100,11 +101,6 @@ namespace RpgTowerDefense
                 Position = new Vector2(500, 500),
                 Scale = 0.2f
             };
-
-
-
-
-
 
             Upgrade_01Button = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
             {
@@ -131,7 +127,7 @@ namespace RpgTowerDefense
             };
 
 
-            Uielements = new List<UIComponent>()
+            UIElements = new List<UIComponent>()
             {
                 exitButton,
                 tower_01Button,
@@ -142,8 +138,10 @@ namespace RpgTowerDefense
             removeUIElements = new List<UIComponent>();
             addUIElements = new List<UIComponent>();
 
+
+            
             //subscribe to events
-     
+
             tower_01Button.Click += Tower_01Button_Click;
             tower_02Button.Click += Tower_02Button_Click;
             tower_03Button.Click += Tower_03Button_Click;
@@ -169,71 +167,79 @@ namespace RpgTowerDefense
             gateHealth.Update();
             highScore.Update();
 
-            if (GameWorld._Instance.SelectedGameObject != null)
+            if (GameWorld._Instance.SelectedGameObject != null && GameWorld._Instance.SelectedGameObject != previousGameObject)
             {
-                if(GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") != null)
+                SelectedBlue(GameWorld._Instance.SelectedGameObject);
+                if (previousGameObject != null)
+                {
+                   UnselectWhite(previousGameObject);
+                }
+             
+                if (GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") != null)
                 {
                     //Make this to a Method of its own
                     bool containsUpgrade = false;
-                    foreach (UIComponent item in Uielements)
+                    foreach (UIComponent item in UIElements)
                     {
-                        
+
                         if (item == Upgrade_01Button || item == Upgrade_02Button || item == Upgrade_03Button)
                         {
                             containsUpgrade = true;
                             break;
                         }
 
-                        if (!containsUpgrade)
-                        {
-                            RemoveUIElements.Add(tower_01Button);
-                            RemoveUIElements.Add(tower_02Button);
-                            RemoveUIElements.Add(tower_03Button);
+                    }
 
-                            addUIElements.Add(Upgrade_01Button);
-                            addUIElements.Add(Upgrade_02Button);
-                            addUIElements.Add(Upgrade_03Button);
-                        }
+                    if (!containsUpgrade)
+                    {
+                        RemoveUIElements.Add(tower_01Button);
+                        RemoveUIElements.Add(tower_02Button);
+                        RemoveUIElements.Add(tower_03Button);
+
+                        addUIElements.Add(Upgrade_01Button);
+                        addUIElements.Add(Upgrade_02Button);
+                        addUIElements.Add(Upgrade_03Button);
                     }
                 }
                 else
                 {
                     bool containsUpgrade = false;
-                    foreach (UIComponent item in Uielements)
+                    foreach (UIComponent item in UIElements)
                     {
 
-                        if (item == tower_01Button|| item == tower_02Button || item == tower_03Button)
+                        if (item == tower_01Button || item == tower_02Button || item == tower_03Button)
                         {
                             containsUpgrade = true;
                             break;
                         }
 
-                        if (!containsUpgrade)
-                        {
-                            RemoveUIElements.Add(Upgrade_01Button);
-                            RemoveUIElements.Add(Upgrade_02Button);
-                            RemoveUIElements.Add(Upgrade_03Button);
+                    }
+                    if (!containsUpgrade)
+                    {
+                        RemoveUIElements.Add(Upgrade_01Button);
+                        RemoveUIElements.Add(Upgrade_02Button);
+                        RemoveUIElements.Add(Upgrade_03Button);
 
-                            addUIElements.Add(tower_01Button);
-                            addUIElements.Add(tower_02Button);
-                            addUIElements.Add(tower_03Button);
-                        }
+                        addUIElements.Add(tower_01Button);
+                        addUIElements.Add(tower_02Button);
+                        addUIElements.Add(tower_03Button);
                     }
                 }
             }
-            foreach (UIComponent component in Uielements)
+            foreach (UIComponent component in UIElements)
             {
                 component.Update();
             }
             foreach (UIComponent componet in addUIElements)
             {
-                Uielements.Add(componet);
+                UIElements.Add(componet);
             }
             foreach (UIComponent componet in removeUIElements)
             {
                 uielements.Remove(componet);
             }
             ClearTemplists();
+            previousGameObject = GameWorld._Instance.SelectedGameObject;
         }
         #endregion
         #region Draw
@@ -250,7 +256,7 @@ namespace RpgTowerDefense
             highScore.Draw(spriteBatch);
 
 
-            foreach (UIComponent component in Uielements)
+            foreach (UIComponent component in UIElements)
             {
                 component.Draw(spriteBatch);
             }
@@ -343,19 +349,31 @@ namespace RpgTowerDefense
         {
 
             Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
-            tower.AttackPower++;
+            if (GameWorld._Instance.PlayerGold > 30)
+            {
+                tower.AttackPower++;
+            }
         }
 
         private void UpgradeButton02_Click(object sender, System.EventArgs e)
         {
+            
             Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
-            tower.AttackRadius += 50;
+            if (GameWorld._Instance.PlayerGold > 10)
+            {
+                tower.AttackRadius += 50;
+            }
+         
         }
 
         private void UpgradeButton03_Click(object sender, System.EventArgs e)
         {
             Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
-            tower.AttackSpeed ++;
+            if (GameWorld._Instance.PlayerGold > 10)
+            {
+                tower.AttackSpeed++;
+            }
+           
         }
 
 
@@ -367,7 +385,7 @@ namespace RpgTowerDefense
         /// <param name="e"></param>
         private void ExitButton_Click(object sender, System.EventArgs e)
         {
-           GameWorld._Instance.Exit();
+            GameWorld._Instance.Exit();
         }
 
 
@@ -379,6 +397,17 @@ namespace RpgTowerDefense
         {
             addUIElements.Clear();
             removeUIElements.Clear();
+        }
+
+        private void SelectedBlue(GameObject gameObject)
+        {
+            SpriteRenderer sp = gameObject.GetComponent("SpriteRenderer") as SpriteRenderer;
+            sp.Color = Color.Cyan;
+        }
+        private void UnselectWhite(GameObject gameObject)
+        {
+            SpriteRenderer sp = gameObject.GetComponent("SpriteRenderer") as SpriteRenderer;
+            sp.Color = Color.White;
         }
     }
 }
