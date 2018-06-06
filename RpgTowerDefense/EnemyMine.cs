@@ -24,8 +24,8 @@ namespace RpgTowerDefense
         //GoldGain = Amount of gold gained for killing an enemy
         //threadSleep = Speed of enemy
         bool mineThreadStarted = false;
-        int dmg, pointGain, goldGainOnKill, threadSleep = 20;
-        float attackCooldown, attackSpeed, attackRange, speed, health, lookRange;
+        int dmg, pointGain, goldGainOnKill, health, threadSleep = 20;
+        float attackCooldown, attackSpeed, attackRange, speed, lookRange;
         GameObject player;
         Vector2 waitPos;
 
@@ -53,10 +53,12 @@ namespace RpgTowerDefense
             attackCooldown = 1.5f;
 
             TileSize = (int)worldBuilder.xWidth;
-            //this.Health = health;
             dmg = 1;
             pointGain = 5;
             goldGainOnKill = 5;
+
+            health = 3;
+            this.Health = health;
         }
         #endregion
         #region Methods
@@ -178,7 +180,7 @@ namespace RpgTowerDefense
                     moveVector = Vector2.Normalize(moveVector);
                 }
                 //moves based on moveVector
-                gameObject.Transform.Translate(new Vector2 (-10,0));
+                gameObject.Transform.Translate(moveVector);
                 Thread.Sleep(threadSleep);
             }
 
