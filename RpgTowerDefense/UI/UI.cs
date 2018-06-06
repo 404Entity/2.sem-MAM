@@ -177,7 +177,7 @@ namespace RpgTowerDefense
              
                 if (GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") != null)
                 {
-                    //Make this to a Method of its own
+               
                     bool containsUpgrade = false;
                     foreach (UIComponent item in UIElements)
                     {
