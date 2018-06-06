@@ -13,13 +13,19 @@ namespace RpgTowerDefense
         Director dic;
         Director dic2;
         Director dic3;
+        Director dic4;
 
         //testing mobspawn
         float spawntime;
         float interval = 1.5f;
 
+        float mineSpawntime;
+        float mineInterval = 1.5f;
+
         private Camera camera;
 
+        GameObject player;
+        public int playerHealth = 3;
 
         public GameWorldBuilder worldBuilder;
 
@@ -119,7 +125,7 @@ namespace RpgTowerDefense
             worldBuilder.yHeight = graphics.GraphicsDevice.Viewport.Height / worldBuilder.yTiles;
             worldBuilder.xWidth = graphics.GraphicsDevice.Viewport.Width / worldBuilder.xTiles;
             worldBuilder.map1Rect = new Rectangle (0, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
-            worldBuilder.map2Rect = new Rectangle(1600, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
+            worldBuilder.map2Rect = new Rectangle(3200, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
 
 
             // TODO: Add your initialization logic here
@@ -129,9 +135,10 @@ namespace RpgTowerDefense
 
             ui = new UI();
             dic = new Director(new PlayerBuilder());
-            GameObject player = dic.Construct(new Vector2(1, 1));
+            player = dic.Construct(new Vector2(1, 1));
             gameObjects.Add(player);
             dic2 = new Director(new EnemyBuilder());
+            dic4 = new Director(new EnemyMineBuilder());
             
 
             worldBuilder.SetupData();
@@ -203,6 +210,7 @@ namespace RpgTowerDefense
             {
                 camera.Screenvalue = 3;
             }
+            
             //test mob spawn
             spawntime += deltaTime;
             if(spawntime >= interval)
@@ -210,8 +218,14 @@ namespace RpgTowerDefense
                 spawntime = 0;
                 SpawnMob();
             }
+            mineSpawntime += deltaTime;
+            if (mineSpawntime >= mineInterval)
+            {
+                mineSpawntime = 0;
+                SpawnMobMine();
+            }
 
-           
+
             // TODO: Add your update logic here
             foreach (GameObject go in addGameObjects)
             {
@@ -269,6 +283,13 @@ namespace RpgTowerDefense
         public void SpawnMob()
         {
             GameObject mob = dic2.Construct(new Vector2(0, 270));
+            UpdateMobList(mob, true);
+            gameObjects.Add(mob);
+
+        }
+        public void SpawnMobMine()
+        {
+            GameObject mob = dic4.Construct(new Vector2(graphics.GraphicsDevice.Viewport.Width*3, 425));
             UpdateMobList(mob, true);
             gameObjects.Add(mob);
 
