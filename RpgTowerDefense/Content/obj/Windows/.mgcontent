@@ -13,6 +13,9 @@
     <File>C:/Users/Allan/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/GateHealth.spritefont</File>
     <File>C:/Users/Allan/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/CityGate.jpg</File>
     <File>C:/Users/Allan/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/Mine.png</File>
+<<<<<<< HEAD
     <File>C:/Users/Allan/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/enemy_static.png</File>
+=======
+>>>>>>> cameracontroll
   </SourceFiles>
 </SourceFileCollection>

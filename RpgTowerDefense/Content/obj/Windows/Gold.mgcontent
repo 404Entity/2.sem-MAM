@@ -3,7 +3,11 @@
   <SourceFile>C:/Users/Allan/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/Gold.spritefont</SourceFile>
   <SourceTime>2018-06-05T12:28:59.7627254+02:00</SourceTime>
   <DestFile>C:/Users/Allan/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/bin/Windows/Gold.xnb</DestFile>
+<<<<<<< HEAD
   <DestTime>2018-06-07T10:22:24.7031714+02:00</DestTime>
+=======
+  <DestTime>2018-06-05T12:32:51.478963+02:00</DestTime>
+>>>>>>> cameracontroll
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

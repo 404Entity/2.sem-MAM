@@ -28,6 +28,12 @@ namespace RpgTowerDefense
         {
             throw new NotImplementedException();
         }
+
+        public void BuildGameObject(Vector2 position, GameObject player)
+        {
+            throw new NotImplementedException();
+        }
+
         public void BuildGameObject(Vector2 position, int id, Vector2 directionVector)
         {
             GameObject bullet = new GameObject();

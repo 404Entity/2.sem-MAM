@@ -3,7 +3,11 @@
   <SourceFile>C:/Users/Allan/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/Mine.png</SourceFile>
   <SourceTime>2018-06-05T12:28:59.7807138+02:00</SourceTime>
   <DestFile>C:/Users/Allan/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/bin/Windows/Mine.xnb</DestFile>
+<<<<<<< HEAD
   <DestTime>2018-06-07T10:22:25.187505+02:00</DestTime>
+=======
+  <DestTime>2018-06-05T12:32:51.8069399+02:00</DestTime>
+>>>>>>> cameracontroll
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
