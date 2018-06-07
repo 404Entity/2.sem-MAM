@@ -4,6 +4,7 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+<<<<<<< HEAD
     <File>C:/Users/Allan/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/Player.jpg</File>
     <File>C:/Users/Allan/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/Enemy.jpg</File>
     <File>C:/Users/Allan/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/BackGround.png</File>
@@ -13,5 +14,17 @@
     <File>C:/Users/Allan/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/GateHealth.spritefont</File>
     <File>C:/Users/Allan/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/CityGate.jpg</File>
     <File>C:/Users/Allan/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/Mine.png</File>
+=======
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/Player.jpg</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/Enemy.jpg</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/BackGround.png</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/BuildSpot.png</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/BackGroundWithGrid.png</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/Gold.spritefont</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/GateHealth.spritefont</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/CityGate.jpg</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/Mine.png</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/enemy_static.png</File>
+>>>>>>> 0bf90f3b50c4c6ab001f29dfe28f11b26ad53cb3
   </SourceFiles>
 </SourceFileCollection>

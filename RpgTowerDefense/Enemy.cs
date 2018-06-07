@@ -9,24 +9,20 @@ using System.Threading;
 
 namespace RpgTowerDefense
 {
-    class Enemy : Component, ILoadable, IAnimateable, IUpdate
+    class Enemy : Component, ILoadable, IAnimateable, IUpdate, ICollideEnter,ICollideStay,ICollideExit
     {
         #region Fields
         GameWorldBuilder worldBuilder;
 
         private Animator animator;
         private IStrategy strategy;
-        private DIRECTION direction;
-        //Decides move direction
-        Vector2 OpVector = new Vector2(0, -1);
-        Vector2 NedVector = new Vector2(0, 1);
-        Vector2 HojreVector = new Vector2(1, 0);
-        UI uI = new UI();
-        //Decides move direction
-        //Speed of enemy
-        int threadSleep = 20;
-        //Speed of enemy
+
+        //dmg = Damage of enemy
+        //PointGain = amount of points gained for killing an enemy
+        //GoldGain = Amount of gold gained for killing an enemy
+        //threadSleep = Speed of enemy
         bool threadStarted = false;
+        int dmg, pointGain, goldGainOnKill, threadSleep;
 
         //size of tiles, used to scale size of enemy
         int TileSize;
@@ -35,9 +31,10 @@ namespace RpgTowerDefense
         Vector2 moveTarget;
 
         public int Health { get; internal set; }
+        public int Dmg { get => dmg; set => dmg = value; }
         #endregion
         #region Constructor
-        public Enemy(GameObject gameobject) : base(gameobject)
+        public Enemy(GameObject gameobject, int dmg, int threadSleep, int health, int pointGain, int goldGainOnKill) : base(gameobject)
         {
             worldBuilder = GameWorld._Instance.worldBuilder;
 
@@ -47,10 +44,18 @@ namespace RpgTowerDefense
             moveTarget = GameWorld._Instance.walkCoordinates[0];
             //makes enemy spawn on edge of screen on same y coordinate as first pathing destination
             TileSize = (int)worldBuilder.xWidth;
+<<<<<<< HEAD
             if (gameObject.Transform.Position.X == 0)
             {
                 gameObject.Transform.Position = new Vector2(-TileSize, moveTarget.Y);
             }
+=======
+            this.Health = health;
+            this.dmg = dmg;
+            this.threadSleep = threadSleep;
+            this.pointGain = pointGain;
+            this.goldGainOnKill = goldGainOnKill;
+>>>>>>> 0bf90f3b50c4c6ab001f29dfe28f11b26ad53cb3
         }
         #endregion
         #region Methods
@@ -82,6 +87,14 @@ namespace RpgTowerDefense
 
         public void Update()
         {
+            if (Health <= 0)
+            {
+                GameWorld._Instance.RemoveGameObjects.Add(gameObject);
+                //Giver spilleren points når en enemy dør
+                GameWorld._Instance.HighScore += pointGain;
+                //Giver spilleren guld hver gang en enemy dør
+                GameWorld._Instance.PlayerGold += goldGainOnKill;
+            }
             if (strategy is Walk)
             {
 
@@ -108,7 +121,41 @@ namespace RpgTowerDefense
                 threadStarted = true;
             }
         }
-        
+
+        #region Collision
+        /// <summary>
+        /// When a enemy is hit by a bullet lose health and remove the bullet
+        /// </summary>
+        /// <param name="other"></param>
+        public void OnCollisionEnter(Collider other)
+        {
+            if ((Projectile)other.GameObject.GetComponent("Projectile") != null)
+            {
+                Projectile dmgObject = (Projectile)other.GameObject.GetComponent("Projectile");
+                this.Health -= dmgObject.Damage;
+                GameWorld._Instance.RemoveGameObjects.Add(other.GameObject);
+                GameWorld._Instance.Colliders.Remove(other);
+            }
+        }
+        /// <summary>
+        /// not implementet yet
+        /// </summary>
+        /// <param name="other"></param>
+        public void OnCollisionExit(Collider other)
+        {
+            
+        }
+        /// <summary>
+        /// not implementet
+        /// </summary>
+        /// <param name="other"></param>
+        public void OnCollisionStay(Collider other)
+        {
+
+        }
+        #endregion
+
+
         //Enemy Movement Method
         public void EnemyMovement(Object stateInfo)
         {
@@ -125,92 +172,7 @@ namespace RpgTowerDefense
                 gameObject.Transform.Translate(moveVector);
                 Thread.Sleep(threadSleep);
             }
-            /*
-            while (true)
-            {
-                //Bevæger sig til hojre
-                gameObject.Transform.Translate(HojreVector);
-                Thread.Sleep(threadSleep);
-                if (gameObject.Transform.Position == new Vector2(115, 280))
-                {
-                    //Breaker hvis punktet er ramt
-                    break;
-                }
-            }
-            while (true)
-            {
-                //Bevæger sig op
-                gameObject.Transform.Translate(OpVector);
-                Thread.Sleep(threadSleep);
-                if (gameObject.Transform.Position == new Vector2(115, 115))
-                {
-                    //Breaker hvis punktet er ramt
-                    break;
-                }
-            }
-            while (true)
-            {
-                //Bevæger sig til hojre
-                gameObject.Transform.Translate(HojreVector);
-                Thread.Sleep(threadSleep);
-                if (gameObject.Transform.Position == new Vector2(282, 115))
-                {
-                    //Breaker hvis punktet er ramt
-                    break;
-                }
-            }
-            while (true)
-            {
-                //Bevæger sig ned
-                gameObject.Transform.Translate(NedVector);
-                Thread.Sleep(threadSleep);
-                if (gameObject.Transform.Position == new Vector2(282, 340))
-                {
-                    //Breaker hvis punktet er ramt
-                    break;
-                }
-            }
-            while (true)
-            {
-                //Bevæger sig til hojre
-                gameObject.Transform.Translate(HojreVector);
-                Thread.Sleep(threadSleep);
-                if (gameObject.Transform.Position == new Vector2(507, 340))
-                {
-                    //Breaker hvis punktet er ramt
-                    break;
-                }
-            }
-            while (true)
-            {
-                //Bevæger sig Op 
-                gameObject.Transform.Translate(OpVector);
-                Thread.Sleep(threadSleep);
-                if (gameObject.Transform.Position == new Vector2(507, 226))
-                {
-                    //Breaker hvis punktet er ramt
-                    break;
-                }
-            }
-            while (true)
-            {
-                //Bevæger sig til hojre
-                gameObject.Transform.Translate(HojreVector);
-                Thread.Sleep(threadSleep);
-                if (gameObject.Transform.Position == new Vector2(750, 226))
-                {
-                    //Breaker hvis punktet er ramt
-                    break;
-                }
-            }
-            while (true)
-            {
-                //Denne kører bare i loop til vi har en implementering
-                gameObject.Transform.Translate(new Vector2(0, 0));
-                Thread.Sleep(threadSleep);
-                //Denne kører bare i loop til vi har en implementering
-            }
-            */
+            
         }
         #endregion
     }

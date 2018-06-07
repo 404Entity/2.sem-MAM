@@ -12,7 +12,8 @@ namespace RpgTowerDefense
     {
         Director dic;
         Director dic2;
-        Director dic3;
+
+        int playerGold, GoldGainEachRound = 10, highScore, gateHealth = 100;
 
         //testing mobspawn
         float spawntime;
@@ -20,15 +21,22 @@ namespace RpgTowerDefense
         float mineSpawntime;
         float mineInterval = 15;
 
+<<<<<<< HEAD
         MineMonsterHandler mine;
         public GameWorldBuilder worldBuilder;
+=======
+        private Camera camera;
+>>>>>>> 0bf90f3b50c4c6ab001f29dfe28f11b26ad53cb3
 
+
+        public GameWorldBuilder worldBuilder;
         public Texture2D currentMap;
         public Rectangle currentRect;
 
         //list of locations on the grid where towers can be built
         public Vector2[] buildSpotLocation = { new Vector2(3, 12), new Vector2(6, 14), new Vector2(7, 3), new Vector2(12, 12), new Vector2(14, 3), new Vector2(16, 6), new Vector2(21, 12), new Vector2(24, 6), new Vector2(28, 1) };
         public bool[] buildSpotAvailable;
+
         //keeps track of coordinates for enemy pathing
         public Vector2[] walkCoordinates = { new Vector2(5, 14), new Vector2(5, 2), new Vector2(17, 2), new Vector2(17, 8), new Vector2(11, 8), new Vector2(11, 14), new Vector2(23, 14), new Vector2(23, 2), new Vector2(32, 2) };
 
@@ -70,10 +78,12 @@ namespace RpgTowerDefense
         UI ui;
         private int screenWidth;
         private int screenHeigth;
+
         private List<GameObject> gameObjects;
         private List<GameObject> addGameObjects;
         private List<GameObject> removeGameObjects;
         private List<Collider> colliders;
+
         internal List<GameObject> GameObjects { get => gameObjects; set => gameObjects = value; }
         internal List<GameObject> AddGameObjects { get => addGameObjects; set => addGameObjects = value; }
         internal List<GameObject> RemoveGameObjects { get => removeGameObjects; set => removeGameObjects = value; }
@@ -86,8 +96,12 @@ namespace RpgTowerDefense
 
         public int ScreenWidth { get => screenWidth; set => screenWidth = value; }
         public int ScreenHeigth { get => screenHeigth; set => screenHeigth = value; }
+        public int PlayerGold { get => playerGold; set => playerGold = value; }
+        public int HighScore { get => highScore; set => highScore = value; }
+        public int GateHealth { get => gateHealth; set => gateHealth = value; }
 
         public float deltaTime;
+
         public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -108,11 +122,23 @@ namespace RpgTowerDefense
             mine = new MineMonsterHandler();
             worldBuilder = new GameWorldBuilder();
 
+
+            //intialize camera
+            camera = new Camera();
+            camera.Screenvalue = 1;
+
             graphics.PreferredBackBufferWidth = 1600;
             graphics.PreferredBackBufferHeight = 900;
+<<<<<<< HEAD
 
+=======
+            graphics.ApplyChanges();
+>>>>>>> 0bf90f3b50c4c6ab001f29dfe28f11b26ad53cb3
             graphics.GraphicsDevice.Viewport = new Viewport(0, 0, 1600, 900);
             graphics.ApplyChanges();
+
+            ScreenWidth = graphics.PreferredBackBufferWidth;
+            ScreenHeigth = graphics.PreferredBackBufferHeight;
 
             worldBuilder.yHeight = graphics.GraphicsDevice.Viewport.Height / worldBuilder.yTiles;
             worldBuilder.xWidth = graphics.GraphicsDevice.Viewport.Width / worldBuilder.xTiles;
@@ -124,7 +150,7 @@ namespace RpgTowerDefense
             GameObjects = new List<GameObject>();
             addGameObjects = new List<GameObject>();
             removeGameObjects = new List<GameObject>();
-
+            colliders = new List<Collider>();
             ui = new UI();
             dic = new Director(new PlayerBuilder());
             GameObject player = dic.Construct(new Vector2(1, 1));
@@ -187,13 +213,28 @@ namespace RpgTowerDefense
             deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D1))
+            {
+                
+                camera.Screenvalue = 1;
+            }
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D2))
+            {
+                Mouse.SetPosition(screenWidth, 0);
+                camera.Screenvalue = 2;
+            }
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D3))
+            {
+                camera.Screenvalue = 3;
+            }
             //test mob spawn
             spawntime += deltaTime;
             if(spawntime >= interval)
             {
                 spawntime = 0;
                 SpawnMob();
+                //Giver spilleren 10+ guld hvert enemy spawn
+                PlayerGold += GoldGainEachRound;
             }
             mineSpawntime += deltaTime;
             if(mineSpawntime >= mineInterval)
@@ -202,7 +243,7 @@ namespace RpgTowerDefense
                 mine.SpawnMob(3);
             }
 
-
+           
             // TODO: Add your update logic here
             foreach (GameObject go in addGameObjects)
             {
@@ -211,6 +252,7 @@ namespace RpgTowerDefense
             foreach (GameObject go in removeGameObjects)
             {
                 gameObjects.Remove(go);
+                mobList.Remove(go);
             }
             CleanTemptList();
             foreach (GameObject go in GameObjects)
@@ -218,6 +260,7 @@ namespace RpgTowerDefense
                 go.Update(gameTime);
             }
             ui.Update();
+            camera.Follow(new Vector2(0,0));
             base.Update(gameTime);
         }
         private void CleanTemptList()
@@ -225,6 +268,9 @@ namespace RpgTowerDefense
             addGameObjects.Clear();
             removeGameObjects.Clear();
         }
+
+
+
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -233,7 +279,7 @@ namespace RpgTowerDefense
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(transformMatrix:camera.Transform);
 
             //backGround.Draw(spriteBatch);
             
@@ -244,19 +290,21 @@ namespace RpgTowerDefense
             {
                 go.Draw(spriteBatch);
             }
+          
+            spriteBatch.End();
+            spriteBatch.Begin();
             ui.Draw(spriteBatch);
             spriteBatch.End();
-
             base.Draw(gameTime);
         }
 
         //spawns enemy and adds to both gameobjects and moblist
         public void SpawnMob()
         {
-            GameObject mob = dic2.Construct(new Vector2(0, 270));
+            dic2.Construct(new Vector2(0, 270));
+            GameObject mob = dic2.Builder.GetResult();
             UpdateMobList(mob, true);
             gameObjects.Add(mob);
-
         }
 
         //remove /**/ to enable mob spawning in mine

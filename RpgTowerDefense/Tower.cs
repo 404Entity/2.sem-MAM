@@ -23,56 +23,99 @@ namespace RpgTowerDefense
         public float AttackRadius { get => attackRadius; set => attackRadius = value; }
         internal AttackType AttackType { get => attackType; set => attackType = value; }
         internal GameObject Target { get => target; set => target = value; }
+
+        private float coolDown;
         #endregion
         #region Constructor
-        public Tower(GameObject gameObject, float attackpower, float attackspeed, AttackType attackType, float attackRadius): base(gameObject)
+        public Tower(GameObject gameObject, float attackpower, float attackspeed, AttackType attackType, float attackRadius) : base(gameObject)
         {
             AttackPower = attackPower;
             AttackSpeed = attackSpeed;
             AttackType = attackType;
-
+            AttackRadius = attackRadius;
+            coolDown = 0;
         }
         #endregion
         public void FindTarget()
         {
 
-            if (target == null)
+            foreach (GameObject enemy in GameWorld._Instance.MobList)
             {
-
-                foreach (GameObject enemy in GameWorld._Instance.MobList)
+                if (Vector2.Distance(enemy.Transform.Position, this.gameObject.Transform.Position) < AttackRadius)
                 {
-                    if (Vector2.Distance(enemy.GameObject.Transform.Position,GameObject.Transform.Position) < AttackRadius)
-                    {
-                        target = enemy;
-                        break;
-                    }
+                    target = enemy;
+                    break;
                 }
+            }
+        }
+        public void checkTarget()
+        {
 
+            foreach (GameObject enemy in GameWorld._Instance.MobList)
+            {
+                if (enemy == target)
+                {
+                 break;
+                }
+                else
+                {
+                    target = null;
+                }
             }
         }
         public void TowerAttack()
         {
             if (target != null)
             {
-                Vector2 shootdirection = target.GameObject.Transform.Position - gameObject.Transform.Position;
+                Vector2 shootdirection = target.Transform.Position - gameObject.Transform.Position;
                 Vector2 shootdirectonnormalized = Vector2.Normalize(shootdirection);
                 Director director = new Director(new BulletBuilder());
                 director.Construct(gameObject.Transform.Position, 1, shootdirectonnormalized);
                 GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
+                coolDown += 2.5f;
             }
-      
-        }
 
+        }
+        public void LookAttarget()
+        {
+            if (target != null)
+            {
+                SpriteRenderer sp = gameObject.GetComponent("spriteRenderer") as SpriteRenderer;
+                Vector2 cannonPosition = new Vector2(sp.Sprite.Width - 20, sp.Sprite.Height / 2);
+                sp.Rotation = (float)GetAngle(gameObject.Transform.Position, target.Transform.Position);
+            }
+        }
+        private double GetAngle(Vector2 a, Vector2 b)
+        {
+
+            return Math.Atan2(b.Y - a.Y, b.X - a.X);
+        }
         public void LoadContent(ContentManager content)
         {
 
         }
-
+        /// <summary>
+        ///  runs various checks in order to find a shoot targets
+        /// </summary>
         public void Update()
         {
-            spin();
-            string varstring = "hello";
-            TowerAttack();
+            if (target == null)
+            {
+                FindTarget();
+            }
+            else
+            {
+                checkTarget();
+            }
+            if (coolDown > 0)
+            {
+                coolDown -= GameWorld._Instance.deltaTime;
+            }
+            else
+            {
+                LookAttarget();
+                TowerAttack();
+            }
         }
         public void spin()
         {
@@ -82,13 +125,15 @@ namespace RpgTowerDefense
         public void Upgrade(int param)
         {
             //psudo kode
-            if (param ==1)
+            if (param == 1)
             {
                 attackPower += 1;
-            }else if (param == 2)
+            }
+            else if (param == 2)
             {
                 attackSpeed += 1;
-            }else if (param == 3)
+            }
+            else if (param == 3)
             {
                 attackRadius += 1;
             }

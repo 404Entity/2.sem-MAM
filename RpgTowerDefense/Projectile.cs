@@ -7,47 +7,48 @@ using System.Threading.Tasks;
 
 namespace RpgTowerDefense
 {
-    class Projectile : Component, IUpdate,ICollideEnter,ICollideStay,ICollideExit
+    class Projectile : Component, IUpdate, ICollideEnter
     {
-       private Vector2 directionVector;
-       private int damage;
-       private int health;
-
-       public Projectile(GameObject gameObject,int damage,Vector2 directionVector): base(gameObject)
+        private Vector2 directionVector;
+        private int damage;
+        private int decay;
+        private int lifetime;
+        public Projectile(GameObject gameObject, int damage, Vector2 directionVector) : base(gameObject)
         {
-            this.damage = damage;
+            this.Damage = damage;
             this.directionVector = directionVector;
+            lifetime = 200;
+            decay = 0;
         }
-        public int Health { get => health; set => health = value; }
+
+        public int Damage { get => damage; set => damage = value; }
 
         public void OnCollisionEnter(Collider other)
         {
-            if ( (Enemy)other.GameObject.GetComponent("Enemy") is null)
+            if ((Enemy)other.GameObject.GetComponent("Enemy") != null)
             {
-                throw new NotImplementedException();
+                GameWorld._Instance.RemoveGameObjects.Add(other.GameObject);
+                GameWorld._Instance.RemoveGameObjects.Add(gameObject);
             }
             else
             {
-                Enemy target = (Enemy)other.GameObject.GetComponent("Enemy");
-                target.Health -= damage;
+                Collider collider = (Collider)gameObject.GetComponent("Collider");
+
+
             }
-         
-        }
 
-        public void OnCollisionExit(Collider other)
-        {
-            //removes the bullet on collinsion+
-            GameWorld._Instance.RemoveGameObjects.Add(gameObject);
-        }
-
-        public void OnCollisionStay(Collider other)
-        {
-            throw new NotImplementedException();
         }
 
         public void Update()
         {
-            gameObject.Transform.Translate(directionVector * 2);
+            if (decay > lifetime)
+            {
+                GameWorld._Instance.RemoveGameObjects.Add(gameObject);
+                Collider collider = gameObject.GetComponent("Collider") as Collider; 
+                GameWorld._Instance.Colliders.Remove(collider);
+            }
+            gameObject.Transform.Translate(directionVector * 5);
+            decay++;
         }
     }
 }

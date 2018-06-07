@@ -44,11 +44,6 @@ namespace RpgTowerDefense
         }
         public void Update()
         {
-            //position.Y += gravity;
-            if (velocity.Y > 12)
-            {
-                velocity.Y = 10;
-            }
             position += velocity;
         }
     }
