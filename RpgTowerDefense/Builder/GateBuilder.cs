@@ -37,6 +37,7 @@ namespace RpgTowerDefense
         }
 
         public void BuildGameObject(Vector2 position, int id, Vector2 direction)
+        public void BuildGameObject(Vector2 position, int id, Vector2 direction, float damage, AttackType attackType)
         {
             throw new NotImplementedException();
         }

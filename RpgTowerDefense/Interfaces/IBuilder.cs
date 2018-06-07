@@ -13,6 +13,6 @@ namespace RpgTowerDefense
         void BuildGameObject(Vector2 position);
         void BuildGameObject(Vector2 position, GameObject player);
         void BuildGameObject(Vector2 position, int id);
-        void BuildGameObject(Vector2 position, int id, Vector2 direction);
+        void BuildGameObject(Vector2 position, int id, Vector2 direction, float damage, AttackType attackType);
     }
 }

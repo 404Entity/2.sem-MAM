@@ -10,18 +10,20 @@ namespace RpgTowerDefense
     class Projectile : Component, IUpdate, ICollideEnter
     {
         private Vector2 directionVector;
-        private int damage;
+        private float damage;
         private int decay;
         private int lifetime;
-        public Projectile(GameObject gameObject, int damage, Vector2 directionVector) : base(gameObject)
+        private AttackType attackType;
+        public Projectile(GameObject gameObject, float damage,AttackType attackType, Vector2 directionVector) : base(gameObject)
         {
             this.Damage = damage;
             this.directionVector = directionVector;
+            this.attackType = attackType;
             lifetime = 200;
             decay = 0;
         }
 
-        public int Damage { get => damage; set => damage = value; }
+        public float Damage { get => damage; set => damage = value; }
 
         public void OnCollisionEnter(Collider other)
         {

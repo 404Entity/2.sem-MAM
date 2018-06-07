@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RpgTowerDefense
 {
-    class PlayerGold
+    class PlayerGold : ILoadable,IDrawable,IUpdate
     {
 
         SpriteFont spriteFont;

@@ -18,7 +18,6 @@ namespace RpgTowerDefense
         //Bestemmer om menu er på eller spillet kører
         bool gameState = false;
 
-
         //testing mobspawn
         float spawntime;
         float interval = 1.5f;
@@ -29,6 +28,8 @@ namespace RpgTowerDefense
         MineMonsterHandler mine;
         
         private Camera camera;
+        private GameObject selectedGameObject;
+        private MouseState previouseMouseState;
         private StartMenu startMenu;
 
 
@@ -36,6 +37,9 @@ namespace RpgTowerDefense
         GameObject player;
         public Texture2D currentMap;
         public Rectangle currentRect;
+
+        Texture2D UITex;
+        Rectangle UIRect;
 
         //list of locations on the grid where towers can be built
         public Vector2[] buildSpotLocation = { new Vector2(3, 12), new Vector2(6, 14), new Vector2(7, 3), new Vector2(12, 12), new Vector2(14, 3), new Vector2(16, 6), new Vector2(21, 12), new Vector2(24, 6), new Vector2(28, 1) };
@@ -105,6 +109,9 @@ namespace RpgTowerDefense
         public int GateHealth { get => gateHealth; set => gateHealth = value; }
         public bool GameState { get => gameState; set => gameState = value; }
 
+        internal GameObject SelectedGameObject { get => selectedGameObject; set => selectedGameObject = value; }
+        public MouseState PreviouseMouseState { get => previouseMouseState; set => previouseMouseState = value; }
+
         public float deltaTime;
 
         public GameWorld()
@@ -112,6 +119,8 @@ namespace RpgTowerDefense
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
+
+
 
 
         /// <summary>
@@ -179,23 +188,26 @@ namespace RpgTowerDefense
         /// </summary>
         protected override void LoadContent()
         {
+            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            
-            
-                // Create a new SpriteBatch, which can be used to draw textures.
-                startMenu.LoadContent(Content);
-                foreach (GameObject go in GameObjects)
-                {
-                    go.LoadContent(Content);
-                }
-                // TODO: use this.Content to load your game content here
-                ui.LoadContent(Content);
-                backGround.LoadContent(Content);
-                //yyMap = Content.Load<Texture2D>("BackGround");
-                worldBuilder.yyMap = Content.Load<Texture2D>("BackGroundWithGrid");
-                worldBuilder.mineMap = Content.Load<Texture2D>("Mine");
-                worldBuilder.AssignWorld(0);
-            
+            foreach (GameObject go in GameObjects)
+            {
+                go.LoadContent(Content);
+            }
+
+            // TODO: use this.Content to load your game content here
+            ui.LoadContent(Content);
+            backGround.LoadContent(Content);
+            //yyMap = Content.Load<Texture2D>("BackGround");
+            worldBuilder.yyMap = Content.Load<Texture2D>("BackGroundWithGrid");
+            worldBuilder.mineMap = Content.Load<Texture2D>("Mine");
+            worldBuilder.AssignWorld(0);
+
+            UITex = Content.Load<Texture2D>("UI_01");
+            UIRect = graphics.GraphicsDevice.Viewport.Bounds;
+
+
+
         }
 
         /// <summary>
@@ -205,7 +217,7 @@ namespace RpgTowerDefense
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
-           
+
         }
 
         /// <summary>
@@ -215,6 +227,60 @@ namespace RpgTowerDefense
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            MouseState mouseState = Mouse.GetState();
+            var mouseRectangle = new Rectangle(mouseState.X, mouseState.Y, 50, 50);
+            deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
+
+            //Change Camera position to screen 1
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D1))
+            {
+                
+                camera.Screenvalue = 1;
+            }
+            // Change Camera position to screen 2
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D2))
+            {
+                Mouse.SetPosition(screenWidth, 0);
+                camera.Screenvalue = 2;
+            }
+            // Change Camera position to screen 3
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D3))
+            {
+                camera.Screenvalue = 3;
+            }
+            // Set the selected object to the object clicked on
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed && previouseMouseState.LeftButton == ButtonState.Released)
+            {
+                foreach (GameObject gameObject in GameObjects)
+                {
+                    //SpriteRenderer sr = gameObject.GetComponent("SpriteRenderer") as SpriteRenderer;
+                    if (mouseRectangle.Contains(gameObject.Transform.Position))
+                    {
+                        selectedGameObject = gameObject;
+                        break;
+                    }
+                    //if (sr.Rectangle.Intersects(mouseRectangle))
+                    //{
+                   
+                    //}
+                    //else
+                    //{
+                    //    selectedGameObject = null;
+                    //}
+
+                }
+            }
+            //test mob spawn
+            spawntime += deltaTime;
+            if(spawntime >= interval)
+            {
+                spawntime = 0;
+                SpawnMob();
+                //Giver spilleren 10+ guld hvert enemy spawn
+                PlayerGold += GoldGainEachRound;
+            }
             if (GameState == true)
             {
                 startMenu.Update();
@@ -287,29 +353,28 @@ namespace RpgTowerDefense
                     SpawnMobMine();
                 }
 
-
-                // TODO: Add your update logic here
-                foreach (GameObject go in addGameObjects)
-                {
-                    GameObjects.Add(go);
-                }
-                foreach (GameObject go in removeGameObjects)
-                {
-                    gameObjects.Remove(go);
-                    mobList.Remove(go);
-                }
-                CleanTemptList();
-                foreach (GameObject go in GameObjects)
-                {
-                    go.Update(gameTime);
-                }
-                ui.Update();
-                camera.Follow(new Vector2(0, 0));
-                base.Update(gameTime);
+           
+            // TODO: Add your update logic here
+            foreach (GameObject go in addGameObjects)
+            {
+                GameObjects.Add(go);
             }
+            foreach (GameObject go in removeGameObjects)
+            {
+                gameObjects.Remove(go);
+                mobList.Remove(go);
+            }
+            CleanTemptList();
+            foreach (GameObject go in GameObjects)
+            {
+                go.Update(gameTime);
+            }
+
+            ui.Update();
+            camera.Follow(new Vector2(0,0));
+            previouseMouseState = mouseState;
+            base.Update(gameTime);
         }
-
-
         private void CleanTemptList()
         {
             addGameObjects.Clear();
@@ -342,16 +407,21 @@ namespace RpgTowerDefense
                 spriteBatch.Draw(worldBuilder.yyMap, worldBuilder.map1Rect, Color.White);
                 spriteBatch.Draw(worldBuilder.mineMap, worldBuilder.map2Rect, Color.White);
 
-                foreach (GameObject go in gameObjects)
-                {
-                    go.Draw(spriteBatch);
-                }
-
-                
-                ui.Draw(spriteBatch);
-                spriteBatch.End();
+            foreach (GameObject go in gameObjects)
+            {
+                go.Draw(spriteBatch);
             }
-            
+
+
+            spriteBatch.End();
+
+            //draw UI
+
+            spriteBatch.Begin();
+            spriteBatch.Draw(UITex, UIRect, Color.White);
+            ui.Draw(spriteBatch);
+            spriteBatch.End();
+
             base.Draw(gameTime);
         }
 

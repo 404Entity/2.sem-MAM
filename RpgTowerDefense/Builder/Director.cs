@@ -35,9 +35,9 @@ namespace RpgTowerDefense
             builder.BuildGameObject(position, id);
             return builder.GetResult();
         }
-        public GameObject Construct(Vector2 position, int id, Vector2 direction)
+        public GameObject Construct(Vector2 position, int id, Vector2 direction, float damage, AttackType attackType)
         {
-            builder.BuildGameObject(position, id, direction);
+            builder.BuildGameObject(position, id, direction,damage,attackType);
             return builder.GetResult();
         }
 
