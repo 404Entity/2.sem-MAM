@@ -353,36 +353,36 @@ namespace RpgTowerDefense
                     SpawnMobMine();
                 }
 
-           
-            // TODO: Add your update logic here
-            foreach (GameObject go in addGameObjects)
-            {
-                GameObjects.Add(go);
-            }
-            foreach (GameObject go in removeGameObjects)
-            {
-                gameObjects.Remove(go);
-                mobList.Remove(go);
-            }
-            CleanTemptList();
-            foreach (GameObject go in GameObjects)
-            {
-                go.Update(gameTime);
-            }
 
-            ui.Update();
-            camera.Follow(new Vector2(0,0));
-            previouseMouseState = mouseState;
-            base.Update(gameTime);
+                // TODO: Add your update logic here
+                foreach (GameObject go in addGameObjects)
+                {
+                    GameObjects.Add(go);
+                }
+                foreach (GameObject go in removeGameObjects)
+                {
+                    gameObjects.Remove(go);
+                    mobList.Remove(go);
+                }
+                CleanTemptList();
+                foreach (GameObject go in GameObjects)
+                {
+                    go.Update(gameTime);
+                }
+
+                ui.Update();
+                camera.Follow(new Vector2(0, 0));
+                previouseMouseState = mouseState;
+                base.Update(gameTime);
+            }
         }
+
         private void CleanTemptList()
         {
             addGameObjects.Clear();
             removeGameObjects.Clear();
         }
-
-
-
+        
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -407,22 +407,23 @@ namespace RpgTowerDefense
                 spriteBatch.Draw(worldBuilder.yyMap, worldBuilder.map1Rect, Color.White);
                 spriteBatch.Draw(worldBuilder.mineMap, worldBuilder.map2Rect, Color.White);
 
-            foreach (GameObject go in gameObjects)
-            {
-                go.Draw(spriteBatch);
+                foreach (GameObject go in gameObjects)
+                {
+                    go.Draw(spriteBatch);
+                }
+
+
+                spriteBatch.End();
+
+                //draw UI
+
+                spriteBatch.Begin();
+                spriteBatch.Draw(UITex, UIRect, Color.White);
+                ui.Draw(spriteBatch);
+                spriteBatch.End();
+
+                base.Draw(gameTime);
             }
-
-
-            spriteBatch.End();
-
-            //draw UI
-
-            spriteBatch.Begin();
-            spriteBatch.Draw(UITex, UIRect, Color.White);
-            ui.Draw(spriteBatch);
-            spriteBatch.End();
-
-            base.Draw(gameTime);
         }
 
         //spawns enemy and adds to both gameobjects and moblist
