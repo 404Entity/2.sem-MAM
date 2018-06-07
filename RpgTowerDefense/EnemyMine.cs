@@ -106,6 +106,8 @@ namespace RpgTowerDefense
             if (Health <= 0)
             {
                 GameWorld._Instance.RemoveGameObjects.Add(gameObject);
+                Collider collider = gameObject.GetComponent("Collider") as Collider;
+                GameWorld._Instance.Colliders.Remove(collider);
                 //Giver spilleren points når en enemy dør
                 //GameWorld._Instance.HighScore += pointGain;
                 //Giver spilleren guld hver gang en enemy dør
@@ -140,7 +142,7 @@ namespace RpgTowerDefense
             if ((Projectile)other.GameObject.GetComponent("Projectile") != null)
             {
                 Projectile dmgObject = (Projectile)other.GameObject.GetComponent("Projectile");
-                //this.Health -= dmgObject.Damage;
+                this.Health -= (int)dmgObject.Damage;
                 GameWorld._Instance.RemoveGameObjects.Add(other.GameObject);
                 GameWorld._Instance.Colliders.Remove(other);
             }

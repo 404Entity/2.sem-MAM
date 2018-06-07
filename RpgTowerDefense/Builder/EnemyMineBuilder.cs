@@ -21,7 +21,7 @@ namespace RpgTowerDefense
             enemyMine.AddComponent(new Animator(enemyMine));
             enemyMine.AddComponent(new EnemyMine(enemyMine, player));
             enemyMine.LoadContent(GameWorld._Instance.Content);
-            enemyMine.AddComponent(new Collider(enemyMine, false, 0.5f));
+            enemyMine.AddComponent(new Collider(enemyMine, true, 0.5f));
             buildobject = enemyMine;
 
         }
