@@ -43,9 +43,11 @@ namespace RpgTowerDefense
             //Sets pathing destination as the first saved coordinate in GameWorld
             moveTarget = GameWorld._Instance.walkCoordinates[0];
             //makes enemy spawn on edge of screen on same y coordinate as first pathing destination
-            gameObject.Transform.Position = new Vector2 (-TileSize,moveTarget.Y);
-
             TileSize = (int)worldBuilder.xWidth;
+            if (gameObject.Transform.Position.X == 0)
+            {
+                gameObject.Transform.Position = new Vector2(-TileSize, moveTarget.Y);
+            }
             this.Health = health;
             this.dmg = dmg;
             this.threadSleep = threadSleep;
@@ -127,7 +129,7 @@ namespace RpgTowerDefense
             if ((Projectile)other.GameObject.GetComponent("Projectile") != null)
             {
                 Projectile dmgObject = (Projectile)other.GameObject.GetComponent("Projectile");
-                this.Health -= dmgObject.Damage;
+                this.Health -= (int)dmgObject.Damage;
                 GameWorld._Instance.RemoveGameObjects.Add(other.GameObject);
                 GameWorld._Instance.Colliders.Remove(other);
             }

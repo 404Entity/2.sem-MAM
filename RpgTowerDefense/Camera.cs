@@ -19,8 +19,13 @@ namespace RpgTowerDefense
         private int screenvalue;
         public Matrix Transform { get { return transform; } private set { transform = value; } }
 
+
+        public void CameraLock()
+        {
+        }
         public Matrix Offset { get => offset; set => offset = value; }
         public int Screenvalue { get => screenvalue; set => screenvalue = value; }
+       
 
         public void Follow(Vector2 target)
         {
@@ -50,7 +55,7 @@ namespace RpgTowerDefense
             Transform = position * offset;
 
         }
-       public void GetMousePosition()
+        public void GetMousePosition()
         {
            //Mouse.WindowHandle = this.transform.
         }

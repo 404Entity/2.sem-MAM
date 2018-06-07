@@ -23,19 +23,19 @@ namespace RpgTowerDefense
             //tower.AddComponent(new Animator(tower));
             if (id == 1)
             {
-                tower.AddComponent(new Tower(tower, 1, 4, AttackType.Light, 1000));
+                tower.AddComponent(new Towerobj(tower, 1, 4, AttackType.Light, 200));
             }
             else if (id == 2)
             {
-                tower.AddComponent(new Tower(tower, 2, 2, AttackType.heavy, 100));
+                tower.AddComponent(new Towerobj(tower, 2, 2, AttackType.heavy, 200));
             }
             else if (id == 3)
             {
-                tower.AddComponent(new Tower(tower, 3, 5, AttackType.Tesla, 100));
+                tower.AddComponent(new Towerobj(tower, 3, 5, AttackType.Tesla, 100));
             }
             else
             {
-                tower.AddComponent(new Tower(tower, 1, 1, AttackType.Light, 1));
+                tower.AddComponent(new Towerobj(tower, 1, 1, AttackType.Light, 1));
             }
             tower.LoadContent(GameWorld._Instance.Content);
 
@@ -46,7 +46,12 @@ namespace RpgTowerDefense
             sp.Origin = new Vector2(95, sp.Sprite.Height / 2);
         }
 
-        public void BuildGameObject(Vector2 position, int id, Vector2 direction)
+        public void BuildGameObject(Vector2 position, int id, Vector2 direction, float damage, AttackType attackType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void BuildGameObject(Vector2 position, GameObject player)
         {
             throw new NotImplementedException();
         }

@@ -171,7 +171,7 @@ namespace RpgTowerDefense
             Vector2 shootdirection = cursorPosition - gameObject.Transform.Position;
             Vector2 shootdirectonnormalized = Vector2.Normalize(shootdirection);
             Director director = new Director(new BulletBuilder());
-            director.Construct(gameObject.Transform.Position, 1, shootdirectonnormalized);
+            director.Construct(gameObject.Transform.Position, 1, shootdirectonnormalized, 3,AttackType.Light);
             GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
         }
 
