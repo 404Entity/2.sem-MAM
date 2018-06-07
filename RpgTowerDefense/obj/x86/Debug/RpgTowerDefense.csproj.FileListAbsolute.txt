@@ -1,2 +1,0 @@
-C:\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefense.csprojResolveAssemblyReference.cache
-C:\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefense.csproj.CoreCompileInputs.cache
