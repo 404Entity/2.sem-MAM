@@ -111,6 +111,8 @@
     <Content Include="Content\Mine.png" />
     <Content Include="Content\Player.jpg" />
     <Content Include="Content\tower_01.png" />
+    <Content Include="Content\tower_01spriteSheet.png" />
+    <Content Include="Content\UI_01.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

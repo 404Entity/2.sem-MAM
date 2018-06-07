@@ -13,10 +13,10 @@ namespace RpgTowerDefense
         private string text;
         private Vector2 position;
         private SpriteFont font;
-        private Color color;
+        private Color penColor;
 
         public Vector2 Position { get => position; set => position = value; }
-        public Color Color { get => color; set => color = value; }
+        public Color PenColor { get => penColor; set => penColor = value; }
         public string Text { get => text; set => text = value; }
 
         public EventHandler updateMe;
@@ -25,7 +25,7 @@ namespace RpgTowerDefense
         {
             this.font = font;
             this.Text = text;
-            
+            penColor = Color.White;
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace RpgTowerDefense
         {
             if (!string.IsNullOrEmpty(Text))
             {
-                spriteBatch.DrawString(font, Text, Position, Color);
+                spriteBatch.DrawString(font, Text, Position, PenColor);
             }
         }
 

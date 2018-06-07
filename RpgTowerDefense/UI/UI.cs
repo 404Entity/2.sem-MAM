@@ -29,6 +29,8 @@ namespace RpgTowerDefense
         UIButton Upgrade_02Button;
         UIButton Upgrade_03Button;
 
+        UILabel GoldLabel;
+
         GameObject previousGameObject;
 
         private List<UIComponent> uielements;
@@ -65,23 +67,26 @@ namespace RpgTowerDefense
 
             tower_01Button = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
             {
-                Position = new Vector2(1240, 780),
+                Position = new Vector2(1374, 824),
                 Text = "Light Tower",
-                Scale = 0.5f
+                Scale = 0.3f,
+                TextScale = 0.8F
             };
 
             tower_02Button = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
             {
-                Position = new Vector2(1360, 780),
+                Position = new Vector2(1449, 824),
                 Text = "Heavy Tower",
-                Scale = 0.5f
+                Scale = 0.3f,
+                TextScale = 0.8F
             };
 
             tower_03Button = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
             {
-                Position = new Vector2(1480, 780),
+                Position = new Vector2(1524, 824),
                 Text = "Tesla Tower",
-                Scale = 0.5f
+                Scale = 0.3f,
+                TextScale = 0.8f
             };
 
             tower_01ProxyButton = new UIButton(content.Load<Texture2D>("tower_01"), content.Load<SpriteFont>("Fonts/UiFont"), true)
@@ -104,31 +109,37 @@ namespace RpgTowerDefense
 
             Upgrade_01Button = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
             {
-                Position = new Vector2(1240, 780),
+                Position = new Vector2(1374, 824),
                 Text = "AttackDamage",
-                Scale = 0.5f,
+                Scale = 0.3f,
                 TextScale = 0.8f
             };
 
             Upgrade_02Button = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
             {
-                Position = new Vector2(1360, 780),
+                Position = new Vector2(1449, 824),
                 Text = "AttackRange",
-                Scale = 0.5f,
+                Scale = 0.3f,
                 TextScale = 0.8f
             };
 
             Upgrade_03Button = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
             {
-                Position = new Vector2(1480, 780),
+                Position = new Vector2(1524, 824),
                 Text = "AttackSpeed",
-                Scale = 0.5f,
+                Scale = 0.3f,
                 TextScale = 0.8f
             };
 
+            GoldLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), "Ohla")
+            {
+                Position = new Vector2(1280, 18),
+                PenColor = Color.Gold
+            };
 
             UIElements = new List<UIComponent>()
             {
+                GoldLabel,
                 exitButton,
                 tower_01Button,
                 tower_02Button,
@@ -155,7 +166,7 @@ namespace RpgTowerDefense
             Upgrade_03Button.Click += UpgradeButton03_Click;
 
             exitButton.Click += ExitButton_Click;
-
+            GoldLabel.updateMe += UpdateGoldAmount;
 
 
         }
@@ -262,7 +273,7 @@ namespace RpgTowerDefense
             }
         }
         #endregion
-        #region Buttons
+        #region Events
 
         /// <summary>
         ///  Add Proxy Button of tower_01 to active ui-elememts
@@ -374,6 +385,11 @@ namespace RpgTowerDefense
                 tower.AttackSpeed++;
             }
            
+        }
+
+        private void UpdateGoldAmount(object sender, System.EventArgs e)
+        {
+            GoldLabel.Text = GameWorld._Instance.PlayerGold.ToString();
         }
 
 

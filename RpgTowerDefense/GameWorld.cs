@@ -29,6 +29,9 @@ namespace RpgTowerDefense
         public Texture2D currentMap;
         public Rectangle currentRect;
 
+        Texture2D UITex;
+        Rectangle UIRect;
+
         //list of locations on the grid where towers can be built
         public Vector2[] buildSpotLocation = { new Vector2(3, 12), new Vector2(6, 14), new Vector2(7, 3), new Vector2(12, 12), new Vector2(14, 3), new Vector2(16, 6), new Vector2(21, 12), new Vector2(24, 6), new Vector2(28, 1) };
         public bool[] buildSpotAvailable;
@@ -187,6 +190,8 @@ namespace RpgTowerDefense
             worldBuilder.mineMap = Content.Load<Texture2D>("Mine");
             worldBuilder.AssignWorld(0);
 
+            UITex = Content.Load<Texture2D>("UI_01");
+            UIRect = graphics.GraphicsDevice.Viewport.Bounds;
 
 
 
@@ -316,9 +321,14 @@ namespace RpgTowerDefense
 
 
             spriteBatch.End();
+
+            //draw UI
+
             spriteBatch.Begin();
+            spriteBatch.Draw(UITex, UIRect, Color.White);
             ui.Draw(spriteBatch);
             spriteBatch.End();
+
             base.Draw(gameTime);
         }
 
