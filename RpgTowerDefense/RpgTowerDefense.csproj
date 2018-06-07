@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Animation.cs" />
     <Compile Include="Builder\BulletBuilder.cs" />
+    <Compile Include="Builder\EnemyMineBuilder.cs" />
     <Compile Include="Component\BackGround.cs" />
     <Compile Include="Builder\Director.cs" />
     <Compile Include="Builder\EnemyBuilder.cs" />
@@ -53,7 +54,9 @@
     <Compile Include="Component\Component.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Builder\GateBuilder.cs" />
+    <Compile Include="EnemyMine.cs" />
     <Compile Include="GameWorldBuilder.cs" />
+    <Compile Include="MineMonsterHandler.cs" />
     <Compile Include="UI\HighScore.cs" />
     <Compile Include="UI\GateHealth.cs" />
     <Compile Include="MainGate.cs" />

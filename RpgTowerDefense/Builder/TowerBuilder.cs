@@ -51,6 +51,11 @@ namespace RpgTowerDefense
             throw new NotImplementedException();
         }
 
+        public void BuildGameObject(Vector2 position, GameObject player)
+        {
+            throw new NotImplementedException();
+        }
+
         public GameObject GetResult()
         {
             return buildObject;

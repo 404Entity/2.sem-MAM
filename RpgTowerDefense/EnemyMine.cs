@@ -9,10 +9,12 @@ using System.Threading;
 
 namespace RpgTowerDefense
 {
-    class Enemy : Component, ILoadable, IAnimateable, IUpdate, ICollideEnter,ICollideStay,ICollideExit
+    class EnemyMine : Component, ILoadable, IAnimateable, IUpdate, ICollideEnter, ICollideStay, ICollideExit
     {
         #region Fields
         GameWorldBuilder worldBuilder;
+
+        Player playerScript;
 
         private Animator animator;
         private IStrategy strategy;
@@ -21,38 +23,40 @@ namespace RpgTowerDefense
         //PointGain = amount of points gained for killing an enemy
         //GoldGain = Amount of gold gained for killing an enemy
         //threadSleep = Speed of enemy
-        bool threadStarted = false;
-        int dmg, pointGain, goldGainOnKill, threadSleep;
+        bool mineThreadStarted = false;
+        int dmg, pointGain, goldGainOnKill, health, threadSleep = 20;
+        float attackCooldown, attackSpeed, attackRange, speed, lookRange;
+        GameObject player;
+        Vector2 waitPos;
 
         //size of tiles, used to scale size of enemy
         int TileSize;
         //used to find and save destinations for pathing
-        int walkIndex;
+
         Vector2 moveTarget;
 
         public int Health { get; internal set; }
         public int Dmg { get => dmg; set => dmg = value; }
         #endregion
         #region Constructor
-        public Enemy(GameObject gameobject, int dmg, int threadSleep, int health, int pointGain, int goldGainOnKill) : base(gameobject)
+        public EnemyMine(GameObject gameobject, GameObject player) : base(gameobject)
         {
             worldBuilder = GameWorld._Instance.worldBuilder;
+            this.player = player;
 
-            animator = (gameobject.GetComponent("Animator")as Animator);
+            animator = (gameobject.GetComponent("Animator") as Animator);
 
-            //Sets pathing destination as the first saved coordinate in GameWorld
-            moveTarget = GameWorld._Instance.walkCoordinates[0];
-            //makes enemy spawn on edge of screen on same y coordinate as first pathing destination
+            waitPos = new Vector2(3950, (GameWorld._Instance.GraphicsDevice.Viewport.Height / 2) - (animator.SpriteRenderer.Rectangle.Height / 2));
+            moveTarget = waitPos;
+            attackCooldown = 1.5f;
+
             TileSize = (int)worldBuilder.xWidth;
-            if (gameObject.Transform.Position.X == 0)
-            {
-                gameObject.Transform.Position = new Vector2(-TileSize, moveTarget.Y);
-            }
+            dmg = 1;
+            pointGain = 5;
+            goldGainOnKill = 5;
+
+            health = 3;
             this.Health = health;
-            this.dmg = dmg;
-            this.threadSleep = threadSleep;
-            this.pointGain = pointGain;
-            this.goldGainOnKill = goldGainOnKill;
         }
         #endregion
         #region Methods
@@ -79,44 +83,52 @@ namespace RpgTowerDefense
 
         public void OnAnimationDone(string animationName)
         {
-           
+
         }
 
         public void Update()
         {
+            if (player == null)
+            {
+
+            }
+
+            if (Vector2.Distance(player.Transform.Position, gameObject.Transform.Position) <= lookRange && player.Transform.Position.X >= 3200)
+            {
+                 moveTarget = player.Transform.Position;
+            }
+            else
+            {
+                 moveTarget = waitPos;
+            }
+            moveTarget = waitPos;
+
             if (Health <= 0)
             {
                 GameWorld._Instance.RemoveGameObjects.Add(gameObject);
                 //Giver spilleren points når en enemy dør
-                GameWorld._Instance.HighScore += pointGain;
+                //GameWorld._Instance.HighScore += pointGain;
                 //Giver spilleren guld hver gang en enemy dør
-                GameWorld._Instance.PlayerGold += goldGainOnKill;
+                //GameWorld._Instance.PlayerGold += goldGainOnKill;
             }
-            if (strategy is Walk)
+            
+            if (Vector2.Distance(player.Transform.Position, gameObject.Transform.Position) <= attackRange && attackCooldown <= 0)
             {
-
-            }
-            if (strategy is Idle)
-            {
-
-            }
-            if (strategy is Attack)
-            {
-
-            }
-
-            if(gameObject.Transform.Position == moveTarget)
-            {
-                walkIndex++;
-                moveTarget = GameWorld._Instance.walkCoordinates[walkIndex];
+                Attack();
+                attackCooldown = attackSpeed;
             }
             
             //Enemy Movement Thread
-            if (threadStarted == false)
+            if (mineThreadStarted == false)
             {
                 ThreadPool.QueueUserWorkItem(EnemyMovement);
-                threadStarted = true;
+                mineThreadStarted = true;
             }
+        }
+
+        void Attack()
+        {
+            GameWorld._Instance.playerHealth--;
         }
 
         #region Collision
@@ -129,7 +141,7 @@ namespace RpgTowerDefense
             if ((Projectile)other.GameObject.GetComponent("Projectile") != null)
             {
                 Projectile dmgObject = (Projectile)other.GameObject.GetComponent("Projectile");
-                this.Health -= dmgObject.Damage;
+                //this.Health -= dmgObject.Damage;
                 GameWorld._Instance.RemoveGameObjects.Add(other.GameObject);
                 GameWorld._Instance.Colliders.Remove(other);
             }
@@ -140,7 +152,7 @@ namespace RpgTowerDefense
         /// <param name="other"></param>
         public void OnCollisionExit(Collider other)
         {
-            
+
         }
         /// <summary>
         /// not implementet
@@ -169,7 +181,7 @@ namespace RpgTowerDefense
                 gameObject.Transform.Translate(moveVector);
                 Thread.Sleep(threadSleep);
             }
-            
+
         }
         #endregion
     }

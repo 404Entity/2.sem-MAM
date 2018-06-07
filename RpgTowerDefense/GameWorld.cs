@@ -12,15 +12,24 @@ namespace RpgTowerDefense
     {
         Director dic;
         Director dic2;
+        Director dic4;
 
         int playerGold, GoldGainEachRound = 10, highScore, gateHealth = 100;
+
 
         //testing mobspawn
         float spawntime;
         float interval = 1.5f;
 
+        float mineSpawntime;
+        float mineInterval = 15;
+        
+        MineMonsterHandler mine;
+        
         private Camera camera;
 
+        GameObject player;
+        public int playerHealth = 3;
 
         public GameWorldBuilder worldBuilder;
         public Texture2D currentMap;
@@ -111,6 +120,8 @@ namespace RpgTowerDefense
         protected override void Initialize()
         {
             IsMouseVisible = true;
+
+            mine = new MineMonsterHandler();
             worldBuilder = new GameWorldBuilder();
 
 
@@ -120,8 +131,8 @@ namespace RpgTowerDefense
 
             graphics.PreferredBackBufferWidth = 1600;
             graphics.PreferredBackBufferHeight = 900;
-            graphics.ApplyChanges();
             graphics.GraphicsDevice.Viewport = new Viewport(0, 0, 1600, 900);
+            graphics.ApplyChanges();
 
             ScreenWidth = graphics.PreferredBackBufferWidth;
             ScreenHeigth = graphics.PreferredBackBufferHeight;
@@ -129,7 +140,7 @@ namespace RpgTowerDefense
             worldBuilder.yHeight = graphics.GraphicsDevice.Viewport.Height / worldBuilder.yTiles;
             worldBuilder.xWidth = graphics.GraphicsDevice.Viewport.Width / worldBuilder.xTiles;
             worldBuilder.map1Rect = new Rectangle (0, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
-            worldBuilder.map2Rect = new Rectangle(1600, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
+            worldBuilder.map2Rect = new Rectangle(3200, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
 
 
             // TODO: Add your initialization logic here
@@ -139,9 +150,10 @@ namespace RpgTowerDefense
             colliders = new List<Collider>();
             ui = new UI();
             dic = new Director(new PlayerBuilder());
-            GameObject player = dic.Construct(new Vector2(1, 1));
+            player = dic.Construct(new Vector2(1, 1));
             gameObjects.Add(player);
             dic2 = new Director(new EnemyBuilder());
+            dic4 = new Director(new EnemyMineBuilder());
             
 
             worldBuilder.SetupData();
@@ -213,6 +225,7 @@ namespace RpgTowerDefense
             {
                 camera.Screenvalue = 3;
             }
+            
             //test mob spawn
             spawntime += deltaTime;
             if(spawntime >= interval)
@@ -222,8 +235,20 @@ namespace RpgTowerDefense
                 //Giver spilleren 10+ guld hvert enemy spawn
                 PlayerGold += GoldGainEachRound;
             }
+            mineSpawntime += deltaTime;
+            if(mineSpawntime >= mineInterval)
+            {
+                mineSpawntime = 0;
+                mine.SpawnMob(3);
+            }
+            mineSpawntime += deltaTime;
+            if (mineSpawntime >= mineInterval)
+            {
+                mineSpawntime = 0;
+                SpawnMobMine();
+            }
 
-           
+
             // TODO: Add your update logic here
             foreach (GameObject go in addGameObjects)
             {
@@ -285,6 +310,14 @@ namespace RpgTowerDefense
             GameObject mob = dic2.Builder.GetResult();
             UpdateMobList(mob, true);
             gameObjects.Add(mob);
+        }
+
+        public void SpawnMobMine()
+        {
+            GameObject mob = dic4.Construct(new Vector2(graphics.GraphicsDevice.Viewport.Width*3, 425), player);
+            UpdateMobList(mob, true);
+            gameObjects.Add(mob);
+
         }
     }
 }
