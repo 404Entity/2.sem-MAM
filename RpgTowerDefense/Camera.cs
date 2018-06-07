@@ -22,15 +22,18 @@ namespace RpgTowerDefense
         public Matrix Offset { get => offset; set => offset = value; }
         public int Screenvalue { get => screenvalue; set => screenvalue = value; }
 
-        public void Follow(Vector2 target)
+
+        /// <summary>
+        /// Calculate Transform using target parameters.
+        /// </summary>
+        /// <param name="targetPosition"></param>
+        public void Follow(Vector2 targetPosition)
         {
-            ///<summary>
-            ///Calculate Transform using target parameters.
-            /// </summary>
+
             
             var position = Matrix.CreateTranslation(
-                -target.X,
-                -target.Y,
+                -targetPosition.X,
+                -targetPosition.Y,
                 0);
 
             var offset = Matrix.CreateTranslation(0, 0, 0);
