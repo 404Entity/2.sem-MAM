@@ -9,17 +9,26 @@ namespace RpgTowerDefense
 {
     class EnemyMineBuilder : IBuilder
     {
+        GameObject player;
+        GameObject enemyMine;
+
         private GameObject buildobject;
-        public void BuildGameObject(Vector2 position)
+        public void BuildGameObject(Vector2 position, GameObject player)
         {
-            GameObject enemyMine = new GameObject();
+            enemyMine = new GameObject();
             enemyMine.AddComponent(new Transform(enemyMine, position));
             enemyMine.AddComponent(new SpriteRenderer(enemyMine, "Enemy", 1, 0.5f));
             enemyMine.AddComponent(new Animator(enemyMine));
-            enemyMine.AddComponent(new EnemyMine(enemyMine));
+            enemyMine.AddComponent(new EnemyMine(enemyMine, player));
             enemyMine.LoadContent(GameWorld._Instance.Content);
             enemyMine.AddComponent(new Collider(enemyMine, false, 0.5f));
             buildobject = enemyMine;
+
+        }
+
+        public void BuildGameObject(Vector2 position)
+        {
+            throw new NotImplementedException();
         }
 
         public void BuildGameObject(Vector2 position, int id)
@@ -31,6 +40,7 @@ namespace RpgTowerDefense
         {
             throw new NotImplementedException();
         }
+
 
         public GameObject GetResult()
         {

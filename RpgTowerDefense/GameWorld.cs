@@ -289,7 +289,7 @@ namespace RpgTowerDefense
         }
         public void SpawnMobMine()
         {
-            GameObject mob = dic4.Construct(new Vector2(graphics.GraphicsDevice.Viewport.Width*3, 425));
+            GameObject mob = dic4.Construct(new Vector2(graphics.GraphicsDevice.Viewport.Width*3, 425), player);
             UpdateMobList(mob, true);
             gameObjects.Add(mob);
 

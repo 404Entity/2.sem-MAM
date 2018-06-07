@@ -39,17 +39,15 @@ namespace RpgTowerDefense
         public int Dmg { get => dmg; set => dmg = value; }
         #endregion
         #region Constructor
-        public EnemyMine(GameObject gameobject) : base(gameobject)
+        public EnemyMine(GameObject gameobject, GameObject player) : base(gameobject)
         {
             worldBuilder = GameWorld._Instance.worldBuilder;
-
-            //gameObject.Transform.Position = new Vector2(4800, 425);
+            this.player = player;
 
             animator = (gameobject.GetComponent("Animator") as Animator);
 
             waitPos = new Vector2(3950, (GameWorld._Instance.GraphicsDevice.Viewport.Height / 2) - (animator.SpriteRenderer.Rectangle.Height / 2));
             moveTarget = waitPos;
-            //gameObject.Transform.Position = new Vector2(gameObject.Transform.posi, moveTarget.Y);
             attackCooldown = 1.5f;
 
             TileSize = (int)worldBuilder.xWidth;
@@ -95,14 +93,14 @@ namespace RpgTowerDefense
 
             }
 
-            /* if (Vector2.Distance(player.Transform.Position, gameObject.Transform.Position) <= lookRange && player.Transform.Position.X >= 3200)
-             {
+            if (Vector2.Distance(player.Transform.Position, gameObject.Transform.Position) <= lookRange && player.Transform.Position.X >= 3200)
+            {
                  moveTarget = player.Transform.Position;
-             }
-             else
-             {
+            }
+            else
+            {
                  moveTarget = waitPos;
-             }*/
+            }
             moveTarget = waitPos;
 
             if (Health <= 0)
@@ -113,13 +111,13 @@ namespace RpgTowerDefense
                 //Giver spilleren guld hver gang en enemy dør
                 //GameWorld._Instance.PlayerGold += goldGainOnKill;
             }
-            /*
+            
             if (Vector2.Distance(player.Transform.Position, gameObject.Transform.Position) <= attackRange && attackCooldown <= 0)
             {
                 Attack();
                 attackCooldown = attackSpeed;
             }
-            */
+            
             //Enemy Movement Thread
             if (mineThreadStarted == false)
             {
