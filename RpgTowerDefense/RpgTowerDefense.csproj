@@ -54,11 +54,8 @@
     <Compile Include="Enemy.cs" />
     <Compile Include="Builder\GateBuilder.cs" />
     <Compile Include="GameWorldBuilder.cs" />
-<<<<<<< HEAD
     <Compile Include="MineMonsterHandler.cs" />
-=======
     <Compile Include="UI\HighScore.cs" />
->>>>>>> 0bf90f3b50c4c6ab001f29dfe28f11b26ad53cb3
     <Compile Include="UI\GateHealth.cs" />
     <Compile Include="MainGate.cs" />
     <Compile Include="Player.cs" />

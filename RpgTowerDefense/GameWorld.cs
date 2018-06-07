@@ -20,13 +20,10 @@ namespace RpgTowerDefense
         float interval = 1.5f;
         float mineSpawntime;
         float mineInterval = 15;
-
-<<<<<<< HEAD
+        
         MineMonsterHandler mine;
-        public GameWorldBuilder worldBuilder;
-=======
+        
         private Camera camera;
->>>>>>> 0bf90f3b50c4c6ab001f29dfe28f11b26ad53cb3
 
 
         public GameWorldBuilder worldBuilder;
@@ -129,11 +126,6 @@ namespace RpgTowerDefense
 
             graphics.PreferredBackBufferWidth = 1600;
             graphics.PreferredBackBufferHeight = 900;
-<<<<<<< HEAD
-
-=======
-            graphics.ApplyChanges();
->>>>>>> 0bf90f3b50c4c6ab001f29dfe28f11b26ad53cb3
             graphics.GraphicsDevice.Viewport = new Viewport(0, 0, 1600, 900);
             graphics.ApplyChanges();
 

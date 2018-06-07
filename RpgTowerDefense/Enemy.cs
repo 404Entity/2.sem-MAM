@@ -44,18 +44,15 @@ namespace RpgTowerDefense
             moveTarget = GameWorld._Instance.walkCoordinates[0];
             //makes enemy spawn on edge of screen on same y coordinate as first pathing destination
             TileSize = (int)worldBuilder.xWidth;
-<<<<<<< HEAD
             if (gameObject.Transform.Position.X == 0)
             {
                 gameObject.Transform.Position = new Vector2(-TileSize, moveTarget.Y);
             }
-=======
             this.Health = health;
             this.dmg = dmg;
             this.threadSleep = threadSleep;
             this.pointGain = pointGain;
             this.goldGainOnKill = goldGainOnKill;
->>>>>>> 0bf90f3b50c4c6ab001f29dfe28f11b26ad53cb3
         }
         #endregion
         #region Methods
