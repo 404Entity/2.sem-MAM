@@ -15,6 +15,8 @@ namespace RpgTowerDefense
         Director dic4;
 
         int playerGold, GoldGainEachRound = 10, highScore, gateHealth = 100;
+        //Bestemmer om menu er på eller spillet kører
+        bool gameState = false;
 
 
         //testing mobspawn
@@ -27,9 +29,8 @@ namespace RpgTowerDefense
         MineMonsterHandler mine;
         
         private Camera camera;
+        private StartMenu startMenu;
 
-        GameObject player;
-        public int playerHealth = 3;
 
         public GameWorldBuilder worldBuilder;
         public Texture2D currentMap;
@@ -101,6 +102,7 @@ namespace RpgTowerDefense
         public int PlayerGold { get => playerGold; set => playerGold = value; }
         public int HighScore { get => highScore; set => highScore = value; }
         public int GateHealth { get => gateHealth; set => gateHealth = value; }
+        public bool GameState { get => gameState; set => gameState = value; }
 
         public float deltaTime;
 
@@ -123,8 +125,8 @@ namespace RpgTowerDefense
 
             mine = new MineMonsterHandler();
             worldBuilder = new GameWorldBuilder();
-
-
+            
+            startMenu = new StartMenu();
             //intialize camera
             camera = new Camera();
             camera.Screenvalue = 1;
@@ -176,19 +178,23 @@ namespace RpgTowerDefense
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            foreach (GameObject go in GameObjects)
-            {
-                go.LoadContent(Content);
-            }
-            // TODO: use this.Content to load your game content here
-            ui.LoadContent(Content);
-            backGround.LoadContent(Content);
-            //yyMap = Content.Load<Texture2D>("BackGround");
-            worldBuilder.yyMap = Content.Load<Texture2D>("BackGroundWithGrid");
-            worldBuilder.mineMap = Content.Load<Texture2D>("Mine");
-            worldBuilder.AssignWorld(0);
+            
+            
+                // Create a new SpriteBatch, which can be used to draw textures.
+                startMenu.LoadContent(Content);
+                foreach (GameObject go in GameObjects)
+                {
+                    go.LoadContent(Content);
+                }
+                // TODO: use this.Content to load your game content here
+                ui.LoadContent(Content);
+                backGround.LoadContent(Content);
+                //yyMap = Content.Load<Texture2D>("BackGround");
+                worldBuilder.yyMap = Content.Load<Texture2D>("BackGroundWithGrid");
+                worldBuilder.mineMap = Content.Load<Texture2D>("Mine");
+                worldBuilder.AssignWorld(0);
+            
         }
 
         /// <summary>
@@ -208,6 +214,38 @@ namespace RpgTowerDefense
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            if (GameState == true)
+            {
+                startMenu.Update();
+            }
+            else
+            {
+                deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                    Exit();
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D1))
+                {
+
+                    camera.Screenvalue = 1;
+                }
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D2))
+                {
+                    Mouse.SetPosition(screenWidth, 0);
+                    camera.Screenvalue = 2;
+                }
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D3))
+                {
+                    camera.Screenvalue = 3;
+                }
+                //test mob spawn
+                spawntime += deltaTime;
+                if (spawntime >= interval)
+                {
+                    spawntime = 0;
+                    SpawnMob();
+                    //Giver spilleren 10+ guld hvert enemy spawn
+                    PlayerGold += GoldGainEachRound;
+                }
             deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
@@ -282,24 +320,34 @@ namespace RpgTowerDefense
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            spriteBatch.Begin(transformMatrix:camera.Transform);
-
-            //backGround.Draw(spriteBatch);
-            
-            spriteBatch.Draw(worldBuilder.yyMap, worldBuilder.map1Rect, Color.White);
-            spriteBatch.Draw(worldBuilder.mineMap, worldBuilder.map2Rect, Color.White);
-
-            foreach (GameObject go in gameObjects)
+            if (GameState == true)
             {
-                go.Draw(spriteBatch);
+                GraphicsDevice.Clear(Color.Blue);
+                spriteBatch.Begin();
+                startMenu.Draw(spriteBatch);
+                spriteBatch.End();
             }
-          
-            spriteBatch.End();
-            spriteBatch.Begin();
-            ui.Draw(spriteBatch);
-            spriteBatch.End();
+            else
+            {
+                GraphicsDevice.Clear(Color.CornflowerBlue);
+
+                spriteBatch.Begin(transformMatrix: camera.Transform);
+
+                //backGround.Draw(spriteBatch);
+
+                spriteBatch.Draw(worldBuilder.yyMap, worldBuilder.map1Rect, Color.White);
+                spriteBatch.Draw(worldBuilder.mineMap, worldBuilder.map2Rect, Color.White);
+
+                foreach (GameObject go in gameObjects)
+                {
+                    go.Draw(spriteBatch);
+                }
+
+                
+                ui.Draw(spriteBatch);
+                spriteBatch.End();
+            }
+            
             base.Draw(gameTime);
         }
 

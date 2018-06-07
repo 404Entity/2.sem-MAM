@@ -123,3 +123,10 @@
 /processorParam:TextureFormat=Color
 /build:enemy_static.png
 
+#begin MenuButtom.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:MenuButtom.spritefont
+
