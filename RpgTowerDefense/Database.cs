@@ -10,29 +10,31 @@ namespace RpgTowerDefense
     class Database
     {
         SQLiteConnection sqlite2 = new SQLiteConnection("Data Source=C:\\TowerDefence\\TowerDefence.db");
+        List<string> score;
 
-
+        public List<string> Score { get => score; set => score = value; }
 
         #region ReadFrom
-        public List<object> ReadFromDatabase(string select)
+        public List<string> ReadHighScore(string select)
         {
-            //Read from database
+            //Read highscore from database
             sqlite2.Open();
             string sql = select;
             //"select * from users" +
             //"order by score desc"
-            List<object> tabel = new List<object>();
+            Score = new List<string>();
 
             SQLiteCommand command = new SQLiteCommand(sql, sqlite2);
             SQLiteDataReader reader = command.ExecuteReader();
-
+            
             while (reader.Read())
             {
-                tabel.Add(reader.GetValues());
+                string a = "" + reader.GetString(1) + "    " + reader.GetInt32(2) + "";
+                Score.Add(a);
             }
 
             sqlite2.Close();
-            return tabel;
+            return Score;
         }
         #endregion
 

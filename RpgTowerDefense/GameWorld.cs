@@ -14,7 +14,8 @@ namespace RpgTowerDefense
         Director dic2;
 
         int playerGold, GoldGainEachRound = 10, highScore, gateHealth = 100;
-        bool gameState = true;
+        //Bestemmer om menu er på eller spillet kører
+        bool gameState = false;
 
         //testing mobspawn
         float spawntime;
@@ -93,6 +94,7 @@ namespace RpgTowerDefense
         public int PlayerGold { get => playerGold; set => playerGold = value; }
         public int HighScore { get => highScore; set => highScore = value; }
         public int GateHealth { get => gateHealth; set => gateHealth = value; }
+        public bool GameState { get => gameState; set => gameState = value; }
 
         public float deltaTime;
 
@@ -113,13 +115,8 @@ namespace RpgTowerDefense
         {
             IsMouseVisible = true;
             worldBuilder = new GameWorldBuilder();
-
-            Database data = new Database();
+            
             startMenu = new StartMenu();
-
-            data.AddHighScore("Morten", 1000);
-            data.AddAnalyse(100, 1000, 3, 10);
-
             //intialize camera
             camera = new Camera();
             camera.Screenvalue = 1;
@@ -170,19 +167,23 @@ namespace RpgTowerDefense
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            foreach (GameObject go in GameObjects)
-            {
-                go.LoadContent(Content);
-            }
-            // TODO: use this.Content to load your game content here
-            ui.LoadContent(Content);
-            backGround.LoadContent(Content);
-            //yyMap = Content.Load<Texture2D>("BackGround");
-            worldBuilder.yyMap = Content.Load<Texture2D>("BackGroundWithGrid");
-            worldBuilder.mineMap = Content.Load<Texture2D>("Mine");
-            worldBuilder.AssignWorld(0);
+            
+            
+                // Create a new SpriteBatch, which can be used to draw textures.
+                startMenu.LoadContent(Content);
+                foreach (GameObject go in GameObjects)
+                {
+                    go.LoadContent(Content);
+                }
+                // TODO: use this.Content to load your game content here
+                ui.LoadContent(Content);
+                backGround.LoadContent(Content);
+                //yyMap = Content.Load<Texture2D>("BackGround");
+                worldBuilder.yyMap = Content.Load<Texture2D>("BackGroundWithGrid");
+                worldBuilder.mineMap = Content.Load<Texture2D>("Mine");
+                worldBuilder.AssignWorld(0);
+            
         }
 
         /// <summary>
@@ -202,7 +203,7 @@ namespace RpgTowerDefense
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (gameState == true)
+            if (GameState == true)
             {
                 startMenu.Update();
             }
@@ -271,7 +272,7 @@ namespace RpgTowerDefense
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            if (gameState == true)
+            if (GameState == true)
             {
                 GraphicsDevice.Clear(Color.Blue);
                 spriteBatch.Begin();
@@ -294,8 +295,7 @@ namespace RpgTowerDefense
                     go.Draw(spriteBatch);
                 }
 
-                spriteBatch.End();
-                spriteBatch.Begin();
+                
                 ui.Draw(spriteBatch);
                 spriteBatch.End();
             }
