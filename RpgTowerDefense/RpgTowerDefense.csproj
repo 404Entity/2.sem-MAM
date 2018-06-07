@@ -119,6 +119,7 @@
     <Content Include="Content\Enemy.jpg" />
     <Content Include="Content\enemy_static.png" />
     <Content Include="Content\Mine.png" />
+    <Content Include="Content\MineDebug.png" />
     <Content Include="Content\Player.jpg" />
     <Content Include="Content\tower_01.png" />
     <Content Include="Content\tower_01spriteSheet.png" />
@@ -131,6 +132,7 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
+    <None Include="bin\Windows\x86\Debug\Content\CollisionTexture.xnb" />
     <None Include="Content\bin\Windows\BackGround.xnb" />
     <None Include="Content\bin\Windows\BackGroundWithGrid.xnb" />
     <None Include="Content\bin\Windows\BuildSpot.xnb" />
@@ -140,6 +142,7 @@
     <None Include="Content\Fonts\UiFont.spritefont" />
     <None Include="Content\GateHealth.spritefont" />
     <None Include="Content\Gold.spritefont" />
+    <None Include="Content\MenuButtom.spritefont" />
     <None Include="Content\obj\Windows\.mgcontent" />
     <None Include="Content\obj\Windows\BackGround.mgcontent" />
     <None Include="Content\obj\Windows\BackGroundWithGrid.mgcontent" />
@@ -153,7 +156,6 @@
     <None Include="obj\x86\Release\RpgTowerDefense.csproj.CoreCompileInputs.cache" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="bin\Windows\x86\Debug\" />
     <Folder Include="bin\Windows\x86\Release\" />
     <Folder Include="obj\x86\Debug\TempPE\" />
   </ItemGroup>

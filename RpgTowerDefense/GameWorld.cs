@@ -206,7 +206,7 @@ namespace RpgTowerDefense
             UITex = Content.Load<Texture2D>("UI_01");
             UIRect = graphics.GraphicsDevice.Viewport.Bounds;
 
-
+            startMenu.LoadContent(Content);
 
         }
 
