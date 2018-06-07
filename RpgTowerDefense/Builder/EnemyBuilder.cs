@@ -23,16 +23,13 @@ namespace RpgTowerDefense
             enemy.AddComponent(new Collider(enemy, true, 0.5f));
             buildobject = enemy;
         }
-<<<<<<< HEAD
-        
-=======
+
 
         public void BuildGameObject(Vector2 position, GameObject player)
         {
             throw new NotImplementedException();
         }
 
->>>>>>> cameracontroll
         public void BuildGameObject(Vector2 position, int id)
         {
             throw new NotImplementedException();

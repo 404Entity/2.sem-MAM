@@ -128,7 +128,6 @@ namespace RpgTowerDefense
 
         void Attack()
         {
-            GameWorld._Instance.playerHealth--;
         }
 
         #region Collision

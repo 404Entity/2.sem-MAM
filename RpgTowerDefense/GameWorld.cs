@@ -33,6 +33,7 @@ namespace RpgTowerDefense
 
 
         public GameWorldBuilder worldBuilder;
+        GameObject player;
         public Texture2D currentMap;
         public Rectangle currentRect;
 
@@ -246,66 +247,69 @@ namespace RpgTowerDefense
                     //Giver spilleren 10+ guld hvert enemy spawn
                     PlayerGold += GoldGainEachRound;
                 }
-            deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D1))
-            {
-                
-                camera.Screenvalue = 1;
-            }
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D2))
-            {
-                Mouse.SetPosition(screenWidth, 0);
-                camera.Screenvalue = 2;
-            }
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D3))
-            {
-                camera.Screenvalue = 3;
-            }
-            
-            //test mob spawn
-            spawntime += deltaTime;
-            if(spawntime >= interval)
-            {
-                spawntime = 0;
-                SpawnMob();
-                //Giver spilleren 10+ guld hvert enemy spawn
-                PlayerGold += GoldGainEachRound;
-            }
-            mineSpawntime += deltaTime;
-            if(mineSpawntime >= mineInterval)
-            {
-                mineSpawntime = 0;
-                mine.SpawnMob(3);
-            }
-            mineSpawntime += deltaTime;
-            if (mineSpawntime >= mineInterval)
-            {
-                mineSpawntime = 0;
-                SpawnMobMine();
-            }
+                deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                    Exit();
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D1))
+                {
+
+                    camera.Screenvalue = 1;
+                }
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D2))
+                {
+                    Mouse.SetPosition(screenWidth, 0);
+                    camera.Screenvalue = 2;
+                }
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D3))
+                {
+                    camera.Screenvalue = 3;
+                }
+
+                //test mob spawn
+                spawntime += deltaTime;
+                if (spawntime >= interval)
+                {
+                    spawntime = 0;
+                    SpawnMob();
+                    //Giver spilleren 10+ guld hvert enemy spawn
+                    PlayerGold += GoldGainEachRound;
+                }
+                mineSpawntime += deltaTime;
+                if (mineSpawntime >= mineInterval)
+                {
+                    mineSpawntime = 0;
+                    mine.SpawnMob(3);
+                }
+                mineSpawntime += deltaTime;
+                if (mineSpawntime >= mineInterval)
+                {
+                    mineSpawntime = 0;
+                    SpawnMobMine();
+                }
 
 
-            // TODO: Add your update logic here
-            foreach (GameObject go in addGameObjects)
-            {
-                GameObjects.Add(go);
+                // TODO: Add your update logic here
+                foreach (GameObject go in addGameObjects)
+                {
+                    GameObjects.Add(go);
+                }
+                foreach (GameObject go in removeGameObjects)
+                {
+                    gameObjects.Remove(go);
+                    mobList.Remove(go);
+                }
+                CleanTemptList();
+                foreach (GameObject go in GameObjects)
+                {
+                    go.Update(gameTime);
+                }
+                ui.Update();
+                camera.Follow(new Vector2(0, 0));
+                base.Update(gameTime);
             }
-            foreach (GameObject go in removeGameObjects)
-            {
-                gameObjects.Remove(go);
-                mobList.Remove(go);
-            }
-            CleanTemptList();
-            foreach (GameObject go in GameObjects)
-            {
-                go.Update(gameTime);
-            }
-            ui.Update();
-            camera.Follow(new Vector2(0,0));
-            base.Update(gameTime);
         }
+
+
         private void CleanTemptList()
         {
             addGameObjects.Clear();
