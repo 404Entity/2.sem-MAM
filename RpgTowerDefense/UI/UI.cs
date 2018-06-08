@@ -29,7 +29,8 @@ namespace RpgTowerDefense
         UIButton Upgrade_02Button;
         UIButton Upgrade_03Button;
 
-        UILabel GoldLabel;
+        UILabel goldLabel;
+        UILabel gateHealthLabel;
 
         GameObject previousGameObject;
 
@@ -131,15 +132,22 @@ namespace RpgTowerDefense
                 TextScale = 0.8f
             };
 
-            GoldLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), "Ohla")
+            goldLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), "Ohla")
             {
                 Position = new Vector2(1280, 18),
                 PenColor = Color.Gold
             };
 
+            gateHealthLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), "Ohla")
+            {
+                Position = new Vector2(1470, 18),
+                PenColor = Color.Red
+            };
+
             UIElements = new List<UIComponent>()
             {
-                GoldLabel,
+                goldLabel,
+                gateHealthLabel,
                 exitButton,
                 tower_01Button,
                 tower_02Button,
@@ -166,8 +174,8 @@ namespace RpgTowerDefense
             Upgrade_03Button.Click += UpgradeButton03_Click;
 
             exitButton.Click += ExitButton_Click;
-            GoldLabel.updateMe += UpdateGoldAmount;
-
+            goldLabel.updateMe += UpdateGoldAmount;
+            gateHealthLabel.updateMe += UpdateGateHealth;
 
         }
         #endregion
@@ -389,7 +397,12 @@ namespace RpgTowerDefense
 
         private void UpdateGoldAmount(object sender, System.EventArgs e)
         {
-            GoldLabel.Text = GameWorld._Instance.PlayerGold.ToString();
+            goldLabel.Text = GameWorld._Instance.PlayerGold.ToString();
+        }
+
+        private void UpdateGateHealth(object sender, System.EventArgs e)
+        {
+            gateHealthLabel.Text = GameWorld._Instance.GateHealth.ToString();
         }
 
 

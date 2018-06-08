@@ -230,26 +230,6 @@ namespace RpgTowerDefense
             MouseState mouseState = Mouse.GetState();
             var mouseRectangle = new Rectangle(mouseState.X, mouseState.Y, 50, 50);
             deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
-            //Change Camera position to screen 1
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D1))
-            {
-                
-                camera.Screenvalue = 1;
-            }
-            // Change Camera position to screen 2
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D2))
-            {
-                Mouse.SetPosition(screenWidth, 0);
-                camera.Screenvalue = 2;
-            }
-            // Change Camera position to screen 3
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D3))
-            {
-                camera.Screenvalue = 3;
-            }
             // Set the selected object to the object clicked on
             if (Mouse.GetState().LeftButton == ButtonState.Pressed && previouseMouseState.LeftButton == ButtonState.Released)
             {
@@ -261,14 +241,6 @@ namespace RpgTowerDefense
                         selectedGameObject = gameObject;
                         break;
                     }
-                    //if (sr.Rectangle.Intersects(mouseRectangle))
-                    //{
-                   
-                    //}
-                    //else
-                    //{
-                    //    selectedGameObject = null;
-                    //}
 
                 }
             }
@@ -304,32 +276,6 @@ namespace RpgTowerDefense
                 {
                     camera.Screenvalue = 3;
                 }
-                //test mob spawn
-                spawntime += deltaTime;
-                if (spawntime >= interval)
-                {
-                    spawntime = 0;
-                    SpawnMob();
-                    //Giver spilleren 10+ guld hvert enemy spawn
-                    PlayerGold += GoldGainEachRound;
-                }
-                deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                    Exit();
-                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D1))
-                {
-
-                    camera.Screenvalue = 1;
-                }
-                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D2))
-                {
-                    Mouse.SetPosition(screenWidth, 0);
-                    camera.Screenvalue = 2;
-                }
-                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D3))
-                {
-                    camera.Screenvalue = 3;
-                }
 
                 //test mob spawn
                 spawntime += deltaTime;
@@ -339,12 +285,6 @@ namespace RpgTowerDefense
                     SpawnMob();
                     //Giver spilleren 10+ guld hvert enemy spawn
                     PlayerGold += GoldGainEachRound;
-                }
-                mineSpawntime += deltaTime;
-                if (mineSpawntime >= mineInterval)
-                {
-                    mineSpawntime = 0;
-                    mine.SpawnMob(3);
                 }
                 mineSpawntime += deltaTime;
                 if (mineSpawntime >= mineInterval)
