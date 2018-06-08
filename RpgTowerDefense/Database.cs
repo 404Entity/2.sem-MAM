@@ -92,7 +92,7 @@ namespace RpgTowerDefense
         {
             //Adder Analysen til databasen
             sqlite2.Open();
-            string txtSqlQuery = "INSERT INTO Analyse Values(null," + indkomstPrLevel+","+totalInkomst+","+loseLvl+","+totalTårnePlaceret+")";
+            string txtSqlQuery = "INSERT INTO Analyse Values(null,"+indkomstPrLevel+","+totalInkomst+","+loseLvl+","+totalTårnePlaceret+")";
 
 
 
@@ -122,11 +122,11 @@ namespace RpgTowerDefense
             //Analyse tables created
 
             string CreateTableAnalyse = "CREATE TABLE IF NOT EXISTS Analyse" +
-                "('ID' INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "" + "Income per round" + " INTEGER," +
-                "'" + "Total Income" + "' INTEGER," +
-                "'" + "Lose Lvl" + "' INTEGER," +
-                "'" + "Total turrets placed" + "' INTEGER)";
+                "('ID' INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "" + "IncomeEachRound" + " INTEGER," +
+                "'" + "TotalIncome" + "' INTEGER," +
+                "'" + "LoseLvl" + "' INTEGER," +
+                "'" + "PlacedTurrets" + "' INTEGER)";
             
             SQLiteCommand commandAnalyse = new SQLiteCommand(CreateTableAnalyse, sqlite2);
             commandAnalyse.ExecuteNonQuery();

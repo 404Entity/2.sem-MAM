@@ -33,9 +33,8 @@ namespace RpgTowerDefense
         public void HighScore(SpriteBatch spriteBatch)
         {
             //HighScore Draw
-            Database database = new Database();
             Vector2 vec = new Vector2(200, 200);
-            foreach (string t in database.ReadHighScore("select * from highscore ORDER BY score DESC limit 10"))
+            foreach (string t in Database._Instance.ReadHighScore("select * from highscore ORDER BY score DESC limit 10"))
             {
                 spriteBatch.DrawString(texture, t, vec, Color.Red);
                 vec.Y += 20;
