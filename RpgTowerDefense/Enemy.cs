@@ -21,7 +21,7 @@ namespace RpgTowerDefense
         //PointGain = amount of points gained for killing an enemy
         //GoldGain = Amount of gold gained for killing an enemy
         //threadSleep = Speed of enemy
-        bool threadStarted = false;
+        bool threadStarted = false, enemyMovementBool = true;
         int dmg, pointGain, goldGainOnKill, threadSleep;
 
         //size of tiles, used to scale size of enemy
@@ -91,6 +91,7 @@ namespace RpgTowerDefense
                 GameWorld._Instance.HighScore += pointGain;
                 //Giver spilleren guld hver gang en enemy dør
                 GameWorld._Instance.PlayerGold += goldGainOnKill;
+                enemyMovementBool = false;
             }
             if (strategy is Walk)
             {
@@ -156,7 +157,7 @@ namespace RpgTowerDefense
         //Enemy Movement Method
         public void EnemyMovement(Object stateInfo)
         {
-            while (true)
+            while (enemyMovementBool == true)
             {
                 //calculates distance between enemy and destination
                 Vector2 moveVector = moveTarget - gameObject.Transform.Position;

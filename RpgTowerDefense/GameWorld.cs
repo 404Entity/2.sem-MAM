@@ -429,10 +429,16 @@ namespace RpgTowerDefense
         //spawns enemy and adds to both gameobjects and moblist
         public void SpawnMob()
         {
-            dic2.Construct(new Vector2(0, 270));
-            GameObject mob = dic2.Builder.GetResult();
-            UpdateMobList(mob, true);
-            gameObjects.Add(mob);
+            if (MobList.Count < 100)
+            {
+                if (gameObjects.Count < 100)
+                {
+                    dic2.Construct(new Vector2(0, 270));
+                    GameObject mob = dic2.Builder.GetResult();
+                    UpdateMobList(mob, true);
+                    gameObjects.Add(mob);
+                }
+            }
         }
 
         public void SpawnMobMine()
