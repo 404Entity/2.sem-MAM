@@ -130,8 +130,10 @@
     <Content Include="Content\BuildSpot.png" />
     <Content Include="Content\Bullet.png" />
     <Content Include="Content\CityGate.jpg" />
+    <Content Include="Content\CollisionTexture.png" />
     <Content Include="Content\Controls\Button.png" />
     <Content Include="Content\Enemy.jpg" />
+    <Content Include="Content\Enemy01_SpriteSheetv.02.png" />
     <Content Include="Content\enemy_static.png" />
     <Content Include="Content\Mine.png" />
     <Content Include="Content\Player.jpg" />
