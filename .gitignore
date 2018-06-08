@@ -1,13 +1,20 @@
 ﻿################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
-/.vs/RpgTowerDefense/obj/x86/Debug
-/.vs/RpgTowerDefense/v15
-/.vs/RpgTowerDefense/v15/Server/sqlite3/db.lock
-/.vs/RpgTowerDefense/v15/Server/sqlite3/storage.ide
-/.vs/RpgTowerDefense/v15/Server/sqlite3
-/.vs/RpgTowerDefense/v15/sqlite3/storage.ide-wal
-/.vs/RpgTowerDefense/v15/sqlite3/storage.ide-shm
-/.vs/RpgTowerDefense/v15/sqlite3/db.lock
-/.vs/RpgTowerDefense/v15/sqlite3/storage.ide
-/.vs/RpgTowerDefense/v15/.suo
+*.vs
+*RpgTowerDefense\Content\obj\Windows
+/RpgTowerDefense/obj/x86/Debug/TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
+/RpgTowerDefense/obj/x86/Debug/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
+/RpgTowerDefense/obj/x86/Debug/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
+/RpgTowerDefense/obj/x86/Debug/RpgTowerDefense.pdb
+/RpgTowerDefense/obj/x86/Debug/RpgTowerDefense.exe
+/RpgTowerDefense/Content/obj/Windows/BackGroundWithGrid.mgcontent
+/RpgTowerDefense/Content/obj/Windows/Bullet.mgcontent
+/RpgTowerDefense/Content/obj/Windows/yingyang tile buildspot.mgcontent
+/RpgTowerDefense/Content/obj/Windows/tower_01.mgcontent
+/RpgTowerDefense/Content/obj/Windows/enemy_static.mgcontent
+/RpgTowerDefense/Content/obj/Windows/CityGate.mgcontent
+/RpgTowerDefense/Content/obj/Windows/Player.mgcontent
+/RpgTowerDefense/Content/obj/Windows/Gold.mgcontent
+/RpgTowerDefense/Content/obj/Windows/Gate.mgcontent
+/RpgTowerDefense/Content/obj/Windows

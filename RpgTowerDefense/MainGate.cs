@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace RpgTowerDefense
 {
-    class MainGate : Component, IUpdate, IDrawable, ILoadable
+    class MainGate : Component, IUpdate, IDrawable, ILoadable, ICollideEnter
     {
         #region Fields
         int health;
@@ -58,7 +58,13 @@ namespace RpgTowerDefense
 
         public void Update()
         {
-            text = "Stronghold Health:  " + health.ToString();
+            if (GameWorld._Instance.GateHealth <= 0)
+            {
+                //Loose game
+                Database database = new Database();
+                GameWorld._Instance.GameState = true;
+                database.AddHighScore("Test", GameWorld._Instance.HighScore);
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -66,7 +72,17 @@ namespace RpgTowerDefense
             //(spriteBatch.DrawString(GateHealth, text, new Vector2(800f, 100), Color.White);
         }
 
-        
+        public void OnCollisionEnter(Collider other)
+        {
+            if ((Enemy)other.GameObject.GetComponent("Enemy") != null)
+            {
+                Enemy dmgObject = (Enemy)other.GameObject.GetComponent("Enemy");
+                GameWorld._Instance.GateHealth -= dmgObject.Dmg;
+                GameWorld._Instance.RemoveGameObjects.Add(other.GameObject);
+            }
+        }
+
+
 
 
         #endregion

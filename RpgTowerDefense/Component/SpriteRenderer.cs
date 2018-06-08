@@ -17,6 +17,7 @@ namespace RpgTowerDefense
         private Vector2 offset;
         private Vector2 origin;
         private float rotation;
+        private Color color;
  
         private string spriteName;
         private float layerDepth;
@@ -40,6 +41,7 @@ namespace RpgTowerDefense
             set { rectangle = value; }
         }
         public float Scale { get => scale; set => scale = value; }
+        public Color Color { get => color; set => color = value; }
 
         public SpriteRenderer(GameObject gameobject, string spriteName, float layerDepth, float scale) : base(gameobject)
         {
@@ -48,6 +50,7 @@ namespace RpgTowerDefense
             this.Scale = scale;
             rotation = 0;
             origin = Vector2.Zero;
+            this.Color = Color.White;
         }
         public void LoadContent(ContentManager content)
         {
@@ -56,7 +59,7 @@ namespace RpgTowerDefense
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, GameObject.Transform.Position + offset, rectangle, Color.White, rotation, origin, Scale, SpriteEffects.None, layerDepth);
+            spriteBatch.Draw(sprite, GameObject.Transform.Position + offset, rectangle, color, rotation, origin, Scale, SpriteEffects.None, layerDepth);
         }
 
         public void GetStaticRectangle()
