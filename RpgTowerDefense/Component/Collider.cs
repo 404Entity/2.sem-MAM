@@ -59,7 +59,7 @@ namespace RpgTowerDefense
         {
             isCollideWith = false;
             doCollisionChecks = CheckCollision;
-            //GameWorld._Instance.Colliders.Add(this);
+            GameWorld._Instance.Colliders.Add(this);
             LoadContent(GameWorld._Instance.Content);
             ohterColliders = new List<Collider>();
             this.scale = scale;
@@ -88,6 +88,7 @@ namespace RpgTowerDefense
             spriteRender = (SpriteRenderer)gameObject.GetComponent("SpriteRender");
             texture2D = Content.Load<Texture2D>("CollisionTexture");
         }
+
         public void Update()
         {
             CheckCollision();
@@ -122,28 +123,31 @@ namespace RpgTowerDefense
                 List<Collider> OptimList = new List<Collider>();
                 if (OptimList != null || OptimList.Count > 0)
                 {
-                    //OptimList.AddRange(GameWorld._Instance.Colliders);
-                    //foreach (Collider collider in ohterColliders)
-                    //{
-                    //    OptimList.Remove(collider);
-                    //}
-                    //foreach (Collider collider in OptimList)
-                    //{
-                    //    if (collider != this)
-                    //    {
-                    //        if (CollisionBox.Intersects(collider.CollisionBox))
-                    //        {
-                    //            gameObject.OnCollisionEnter(collider);
-                    //            ohterColliders.Add(collider);
-                    //        }
-                    //    }
-                    //}
+                    OptimList.AddRange(GameWorld._Instance.Colliders);
+                    foreach (Collider collider in ohterColliders)
+                    {
+                        //removes currently collideing objects form the collision checklist
+                        OptimList.Remove(collider);
+                    }
+                    foreach (Collider collider in OptimList)
+                    {
+                        if (collider != this)
+                        {
+                            if (CollisionBox.Intersects(collider.CollisionBox))
+                            {
+                                gameObject.OnCollisionEnter(collider);
+                                ohterColliders.Add(collider);
+                            }
+                        }
+                    }
                 }
 
             }
         }
 
-
+        /// <summary>
+        /// preset for making pixel collision
+        /// </summary>
         private void CachePixels()
         {
             //foreach (KeyValuePair<string, Animation> pair in animator.MyAnimations)

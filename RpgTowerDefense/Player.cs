@@ -20,13 +20,7 @@ namespace RpgTowerDefense
         private IStrategy strategy;
         private DIRECTION direction;
         private bool canMove;
-        private bool isgrounded;
         private MouseState previousMouseState; 
-        public bool CanMove
-        {
-            get { return canMove; }
-            set { canMove = value; }
-        }
 
 
         #endregion
@@ -41,7 +35,6 @@ namespace RpgTowerDefense
             speed = 100;
             animator = (gameobject.GetComponent("Animator") as Animator);
             canMove = true;
-            isgrounded = false;
         }
         #endregion
         #region Methods
@@ -58,7 +51,12 @@ namespace RpgTowerDefense
             {
                 if (keyState.IsKeyDown(Keys.F))
                 {
-                    BuildTower();
+                    if (GameWorld._Instance.PlayerGold > 50)
+                    {
+                        GameWorld._Instance.PlayerGold -= 50;
+                        BuildTower();
+                    }
+                    
                 }
                 if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
                 {
@@ -173,7 +171,7 @@ namespace RpgTowerDefense
             Vector2 shootdirection = cursorPosition - gameObject.Transform.Position;
             Vector2 shootdirectonnormalized = Vector2.Normalize(shootdirection);
             Director director = new Director(new BulletBuilder());
-            director.Construct(gameObject.Transform.Position, 1, shootdirectonnormalized);
+            director.Construct(gameObject.Transform.Position, 1, shootdirectonnormalized, 3,AttackType.Light);
             GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
         }
 

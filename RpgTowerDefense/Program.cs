@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data.SQLite;
+
 
 namespace RpgTowerDefense
 {
@@ -14,6 +16,13 @@ namespace RpgTowerDefense
         [STAThread]
         static void Main()
         {
+            if (!System.IO.File.Exists("C:\\TowerDefence\\TowerDefence.db"))
+            {
+                System.IO.Directory.CreateDirectory("C:\\TowerDefence");
+                SQLiteConnection.CreateFile("C:\\TowerDefence\\TowerDefence.db");
+            }
+            Database._Instance.CreateTables();
+
             using (var game = GameWorld._Instance)
                 game.Run();
         }

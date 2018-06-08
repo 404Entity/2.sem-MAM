@@ -10,10 +10,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace RpgTowerDefense
 {
-    class GateHealth : UI
+    class GateHealth
     {
         #region fields
-        int health = 100;
         string text;
         SpriteFont GateHealthFont;
         Vector2 vector2;
@@ -32,27 +31,21 @@ namespace RpgTowerDefense
         }
 
         #endregion
-        #region properties
-
-        public int Health { get => health; set => health -= value; }
-
-        #endregion
-
+       
 
         #region Methods
-        public new void LoadContent(ContentManager content)
+        public void LoadContent(ContentManager content)
         {
-            GateHealthFont = content.Load<SpriteFont>("GateHealth");
+            GateHealthFont = content.Load<SpriteFont>("Gold");
         }
 
-        public new void Update()
+        public void Update()
         {
-            text = "Gate Health:  " + Health.ToString();
+            text = "Gate Health:  " + GameWorld._Instance.GateHealth.ToString();
         }
 
-        public new void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
-
             spriteBatch.DrawString(GateHealthFont, text, vector2, Color.White);
             spriteBatch.DrawString(GateHealthFont, text2, new Vector2(1390,10), Color.Red);
         }

@@ -22,7 +22,7 @@ namespace RpgTowerDefense
             mainGate.LoadContent(GameWorld._Instance.Content);
             SpriteRenderer sp = mainGate.GetComponent("SpriteRenderer") as SpriteRenderer;
             sp.GetStaticRectangle();
-            mainGate.AddComponent(new Collider(mainGate, false, 0.5f));
+            mainGate.AddComponent(new Collider(mainGate, true, 0.5f));
             buildObject = mainGate;
         }
 
@@ -31,7 +31,13 @@ namespace RpgTowerDefense
             throw new NotImplementedException();
         }
 
-        public void BuildGameObject(Vector2 position, int id, Vector2 direction)
+        public void BuildGameObject(Vector2 position, GameObject player)
+        {
+            throw new NotImplementedException();
+        }
+
+        //public void BuildGameObject(Vector2 position, int id, Vector2 direction)
+        public void BuildGameObject(Vector2 position, int id, Vector2 direction, float damage, AttackType attackType)
         {
             throw new NotImplementedException();
         }
