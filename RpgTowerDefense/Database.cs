@@ -11,6 +11,27 @@ namespace RpgTowerDefense
     {
         SQLiteConnection sqlite2 = new SQLiteConnection("Data Source=C:\\TowerDefence\\TowerDefence.db");
         List<string> score;
+        private static Database DB_instance;
+
+        private Database()
+        {
+        }
+
+
+
+        //Singleton
+        static public Database _Instance
+        {
+            get
+            {
+                if (DB_instance == null)
+                {
+                    DB_instance = new Database();
+                }
+                return DB_instance;
+            }
+        }
+
 
         public List<string> Score { get => score; set => score = value; }
 
