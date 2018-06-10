@@ -150,7 +150,7 @@ namespace RpgTowerDefense
             addUIElements = new List<UIComponent>();
 
 
-            
+
             //subscribe to events
 
             tower_01Button.Click += Tower_01Button_Click;
@@ -183,12 +183,12 @@ namespace RpgTowerDefense
                 SelectedBlue(GameWorld._Instance.SelectedGameObject);
                 if (previousGameObject != null)
                 {
-                   UnselectWhite(previousGameObject);
+                    UnselectWhite(previousGameObject);
                 }
-             
+
                 if (GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") != null)
                 {
-               
+
                     bool containsUpgrade = false;
                     foreach (UIComponent item in UIElements)
                     {
@@ -210,6 +210,48 @@ namespace RpgTowerDefense
                         addUIElements.Add(Upgrade_01Button);
                         addUIElements.Add(Upgrade_02Button);
                         addUIElements.Add(Upgrade_03Button);
+
+                        Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
+                        if (tower.APCapped == true)
+                        {
+                            Upgrade_01Button.Text = "Fully Upgraded";
+                        }
+                        else if (tower.APUpgradeLvl == 1)
+                        {
+                            Upgrade_01Button.Text = string.Format("{0}", CalculateUpgradecost(tower.APUpgradeLvl));
+                        }
+                        else
+                        {
+                            Upgrade_01Button.Text = string.Format("{0}", CalculateUpgradecost(tower.APUpgradeLvl + 1));
+                        }
+
+                        if (tower.ASCapped == true)
+                        {
+                            Upgrade_02Button.Text = "Fully Upgraded";
+                        }
+                        else if (tower.ASUpgradeLvl == 1)
+                        {
+                            Upgrade_02Button.Text = string.Format("{0}", CalculateUpgradecost(tower.ASUpgradeLvl));
+                        }
+                        else
+                        {
+                            Upgrade_02Button.Text = string.Format("{0}", CalculateUpgradecost(tower.ASUpgradeLvl));
+                        }
+
+                        if (tower.ARCapped == true)
+                        {
+                            Upgrade_03Button.Text = "Fully Upgraded";
+                        }
+                        else if (tower.ARUpgradeLvl == 1)
+                        {
+                            Upgrade_03Button.Text = string.Format("{0}", CalculateUpgradecost(tower.ARUpgradeLvl));
+                        }
+                        else
+                        {
+                            Upgrade_03Button.Text = string.Format("{0}", CalculateUpgradecost(tower.ARUpgradeLvl));
+                        }
+
+
                     }
                 }
                 else
@@ -360,33 +402,80 @@ namespace RpgTowerDefense
         {
 
             Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
-            if (GameWorld._Instance.PlayerGold > 30)
+
+            float upgradeCost = CalculateUpgradecost(tower.APUpgradeLvl);
+
+            if (tower.APCapped != true)
             {
-                tower.AttackPower++;
+                Upgrade_01Button.Text = string.Format("{0}", CalculateUpgradecost(tower.APUpgradeLvl + 1));
+            }
+            else
+            {
+                Upgrade_01Button.Text = "Fully Upgraded";
+            }
+        
+
+            if (GameWorld._Instance.PlayerGold > upgradeCost && tower.APCapped == false)
+            {
+                tower.UpgradeTower(1);
+                GameWorld._Instance.PlayerGold -= (int)Math.Floor(upgradeCost);
             }
         }
 
         private void UpgradeButton02_Click(object sender, System.EventArgs e)
         {
-            
+
             Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
-            if (GameWorld._Instance.PlayerGold > 10)
+
+            float upgradeCost = CalculateUpgradecost(tower.ASUpgradeLvl);
+
+            if (tower.ASCapped != true)
             {
-                tower.AttackRadius += 50;
+                Upgrade_02Button.Text = string.Format("{0}", CalculateUpgradecost(tower.ASUpgradeLvl + 1));
             }
-         
+            else
+            {
+                Upgrade_02Button.Text = "Fully Upgraded";
+            }
+            
+
+            if (GameWorld._Instance.PlayerGold > upgradeCost && tower.ASCapped == false)
+            {
+                tower.UpgradeTower(2);
+                GameWorld._Instance.PlayerGold -= (int)Math.Floor(upgradeCost);
+            }
+
         }
 
         private void UpgradeButton03_Click(object sender, System.EventArgs e)
         {
             Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
-            if (GameWorld._Instance.PlayerGold > 10)
+
+            float upgradeCost = CalculateUpgradecost(tower.ARUpgradeLvl);
+            if (tower.ARCapped != true)
             {
-                tower.AttackSpeed++;
+                Upgrade_03Button.Text = string.Format("{0}", CalculateUpgradecost(tower.ARUpgradeLvl + 1));
             }
-           
+            else
+            {
+                Upgrade_03Button.Text = "Fully Upgraded";
+            }
+          
+
+            if (GameWorld._Instance.PlayerGold > upgradeCost && tower.ARCapped == false)
+            {
+                tower.UpgradeTower(3);
+                GameWorld._Instance.PlayerGold -= (int)Math.Floor(upgradeCost);
+
+            }
+
         }
 
+        private float CalculateUpgradecost(int upgradelvl)
+        {
+            float upgradeCost = 10 * upgradelvl;
+            return upgradeCost;
+        }
         private void UpdateGoldAmount(object sender, System.EventArgs e)
         {
             GoldLabel.Text = GameWorld._Instance.PlayerGold.ToString();
