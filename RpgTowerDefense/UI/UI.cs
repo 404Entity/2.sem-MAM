@@ -19,18 +19,23 @@ namespace RpgTowerDefense
         HighScore highScore = new HighScore(new Vector2(100, 50));
 
         //None Permenet Buttons some what dynamic buttons.
-        UIButton tower_01Button;
-        UIButton tower_01ProxyButton;
-        UIButton tower_02Button;
-        UIButton tower_02ProxyButton;
-        UIButton tower_03Button;
-        UIButton tower_03ProxyButton;
-        UIButton Upgrade_01Button;
-        UIButton Upgrade_02Button;
-        UIButton Upgrade_03Button;
+        private UIButton tower_01Button;
+        private UIButton tower_01ProxyButton;
+        private UIButton tower_02Button;
+        private UIButton tower_02ProxyButton;
+        private UIButton tower_03Button;
+        private UIButton tower_03ProxyButton;
+        private UIButton Upgrade_01Button;
+        private UIButton Upgrade_02Button;
+        private UIButton Upgrade_03Button;
 
-        UILabel goldLabel;
-        UILabel gateHealthLabel;
+        private UILabel goldLabel;
+        private UILabel gateHealthLabel;
+        private UILabel highscoreLabel;
+
+        private UILabel attackPower;
+        private UILabel attackSpeed;
+        private UILabel attackRange;
 
         GameObject previousGameObject;
 

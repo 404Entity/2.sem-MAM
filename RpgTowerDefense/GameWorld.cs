@@ -162,7 +162,7 @@ namespace RpgTowerDefense
             colliders = new List<Collider>();
             ui = new UI();
             dic = new Director(new PlayerBuilder());
-            player = dic.Construct(new Vector2(1, 1));
+            player = dic.Construct(new Vector2(1400, 200));
             gameObjects.Add(player);
             dic2 = new Director(new EnemyBuilder());
             dic4 = new Director(new EnemyMineBuilder());
