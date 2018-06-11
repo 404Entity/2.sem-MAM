@@ -124,7 +124,7 @@ namespace RpgTowerDefense
         /// <summary>
         /// When a enemy is hit by a bullet lose health and remove the bullet
         /// </summary>
-        /// <param name="other"></param>
+        /// <param name="other">any other collider in the collider list</param>
         public void OnCollisionEnter(Collider other)
         {
             if ((Projectile)other.GameObject.GetComponent("Projectile") != null)
