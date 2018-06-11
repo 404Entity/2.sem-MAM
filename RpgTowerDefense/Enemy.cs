@@ -67,7 +67,7 @@ namespace RpgTowerDefense
             animator.CreateAnimation("IdleRight", new Animation(1, 0, 2, TileSize * 2, TileSize * 2, 0, Vector2.Zero));
             animator.CreateAnimation("IdleBack", new Animation(1, 0, 3, TileSize * 2, TileSize * 2, 0, Vector2.Zero));
             animator.CreateAnimation("WalkFront", new Animation(4, 25, 0, TileSize * 2, TileSize * 2, 5, Vector2.Zero));
-            animator.CreateAnimation("WalkBack", new Animation(4, 25, 4, TileSize * 2, TileSize * 2, 5, Vector2.Zero));
+            animator.CreateAnimation("WalkBack", new Animation(7, 25, 0, 550, 650, 7, Vector2.Zero));
             animator.CreateAnimation("WalkLeft", new Animation(4, 50, 0, TileSize * 2, TileSize * 2, 5, Vector2.Zero));
             animator.CreateAnimation("WalkRight", new Animation(4, 50, 4, TileSize * 2, TileSize * 2, 5, Vector2.Zero));
             animator.CreateAnimation("DieBack", new Animation(4, 75, 0, TileSize * 2, TileSize * 2, 5, Vector2.Zero));
@@ -87,6 +87,8 @@ namespace RpgTowerDefense
             if (Health <= 0)
             {
                 GameWorld._Instance.RemoveGameObjects.Add(gameObject);
+                Collider collider = gameObject.GetComponent("Collider") as Collider;
+                GameWorld._Instance.Colliders.Remove(collider);
                 //Giver spilleren points når en enemy dør
                 GameWorld._Instance.HighScore += pointGain;
                 //Giver spilleren guld hver gang en enemy dør
@@ -168,6 +170,7 @@ namespace RpgTowerDefense
                 }
                 //moves based on moveVector
                 gameObject.Transform.Translate(moveVector);
+                animator.PlayAnimation("WalkBack");
                 Thread.Sleep(threadSleep);
             }
             

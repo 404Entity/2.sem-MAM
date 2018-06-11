@@ -27,6 +27,7 @@ namespace RpgTowerDefense
         {
             HighScore(spriteBatch);
             //spriteBatch.Draw(texture, new Rectangle(500,500,texture.Width,texture.Height), Color.Green);
+           
 
         }
 

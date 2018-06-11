@@ -20,7 +20,7 @@ namespace RpgTowerDefense
         #endregion
 
 
-        #region Propertys
+        #region Properties
         public int Health { get => health; set => health = value; }
 
         #endregion
@@ -30,17 +30,6 @@ namespace RpgTowerDefense
         public MainGate(GameObject gameObject): base(gameObject)
         {
             GateHealth gateHealth = new GateHealth();
-
-
-
-
-
-
-
-
-
-
-             
 
         }
 

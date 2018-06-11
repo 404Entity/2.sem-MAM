@@ -19,17 +19,23 @@ namespace RpgTowerDefense
         HighScore highScore = new HighScore(new Vector2(100, 50));
 
         //None Permenet Buttons some what dynamic buttons.
-        UIButton tower_01Button;
-        UIButton tower_01ProxyButton;
-        UIButton tower_02Button;
-        UIButton tower_02ProxyButton;
-        UIButton tower_03Button;
-        UIButton tower_03ProxyButton;
-        UIButton Upgrade_01Button;
-        UIButton Upgrade_02Button;
-        UIButton Upgrade_03Button;
+        private UIButton tower_01Button;
+        private UIButton tower_01ProxyButton;
+        private UIButton tower_02Button;
+        private UIButton tower_02ProxyButton;
+        private UIButton tower_03Button;
+        private UIButton tower_03ProxyButton;
+        private UIButton Upgrade_01Button;
+        private UIButton Upgrade_02Button;
+        private UIButton Upgrade_03Button;
 
-        UILabel GoldLabel;
+        private UILabel goldLabel;
+        private UILabel gateHealthLabel;
+        private UILabel highscoreLabel;
+
+        private UILabel attackPower;
+        private UILabel attackSpeed;
+        private UILabel attackRange;
 
         GameObject previousGameObject;
 
@@ -131,15 +137,22 @@ namespace RpgTowerDefense
                 TextScale = 0.8f
             };
 
-            GoldLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), "Ohla")
+            goldLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), "Ohla")
             {
                 Position = new Vector2(1280, 18),
                 PenColor = Color.Gold
             };
 
+            gateHealthLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), "Ohla")
+            {
+                Position = new Vector2(1470, 18),
+                PenColor = Color.Red
+            };
+
             UIElements = new List<UIComponent>()
             {
-                GoldLabel,
+                goldLabel,
+                gateHealthLabel,
                 exitButton,
                 tower_01Button,
                 tower_02Button,
@@ -166,8 +179,8 @@ namespace RpgTowerDefense
             Upgrade_03Button.Click += UpgradeButton03_Click;
 
             exitButton.Click += ExitButton_Click;
-            GoldLabel.updateMe += UpdateGoldAmount;
-
+            goldLabel.updateMe += UpdateGoldAmount;
+            gateHealthLabel.updateMe += UpdateGateHealth;
 
         }
         #endregion
@@ -389,7 +402,12 @@ namespace RpgTowerDefense
 
         private void UpdateGoldAmount(object sender, System.EventArgs e)
         {
-            GoldLabel.Text = GameWorld._Instance.PlayerGold.ToString();
+            goldLabel.Text = GameWorld._Instance.PlayerGold.ToString();
+        }
+
+        private void UpdateGateHealth(object sender, System.EventArgs e)
+        {
+            gateHealthLabel.Text = GameWorld._Instance.GateHealth.ToString();
         }
 
 
