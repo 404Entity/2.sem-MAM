@@ -62,7 +62,6 @@ C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Conte
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Mine.xnb
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\tower_01spriteSheet.xnb
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\UI_01.xnb
-C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\SQLite.Interop.dll
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\RpgTowerDefense.exe
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\RpgTowerDefense.pdb
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\MonoGame.Framework.dll
@@ -90,3 +89,15 @@ C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefen
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefense.csproj.CopyComplete
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefense.exe
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefense.pdb
+C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\CollisionTexture.xnb
+C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Enemy01_SpriteSheet.xnb
+C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Enemy01_SpriteSheetv.02.xnb
+C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Enemy_01_SpriteSheet.xnb
+C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\RpgTowerDefense.exe.config
+C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\EntityFramework.dll
+C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\EntityFramework.SqlServer.dll
+C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\System.Data.SQLite.EF6.dll
+C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\System.Data.SQLite.Linq.dll
+C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\EntityFramework.xml
+C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\EntityFramework.SqlServer.xml
+C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\System.Data.SQLite.xml
