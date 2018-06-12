@@ -19,17 +19,22 @@ namespace RpgTowerDefense
         HighScore highScore = new HighScore(new Vector2(100, 50));
 
         //None Permenet Buttons some what dynamic buttons.
-        UIButton tower_01Button;
-        UIButton tower_01ProxyButton;
-        UIButton tower_02Button;
-        UIButton tower_02ProxyButton;
-        UIButton tower_03Button;
-        UIButton tower_03ProxyButton;
-        UIButton Upgrade_01Button;
-        UIButton Upgrade_02Button;
-        UIButton Upgrade_03Button;
+        private UIButton tower_01Button;
+        private UIButton tower_01ProxyButton;
+        private UIButton tower_02Button;
+        private UIButton tower_02ProxyButton;
+        private UIButton tower_03Button;
+        private UIButton tower_03ProxyButton;
+        private UIButton upgrade_01Button;
+        private UIButton upgrade_02Button;
+        private UIButton upgrade_03Button;
 
-        UILabel GoldLabel;
+        //Labels
+        private UILabel goldLabel;
+        private UILabel scoreLabel;
+        private UILabel attackPowerLabel;
+        private UILabel attackSpeedLabel;
+        private UILabel attackRangeLabel;
 
         GameObject previousGameObject;
 
@@ -107,7 +112,7 @@ namespace RpgTowerDefense
                 Scale = 0.2f
             };
 
-            Upgrade_01Button = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
+            upgrade_01Button = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
             {
                 Position = new Vector2(1374, 824),
                 Text = "AttackDamage",
@@ -115,7 +120,7 @@ namespace RpgTowerDefense
                 TextScale = 0.8f
             };
 
-            Upgrade_02Button = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
+            upgrade_02Button = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
             {
                 Position = new Vector2(1449, 824),
                 Text = "AttackRange",
@@ -123,7 +128,7 @@ namespace RpgTowerDefense
                 TextScale = 0.8f
             };
 
-            Upgrade_03Button = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
+            upgrade_03Button = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
             {
                 Position = new Vector2(1524, 824),
                 Text = "AttackSpeed",
@@ -131,15 +136,21 @@ namespace RpgTowerDefense
                 TextScale = 0.8f
             };
 
-            GoldLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), "Ohla")
+            goldLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), "Ohla")
             {
                 Position = new Vector2(1280, 18),
                 PenColor = Color.Gold
             };
+            scoreLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), "Ohla")
+            {
+                Position = new Vector2(180, 18),
+                PenColor = Color.White
+            };
 
             UIElements = new List<UIComponent>()
             {
-                GoldLabel,
+                scoreLabel,
+                goldLabel,
                 exitButton,
                 tower_01Button,
                 tower_02Button,
@@ -161,13 +172,13 @@ namespace RpgTowerDefense
             tower_02ProxyButton.Click += Tower_02ProxyButton_Click;
             tower_03ProxyButton.Click += Tower_03ProxyButton_Click;
 
-            Upgrade_01Button.Click += UpgradeButton01_Click;
-            Upgrade_02Button.Click += UpgradeButton02_Click;
-            Upgrade_03Button.Click += UpgradeButton03_Click;
+            upgrade_01Button.Click += UpgradeButton01_Click;
+            upgrade_02Button.Click += UpgradeButton02_Click;
+            upgrade_03Button.Click += UpgradeButton03_Click;
 
             exitButton.Click += ExitButton_Click;
-            GoldLabel.updateMe += UpdateGoldAmount;
-
+            goldLabel.updateMe += UpdateGoldAmount;
+            scoreLabel.updateMe += UpdateScore;
 
         }
         #endregion
@@ -193,7 +204,7 @@ namespace RpgTowerDefense
                     foreach (UIComponent item in UIElements)
                     {
 
-                        if (item == Upgrade_01Button || item == Upgrade_02Button || item == Upgrade_03Button)
+                        if (item == upgrade_01Button || item == upgrade_02Button || item == upgrade_03Button)
                         {
                             containsUpgrade = true;
                             break;
@@ -207,48 +218,48 @@ namespace RpgTowerDefense
                         RemoveUIElements.Add(tower_02Button);
                         RemoveUIElements.Add(tower_03Button);
 
-                        addUIElements.Add(Upgrade_01Button);
-                        addUIElements.Add(Upgrade_02Button);
-                        addUIElements.Add(Upgrade_03Button);
+                        addUIElements.Add(upgrade_01Button);
+                        addUIElements.Add(upgrade_02Button);
+                        addUIElements.Add(upgrade_03Button);
 
                         Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
                         if (tower.APCapped == true)
                         {
-                            Upgrade_01Button.Text = "Fully Upgraded";
+                            upgrade_01Button.Text = "Fully Upgraded";
                         }
                         else if (tower.APUpgradeLvl == 1)
                         {
-                            Upgrade_01Button.Text = string.Format("{0}", CalculateUpgradecost(tower.APUpgradeLvl));
+                            upgrade_01Button.Text = string.Format("{0}", CalculateUpgradecost(tower.APUpgradeLvl));
                         }
                         else
                         {
-                            Upgrade_01Button.Text = string.Format("{0}", CalculateUpgradecost(tower.APUpgradeLvl + 1));
+                            upgrade_01Button.Text = string.Format("{0}", CalculateUpgradecost(tower.APUpgradeLvl + 1));
                         }
 
                         if (tower.ASCapped == true)
                         {
-                            Upgrade_02Button.Text = "Fully Upgraded";
+                            upgrade_02Button.Text = "Fully Upgraded";
                         }
                         else if (tower.ASUpgradeLvl == 1)
                         {
-                            Upgrade_02Button.Text = string.Format("{0}", CalculateUpgradecost(tower.ASUpgradeLvl));
+                            upgrade_02Button.Text = string.Format("{0}", CalculateUpgradecost(tower.ASUpgradeLvl));
                         }
                         else
                         {
-                            Upgrade_02Button.Text = string.Format("{0}", CalculateUpgradecost(tower.ASUpgradeLvl));
+                            upgrade_02Button.Text = string.Format("{0}", CalculateUpgradecost(tower.ASUpgradeLvl));
                         }
 
                         if (tower.ARCapped == true)
                         {
-                            Upgrade_03Button.Text = "Fully Upgraded";
+                            upgrade_03Button.Text = "Fully Upgraded";
                         }
                         else if (tower.ARUpgradeLvl == 1)
                         {
-                            Upgrade_03Button.Text = string.Format("{0}", CalculateUpgradecost(tower.ARUpgradeLvl));
+                            upgrade_03Button.Text = string.Format("{0}", CalculateUpgradecost(tower.ARUpgradeLvl));
                         }
                         else
                         {
-                            Upgrade_03Button.Text = string.Format("{0}", CalculateUpgradecost(tower.ARUpgradeLvl));
+                            upgrade_03Button.Text = string.Format("{0}", CalculateUpgradecost(tower.ARUpgradeLvl));
                         }
 
 
@@ -269,9 +280,9 @@ namespace RpgTowerDefense
                     }
                     if (!containsUpgrade)
                     {
-                        RemoveUIElements.Add(Upgrade_01Button);
-                        RemoveUIElements.Add(Upgrade_02Button);
-                        RemoveUIElements.Add(Upgrade_03Button);
+                        RemoveUIElements.Add(upgrade_01Button);
+                        RemoveUIElements.Add(upgrade_02Button);
+                        RemoveUIElements.Add(upgrade_03Button);
 
                         addUIElements.Add(tower_01Button);
                         addUIElements.Add(tower_02Button);
@@ -407,11 +418,11 @@ namespace RpgTowerDefense
 
             if (tower.APCapped != true)
             {
-                Upgrade_01Button.Text = string.Format("{0}", CalculateUpgradecost(tower.APUpgradeLvl + 1));
+                upgrade_01Button.Text = string.Format("{0}", CalculateUpgradecost(tower.APUpgradeLvl + 1));
             }
             else
             {
-                Upgrade_01Button.Text = "Fully Upgraded";
+                upgrade_01Button.Text = "Fully Upgraded";
             }
         
 
@@ -431,11 +442,11 @@ namespace RpgTowerDefense
 
             if (tower.ASCapped != true)
             {
-                Upgrade_02Button.Text = string.Format("{0}", CalculateUpgradecost(tower.ASUpgradeLvl + 1));
+                upgrade_02Button.Text = string.Format("{0}", CalculateUpgradecost(tower.ASUpgradeLvl + 1));
             }
             else
             {
-                Upgrade_02Button.Text = "Fully Upgraded";
+                upgrade_02Button.Text = "Fully Upgraded";
             }
             
 
@@ -454,11 +465,11 @@ namespace RpgTowerDefense
             float upgradeCost = CalculateUpgradecost(tower.ARUpgradeLvl);
             if (tower.ARCapped != true)
             {
-                Upgrade_03Button.Text = string.Format("{0}", CalculateUpgradecost(tower.ARUpgradeLvl + 1));
+                upgrade_03Button.Text = string.Format("{0}", CalculateUpgradecost(tower.ARUpgradeLvl + 1));
             }
             else
             {
-                Upgrade_03Button.Text = "Fully Upgraded";
+                upgrade_03Button.Text = "Fully Upgraded";
             }
           
 
@@ -476,9 +487,15 @@ namespace RpgTowerDefense
             float upgradeCost = 10 * upgradelvl;
             return upgradeCost;
         }
+
         private void UpdateGoldAmount(object sender, System.EventArgs e)
         {
-            GoldLabel.Text = GameWorld._Instance.PlayerGold.ToString();
+            goldLabel.Text = GameWorld._Instance.PlayerGold.ToString();
+        }
+
+        private void UpdateScore(object sender, System.EventArgs e)
+        {
+            scoreLabel.Text = GameWorld._Instance.HighScore.ToString();
         }
 
 
