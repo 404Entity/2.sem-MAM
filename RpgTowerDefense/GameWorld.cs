@@ -10,6 +10,7 @@ namespace RpgTowerDefense
     /// </summary>
     public class GameWorld : Game
     {
+        #region Fields
         Director dic;
         Director dic2;
         Director dic4;
@@ -120,7 +121,7 @@ namespace RpgTowerDefense
             Content.RootDirectory = "Content";
         }
 
-
+        #endregion
 
 
         /// <summary>
