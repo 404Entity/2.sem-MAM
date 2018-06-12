@@ -50,9 +50,9 @@ namespace RpgTowerDefense
             if (GameWorld._Instance.GateHealth <= 0)
             {
                 //Loose game
-                Database database = new Database();
                 GameWorld._Instance.GameState = true;
-                database.AddHighScore("Test", GameWorld._Instance.HighScore);
+                Database._Instance.AddHighScore("Test", GameWorld._Instance.HighScore);
+                Database._Instance.AddAnalyse(100, 10000, 3, 400);
             }
         }
 

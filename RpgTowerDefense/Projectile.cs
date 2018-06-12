@@ -25,6 +25,8 @@ namespace RpgTowerDefense
 
         public float Damage { get => damage; set => damage = value; }
 
+
+        //Remove this and its Interface ?
         public void OnCollisionEnter(Collider other)
         {
             if ((Enemy)other.GameObject.GetComponent("Enemy") != null)

@@ -21,8 +21,7 @@ namespace RpgTowerDefense
                 System.IO.Directory.CreateDirectory("C:\\TowerDefence");
                 SQLiteConnection.CreateFile("C:\\TowerDefence\\TowerDefence.db");
             }
-            Database data = new Database();
-            data.CreateTables();
+            Database._Instance.CreateTables();
 
             using (var game = GameWorld._Instance)
                 game.Run();
