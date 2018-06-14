@@ -53,7 +53,13 @@ namespace RpgTowerDefense
             this.threadSleep = threadSleep;
             this.pointGain = pointGain;
             this.goldGainOnKill = goldGainOnKill;
+
+            baseSpeed = GameWorld._Instance.worldBuilder.xWidth;
         }
+
+        float baseSpeed;
+        float speedMod = 1;
+
         #endregion
         #region Methods
         public void LoadContent(ContentManager Content)
@@ -166,7 +172,7 @@ namespace RpgTowerDefense
                     moveVector = Vector2.Normalize(moveVector);
                 }
                 //moves based on moveVector
-                gameObject.Transform.Translate(moveVector);
+                gameObject.Transform.Translate(moveVector * baseSpeed * speedMod * GameWorld._Instance.deltaTime);
                 Thread.Sleep(threadSleep);
             }
             

@@ -33,7 +33,10 @@ namespace RpgTowerDefense
 
 
         public GameWorldBuilder()
-        {   }
+        {
+            yHeight = GameWorld._Instance.graphics.GraphicsDevice.Viewport.Height / yTiles;
+            xWidth = GameWorld._Instance.graphics.GraphicsDevice.Viewport.Width / xTiles;
+        }
 
         public void SetupData()
         {
@@ -56,19 +59,18 @@ namespace RpgTowerDefense
                 x++;
             }
 
-            //World 1, maze
+            //sets coordinates for buildspots to be pixel corrdinates instead of tile coordinates
             for (int i = 0; i < gw.buildSpotLocation.Length;)
             {
-                gw.buildSpotLocation[i].X = gw.buildSpotLocation[i].X * xWidth;
-                gw.buildSpotLocation[i].Y = gw.buildSpotLocation[i].Y * yHeight;
+                gw.buildSpotLocation[i] = new Vector2(gw.buildSpotLocation[i].X * xWidth, gw.buildSpotLocation[i].Y * yHeight);
                 i++;
             }
             gw.buildSpotAvailable = new bool[gw.buildSpotLocation.Length];
 
+            //sets monster waypoints to be pixel coordinates instead of tile coordinates
             for (int i = 0; i < gw.walkCoordinates.Length;)
             {
-                gw.walkCoordinates[i].X = gw.walkCoordinates[i].X * xWidth;
-                gw.walkCoordinates[i].Y = gw.walkCoordinates[i].Y * yHeight;
+                gw.walkCoordinates[i] = new Vector2(gw.walkCoordinates[i].X * xWidth, gw.walkCoordinates[i].Y * yHeight);
                 i++;
             }
         }

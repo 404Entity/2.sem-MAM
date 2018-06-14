@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System;
 
 namespace RpgTowerDefense
 {
@@ -10,6 +11,8 @@ namespace RpgTowerDefense
     /// </summary>
     public class GameWorld : Game
     {
+        Random rng;
+
         Director dic;
         Director dic2;
         Director dic4;
@@ -23,11 +26,11 @@ namespace RpgTowerDefense
         float interval = 1.5f;
 
         float mineSpawntime;
-        float mineInterval = 15;
+        float mineInterval = 1.5f;
         
         MineMonsterHandler mine;
         
-        private Camera camera;
+        public Camera camera;
         private GameObject selectedGameObject;
         private MouseState previouseMouseState;
         private StartMenu startMenu;
@@ -41,11 +44,11 @@ namespace RpgTowerDefense
         Texture2D UITex;
         Rectangle UIRect;
 
-        //list of locations on the grid where towers can be built
+        //list of locations on the grid where towers can be built, marked in tile coordinates
         public Vector2[] buildSpotLocation = { new Vector2(3, 12), new Vector2(6, 14), new Vector2(7, 3), new Vector2(12, 12), new Vector2(14, 3), new Vector2(16, 6), new Vector2(21, 12), new Vector2(24, 6), new Vector2(28, 1) };
         public bool[] buildSpotAvailable;
 
-        //keeps track of coordinates for enemy pathing
+        //keeps track of coordinates for enemy pathing, marked in tile coordinates
         public Vector2[] walkCoordinates = { new Vector2(5, 14), new Vector2(5, 2), new Vector2(17, 2), new Vector2(17, 8), new Vector2(11, 8), new Vector2(11, 14), new Vector2(23, 14), new Vector2(23, 2), new Vector2(32, 2) };
 
 
@@ -79,7 +82,7 @@ namespace RpgTowerDefense
             }
         }
 
-        GraphicsDeviceManager graphics;
+        public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         BackGround backGround = new BackGround();
@@ -141,18 +144,21 @@ namespace RpgTowerDefense
             camera = new Camera();
             camera.Screenvalue = 1;
 
-            graphics.PreferredBackBufferWidth = 1600;
-            graphics.PreferredBackBufferHeight = 900;
-            graphics.GraphicsDevice.Viewport = new Viewport(0, 0, 1600, 900);
+            graphics.IsFullScreen = true;
+
+            graphics.PreferredBackBufferWidth = graphics.GraphicsDevice.DisplayMode.Width;
+            graphics.PreferredBackBufferHeight = graphics.GraphicsDevice.DisplayMode.Height;
+
+            
+            
+            //graphics.GraphicsDevice.Viewport = new Viewport(0, 0, 1600, 900);
             graphics.ApplyChanges();
 
             ScreenWidth = graphics.PreferredBackBufferWidth;
             ScreenHeigth = graphics.PreferredBackBufferHeight;
 
-            worldBuilder.yHeight = graphics.GraphicsDevice.Viewport.Height / worldBuilder.yTiles;
-            worldBuilder.xWidth = graphics.GraphicsDevice.Viewport.Width / worldBuilder.xTiles;
             worldBuilder.map1Rect = new Rectangle (0, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
-            worldBuilder.map2Rect = new Rectangle(3200, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
+            worldBuilder.map2Rect = new Rectangle(graphics.GraphicsDevice.Viewport.Width * 3, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
 
 
             // TODO: Add your initialization logic here
@@ -272,15 +278,7 @@ namespace RpgTowerDefense
 
                 }
             }
-            //test mob spawn
-            spawntime += deltaTime;
-            if(spawntime >= interval)
-            {
-                spawntime = 0;
-                SpawnMob();
-                //Giver spilleren 10+ guld hvert enemy spawn
-                PlayerGold += GoldGainEachRound;
-            }
+
             if (GameState == true)
             {
                 startMenu.Update();
@@ -288,32 +286,7 @@ namespace RpgTowerDefense
             else
             {
                 deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                    Exit();
-                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D1))
-                {
 
-                    camera.Screenvalue = 1;
-                }
-                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D2))
-                {
-                    Mouse.SetPosition(screenWidth, 0);
-                    camera.Screenvalue = 2;
-                }
-                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D3))
-                {
-                    camera.Screenvalue = 3;
-                }
-                //test mob spawn
-                spawntime += deltaTime;
-                if (spawntime >= interval)
-                {
-                    spawntime = 0;
-                    SpawnMob();
-                    //Giver spilleren 10+ guld hvert enemy spawn
-                    PlayerGold += GoldGainEachRound;
-                }
-                deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                     Exit();
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D1))
@@ -333,18 +306,12 @@ namespace RpgTowerDefense
 
                 //test mob spawn
                 spawntime += deltaTime;
-                if (spawntime >= interval)
+                if (spawntime >= interval && gameObjects.Count <= 50)
                 {
                     spawntime = 0;
                     SpawnMob();
                     //Giver spilleren 10+ guld hvert enemy spawn
                     PlayerGold += GoldGainEachRound;
-                }
-                mineSpawntime += deltaTime;
-                if (mineSpawntime >= mineInterval)
-                {
-                    mineSpawntime = 0;
-                    mine.SpawnMob(3);
                 }
                 mineSpawntime += deltaTime;
                 if (mineSpawntime >= mineInterval)
@@ -437,10 +404,26 @@ namespace RpgTowerDefense
 
         public void SpawnMobMine()
         {
-            GameObject mob = dic4.Construct(new Vector2(graphics.GraphicsDevice.Viewport.Width*3, 425), player);
-            UpdateMobList(mob, true);
-            gameObjects.Add(mob);
-
+            rng = new Random();
+            int i = rng.Next(1, 4);
+            if (i == 1)
+            {
+                GameObject mob = dic4.Construct(new Vector2(graphics.GraphicsDevice.Viewport.Width * 3, rng.Next(150, 350)), player);
+                UpdateMobList(mob, true);
+                gameObjects.Add(mob);
+            }
+            else if (i == 2)
+            {
+                GameObject mob = dic4.Construct(new Vector2(graphics.GraphicsDevice.Viewport.Width * 3, rng.Next(350, 550)), player);
+                UpdateMobList(mob, true);
+                gameObjects.Add(mob);
+            }
+            else
+            {
+                GameObject mob = dic4.Construct(new Vector2(graphics.GraphicsDevice.Viewport.Width * 3, rng.Next(550, 750)), player);
+                UpdateMobList(mob, true);
+                gameObjects.Add(mob);
+            }
         }
     }
 }

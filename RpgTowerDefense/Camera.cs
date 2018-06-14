@@ -9,14 +9,16 @@ using Microsoft.Xna.Framework.Input;
 
 namespace RpgTowerDefense
 {
-    class Camera
+    public class Camera
     {
         /// <summary>
         /// The Camera class locks to a specified target(Gameobject) and allows us to transform the render area, using the offset.
         /// </summary>
+
+
         private Matrix transform;
         private Matrix offset;
-        private int screenvalue;
+        public int screenvalue;
         public Matrix Transform { get { return transform; } private set { transform = value; } }
 
 

@@ -167,7 +167,7 @@ namespace RpgTowerDefense
 
         public void Shoot()
         {
-            Vector2 cursorPosition = new Vector2(Mouse.GetState().Position.X,Mouse.GetState().Position.Y);
+            Vector2 cursorPosition = new Vector2(Mouse.GetState().Position.X + ((GameWorld._Instance.camera.screenvalue-1) * 1600),Mouse.GetState().Position.Y);
             Vector2 shootdirection = cursorPosition - gameObject.Transform.Position;
             Vector2 shootdirectonnormalized = Vector2.Normalize(shootdirection);
             Director director = new Director(new BulletBuilder());

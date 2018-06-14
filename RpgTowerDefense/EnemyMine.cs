@@ -25,7 +25,7 @@ namespace RpgTowerDefense
         //threadSleep = Speed of enemy
         bool mineThreadStarted = false;
         int dmg, pointGain, goldGainOnKill, health, threadSleep = 20;
-        float attackCooldown, attackSpeed, attackRange, speed, lookRange;
+        float attackCooldown = 0, attackSpeed = 0, attackRange = 15, speed, lookRange;
         GameObject player;
         Vector2 waitPos;
 
