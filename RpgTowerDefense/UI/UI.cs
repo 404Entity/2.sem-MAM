@@ -13,6 +13,7 @@ namespace RpgTowerDefense
     class UI
     {
         #region Fields
+        //Test Fields
         PlayerGold playerGold = new PlayerGold(new Vector2(600f, 10));
         GateHealth gateHealth = new GateHealth(new Vector2(840, 10));
         VersionControl versionControl = new VersionControl(new Vector2(1, 880));
@@ -36,7 +37,7 @@ namespace RpgTowerDefense
         private UILabel attackSpeedLabel;
         private UILabel attackRangeLabel;
 
-        GameObject previousGameObject;
+        private GameObject previousGameObject;
 
         private List<UIComponent> uielements;
         private List<UIComponent> addUIElements;

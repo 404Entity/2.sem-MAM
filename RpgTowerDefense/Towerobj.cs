@@ -57,7 +57,7 @@ namespace RpgTowerDefense
             coolDown = 0;
 
             // limt upgrades
-            // sets base lvl to one for all upgrades
+            // sets base lvl to one for all upgrades Test Wise
             aPUpgradeLvl = 1; 
             aSUpgradeLvl = 1;
             aRUpgradeLvl = 1;

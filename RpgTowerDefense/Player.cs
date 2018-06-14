@@ -49,6 +49,7 @@ namespace RpgTowerDefense
             KeyboardState keyState = Keyboard.GetState();
             if (canMove)
             {
+#if DEBUG
                 if (keyState.IsKeyDown(Keys.F))
                 {
                     if (GameWorld._Instance.PlayerGold > 50)
@@ -58,6 +59,7 @@ namespace RpgTowerDefense
                     }
                     
                 }
+#endif
                 if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
                 {
                     Shoot();
@@ -137,23 +139,8 @@ namespace RpgTowerDefense
 
         public void OnAnimationDone(string animationName)
         {
-            /*
-            if (animationName == null)
-            {
-                animationName = "Idle";
-            }
-            if (animationName.Contains("Attack"))
-            {
-                canMove = true;
-
-            }
-            if (animationName.Contains("Jump"))
-            {
-                strategy = null;
-            }
-            */
         }
-
+#if DEBUG
         public void BuildTower()
         {
             Director dic = new Director(new TowerBuilder());
@@ -164,7 +151,7 @@ namespace RpgTowerDefense
         {
 
         }
-
+#endif
         public void Shoot()
         {
             Vector2 cursorPosition = new Vector2(Mouse.GetState().Position.X,Mouse.GetState().Position.Y);

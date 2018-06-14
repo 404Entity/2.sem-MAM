@@ -15,7 +15,6 @@ namespace RpgTowerDefense
         GameWorldBuilder worldBuilder;
 
         private Animator animator;
-        private IStrategy strategy;
 
         //dmg = Damage of enemy
         //PointGain = amount of points gained for killing an enemy
@@ -25,7 +24,7 @@ namespace RpgTowerDefense
         int dmg, pointGain, goldGainOnKill, threadSleep;
 
         //size of tiles, used to scale size of enemy
-        int TileSize;
+        int tileSize;
         //used to find and save destinations for pathing
         int walkIndex;
         Vector2 moveTarget;
@@ -43,10 +42,10 @@ namespace RpgTowerDefense
             //Sets pathing destination as the first saved coordinate in GameWorld
             moveTarget = GameWorld._Instance.walkCoordinates[0];
             //makes enemy spawn on edge of screen on same y coordinate as first pathing destination
-            TileSize = (int)worldBuilder.xWidth;
+            tileSize = (int)worldBuilder.xWidth;
             if (gameObject.Transform.Position.X == 0)
             {
-                gameObject.Transform.Position = new Vector2(-TileSize, moveTarget.Y);
+                gameObject.Transform.Position = new Vector2(-tileSize, moveTarget.Y);
             }
             this.Health = health;
             this.dmg = dmg;
@@ -62,18 +61,18 @@ namespace RpgTowerDefense
         }
         public void CreateAnimation()
         {
-            animator.CreateAnimation("IdleFront", new Animation(1, 0, 0, TileSize * 2, TileSize * 2, 0, Vector2.Zero));
-            animator.CreateAnimation("IdleLeft", new Animation(1, 0, 1, TileSize * 2, TileSize * 2, 0, Vector2.Zero));
-            animator.CreateAnimation("IdleRight", new Animation(1, 0, 2, TileSize * 2, TileSize * 2, 0, Vector2.Zero));
-            animator.CreateAnimation("IdleBack", new Animation(1, 0, 3, TileSize * 2, TileSize * 2, 0, Vector2.Zero));
-            animator.CreateAnimation("WalkFront", new Animation(4, 25, 0, TileSize * 2, TileSize * 2, 5, Vector2.Zero));
-            animator.CreateAnimation("WalkBack", new Animation(4, 25, 4, TileSize * 2, TileSize * 2, 5, Vector2.Zero));
-            animator.CreateAnimation("WalkLeft", new Animation(4, 50, 0, TileSize * 2, TileSize * 2, 5, Vector2.Zero));
-            animator.CreateAnimation("WalkRight", new Animation(4, 50, 4, TileSize * 2, TileSize * 2, 5, Vector2.Zero));
-            animator.CreateAnimation("DieBack", new Animation(4, 75, 0, TileSize * 2, TileSize * 2, 5, Vector2.Zero));
-            animator.CreateAnimation("DieFront", new Animation(4, 75, 4, TileSize * 2, TileSize * 2, 5, Vector2.Zero));
-            animator.CreateAnimation("DieLeft", new Animation(4, 100, 0, TileSize * 2, TileSize * 2, 5, Vector2.Zero));
-            animator.CreateAnimation("DieRight", new Animation(4, 100, 4, TileSize * 2, TileSize * 2, 5, Vector2.Zero));
+            animator.CreateAnimation("IdleFront", new Animation(1, 0, 0, tileSize * 2, tileSize * 2, 0, Vector2.Zero));
+            animator.CreateAnimation("IdleLeft", new Animation(1, 0, 1, tileSize * 2, tileSize * 2, 0, Vector2.Zero));
+            animator.CreateAnimation("IdleRight", new Animation(1, 0, 2, tileSize * 2, tileSize * 2, 0, Vector2.Zero));
+            animator.CreateAnimation("IdleBack", new Animation(1, 0, 3, tileSize * 2, tileSize * 2, 0, Vector2.Zero));
+            animator.CreateAnimation("WalkFront", new Animation(4, 25, 0, tileSize * 2, tileSize * 2, 5, Vector2.Zero));
+            animator.CreateAnimation("WalkBack", new Animation(4, 25, 4, tileSize * 2, tileSize * 2, 5, Vector2.Zero));
+            animator.CreateAnimation("WalkLeft", new Animation(4, 50, 0, tileSize * 2, tileSize * 2, 5, Vector2.Zero));
+            animator.CreateAnimation("WalkRight", new Animation(4, 50, 4, tileSize * 2, tileSize * 2, 5, Vector2.Zero));
+            animator.CreateAnimation("DieBack", new Animation(4, 75, 0, tileSize * 2, tileSize * 2, 5, Vector2.Zero));
+            animator.CreateAnimation("DieFront", new Animation(4, 75, 4, tileSize * 2, tileSize * 2, 5, Vector2.Zero));
+            animator.CreateAnimation("DieLeft", new Animation(4, 100, 0, tileSize * 2, tileSize * 2, 5, Vector2.Zero));
+            animator.CreateAnimation("DieRight", new Animation(4, 100, 4, tileSize * 2, tileSize * 2, 5, Vector2.Zero));
             animator.PlayAnimation("IdleFront");
         }
 
@@ -92,18 +91,6 @@ namespace RpgTowerDefense
                 //Giver spilleren guld hver gang en enemy dør
                 GameWorld._Instance.PlayerGold += goldGainOnKill;
                 enemyMovementBool = false;
-            }
-            if (strategy is Walk)
-            {
-
-            }
-            if (strategy is Idle)
-            {
-
-            }
-            if (strategy is Attack)
-            {
-
             }
 
             if(gameObject.Transform.Position == moveTarget)
