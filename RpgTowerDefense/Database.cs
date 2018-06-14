@@ -78,7 +78,7 @@ namespace RpgTowerDefense
 
         public void AddHighScore(string user, int Score)
         {
-            //Adder HighScores til databasen
+            //Adds HighScore to database
             sqlite2.Open();
             
             string txtSqlQuery = "INSERT INTO HighScore Values (null,'"+ user +"'," + Score + ", date('now'))";
@@ -88,11 +88,11 @@ namespace RpgTowerDefense
             sqlite2.Close();
         }
 
-        public void AddAnalyse(int indkomstPrLevel, int totalInkomst, int loseLvl, int totalTårnePlaceret)
+        public void AddAnalyse(int incomePrLevel, int totalIncome, int loseLvl, int totalTowersPlaced)
         {
-            //Adder Analysen til databasen
+            //adds Analysis to database
             sqlite2.Open();
-            string txtSqlQuery = "INSERT INTO Analyse Values(null,"+indkomstPrLevel+","+totalInkomst+","+loseLvl+","+totalTårnePlaceret+")";
+            string txtSqlQuery = "INSERT INTO Analyse Values(null,"+incomePrLevel+","+totalIncome+","+loseLvl+","+totalTowersPlaced+")";
 
 
 
@@ -107,7 +107,7 @@ namespace RpgTowerDefense
         #region CreateTables
         public void CreateTables()
         {
-            //Highscore tables created
+            //Highscore table created
 
             sqlite2.Open();
             string CreateTableHighscore = "CREATE TABLE IF NOT EXISTS HighScore" +
@@ -119,7 +119,7 @@ namespace RpgTowerDefense
             SQLiteCommand commandHighscore = new SQLiteCommand(CreateTableHighscore, sqlite2);
             commandHighscore.ExecuteNonQuery();
 
-            //Analyse tables created
+            //Analyse table created
 
             string CreateTableAnalyse = "CREATE TABLE IF NOT EXISTS Analyse" +
                 "('ID' INTEGER PRIMARY KEY AUTOINCREMENT,"+
@@ -130,12 +130,6 @@ namespace RpgTowerDefense
             
             SQLiteCommand commandAnalyse = new SQLiteCommand(CreateTableAnalyse, sqlite2);
             commandAnalyse.ExecuteNonQuery();
-
-
-
-
-
-
 
             sqlite2.Close();
         }

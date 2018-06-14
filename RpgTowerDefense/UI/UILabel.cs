@@ -42,6 +42,7 @@ namespace RpgTowerDefense
 
         public override void Update()
        {
+            //Not null operator(elvis Operator) checks if the label has any subscriptions
             updateMe?.Invoke(this,new EventArgs());
         }
 

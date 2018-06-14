@@ -44,7 +44,6 @@
     <Compile Include="Animation.cs" />
     <Compile Include="Builder\BulletBuilder.cs" />
     <Compile Include="Builder\EnemyMineBuilder.cs" />
-    <Compile Include="Circle.cs" />
     <Compile Include="Component\BackGround.cs" />
     <Compile Include="Builder\Director.cs" />
     <Compile Include="Builder\EnemyBuilder.cs" />
@@ -125,10 +124,6 @@
     <Content Include="Content\tower_01spriteSheet.png" />
     <Content Include="Content\UI_01.png" />
     <Content Include="Icon.ico" />
-    <Content Include="SQLite.Interop.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="System.Data.SQLite.dll" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
@@ -155,7 +150,6 @@
     <None Include="obj\x86\Debug\RpgTowerDefense.csproj.CoreCompileInputs.cache" />
     <None Include="obj\x86\Debug\RpgTowerDefense.csprojResolveAssemblyReference.cache" />
     <None Include="obj\x86\Release\RpgTowerDefense.csproj.CoreCompileInputs.cache" />
-    <None Include="System.Data.SQLite.dll.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Windows\x86\Release\" />

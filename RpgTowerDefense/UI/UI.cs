@@ -32,6 +32,7 @@ namespace RpgTowerDefense
         //Labels
         private UILabel goldLabel;
         private UILabel scoreLabel;
+        private UILabel gateHealthLabel;
         private UILabel attackPowerLabel;
         private UILabel attackSpeedLabel;
         private UILabel attackRangeLabel;
@@ -136,12 +137,17 @@ namespace RpgTowerDefense
                 TextScale = 0.8f
             };
 
-            goldLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), "Ohla")
+            goldLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), "0")
             {
                 Position = new Vector2(1280, 18),
                 PenColor = Color.Gold
             };
-            scoreLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), "Ohla")
+            gateHealthLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), "0")
+            {
+                Position = new Vector2(1470, 18),
+                PenColor = Color.Red
+            };
+            scoreLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), "0")
             {
                 Position = new Vector2(180, 18),
                 PenColor = Color.White
@@ -149,6 +155,7 @@ namespace RpgTowerDefense
 
             UIElements = new List<UIComponent>()
             {
+                gateHealthLabel,
                 scoreLabel,
                 goldLabel,
                 exitButton,
@@ -191,10 +198,10 @@ namespace RpgTowerDefense
 
             if (GameWorld._Instance.SelectedGameObject != null && GameWorld._Instance.SelectedGameObject != previousGameObject)
             {
-                SelectedBlue(GameWorld._Instance.SelectedGameObject);
+                ChangeColor(GameWorld._Instance.SelectedGameObject, Color.Cyan);
                 if (previousGameObject != null)
                 {
-                    UnselectWhite(previousGameObject);
+                    ChangeColor(previousGameObject, Color.White);
                 }
 
                 if (GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") != null)
@@ -409,6 +416,11 @@ namespace RpgTowerDefense
             }
         }
 
+        /// <summary>
+        /// When clicked try to Upgrade the towers AttackPower if gold avalible and the upgrade is not capped
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpgradeButton01_Click(object sender, System.EventArgs e)
         {
 
@@ -433,6 +445,11 @@ namespace RpgTowerDefense
             }
         }
 
+        /// <summary>
+        ///  When clicked try to Upgrade the towers AttackSpeed if gold avalible and the upgrade is not capped 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpgradeButton02_Click(object sender, System.EventArgs e)
         {
 
@@ -458,6 +475,11 @@ namespace RpgTowerDefense
 
         }
 
+        /// <summary>
+        /// When clicked try to Upgrade the towers AttackRange if gold avalible and the upgrade is not capped
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpgradeButton03_Click(object sender, System.EventArgs e)
         {
             Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
@@ -482,6 +504,11 @@ namespace RpgTowerDefense
 
         }
 
+        /// <summary>
+        /// Calculate the cost of the Upgrade for the Upgradebutton.
+        /// </summary>
+        /// <param name="upgradelvl"></param>
+        /// <returns></returns>
         private float CalculateUpgradecost(int upgradelvl)
         {
             float upgradeCost = 10 * upgradelvl;
@@ -521,15 +548,10 @@ namespace RpgTowerDefense
             removeUIElements.Clear();
         }
 
-        private void SelectedBlue(GameObject gameObject)
+        private void ChangeColor(GameObject gameObject, Color color)
         {
             SpriteRenderer sp = gameObject.GetComponent("SpriteRenderer") as SpriteRenderer;
-            sp.Color = Color.Cyan;
-        }
-        private void UnselectWhite(GameObject gameObject)
-        {
-            SpriteRenderer sp = gameObject.GetComponent("SpriteRenderer") as SpriteRenderer;
-            sp.Color = Color.White;
+            sp.Color = color;
         }
     }
 }
