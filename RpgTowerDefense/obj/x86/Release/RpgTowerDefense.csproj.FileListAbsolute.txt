@@ -92,3 +92,4 @@ C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\obj\x86\Release\RpgTowerDef
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\obj\x86\Release\RpgTowerDefense.csproj.CopyComplete
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\obj\x86\Release\RpgTowerDefense.exe
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\obj\x86\Release\RpgTowerDefense.pdb
+C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Release\System.Data.SQLite.xml
