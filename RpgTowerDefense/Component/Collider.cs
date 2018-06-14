@@ -86,7 +86,7 @@ namespace RpgTowerDefense
         public void LoadContent(ContentManager Content)
         {
             spriteRender = (SpriteRenderer)gameObject.GetComponent("SpriteRender");
-            texture2D = Content.Load<Texture2D>("CollisionTexture");
+            //texture2D = Content.Load<Texture2D>("CollisionTexture");
         }
 
         public void Update()

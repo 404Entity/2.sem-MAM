@@ -103,7 +103,6 @@ namespace RpgTowerDefense
                 else
                 {
                     strategy = new Idle(animator);
-                    gameObject.Transform.stop();
                 }
                 if (keyState.IsKeyDown(Keys.E))
                 {
@@ -154,7 +153,7 @@ namespace RpgTowerDefense
 #endif
         public void Shoot()
         {
-            Vector2 cursorPosition = new Vector2(Mouse.GetState().Position.X,Mouse.GetState().Position.Y);
+            Vector2 cursorPosition = new Vector2(Mouse.GetState().Position.X + ((GameWorld._Instance.camera.screenvalue-1) * GameWorld._Instance.ScreenWidth),Mouse.GetState().Position.Y);
             Vector2 shootdirection = cursorPosition - gameObject.Transform.Position;
             Vector2 shootdirectonnormalized = Vector2.Normalize(shootdirection);
             Director director = new Director(new BulletBuilder());

@@ -27,7 +27,7 @@ namespace RpgTowerDefense
         
         MineMonsterHandler mine;
         
-        private Camera camera;
+        public Camera camera;
         private GameObject selectedGameObject;
         private MouseState previouseMouseState;
         private StartMenu startMenu;
