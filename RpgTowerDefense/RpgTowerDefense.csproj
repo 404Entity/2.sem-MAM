@@ -41,13 +41,23 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Animation.cs" />
+    <Compile Include="Builder\BulletBuilder.cs" />
+    <Compile Include="Circle.cs" />
+    <Compile Include="Component\BackGround.cs" />
     <Compile Include="Builder\Director.cs" />
     <Compile Include="Builder\EnemyBuilder.cs" />
     <Compile Include="Builder\PlayerBuilder.cs" />
+    <Compile Include="Builder\TowerBuilder.cs" />
     <Compile Include="Component\Animator.cs" />
     <Compile Include="Component\Collider.cs" />
     <Compile Include="Component\Component.cs" />
-    <Compile Include="Component\Enemy.cs" />
+    <Compile Include="Enemy.cs" />
+    <Compile Include="Builder\GateBuilder.cs" />
+    <Compile Include="GameWorldBuilder.cs" />
+    <Compile Include="UI\HighScore.cs" />
+    <Compile Include="UI\GateHealth.cs" />
+    <Compile Include="MainGate.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Component\SpriteRenderer.cs" />
     <Compile Include="Component\Transform.cs" />
@@ -65,15 +75,20 @@
     <Compile Include="obj\x86\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\x86\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\x86\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="UI\PlayerGold.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Projectile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strategy\Attack.cs" />
-    <Compile Include="Strategy\Climb.cs" />
-    <Compile Include="Strategy\Detect.cs" />
+    <Compile Include="Camera.cs" />
     <Compile Include="Strategy\Idle.cs" />
-    <Compile Include="Strategy\Jump.cs" />
     <Compile Include="Strategy\Walk.cs" />
-    <Compile Include="Tower.cs" />
+    <Compile Include="Towerobj.cs" />
+    <Compile Include="UI\UI.cs" />
+    <Compile Include="UI\UIButton.cs" />
+    <Compile Include="UI\UIComponent.cs" />
+    <Compile Include="UI\UILabel.cs" />
+    <Compile Include="UI\VersionControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -83,11 +98,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\BackGround.png" />
+    <Content Include="Content\BackGroundWithGrid.png" />
+    <Content Include="Content\BackGround_old.png" />
+    <Content Include="Content\BackGround_WithPainted_spots.png" />
+    <Content Include="Content\BuildSpot.png" />
+    <Content Include="Content\Bullet.png" />
+    <Content Include="Content\CityGate.jpg" />
+    <Content Include="Content\Controls\Button.png" />
+    <Content Include="Content\Enemy.jpg" />
+    <Content Include="Content\enemy_static.png" />
+    <Content Include="Content\Mine.png" />
+    <Content Include="Content\Player.jpg" />
+    <Content Include="Content\tower_01.png" />
+    <Content Include="Content\tower_01spriteSheet.png" />
+    <Content Include="Content\UI_01.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
+    <None Include="Content\bin\Windows\BackGround.xnb" />
+    <None Include="Content\bin\Windows\BackGroundWithGrid.xnb" />
+    <None Include="Content\bin\Windows\BuildSpot.xnb" />
+    <None Include="Content\bin\Windows\Enemy.xnb" />
+    <None Include="Content\bin\Windows\Player.xnb" />
+    <None Include="Content\bin\Windows\yingyang tile buildspot.xnb" />
+    <None Include="Content\Fonts\UiFont.spritefont" />
+    <None Include="Content\GateHealth.spritefont" />
+    <None Include="Content\Gold.spritefont" />
+    <None Include="Content\obj\Windows\.mgcontent" />
+    <None Include="Content\obj\Windows\BackGround.mgcontent" />
+    <None Include="Content\obj\Windows\BackGroundWithGrid.mgcontent" />
+    <None Include="Content\obj\Windows\BuildSpot.mgcontent" />
+    <None Include="Content\obj\Windows\Enemy.mgcontent" />
+    <None Include="Content\obj\Windows\Player.mgcontent" />
+    <None Include="Content\obj\Windows\yingyang tile buildspot.mgcontent" />
     <None Include="obj\x86\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="obj\x86\Debug\RpgTowerDefense.csproj.CoreCompileInputs.cache" />
     <None Include="obj\x86\Debug\RpgTowerDefense.csprojResolveAssemblyReference.cache" />

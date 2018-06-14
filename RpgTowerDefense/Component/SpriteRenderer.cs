@@ -9,51 +9,62 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RpgTowerDefense
 {
-    class SpriteRenderer: Component, ILoadable, IDrawable
+    class SpriteRenderer : Component, ILoadable, IDrawable
     {
-        float scale;
+        private float scale;
         private Rectangle rectangle;
         private Texture2D sprite;
         private Vector2 offset;
+        private Vector2 origin;
+        private float rotation;
+        private Color color;
+ 
+        private string spriteName;
+        private float layerDepth;
         public Vector2 Offset
         {
             get { return offset; }
             set { offset = value; }
         }
+
+
         public Texture2D Sprite
         {
             get { return sprite; }
             set { sprite = value; }
         }
-        private string spriteName;
-        private float layerDepth;
-
+        public float Rotation { get => rotation; set => rotation = value; }
+        public Vector2 Origin { get => origin; set => origin = value; }
         public Rectangle Rectangle
         {
             get { return rectangle; }
             set { rectangle = value; }
         }
+        public float Scale { get => scale; set => scale = value; }
+        public Color Color { get => color; set => color = value; }
+
         public SpriteRenderer(GameObject gameobject, string spriteName, float layerDepth, float scale) : base(gameobject)
         {
             this.layerDepth = layerDepth;
             this.spriteName = spriteName;
-            this.scale = scale;
+            this.Scale = scale;
+            rotation = 0;
+            origin = Vector2.Zero;
+            this.Color = Color.White;
         }
         public void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>(spriteName);
-         
+
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            //Der var fejl i rectangle, jeg har lavet cheat off da jeg har ingen ide om hvad der lige sker :D
-            string ChestImage = "ChestImage";
-            if (ChestImage == sprite.ToString())
-            {
-                rectangle.Height = sprite.Height;
-                rectangle.Width = sprite.Width;
-            }
-            spriteBatch.Draw(sprite, GameObject.Transform.Position + offset,rectangle, Color.White,0,Vector2.Zero,scale,SpriteEffects.None,layerDepth);
+            spriteBatch.Draw(sprite, GameObject.Transform.Position + offset, rectangle, color, rotation, origin, Scale, SpriteEffects.None, layerDepth);
+        }
+
+        public void GetStaticRectangle()
+        {
+            rectangle = new Rectangle(0, 0, sprite.Width, sprite.Height);
         }
     }
 }

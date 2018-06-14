@@ -10,19 +10,26 @@ namespace RpgTowerDefense
     class EnemyBuilder : IBuilder
     {
         private GameObject buildobject;
+        
+
         public void BuildGameObject(Vector2 position)
         {
-            GameObject slime = new GameObject();
-            slime.AddComponent(new Transform(slime, position));
-            slime.AddComponent(new SpriteRenderer(slime, "SlimeSheet", 1, 0.5f));
-            slime.AddComponent(new Animator(slime));
-            slime.AddComponent(new Enemy(slime));
-            slime.LoadContent(GameWorld._Instance.Content);
-            slime.AddComponent(new Collider(slime, false, 0.5f));
-            buildobject = slime;
+            GameObject enemy = new GameObject();
+            enemy.AddComponent(new Transform(enemy, position));
+            enemy.AddComponent(new SpriteRenderer(enemy, "Enemy", 1, 0.5f));
+            enemy.AddComponent(new Animator(enemy));
+            enemy.AddComponent(new Enemy(enemy, 10, 10, 20, 10, 7));
+            enemy.LoadContent(GameWorld._Instance.Content);
+            enemy.AddComponent(new Collider(enemy, true, 0.5f));
+            buildobject = enemy;
         }
 
         public void BuildGameObject(Vector2 position, int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void BuildGameObject(Vector2 position, int id, Vector2 direction, float damage, AttackType attackType)
         {
             throw new NotImplementedException();
         }
@@ -31,5 +38,6 @@ namespace RpgTowerDefense
         {
             return buildobject;
         }
+
     }
 }

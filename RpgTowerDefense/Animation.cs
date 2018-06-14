@@ -11,31 +11,33 @@ namespace RpgTowerDefense
 {
     class Animation
     {
-        float fps;
-        Vector2 offset;
-        Rectangle[] rectangles;
-
-        public Animation(int frames, int yPos, int xPos, int xStratFrame, int width, int height, float fps, Vector2 offset)
+        private float fps;
+        private Vector2 offset;
+        private Rectangle[] rectangles;
+        public float Fps
         {
-
+            get { return fps; }
+            set { fps = value; }
         }
-        public float GetFPS()
+        public Vector2 Offset
         {
-            return fps;
+            get { return offset; }
+            set { offset = value; }
         }
-        public float SetFPS(float FPS)
+        public Rectangle[] Rectangles
         {
-            fps = FPS;
-            return fps;
+            get { return rectangles; }
+            set { rectangles = value; }
         }
-        public Vector2 GetOffset()
+        public Animation(int frames, int yPos, int xStartFrame, int width, int height, int fps, Vector2 offset)
         {
-            return offset;
-        }
-        public Vector2 SetOffset(Vector2 offset)
-        {
-            this.offset = offset;
-            return this.offset;
+            Rectangles = new Rectangle[frames];
+            Offset = offset;
+            this.Fps = fps;
+            for (int i = 0; i < frames; i++)
+            {
+                Rectangles[i] = new Rectangle((i + xStartFrame) * width, yPos, width, height);
+            }
         }
     }
 }
