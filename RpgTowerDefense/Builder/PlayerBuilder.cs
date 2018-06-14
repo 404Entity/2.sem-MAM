@@ -14,7 +14,7 @@ namespace RpgTowerDefense
         {
             GameObject player = new GameObject();
             player.AddComponent(new Transform(player, position));
-            player.AddComponent(new SpriteRenderer(player, "Player", 1, 0.2f));
+            player.AddComponent(new SpriteRenderer(player, "PlayerSprite", 1, 0.1f));
             player.AddComponent(new Animator(player));
             player.AddComponent(new Player(player));
             player.AddComponent(new Collider(player, false, 0.2f));

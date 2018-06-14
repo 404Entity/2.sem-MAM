@@ -116,10 +116,13 @@
     <Content Include="Content\CityGate.jpg" />
     <Content Include="Content\Controls\Button.png" />
     <Content Include="Content\Enemy.jpg" />
+    <Content Include="Content\Enemy01_SpriteSheetv.02.png" />
     <Content Include="Content\enemy_static.png" />
+    <Content Include="Content\gate.png" />
     <Content Include="Content\Mine.png" />
     <Content Include="Content\MineDebug.png" />
     <Content Include="Content\Player.jpg" />
+    <Content Include="Content\playerSprite.png" />
     <Content Include="Content\tower_01.png" />
     <Content Include="Content\tower_01spriteSheet.png" />
     <Content Include="Content\UI_01.png" />

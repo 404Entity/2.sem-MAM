@@ -183,3 +183,5 @@ C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefen
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefense.pdb
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\RpgTowerDefense.exe
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\RpgTowerDefense.pdb
+C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\gate.xnb
+C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\playerSprite.xnb

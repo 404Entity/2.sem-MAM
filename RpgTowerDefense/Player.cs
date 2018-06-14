@@ -103,35 +103,20 @@ namespace RpgTowerDefense
                     strategy = new Idle(animator);
                     gameObject.Transform.stop();
                 }
-                if (keyState.IsKeyDown(Keys.E))
-                {
-                    //attack stuff
-                    strategy = new Attack(animator);
-                    canMove = false;
-                }
-
                 previousMouseState = mouseState;
                 strategy.Execute(direction);
             }
         }
         public void CreateAnimation()
         {
-            animator.CreateAnimation("WalkLeft", new Animation(8, 0, 0, 340, 436, 8, Vector2.Zero));
-            animator.CreateAnimation("WalkRight", new Animation(8, 450, 0, 340, 436, 8, Vector2.Zero));
-            animator.CreateAnimation("IdleFront", new Animation(4, 0, 0, 340, 436, 6, Vector2.Zero));
-            animator.CreateAnimation("IdleBack", new Animation(1, 0, 4, 340, 436, 6, Vector2.Zero));
-            animator.CreateAnimation("IdleLeft", new Animation(1, 0, 0, 340, 436, 1, Vector2.Zero));
-            animator.CreateAnimation("IdleRight", new Animation(1, 450, 0, 340, 436, 1, Vector2.Zero));
-            animator.CreateAnimation("WalkFront", new Animation(1, 150, 0, 90, 150, 6, Vector2.Zero));
-            animator.CreateAnimation("WalkBack", new Animation(4, 150, 4, 90, 150, 6, Vector2.Zero));
-            animator.CreateAnimation("AttackFront", new Animation(9, 1890, 0, 414, 460, 9, new Vector2(10, 0)));
-            animator.CreateAnimation("AttackBack", new Animation(9, 1890, 0, 414, 460, 9, new Vector2(10, 0)));
-            animator.CreateAnimation("AttackRight", new Animation(9, 2388, 0, 414, 460, 9, Vector2.Zero));
-            animator.CreateAnimation("AttackLeft", new Animation(9, 1890, 0, 414, 460, 9, new Vector2(10, 0)));
-            animator.CreateAnimation("JumpFront", new Animation(9, 930, 0, 363, 436, 9, Vector2.Zero));
-            animator.CreateAnimation("JumpBack", new Animation(9, 930, 0, 363, 436, 9, Vector2.Zero));
-            animator.CreateAnimation("JumpLeft", new Animation(9, 940, 0, 363, 436, 9, Vector2.Zero));
-            animator.CreateAnimation("JumpRight", new Animation(9, 1400, 0, 363, 436, 9, Vector2.Zero));
+            animator.CreateAnimation("WalkLeft", new Animation(1, 0, 0, 369, 398, 1, Vector2.Zero));
+            animator.CreateAnimation("WalkRight", new Animation(1, 0, 0, 369, 398, 1, Vector2.Zero));
+            animator.CreateAnimation("IdleFront", new Animation(1, 0, 0, 369, 398, 1, Vector2.Zero));
+            animator.CreateAnimation("IdleBack", new Animation(1, 0, 0,369, 398, 1, Vector2.Zero));
+            animator.CreateAnimation("IdleLeft", new Animation(1, 0, 0, 369, 398, 1, Vector2.Zero));
+            animator.CreateAnimation("IdleRight", new Animation(1, 0, 0, 369, 398, 1, Vector2.Zero));
+            animator.CreateAnimation("WalkFront", new Animation(1, 0, 0, 369, 398, 1, Vector2.Zero));
+            animator.CreateAnimation("WalkBack", new Animation(1, 0, 0, 369, 398, 1, Vector2.Zero));
             animator.PlayAnimation("IdleLeft");
         }
 
