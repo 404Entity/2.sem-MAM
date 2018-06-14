@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
@@ -153,7 +155,7 @@ namespace RpgTowerDefense
                 Position = new Vector2(180, 18),
                 PenColor = Color.White
             };
-            versionLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), "version")
+            versionLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion + " Under Development")
             {
                 Position = new Vector2(5, 880),
                 PenColor = Color.White
