@@ -32,6 +32,7 @@ namespace RpgTowerDefense
         //Labels
         private UILabel goldLabel;
         private UILabel scoreLabel;
+        private UILabel versionLabel;
         private UILabel gateHealthLabel;
         private UILabel attackPowerLabel;
         private UILabel attackSpeedLabel;
@@ -76,7 +77,7 @@ namespace RpgTowerDefense
                 Position = new Vector2(1374, 824),
                 Text = "Light Tower",
                 Scale = 0.3f,
-                TextScale = 0.8F
+                TextScale = 0.7F
             };
 
             tower_02Button = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
@@ -84,7 +85,7 @@ namespace RpgTowerDefense
                 Position = new Vector2(1449, 824),
                 Text = "Heavy Tower",
                 Scale = 0.3f,
-                TextScale = 0.8F
+                TextScale = 0.7F
             };
 
             tower_03Button = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
@@ -92,7 +93,7 @@ namespace RpgTowerDefense
                 Position = new Vector2(1524, 824),
                 Text = "Tesla Tower",
                 Scale = 0.3f,
-                TextScale = 0.8f
+                TextScale = 0.7f
             };
 
             tower_01ProxyButton = new UIButton(content.Load<Texture2D>("tower_01"), content.Load<SpriteFont>("Fonts/UiFont"), true)
@@ -152,9 +153,32 @@ namespace RpgTowerDefense
                 Position = new Vector2(180, 18),
                 PenColor = Color.White
             };
+            versionLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), "version")
+            {
+                Position = new Vector2(5, 880),
+                PenColor = Color.White
+            };
+            attackPowerLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), "AttackPower")
+            {
+                Position = new Vector2(1250, 825),
+                PenColor = Color.White,
+
+            };
+            attackSpeedLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), "AttackSpeed")
+            {
+                Position = new Vector2(1250, 850),
+                PenColor = Color.White
+            };
+            attackRangeLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), "AttackRadius")
+            {
+                Position = new Vector2(1250, 875),
+                PenColor = Color.White
+            };
+
 
             UIElements = new List<UIComponent>()
             {
+                versionLabel,
                 gateHealthLabel,
                 scoreLabel,
                 goldLabel,
@@ -186,15 +210,15 @@ namespace RpgTowerDefense
             exitButton.Click += ExitButton_Click;
             goldLabel.updateMe += UpdateGoldAmount;
             scoreLabel.updateMe += UpdateScore;
+            attackPowerLabel.updateMe += UpdateAttackPower;
+            attackSpeedLabel.updateMe += UpdateAttackSpeed;
+            attackRangeLabel.updateMe += UpdateAttackRange;
 
         }
         #endregion
         #region Update
         public void Update()
         {
-            playerGold.Update();
-            gateHealth.Update();
-            highScore.Update();
 
             if (GameWorld._Instance.SelectedGameObject != null && GameWorld._Instance.SelectedGameObject != previousGameObject)
             {
@@ -228,6 +252,9 @@ namespace RpgTowerDefense
                         addUIElements.Add(upgrade_01Button);
                         addUIElements.Add(upgrade_02Button);
                         addUIElements.Add(upgrade_03Button);
+                        addUIElements.Add(attackPowerLabel);
+                        addUIElements.Add(attackSpeedLabel);
+                        addUIElements.Add(attackRangeLabel);
 
                         Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
                         if (tower.APCapped == true)
@@ -290,6 +317,9 @@ namespace RpgTowerDefense
                         RemoveUIElements.Add(upgrade_01Button);
                         RemoveUIElements.Add(upgrade_02Button);
                         RemoveUIElements.Add(upgrade_03Button);
+                        RemoveUIElements.Add(attackPowerLabel);
+                        RemoveUIElements.Add(attackSpeedLabel);
+                        RemoveUIElements.Add(attackRangeLabel);
 
                         addUIElements.Add(tower_01Button);
                         addUIElements.Add(tower_02Button);
@@ -321,10 +351,10 @@ namespace RpgTowerDefense
         /// <param name="spriteBatch"></param>
         public void Draw(SpriteBatch spriteBatch)
         {
-            playerGold.Draw(spriteBatch);
-            gateHealth.Draw(spriteBatch);
-            versionControl.Draw(spriteBatch);
-            highScore.Draw(spriteBatch);
+            //playerGold.Draw(spriteBatch);
+            //gateHealth.Draw(spriteBatch);
+            //versionControl.Draw(spriteBatch);
+            //highScore.Draw(spriteBatch);
 
 
             foreach (UIComponent component in UIElements)
@@ -436,7 +466,7 @@ namespace RpgTowerDefense
             {
                 upgrade_01Button.Text = "Fully Upgraded";
             }
-        
+
 
             if (GameWorld._Instance.PlayerGold > upgradeCost && tower.APCapped == false)
             {
@@ -465,7 +495,7 @@ namespace RpgTowerDefense
             {
                 upgrade_02Button.Text = "Fully Upgraded";
             }
-            
+
 
             if (GameWorld._Instance.PlayerGold > upgradeCost && tower.ASCapped == false)
             {
@@ -493,7 +523,7 @@ namespace RpgTowerDefense
             {
                 upgrade_03Button.Text = "Fully Upgraded";
             }
-          
+
 
             if (GameWorld._Instance.PlayerGold > upgradeCost && tower.ARCapped == false)
             {
@@ -522,7 +552,34 @@ namespace RpgTowerDefense
 
         private void UpdateScore(object sender, System.EventArgs e)
         {
-            scoreLabel.Text = GameWorld._Instance.HighScore.ToString();
+            scoreLabel.Text = "Score:  " + GameWorld._Instance.HighScore.ToString();
+        }
+        private void UpdateAttackPower(object sender, System.EventArgs e)
+        {
+            if (GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") != null)
+            {
+                Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
+                attackPowerLabel.Text = tower.AttackPower.ToString();
+            }
+
+        }
+        private void UpdateAttackSpeed(object sender, System.EventArgs e)
+        {
+            if (GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") != null)
+            {
+                Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
+                attackSpeedLabel.Text = tower.AttackSpeed.ToString();
+            }
+
+        }
+        private void UpdateAttackRange(object sender, System.EventArgs e)
+        {
+            if (GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") != null)
+            {
+                Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
+                attackRangeLabel.Text = tower.AttackRadius.ToString();
+            }
+
         }
 
 
