@@ -258,7 +258,7 @@ namespace RpgTowerDefense
             }
             if (GameState == true)
             {
-                startMenu.Update();
+            //    startMenu.Update();
             }
             else
             {
@@ -334,10 +334,10 @@ namespace RpgTowerDefense
         {
             if (GameState == true)
             {
-                GraphicsDevice.Clear(Color.Blue);
-                spriteBatch.Begin();
-                startMenu.Draw(spriteBatch);
-                spriteBatch.End();
+                //GraphicsDevice.Clear(Color.Blue);
+                //spriteBatch.Begin();
+                //startMenu.Draw(spriteBatch);
+                //spriteBatch.End();
             }
             else
             {

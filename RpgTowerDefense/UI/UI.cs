@@ -212,6 +212,7 @@ namespace RpgTowerDefense
             exitButton.Click += ExitButton_Click;
             goldLabel.updateMe += UpdateGoldAmount;
             scoreLabel.updateMe += UpdateScore;
+            gateHealthLabel.updateMe += UpdateGateHealth;
             attackPowerLabel.updateMe += UpdateAttackPower;
             attackSpeedLabel.updateMe += UpdateAttackSpeed;
             attackRangeLabel.updateMe += UpdateAttackRange;
@@ -555,6 +556,10 @@ namespace RpgTowerDefense
         private void UpdateScore(object sender, System.EventArgs e)
         {
             scoreLabel.Text = "Score:  " + GameWorld._Instance.HighScore.ToString();
+        }
+        private void UpdateGateHealth(object sender, System.EventArgs e)
+        {
+            gateHealthLabel.Text = GameWorld._Instance.GateHealth.ToString();
         }
         private void UpdateAttackPower(object sender, System.EventArgs e)
         {
