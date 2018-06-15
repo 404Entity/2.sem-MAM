@@ -110,19 +110,15 @@
   <ItemGroup>
     <Content Include="Content\BackGround.png" />
     <Content Include="Content\BackGroundWithGrid.png" />
-    <Content Include="Content\BackGround_old.png" />
     <Content Include="Content\BackGround_WithPainted_spots.png" />
     <Content Include="Content\BuildSpot.png" />
     <Content Include="Content\Bullet.png" />
-    <Content Include="Content\CityGate.jpg" />
     <Content Include="Content\Controls\Button.png" />
-    <Content Include="Content\Enemy.jpg" />
     <Content Include="Content\Enemy01_SpriteSheetv.02.png" />
     <Content Include="Content\enemy_static.png" />
     <Content Include="Content\gate.png" />
     <Content Include="Content\Mine.png" />
     <Content Include="Content\MineDebug.png" />
-    <Content Include="Content\Player.jpg" />
     <Content Include="Content\playerSprite.png" />
     <Content Include="Content\tower_01.png" />
     <Content Include="Content\tower_01spriteSheet.png" />

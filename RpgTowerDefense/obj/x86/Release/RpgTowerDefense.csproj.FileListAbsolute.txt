@@ -95,7 +95,6 @@ C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\obj\x86\Release\RpgTowerDef
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Release\System.Data.SQLite.xml
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Release\Content\gate.xnb
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Release\Content\playerSprite.xnb
-C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\obj\x86\Release\RpgTowerDefense.csprojResolveAssemblyReference.cache
 C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\obj\x86\Release\RpgTowerDefense.csproj.CoreCompileInputs.cache
 C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\obj\x86\Release\RpgTowerDefense.exe
 C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\obj\x86\Release\RpgTowerDefense.pdb
