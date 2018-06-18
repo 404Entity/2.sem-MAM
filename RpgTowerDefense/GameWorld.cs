@@ -199,6 +199,7 @@ namespace RpgTowerDefense
 
             // TODO: use this.Content to load your game content here
             ui.LoadContent(Content);
+            startMenu.LoadContent(Content);
             backGround.LoadContent(Content);
             worldBuilder.yyMap = Content.Load<Texture2D>("BackGround");
             //worldBuilder.yyMap = Content.Load<Texture2D>("BackGroundWithGrid");
@@ -229,39 +230,41 @@ namespace RpgTowerDefense
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            MouseState mouseState = Mouse.GetState();
-            //laver en firkant til musen
-            var mouseRectangle = new Rectangle(mouseState.X, mouseState.Y, 50, 50);
-            deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            // Set the selected object to the object clicked on
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed && previouseMouseState.LeftButton == ButtonState.Released)
-            {
-                foreach (GameObject gameObject in GameObjects)
-                {
-                    //SpriteRenderer sr = gameObject.GetComponent("SpriteRenderer") as SpriteRenderer;
-                    if (mouseRectangle.Contains(gameObject.Transform.Position))
-                    {
-                        selectedGameObject = gameObject;
-                        break;
-                    }
-
-                }
-            }
-            //test mob spawn
-            spawntime += deltaTime;
-            if(spawntime >= interval)
-            {
-                spawntime = 0;
-                SpawnMob();
-                //Giver spilleren 10+ guld hvert enemy spawn
-                PlayerGold += GoldGainEachRound;
-            }
+            
             if (GameState == true)
             {
-            //    startMenu.Update();
+                startMenu.Update();
             }
             else
             {
+                MouseState mouseState = Mouse.GetState();
+                //laver en firkant til musen
+                var mouseRectangle = new Rectangle(mouseState.X, mouseState.Y, 50, 50);
+                deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+                // Set the selected object to the object clicked on
+                if (Mouse.GetState().LeftButton == ButtonState.Pressed && previouseMouseState.LeftButton == ButtonState.Released)
+                {
+                    foreach (GameObject gameObject in GameObjects)
+                    {
+                        //SpriteRenderer sr = gameObject.GetComponent("SpriteRenderer") as SpriteRenderer;
+                        if (mouseRectangle.Contains(gameObject.Transform.Position))
+                        {
+                            selectedGameObject = gameObject;
+                            break;
+                        }
+
+                    }
+                }
+                //test mob spawn
+                spawntime += deltaTime;
+                if (spawntime >= interval)
+                {
+                    spawntime = 0;
+                    SpawnMob();
+                    //Giver spilleren 10+ guld hvert enemy spawn
+                    PlayerGold += GoldGainEachRound;
+                }
+
                 deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                     Exit();
@@ -334,10 +337,10 @@ namespace RpgTowerDefense
         {
             if (GameState == true)
             {
-                //GraphicsDevice.Clear(Color.Blue);
-                //spriteBatch.Begin();
-                //startMenu.Draw(spriteBatch);
-                //spriteBatch.End();
+                GraphicsDevice.Clear(Color.Blue);
+                spriteBatch.Begin();
+                startMenu.Draw(spriteBatch);
+                spriteBatch.End();
             }
             else
             {
