@@ -28,7 +28,7 @@ namespace RpgTowerDefense
         
         MineMonsterHandler mine;
         
-        private Camera camera;
+        public Camera camera;
         private GameObject selectedGameObject;
         private MouseState previouseMouseState;
         private StartMenu startMenu;
@@ -200,8 +200,8 @@ namespace RpgTowerDefense
             // TODO: use this.Content to load your game content here
             ui.LoadContent(Content);
             backGround.LoadContent(Content);
-            //yyMap = Content.Load<Texture2D>("BackGround");
-            worldBuilder.yyMap = Content.Load<Texture2D>("BackGroundWithGrid");
+            worldBuilder.yyMap = Content.Load<Texture2D>("BackGround");
+            //worldBuilder.yyMap = Content.Load<Texture2D>("BackGroundWithGrid");
             worldBuilder.mineMap = Content.Load<Texture2D>("Mine");
             worldBuilder.AssignWorld(0);
 

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,7 +13,8 @@
     <AssemblyName>RpgTowerDefense</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -109,19 +110,15 @@
   <ItemGroup>
     <Content Include="Content\BackGround.png" />
     <Content Include="Content\BackGroundWithGrid.png" />
-    <Content Include="Content\BackGround_old.png" />
     <Content Include="Content\BackGround_WithPainted_spots.png" />
     <Content Include="Content\BuildSpot.png" />
     <Content Include="Content\Bullet.png" />
-    <Content Include="Content\CityGate.jpg" />
     <Content Include="Content\Controls\Button.png" />
-    <Content Include="Content\Enemy.jpg" />
     <Content Include="Content\Enemy01_SpriteSheetv.02.png" />
     <Content Include="Content\enemy_static.png" />
     <Content Include="Content\gate.png" />
     <Content Include="Content\Mine.png" />
     <Content Include="Content\MineDebug.png" />
-    <Content Include="Content\Player.jpg" />
     <Content Include="Content\playerSprite.png" />
     <Content Include="Content\tower_01.png" />
     <Content Include="Content\tower_01spriteSheet.png" />
@@ -130,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
+    <None Include="App.config" />
     <None Include="app.manifest" />
     <None Include="bin\Windows\x86\Debug\Content\CollisionTexture.xnb" />
     <None Include="Content\bin\Windows\BackGround.xnb" />
