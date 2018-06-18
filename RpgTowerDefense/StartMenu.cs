@@ -18,11 +18,15 @@ namespace RpgTowerDefense
             texture = content.Load<SpriteFont>("MenuButtom");
         }
 
+
+
         public void Update()
         {
 
         }
         
+
+
         public void Draw(SpriteBatch spriteBatch)
         {
             HighScore(spriteBatch);
@@ -31,6 +35,10 @@ namespace RpgTowerDefense
 
         }
 
+
+
+
+        #region HighScore Draw
         public void HighScore(SpriteBatch spriteBatch)
         {
             //HighScore Draw
@@ -41,5 +49,6 @@ namespace RpgTowerDefense
                 vec.Y += 20;
             }
         }
+        #endregion
     }
 }
