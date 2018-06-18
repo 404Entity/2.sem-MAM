@@ -88,11 +88,11 @@ namespace RpgTowerDefense
             sqlite2.Close();
         }
 
-        public void AddAnalyse(int incomePrLevel, int totalIncome, int loseLvl, int totalTowersPlaced)
+        public void AddAnalyse(int incomeEachWave, int totalIncome, int loseLvl, int totalTowersPlaced)
         {
             //adds Analysis to database
             sqlite2.Open();
-            string txtSqlQuery = "INSERT INTO Analyse Values(null,"+incomePrLevel+","+totalIncome+","+loseLvl+","+totalTowersPlaced+")";
+            string txtSqlQuery = "INSERT INTO Analyse Values(null,"+incomeEachWave+","+totalIncome+","+loseLvl+","+totalTowersPlaced+")";
 
 
 
