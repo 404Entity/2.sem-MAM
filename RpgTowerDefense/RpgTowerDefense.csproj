@@ -58,6 +58,7 @@
     <Compile Include="Builder\GateBuilder.cs" />
     <Compile Include="EnemyMine.cs" />
     <Compile Include="GameWorldBuilder.cs" />
+    <Compile Include="MenuBase.cs" />
     <Compile Include="StartMenu.cs" />
     <Compile Include="MineMonsterHandler.cs" />
     <Compile Include="UI\HighScore.cs" />

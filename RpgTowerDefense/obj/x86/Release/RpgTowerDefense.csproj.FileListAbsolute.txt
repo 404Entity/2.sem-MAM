@@ -143,3 +143,4 @@ C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Releas
 C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Release\SharpDX.Direct2D1.xml
 C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Release\SharpDX.XInput.xml
 C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Release\SharpDX.Direct3D9.xml
+C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Release\RpgTowerDefense.exe.config

@@ -24,7 +24,7 @@ namespace RpgTowerDefense
             sp.GetStaticRectangle();
             sp.Origin = new Vector2((sp.Sprite.Width*sp.Scale)/ 2,(sp.Sprite.Height*sp.Scale) / 2);
             sp.Rotation = 1.5f;
-            mainGate.AddComponent(new Collider(mainGate, true, 0.5f));
+            mainGate.AddComponent(new Collider(mainGate, true, 0.3f));
             buildObject = mainGate;
         }
 

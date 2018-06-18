@@ -190,3 +190,4 @@ C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\gate.xnb
 C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\playerSprite.xnb
 C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\RpgTowerDefense.exe.config
 C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\System.Data.SQLite.xml
+C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\RpgTowerDefense.exe.config
