@@ -20,7 +20,7 @@ namespace RpgTowerDefense
         #endregion
 
 
-        #region Propertys
+        #region Properties
         public int Health { get => health; set => health = value; }
 
         #endregion
@@ -30,17 +30,6 @@ namespace RpgTowerDefense
         public MainGate(GameObject gameObject): base(gameObject)
         {
             GateHealth gateHealth = new GateHealth();
-
-
-
-
-
-
-
-
-
-
-             
 
         }
 
@@ -58,9 +47,12 @@ namespace RpgTowerDefense
 
         public void Update()
         {
-            if (GameWorld._Instance.GateHealth <= 1)
+            if (GameWorld._Instance.GateHealth <= 0)
             {
-                
+                //Loose game
+                GameWorld._Instance.GameState = true;
+                Database._Instance.AddHighScore("Test", GameWorld._Instance.HighScore);
+                Database._Instance.AddAnalyse(100, 10000, 3, 400);
             }
         }
 

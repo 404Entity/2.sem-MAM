@@ -1,0 +1,20 @@
+Spil manual: Robot Racket Scrapper TD
+
+Kontol:
+
+brug a,s,d,w til at styrre spilleren.
+
+brug musen til at inteagre med diverse knapper.
+
+brug musen til at skyde med spilleren
+
+for at skifte verden brug 1,2,3 tasterne.
+
+
+obs:
+
+være opmærksom for at vælge et tårn eller et andet objekt tryk i øverste venste hjørne.
+
+hvis spilleren taber Fryser spillet lige nu.
+
+Det ikke muligt at vinde spillet på givet tidspunkt.

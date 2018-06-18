@@ -25,6 +25,8 @@ namespace RpgTowerDefense
 
         public float Damage { get => damage; set => damage = value; }
 
+
+        //Remove this and its Interface ?
         public void OnCollisionEnter(Collider other)
         {
             if ((Enemy)other.GameObject.GetComponent("Enemy") != null)
@@ -49,7 +51,7 @@ namespace RpgTowerDefense
                 Collider collider = gameObject.GetComponent("Collider") as Collider; 
                 GameWorld._Instance.Colliders.Remove(collider);
             }
-            gameObject.Transform.Translate(directionVector * 5);
+            gameObject.Transform.Translate(directionVector * 10);
             decay++;
         }
     }

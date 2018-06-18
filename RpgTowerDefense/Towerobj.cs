@@ -14,17 +14,36 @@ namespace RpgTowerDefense
     class Towerobj : Component, ILoadable, IUpdate, IAnimateable
     {
         #region Fields And Properties
-        private float attackPower;
-        private float attackSpeed;
-        private float attackRadius;
-        private AttackType attackType;
-        private GameObject target;
+        private float attackPower; // how much damage a projectile fired by the tower will inflict.
+        private float attackSpeed; // how fast the tower will fire a projectile.
+        private float attackRadius; // determins the search range of the tower.
+        private AttackType attackType; // field that determins the type of attack the tower will use.
+        private GameObject target; // the enemy the tower will shoot after when cooldown is 0.
 
-        public float AttackPower { get => attackPower; set => attackPower = value; }
-        public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
-        public float AttackRadius { get => attackRadius; set => attackRadius = value; }
+        //fields for 
+        private byte aPUpgradeLvl;
+        private byte aSUpgradeLvl;
+        private byte aRUpgradeLvl;
+
+        private byte aPUpgradeCap; //AttackPower UpgradeCap
+        private byte aSUpgradeCap; //AttackSpeed UPgradeCap
+        private byte aRUpgradeCap; //AttackRange UpgradeCap
+        private bool aPCapped;
+        private bool aSCapped;
+        private bool aRCapped;
+
+
+        public float AttackPower { get => attackPower;}
+        public float AttackSpeed { get => attackSpeed;}
+        public float AttackRadius { get => attackRadius;}
         internal AttackType AttackType { get => attackType; set => attackType = value; }
         internal GameObject Target { get => target; set => target = value; }
+        public byte APUpgradeLvl { get => aPUpgradeLvl;}
+        public byte ASUpgradeLvl { get => aSUpgradeLvl;}
+        public byte ARUpgradeLvl { get => aRUpgradeLvl;}
+        public bool APCapped { get => aPCapped;}
+        public bool ASCapped { get => aSCapped;}
+        public bool ARCapped { get => aRCapped;}
 
         private float coolDown;
         #endregion
@@ -34,8 +53,20 @@ namespace RpgTowerDefense
             this.attackPower = attackPower;
             this.attackSpeed = attackSpeed;
             this.attackType = attackType;
-            AttackRadius = attackRadius;
+            this.attackRadius = attackRadius;
             coolDown = 0;
+
+            // limt upgrades
+            // sets base lvl to one for all upgrades
+            aPUpgradeLvl = 1; 
+            aSUpgradeLvl = 1;
+            aRUpgradeLvl = 1;
+            aPCapped = false;
+            aSCapped = false;
+            aRCapped = false;
+            aPUpgradeCap = 10;
+            aSUpgradeCap = 10;
+            aRUpgradeCap = 10;
         }
         #endregion
         #region Methods
@@ -140,6 +171,46 @@ namespace RpgTowerDefense
                 TowerAttack();
             }
         }
+
+
+        /// <summary>
+        /// when called will upgrade one of the towers atributes to a certain lvl
+        /// </summary>
+        /// <param name="upgradetype"></param>
+        public void UpgradeTower(int upgradetype)
+        {
+            if (upgradetype == 1)// upgrade Tower AttackPower with 1 damage
+            {
+                attackPower++;
+                aPUpgradeLvl++;
+                if (APUpgradeLvl >= aPUpgradeCap)
+                {
+                    aPCapped = true;
+                }
+            }
+            else if (upgradetype == 2) // upgrade Tower AttackSpeed with 1
+            {
+                attackSpeed++;
+                aSUpgradeLvl++;
+                if (ASUpgradeLvl >= aSUpgradeCap)
+                {
+                    aSCapped = true;
+                }
+            }
+            else if (upgradetype == 3) // upgrade Tower Range with 50 px
+            {
+                attackRadius += 50;
+                aRUpgradeLvl++;
+                if (ARUpgradeLvl >= aRUpgradeCap)
+                {
+                    aRCapped = true;
+                }
+            }
+            else // pass nothing
+            {
+
+            }
+        }
         //test Metod
         /// <summary>
         /// a basic test metod for testing rotation of a tower to find the best Origin point.
@@ -149,13 +220,14 @@ namespace RpgTowerDefense
             SpriteRenderer sp = gameObject.GetComponent("spriteRenderer") as SpriteRenderer;
             sp.Rotation += 0.05f;
         }
+        //create tower animation
         private void CreateAnimation()
         {
 
         }
         public void OnAnimationDone(string animationName)
         {
-            throw new NotImplementedException();
+            
         }
         #endregion
     }

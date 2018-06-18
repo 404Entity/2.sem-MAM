@@ -21,7 +21,7 @@ namespace RpgTowerDefense
         //PointGain = amount of points gained for killing an enemy
         //GoldGain = Amount of gold gained for killing an enemy
         //threadSleep = Speed of enemy
-        bool threadStarted = false;
+        bool threadStarted = false, enemyMovementBool = true;
         int dmg, pointGain, goldGainOnKill, threadSleep;
 
         //size of tiles, used to scale size of enemy
@@ -43,9 +43,11 @@ namespace RpgTowerDefense
             //Sets pathing destination as the first saved coordinate in GameWorld
             moveTarget = GameWorld._Instance.walkCoordinates[0];
             //makes enemy spawn on edge of screen on same y coordinate as first pathing destination
-            gameObject.Transform.Position = new Vector2 (-TileSize,moveTarget.Y);
-
             TileSize = (int)worldBuilder.xWidth;
+            if (gameObject.Transform.Position.X == 0)
+            {
+                gameObject.Transform.Position = new Vector2(-TileSize, moveTarget.Y);
+            }
             this.Health = health;
             this.dmg = dmg;
             this.threadSleep = threadSleep;
@@ -65,7 +67,7 @@ namespace RpgTowerDefense
             animator.CreateAnimation("IdleRight", new Animation(1, 0, 2, TileSize * 2, TileSize * 2, 0, Vector2.Zero));
             animator.CreateAnimation("IdleBack", new Animation(1, 0, 3, TileSize * 2, TileSize * 2, 0, Vector2.Zero));
             animator.CreateAnimation("WalkFront", new Animation(4, 25, 0, TileSize * 2, TileSize * 2, 5, Vector2.Zero));
-            animator.CreateAnimation("WalkBack", new Animation(4, 25, 4, TileSize * 2, TileSize * 2, 5, Vector2.Zero));
+            animator.CreateAnimation("WalkBack", new Animation(7, 25, 0, 550, 650, 7, Vector2.Zero));
             animator.CreateAnimation("WalkLeft", new Animation(4, 50, 0, TileSize * 2, TileSize * 2, 5, Vector2.Zero));
             animator.CreateAnimation("WalkRight", new Animation(4, 50, 4, TileSize * 2, TileSize * 2, 5, Vector2.Zero));
             animator.CreateAnimation("DieBack", new Animation(4, 75, 0, TileSize * 2, TileSize * 2, 5, Vector2.Zero));
@@ -85,10 +87,13 @@ namespace RpgTowerDefense
             if (Health <= 0)
             {
                 GameWorld._Instance.RemoveGameObjects.Add(gameObject);
+                Collider collider = gameObject.GetComponent("Collider") as Collider;
+                GameWorld._Instance.Colliders.Remove(collider);
                 //Giver spilleren points når en enemy dør
                 GameWorld._Instance.HighScore += pointGain;
                 //Giver spilleren guld hver gang en enemy dør
                 GameWorld._Instance.PlayerGold += goldGainOnKill;
+                enemyMovementBool = false;
             }
             if (strategy is Walk)
             {
@@ -121,7 +126,7 @@ namespace RpgTowerDefense
         /// <summary>
         /// When a enemy is hit by a bullet lose health and remove the bullet
         /// </summary>
-        /// <param name="other"></param>
+        /// <param name="other">any other collider in the collider list</param>
         public void OnCollisionEnter(Collider other)
         {
             if ((Projectile)other.GameObject.GetComponent("Projectile") != null)
@@ -154,7 +159,7 @@ namespace RpgTowerDefense
         //Enemy Movement Method
         public void EnemyMovement(Object stateInfo)
         {
-            while (true)
+            while (enemyMovementBool == true)
             {
                 //calculates distance between enemy and destination
                 Vector2 moveVector = moveTarget - gameObject.Transform.Position;
@@ -165,6 +170,7 @@ namespace RpgTowerDefense
                 }
                 //moves based on moveVector
                 gameObject.Transform.Translate(moveVector);
+                animator.PlayAnimation("WalkBack");
                 Thread.Sleep(threadSleep);
             }
             

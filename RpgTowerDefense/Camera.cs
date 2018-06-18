@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,39 +9,40 @@ using Microsoft.Xna.Framework.Input;
 
 namespace RpgTowerDefense
 {
-    class Camera
+    /// <summary>
+    /// The Camera class locks to a specified target(Gameobject) and allows us to transform the render area, using the offset.
+    /// </summary>
+    public class Camera
     {
-        /// <summary>
-        /// The Camera class locks to a specified target(Gameobject) and allows us to transform the render area, using the offset.
-        /// </summary>
+    
         private Matrix transform;
         private Matrix offset;
-        private int screenvalue;
+        public int screenValue;
         public Matrix Transform { get { return transform; } private set { transform = value; } }
 
+
         public Matrix Offset { get => offset; set => offset = value; }
-        public int Screenvalue { get => screenvalue; set => screenvalue = value; }
+        public int Screenvalue { get => screenValue; set => screenValue = value; }
+
 
 
         /// <summary>
-        /// Calculate Transform using target parameters.
+        ///Calculate Transform using target parameters.
         /// </summary>
-        /// <param name="targetPosition"></param>
-        public void Follow(Vector2 targetPosition)
+        /// <param name="target"></param>
+        public void Follow(Vector2 target)
         {
-
-            
             var position = Matrix.CreateTranslation(
-                -targetPosition.X,
-                -targetPosition.Y,
+                -target.X,
+                -target.Y,
                 0);
 
             var offset = Matrix.CreateTranslation(0, 0, 0);
-            if (screenvalue == 1)
+            if (screenValue == 1)
             {
                 position = Matrix.CreateTranslation(0, 0, 0);
             }
-            else if (screenvalue == 2)
+            else if (screenValue == 2)
             {
                 position = Matrix.CreateTranslation(-GameWorld._Instance.ScreenWidth, 0, 0);
                 
@@ -53,10 +54,7 @@ namespace RpgTowerDefense
             Transform = position * offset;
 
         }
-       public void GetMousePosition()
-        {
-           //Mouse.WindowHandle = this.transform.
-        }
+
     }
 }
 

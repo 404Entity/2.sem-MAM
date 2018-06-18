@@ -67,10 +67,10 @@ namespace RpgTowerDefense
                 {
                     color = Color.Gray;
                 }
-                
+
             }
 
-                spriteBatch.Draw(Texture, Rectangle, color);
+            spriteBatch.Draw(Texture, Rectangle, color);
             //spriteBatch.Draw(Texture, Position, Rectangle, color, 0, Vector2.Zero, Scale, SpriteEffects.None, 1);
 
             // if the text field is not null draw the text
@@ -86,7 +86,7 @@ namespace RpgTowerDefense
         {
             if (isProxy)
             {
-                position = new Vector2(Mouse.GetState().X - (texture.Width*Scale)/2, Mouse.GetState().Y - (texture.Height*scale)/2);
+                position = new Vector2(Mouse.GetState().X - ((texture.Width  * Scale)-20) / 2, Mouse.GetState().Y - (texture.Height * scale) / 2);
             }
             previousState = currentState;
             currentState = Mouse.GetState();
@@ -100,7 +100,6 @@ namespace RpgTowerDefense
                 ishovering = true;
                 if (currentState.LeftButton == ButtonState.Released && previousState.LeftButton == ButtonState.Pressed)
                 {
-                    // an elvis(aka the not null operator) operator to check if the button has been clicked
                     Click?.Invoke(this, new EventArgs());
                 }
             }

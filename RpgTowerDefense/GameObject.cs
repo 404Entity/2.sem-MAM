@@ -11,23 +11,25 @@ namespace RpgTowerDefense
 {
     class GameObject : Component, IAnimateable, ICollideStay, ICollideEnter, ICollideExit
     {
-        //Fields
+        #region Fields
         private List<Component> components;
         private bool isLoaded;
         private Transform transform;
         public Transform Transform
         {
+
             get { return transform; }
             set { transform = value; }
         }
-        //Constructor
+        #endregion
+        #region Constructor
         public GameObject()
         {
             components = new List<Component>();
             isLoaded = false;
         }
-
-        //Methods
+        #endregion
+        #region Methods
         public void AddComponent(Component component)
         {
             components.Add(component);
@@ -60,8 +62,9 @@ namespace RpgTowerDefense
                 }
                 isLoaded = true;
             }
-            
+
         }
+
         //Running updates on the loaded in content
         public void Update(GameTime gameTime)
         {
@@ -108,7 +111,7 @@ namespace RpgTowerDefense
 
         public void OnCollisionExit(Collider other)
         {
-            foreach(Component component in components)
+            foreach (Component component in components)
             {
                 if (component is ICollideExit)
                 {
@@ -127,5 +130,6 @@ namespace RpgTowerDefense
                 }
             }
         }
+        #endregion
     }
 }
