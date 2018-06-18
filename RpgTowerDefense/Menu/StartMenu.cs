@@ -13,16 +13,19 @@ namespace RpgTowerDefense
     {
         SpriteFont texture;
 
+
+
         public void LoadContent(ContentManager content)
         {
             texture = content.Load<SpriteFont>("MenuButtom");
+            NameStringInput._Instance.LoadContent(content);
         }
 
 
 
         public void Update()
         {
-
+            NameStringInput._Instance.Update();
         }
         
 
@@ -31,7 +34,7 @@ namespace RpgTowerDefense
         {
             HighScore(spriteBatch);
             //spriteBatch.Draw(texture, new Rectangle(500,500,texture.Width,texture.Height), Color.Green);
-           
+            NameStringInput._Instance.Draw(spriteBatch);
 
         }
 
