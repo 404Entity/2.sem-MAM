@@ -48,15 +48,25 @@ namespace RpgTowerDefense
 
             while (reader.Read())
             {
-                string a = "" + reader.GetString(1) + "    " + reader.GetInt32(2) + "";
-                Score.Add(a);
+                string a = reader.GetString(1);
+                while (true)
+                {
+                    a += ".";
+                    if (20 <= a.Count())
+                    {
+                        a += reader.GetInt32(2);
+                        Score.Add(a);
+                        break;
+                    }
+                }
+                
+                
             }
 
             sqlite2.Close();
             return Score;
         }
         #endregion
-
 
 
         #region AdMethods
