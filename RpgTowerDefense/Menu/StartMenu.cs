@@ -75,7 +75,10 @@ namespace RpgTowerDefense
 
         private void StartButton_Click(object sender, System.EventArgs e)
         {
-            GameWorld._Instance.GameState = false;
+            if (NameStringInput._Instance.MyName != string.Empty)
+            {
+                GameWorld._Instance.GameState = false;
+            }
         }
 
         #region HighScore Draw

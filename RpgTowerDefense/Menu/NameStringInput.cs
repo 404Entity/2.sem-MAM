@@ -31,12 +31,13 @@ namespace RpgTowerDefense
         private Keys[] lastPressedKeys = new Keys[5];
 
         private string myName = string.Empty;
-
+        private string myNameEmpty = "Enter your name, before you can start the game!";
 
         private SpriteFont sf;
-        private Texture2D texture2D;
+        private Texture2D texture2DOverlay;
         Rectangle rec;
         Vector2 pos;
+        Vector2 posText;
         int maxString = 50;
         bool stringToLong = false;
 
@@ -56,9 +57,10 @@ namespace RpgTowerDefense
             //Load in the sprite
             sf = content.Load<SpriteFont>("MenuButtom");
 
-            texture2D = content.Load<Texture2D>("EnterName");
-            rec = new Rectangle(500, 500, texture2D.Width, texture2D.Height);
+            texture2DOverlay = content.Load<Texture2D>("EnterText");
+            rec = new Rectangle(500, 500, texture2DOverlay.Width, texture2DOverlay.Height);
             pos = new Vector2(500, 200);
+            posText = new Vector2(545, 219);
         }
 
         public override void Update()
@@ -81,13 +83,16 @@ namespace RpgTowerDefense
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            
-            spriteBatch.Draw(texture2D,pos,Color.White);
-            spriteBatch.DrawString(sf, MyName, pos, Color.Black);
+            spriteBatch.Draw(texture2DOverlay, pos, Color.White);
+            spriteBatch.DrawString(sf, MyName, posText, Color.Black);
             if (stringToLong == true)
             {
                 
-                spriteBatch.DrawString(sf, "Your name can only contain "+maxString+" letters!", new Vector2(500, 225), Color.Black);
+                spriteBatch.DrawString(sf, "Your name can only contain "+maxString+" letters!", new Vector2(545, 255), Color.DarkRed);
+            }
+            else if (myName == string.Empty)
+            {
+                spriteBatch.DrawString(sf, myNameEmpty, posText, Color.Black); 
             }
         }
 
