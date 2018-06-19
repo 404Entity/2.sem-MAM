@@ -44,6 +44,7 @@ namespace RpgTowerDefense
         public bool APCapped { get => aPCapped;}
         public bool ASCapped { get => aSCapped;}
         public bool ARCapped { get => aRCapped;}
+        
 
         private float coolDown;
         #endregion
@@ -55,6 +56,7 @@ namespace RpgTowerDefense
             this.attackType = attackType;
             this.attackRadius = attackRadius;
             coolDown = 0;
+            DatabaseData._Instance.TotalTowersPlaced += 1;
 
             // limt upgrades
             // sets base lvl to one for all upgrades

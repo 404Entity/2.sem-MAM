@@ -53,7 +53,8 @@
     <Compile Include="Component\Animator.cs" />
     <Compile Include="Component\Collider.cs" />
     <Compile Include="Component\Component.cs" />
-    <Compile Include="Database.cs" />
+    <Compile Include="Database\DatabaseData.cs" />
+    <Compile Include="Database\Database.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Builder\GateBuilder.cs" />
     <Compile Include="EnemyMine.cs" />
