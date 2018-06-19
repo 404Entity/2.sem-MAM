@@ -58,6 +58,7 @@
     <Compile Include="Enemy.cs" />
     <Compile Include="Builder\GateBuilder.cs" />
     <Compile Include="EnemyMine.cs" />
+    <Compile Include="Menu\GameOver.cs" />
     <Compile Include="GameWorldBuilder.cs" />
     <Compile Include="Menu\LoadMenu.cs" />
     <Compile Include="Menu\MenuBase.cs" />

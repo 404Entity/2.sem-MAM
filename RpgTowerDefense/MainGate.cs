@@ -51,6 +51,7 @@ namespace RpgTowerDefense
             {
                 //Loose game
                 GameWorld._Instance.GameState = true;
+                GameWorld._Instance.GameOver = true;
                 Database._Instance.AddHighScore(NameStringInput._Instance.MyName, GameWorld._Instance.HighScore);
                 Database._Instance.AddAnalyse(100, GameWorld._Instance.PlayerGold,10,DatabaseData._Instance.TotalTowersPlaced);
                 

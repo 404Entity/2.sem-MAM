@@ -56,7 +56,6 @@ namespace RpgTowerDefense
         
         public void Draw(SpriteBatch spriteBatch)
         {
-            HighScore(spriteBatch);
             //spriteBatch.Draw(texture, new Rectangle(500,500,texture.Width,texture.Height), Color.Green);
             NameStringInput._Instance.Draw(spriteBatch);
 
@@ -80,18 +79,5 @@ namespace RpgTowerDefense
                 GameWorld._Instance.GameState = false;
             }
         }
-
-        #region HighScore Draw
-        public void HighScore(SpriteBatch spriteBatch)
-        {
-            //HighScore Draw
-            Vector2 vec = new Vector2(200, 200);
-            foreach (string t in Database._Instance.ReadHighScore("select * from highscore ORDER BY score DESC limit 10"))
-            {
-                spriteBatch.DrawString(texture, t, vec, Color.Red);
-                vec.Y += 20;
-            }
-        }
-        #endregion
     }
 }
