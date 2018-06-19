@@ -13,33 +13,70 @@ namespace RpgTowerDefense
     {
         SpriteFont texture;
 
+        private List<UIComponent> menuElements;
 
 
         public void LoadContent(ContentManager content)
         {
             texture = content.Load<SpriteFont>("MenuButtom");
             NameStringInput._Instance.LoadContent(content);
+            var exitButton = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
+            {
+                Position = new Vector2(800,600),
+                Text = "Exit",
+                Scale = 0.2f,
+                TextScale = 1f
+            };
+            var startGameButton = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
+            {
+                Position = new Vector2(800, 500),
+                Text = "StartGame",
+                Scale = 0.2f,
+                TextScale = 1f
+            };
+
+            menuElements = new List<UIComponent>()
+            {
+                exitButton,
+                startGameButton
+            };
+
+            exitButton.Click += ExitButton_Click;
+            startGameButton.Click += StartButton_Click;
         }
-
-
 
         public void Update()
         {
             NameStringInput._Instance.Update();
+            foreach (UIComponent component in menuElements)
+            {
+                component.Update();
+            }
         }
         
-
-
         public void Draw(SpriteBatch spriteBatch)
         {
             HighScore(spriteBatch);
             //spriteBatch.Draw(texture, new Rectangle(500,500,texture.Width,texture.Height), Color.Green);
             NameStringInput._Instance.Draw(spriteBatch);
 
+            foreach (UIComponent component in menuElements)
+            {
+                component.Draw(spriteBatch);
+            }
+
         }
 
 
+        private void ExitButton_Click(object sender, System.EventArgs e)
+        {
+            GameWorld._Instance.Exit();
+        }
 
+        private void StartButton_Click(object sender, System.EventArgs e)
+        {
+            GameWorld._Instance.GameState = false;
+        }
 
         #region HighScore Draw
         public void HighScore(SpriteBatch spriteBatch)
