@@ -131,7 +131,20 @@ namespace RpgTowerDefense
         {
             if ((Projectile)other.GameObject.GetComponent("Projectile") != null)
             {
+
                 Projectile dmgObject = (Projectile)other.GameObject.GetComponent("Projectile");
+                if (dmgObject.AttackType == AttackType.heavy)
+                {
+                    Director director = new Director(new BulletBuilder());
+                    director.Construct(gameObject.Transform.Position, 1, new Vector2(gameObject.Transform.Position.X +1, gameObject.Transform.Position.Y), 2, AttackType.Light);
+                    GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
+                    director.Construct(gameObject.Transform.Position, 1, new Vector2(gameObject.Transform.Position.X - 1, gameObject.Transform.Position.Y), 2, AttackType.Light);
+                    GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
+                    director.Construct(gameObject.Transform.Position, 1, new Vector2(gameObject.Transform.Position.X, gameObject.Transform.Position.Y + 1), 2, AttackType.Light);
+                    GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
+                    director.Construct(gameObject.Transform.Position, 1, new Vector2(gameObject.Transform.Position.X + 1, gameObject.Transform.Position.Y - 1), 2, AttackType.Light);
+                    GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
+                }
                 this.Health -= (int)dmgObject.Damage;
                 GameWorld._Instance.RemoveGameObjects.Add(other.GameObject);
                 GameWorld._Instance.Colliders.Remove(other);

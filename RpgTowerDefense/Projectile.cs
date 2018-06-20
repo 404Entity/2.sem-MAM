@@ -18,12 +18,13 @@ namespace RpgTowerDefense
         {
             this.Damage = damage;
             this.directionVector = directionVector;
-            this.attackType = attackType;
+            this.AttackType = attackType;
             lifetime = 200;
             decay = 0;
         }
 
         public float Damage { get => damage; set => damage = value; }
+        internal AttackType AttackType { get => attackType; set => attackType = value; }
 
 
         //Remove this and its Interface ?

@@ -120,6 +120,7 @@ namespace RpgTowerDefense
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
         }
 
         #endregion
@@ -255,6 +256,7 @@ namespace RpgTowerDefense
 
                     }
                 }
+
                 //test mob spawn
                 spawntime += deltaTime;
                 if (spawntime >= interval)
