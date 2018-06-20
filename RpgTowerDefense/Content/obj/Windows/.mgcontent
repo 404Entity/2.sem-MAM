@@ -4,26 +4,26 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/Player.jpg</File>
-    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/Enemy.jpg</File>
-    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/BackGround.png</File>
-    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/BuildSpot.png</File>
-    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/BackGroundWithGrid.png</File>
-    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/Gold.spritefont</File>
-    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/GateHealth.spritefont</File>
-    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/CityGate.jpg</File>
-    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/Mine.png</File>
-    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/enemy_static.png</File>
-    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/MenuButtom.spritefont</File>
-    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/UI_01.png</File>
-    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/tower_01spriteSheet.png</File>
-    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/CollisionTexture.png</File>
-    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/Enemy01_SpriteSheet.png</File>
-    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/Enemy01_SpriteSheetv.02.png</File>
-    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/gate.png</File>
-    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/playerSprite.png</File>
-    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/EnterName.png</File>
-    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/EnterText.png</File>
-    <File>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/GameOver.jpg</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/Player.jpg</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/Enemy.jpg</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/BackGround.png</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/BuildSpot.png</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/BackGroundWithGrid.png</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/Gold.spritefont</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/GateHealth.spritefont</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/CityGate.jpg</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/Mine.png</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/enemy_static.png</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/MenuButtom.spritefont</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/UI_01.png</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/tower_01spriteSheet.png</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/CollisionTexture.png</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/Enemy01_SpriteSheet.png</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/Enemy01_SpriteSheetv.02.png</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/gate.png</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/playerSprite.png</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/EnterName.png</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/EnterText.png</File>
+    <File>C:/2.sem-MAM/RpgTowerDefense/Content/GameOver.jpg</File>
   </SourceFiles>
 </SourceFileCollection>
