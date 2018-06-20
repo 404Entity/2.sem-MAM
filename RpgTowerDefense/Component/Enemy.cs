@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace RpgTowerDefense
 {
-    class Enemy : Component, ILoadable, IAnimateable, IUpdate, ICollideEnter,ICollideStay,ICollideExit
+    class Enemy : Component, ILoadable, IAnimateable, IUpdate, ICollideEnter, ICollideStay, ICollideExit
     {
         #region Fields
         GameWorldBuilder worldBuilder;
@@ -38,7 +38,7 @@ namespace RpgTowerDefense
         {
             worldBuilder = GameWorld._Instance.worldBuilder;
 
-            animator = (gameobject.GetComponent("Animator")as Animator);
+            animator = (gameobject.GetComponent("Animator") as Animator);
 
             //Sets pathing destination as the first saved coordinate in GameWorld
             moveTarget = GameWorld._Instance.walkCoordinates[0];
@@ -79,7 +79,7 @@ namespace RpgTowerDefense
 
         public void OnAnimationDone(string animationName)
         {
-           
+
         }
 
         public void Update()
@@ -108,12 +108,12 @@ namespace RpgTowerDefense
 
             }
 
-            if(gameObject.Transform.Position == moveTarget)
+            if (gameObject.Transform.Position == moveTarget)
             {
                 walkIndex++;
                 moveTarget = GameWorld._Instance.walkCoordinates[walkIndex];
             }
-            
+
             //Enemy Movement Thread
             if (threadStarted == false)
             {
@@ -131,19 +131,77 @@ namespace RpgTowerDefense
         {
             if ((Projectile)other.GameObject.GetComponent("Projectile") != null)
             {
+
                 Projectile dmgObject = (Projectile)other.GameObject.GetComponent("Projectile");
-                this.Health -= (int)dmgObject.Damage;
-                GameWorld._Instance.RemoveGameObjects.Add(other.GameObject);
-                GameWorld._Instance.Colliders.Remove(other);
+                if (dmgObject.AttackType == AttackType.heavy)
+                {
+                    SpriteRenderer sp = gameObject.GetComponent("SpriteRenderer") as SpriteRenderer;
+                    Director director = new Director(new BulletBuilder());
+                    director.Construct(new Vector2(gameObject.Transform.Position.X + ((sp.Rectangle.Width / 2) * sp.Scale) , gameObject.Transform.Position.Y + ((sp.Rectangle.Height / 2) * sp.Scale)), 2, new Vector2(-1, 0), 2, AttackType.fragment);
+                    GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
+                    director.Construct(new Vector2(gameObject.Transform.Position.X + ((sp.Rectangle.Width / 2) * sp.Scale) , gameObject.Transform.Position.Y + ((sp.Rectangle.Height / 2) * sp.Scale)), 2, new Vector2(1, 0), 2, AttackType.fragment);
+                    GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
+                    director.Construct(new Vector2(gameObject.Transform.Position.X + ((sp.Rectangle.Width / 2) * sp.Scale), gameObject.Transform.Position.Y + ((sp.Rectangle.Height / 2) * sp.Scale)), 2, new Vector2(0, -1), 2, AttackType.fragment);
+                    GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
+                    director.Construct(new Vector2(gameObject.Transform.Position.X + ((sp.Rectangle.Width / 2) * sp.Scale), gameObject.Transform.Position.Y + ((sp.Rectangle.Height / 2) * sp.Scale)), 2, new Vector2(0, 1), 2, AttackType.fragment);
+                    GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
+                    director.Construct(new Vector2(gameObject.Transform.Position.X + ((sp.Rectangle.Width / 2) * sp.Scale), gameObject.Transform.Position.Y + ((sp.Rectangle.Height / 2) * sp.Scale)), 2, new Vector2(-1, 1), 2, AttackType.fragment);
+                    GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
+                    director.Construct(new Vector2(gameObject.Transform.Position.X + ((sp.Rectangle.Width / 2) * sp.Scale), gameObject.Transform.Position.Y + ((sp.Rectangle.Height / 2) * sp.Scale)), 2, new Vector2(1, -1), 2, AttackType.fragment);
+                    GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
+                    director.Construct(new Vector2(gameObject.Transform.Position.X + ((sp.Rectangle.Width / 2) * sp.Scale), gameObject.Transform.Position.Y + ((sp.Rectangle.Height / 2) * sp.Scale)), 2, new Vector2(-1, -1), 2, AttackType.fragment);
+                    GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
+                    director.Construct(new Vector2(gameObject.Transform.Position.X + ((sp.Rectangle.Width / 2) * sp.Scale), gameObject.Transform.Position.Y + ((sp.Rectangle.Height / 2) * sp.Scale)), 2, new Vector2(1, 1), 2, AttackType.fragment);
+                    GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
+                    this.Health -= (int)dmgObject.Damage;
+                    GameWorld._Instance.RemoveGameObjects.Add(other.GameObject);
+                    GameWorld._Instance.Colliders.Remove(other);
+
+                }
+                else if (dmgObject.AttackType == AttackType.fragment)
+                {
+                    this.Health -= (int)dmgObject.Damage;
+                }
+                else if (dmgObject.AttackType == AttackType.Light)
+                {
+                    this.Health -= (int)dmgObject.Damage;
+                    GameWorld._Instance.RemoveGameObjects.Add(other.GameObject);
+                    GameWorld._Instance.Colliders.Remove(other);
+                }
+                else if (dmgObject.AttackType == AttackType.Tesla)
+                {
+                    GameObject bounceTarget = this.gameObject;
+                    foreach (GameObject enemy in GameWorld._Instance.MobList)
+                    {
+                        if (enemy != this.gameObject)
+                        {
+                            if (Vector2.Distance(enemy.Transform.Position, this.gameObject.Transform.Position) < 50)
+                            {
+                                bounceTarget = enemy;
+                                Vector2 shootdirection = bounceTarget.Transform.Position - gameObject.Transform.Position;
+                                dmgObject.DirectionVector = Vector2.Normalize(shootdirection);
+                                dmgObject.Bounces++;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+
+
             }
         }
+
+
+
+
         /// <summary>
         /// not implementet yet
         /// </summary>
         /// <param name="other"></param>
         public void OnCollisionExit(Collider other)
         {
-            
+
         }
         /// <summary>
         /// not implementet
@@ -173,7 +231,7 @@ namespace RpgTowerDefense
                 animator.PlayAnimation("WalkBack");
                 Thread.Sleep(threadSleep);
             }
-            
+
         }
         #endregion
     }

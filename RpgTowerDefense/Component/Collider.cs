@@ -43,11 +43,12 @@ namespace RpgTowerDefense
                 {
                     return new Rectangle
                     (
-                    (int)(GameObject.Transform.Position.X + spriteRender.Offset.X),
-                    (int)(gameObject.Transform.Position.Y + spriteRender.Offset.Y),
+                    (int)(GameObject.Transform.Position.X),
+                    (int)(gameObject.Transform.Position.Y),
                     (int)(spriteRender.Rectangle.Width * scale),
                     (int)(spriteRender.Rectangle.Height * scale)
                 );
+                    
                 }
             }
         }
@@ -92,7 +93,6 @@ namespace RpgTowerDefense
         public void Update()
         {
             CheckCollision();
-
         }
         #endregion
 

@@ -13,17 +13,22 @@ namespace RpgTowerDefense
         private float damage;
         private int decay;
         private int lifetime;
+        private int bounces;
         private AttackType attackType;
-        public Projectile(GameObject gameObject, float damage,AttackType attackType, Vector2 directionVector) : base(gameObject)
+        public Projectile(GameObject gameObject, float damage,AttackType attackType, Vector2 directionVector, int lifetime) : base(gameObject)
         {
             this.Damage = damage;
             this.directionVector = directionVector;
-            this.attackType = attackType;
-            lifetime = 200;
+            this.AttackType = attackType;
+            this.lifetime = lifetime;
             decay = 0;
+            Bounces = 0;
         }
 
         public float Damage { get => damage; set => damage = value; }
+        public int Bounces { get => bounces; set => bounces = value; }
+        public Vector2 DirectionVector { get => directionVector; set => directionVector = value; }
+        internal AttackType AttackType { get => attackType; set => attackType = value; }
 
 
         //Remove this and its Interface ?
@@ -45,13 +50,29 @@ namespace RpgTowerDefense
 
         public void Update()
         {
+            if (bounces == 5)
+            {
+                GameWorld._Instance.RemoveGameObjects.Add(gameObject);
+                Collider collider = gameObject.GetComponent("Collider") as Collider;
+                GameWorld._Instance.Colliders.Remove(collider);
+            }
+
             if (decay > lifetime)
             {
                 GameWorld._Instance.RemoveGameObjects.Add(gameObject);
                 Collider collider = gameObject.GetComponent("Collider") as Collider; 
                 GameWorld._Instance.Colliders.Remove(collider);
             }
-            gameObject.Transform.Translate(directionVector * 10);
+
+            if (attackType == AttackType.fragment)
+            {
+                gameObject.Transform.Translate(directionVector * 2);
+            }
+            else
+            {
+                gameObject.Transform.Translate(directionVector * 10);
+            }
+          
             decay++;
         }
     }
