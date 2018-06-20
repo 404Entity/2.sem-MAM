@@ -17,7 +17,7 @@ namespace RpgTowerDefense
 
         int playerGold, GoldGainEachRound = 10, highScore, gateHealth = 100;
         //Bestemmer om menu er på eller spillet kører
-        bool gameState = true, gameOver = false;
+        bool gameState = false, gameOver = false;
 
         //testing mobspawn
         float spawntime;
