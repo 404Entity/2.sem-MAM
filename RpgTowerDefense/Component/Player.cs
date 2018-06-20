@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Input;
 namespace RpgTowerDefense
 {
     enum DIRECTION {  Right, Left, Up, Down };
-    class Player : Component, IUpdate, ILoadable, IAnimateable
+    class Player : Component, IUpdate, ILoadable, IAnimateable, ICollideEnter
     {
         
         #region Fields
@@ -21,7 +21,10 @@ namespace RpgTowerDefense
         private DIRECTION direction;
         private bool canMove;
         private MouseState previousMouseState;
+        SpriteRenderer sp;
+        
         private float health;
+        
 
 
 
@@ -43,6 +46,7 @@ namespace RpgTowerDefense
         public void LoadContent(ContentManager Content)
         {
             CreateAnimation();
+            
         }
 
         public void Update()
@@ -108,6 +112,7 @@ namespace RpgTowerDefense
                 previousMouseState = mouseState;
                 strategy.Execute(direction);
             }
+            SpriteTurnMouse();
         }
         public void CreateAnimation()
         {
@@ -124,21 +129,7 @@ namespace RpgTowerDefense
 
         public void OnAnimationDone(string animationName)
         {
-            /*
-            if (animationName == null)
-            {
-                animationName = "Idle";
-            }
-            if (animationName.Contains("Attack"))
-            {
-                canMove = true;
-
-            }
-            if (animationName.Contains("Jump"))
-            {
-                strategy = null;
-            }
-            */
+            
         }
 
         public void BuildTower()
@@ -158,11 +149,28 @@ namespace RpgTowerDefense
             Vector2 shootdirection = cursorPosition - gameObject.Transform.Position;
             Vector2 shootdirectonnormalized = Vector2.Normalize(shootdirection);
             Director director = new Director(new BulletBuilder());
-            director.Construct(gameObject.Transform.Position, 1, shootdirectonnormalized, 3,AttackType.Light);
+            director.Construct(gameObject.Transform.Position+ new Vector2(12,12), 1, shootdirectonnormalized, 3,AttackType.Light);
             GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
         }
 
-        
+        public void SpriteTurnMouse()
+        {
+            var f = Mouse.GetState();
+            Vector2 t = new Vector2(f.X, f.Y);
+            Vector2 SpriteDirection = t - GameObject.Transform.Position;
+            float rotation = (float)Math.Atan2(SpriteDirection.Y, SpriteDirection.X);
+            sp = gameObject.GetComponent("SpriteRenderer") as SpriteRenderer;
+            sp.Origin = new Vector2(sp.Sprite.Height / 2, sp.Sprite.Width / 2);
+            sp.Rotation = rotation + (float)Math.PI;
+            sp.Offset = new Vector2(18, 18);
+        }
+
+        public void OnCollisionEnter(Collider other)
+        {
+            throw new NotImplementedException();
+        }
+
+
         #endregion
     }
 }

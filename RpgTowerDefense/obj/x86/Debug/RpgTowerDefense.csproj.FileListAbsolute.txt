@@ -205,6 +205,6 @@ C:\Users\MIKZU\Source\Repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\RpgT
 C:\Users\MIKZU\Source\Repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\System.Data.SQLite.xml
 C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\EnterText.xnb
 C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\GameOver.xnb
-C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\EnterName.xnb
-C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\EnterText.xnb
-C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\GameOver.xnb
+C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\EnterName.xnb
+C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\EnterText.xnb
+C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\GameOver.xnb
