@@ -20,13 +20,15 @@ namespace RpgTowerDefense
         private IStrategy strategy;
         private DIRECTION direction;
         private bool canMove;
-        private MouseState previousMouseState; 
+        private MouseState previousMouseState;
+        private float health;
+
+
 
 
         #endregion
         #region Property
-
-        
+        public float Health { get => health; set => health = value; }
 
         #endregion
         #region Constructor

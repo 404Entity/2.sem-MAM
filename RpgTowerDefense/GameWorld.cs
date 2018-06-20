@@ -17,7 +17,7 @@ namespace RpgTowerDefense
 
         int playerGold, GoldGainEachRound = 10, highScore, gateHealth = 100;
         //Bestemmer om menu er på eller spillet kører
-        bool gameState = true;
+        bool gameState = true, gameOver = false;
 
         //testing mobspawn
         float spawntime;
@@ -32,6 +32,7 @@ namespace RpgTowerDefense
         private GameObject selectedGameObject;
         private MouseState previouseMouseState;
         private StartMenu startMenu;
+        private GameOver gameOverObject;
 
 
         public GameWorldBuilder worldBuilder;
@@ -113,6 +114,7 @@ namespace RpgTowerDefense
 
         internal GameObject SelectedGameObject { get => selectedGameObject; set => selectedGameObject = value; }
         public MouseState PreviouseMouseState { get => previouseMouseState; set => previouseMouseState = value; }
+        public bool GameOver { get => gameOver; set => gameOver = value; }
 
         public float deltaTime;
 
@@ -138,7 +140,8 @@ namespace RpgTowerDefense
 
             mine = new MineMonsterHandler();
             worldBuilder = new GameWorldBuilder();
-            
+
+            gameOverObject = new GameOver();
             startMenu = new StartMenu();
             //intialize camera
             camera = new Camera();
@@ -171,6 +174,8 @@ namespace RpgTowerDefense
             dic4 = new Director(new EnemyMineBuilder());
             
 
+
+
             worldBuilder.SetupData();
 
 
@@ -201,6 +206,7 @@ namespace RpgTowerDefense
             // TODO: use this.Content to load your game content here
             ui.LoadContent(Content);
             startMenu.LoadContent(Content);
+            gameOverObject.LoadContent(Content);
             backGround.LoadContent(Content);
             worldBuilder.yyMap = Content.Load<Texture2D>("BackGround");
             //worldBuilder.yyMap = Content.Load<Texture2D>("BackGroundWithGrid");
@@ -234,7 +240,14 @@ namespace RpgTowerDefense
             
             if (GameState == true)
             {
-                startMenu.Update();
+                if (GameOver == true)
+                {
+                    gameOverObject.Update();
+                }
+                else
+                {
+                    startMenu.Update();
+                }
             }
             else
             {
@@ -339,10 +352,20 @@ namespace RpgTowerDefense
         {
             if (GameState == true)
             {
-                GraphicsDevice.Clear(Color.Blue);
-                spriteBatch.Begin();
-                startMenu.Draw(spriteBatch);
-                spriteBatch.End();
+                if (GameOver == true)
+                {
+                    GraphicsDevice.Clear(Color.Black);
+                    spriteBatch.Begin();
+                    gameOverObject.Draw(spriteBatch);
+                    spriteBatch.End();
+                }
+                else
+                {
+                    GraphicsDevice.Clear(Color.Blue);
+                    spriteBatch.Begin();
+                    startMenu.Draw(spriteBatch);
+                    spriteBatch.End();
+                }
             }
             else
             {
