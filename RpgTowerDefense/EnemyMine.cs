@@ -46,7 +46,7 @@ namespace RpgTowerDefense
 
             animator = (gameobject.GetComponent("Animator") as Animator);
 
-            waitPos = new Vector2(3150, (GameWorld._Instance.GraphicsDevice.Viewport.Height / 2) - (animator.SpriteRenderer.Rectangle.Height / 2));
+            waitPos = new Vector2(3250, (GameWorld._Instance.GraphicsDevice.Viewport.Height / 2) - (animator.SpriteRenderer.Rectangle.Height / 2));
             moveTarget = waitPos;
             attackCooldown = 1.5f;
 
@@ -177,7 +177,7 @@ namespace RpgTowerDefense
                     moveVector = Vector2.Normalize(moveVector);
                 }
                 //moves based on moveVector
-                if (Vector2.Distance(player.Transform.Position, gameObject.Transform.Position) <= 300)
+                if (Vector2.Distance(player.Transform.Position, gameObject.Transform.Position) <= 600)
                 {
                     Attack();
                 }
