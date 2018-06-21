@@ -48,6 +48,7 @@ namespace RpgTowerDefense
                     (int)(spriteRender.Rectangle.Width * scale),
                     (int)(spriteRender.Rectangle.Height * scale)
                 );
+                    
                 }
             }
         }
@@ -92,7 +93,6 @@ namespace RpgTowerDefense
         public void Update()
         {
             CheckCollision();
-
         }
         #endregion
 
