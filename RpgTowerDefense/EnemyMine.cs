@@ -46,7 +46,7 @@ namespace RpgTowerDefense
 
             animator = (gameobject.GetComponent("Animator") as Animator);
 
-            waitPos = new Vector2(3950, (GameWorld._Instance.GraphicsDevice.Viewport.Height / 2) - (animator.SpriteRenderer.Rectangle.Height / 2));
+            waitPos = new Vector2(3150, (GameWorld._Instance.GraphicsDevice.Viewport.Height / 2) - (animator.SpriteRenderer.Rectangle.Height / 2));
             moveTarget = waitPos;
             attackCooldown = 1.5f;
 
@@ -101,7 +101,7 @@ namespace RpgTowerDefense
             {
                  moveTarget = waitPos;
             }
-            moveTarget = waitPos;
+            //moveTarget = waitPos;
 
             if (Health <= 0)
             {
@@ -114,11 +114,7 @@ namespace RpgTowerDefense
                 //GameWorld._Instance.PlayerGold += goldGainOnKill;
             }
             
-            if (Vector2.Distance(player.Transform.Position, gameObject.Transform.Position) <= attackRange && attackCooldown <= 0)
-            {
-                Attack();
-                attackCooldown = attackSpeed;
-            }
+            
             
             //Enemy Movement Thread
             if (mineThreadStarted == false)
@@ -130,6 +126,8 @@ namespace RpgTowerDefense
 
         void Attack()
         {
+            Vector2 moveTo = player.Transform.Position - GameObject.Transform.Position;
+            GameObject.Transform.Position += Vector2.Normalize(moveTo);
         }
 
         #region Collision
@@ -179,7 +177,14 @@ namespace RpgTowerDefense
                     moveVector = Vector2.Normalize(moveVector);
                 }
                 //moves based on moveVector
-                gameObject.Transform.Translate(moveVector);
+                if (Vector2.Distance(player.Transform.Position, gameObject.Transform.Position) <= 300)
+                {
+                    Attack();
+                }
+                else
+                {
+                    gameObject.Transform.Translate(moveVector);
+                }
                 Thread.Sleep(threadSleep);
             }
 

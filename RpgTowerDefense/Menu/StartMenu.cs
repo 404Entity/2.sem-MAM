@@ -35,14 +35,24 @@ namespace RpgTowerDefense
                 TextScale = 1f
             };
 
+            var resetHighScore = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
+            {
+                Position = new Vector2(100, 800),
+                Text = "ResetHighScore",
+                Scale = 0.2f,
+                TextScale = 1f
+            };
+
             menuElements = new List<UIComponent>()
             {
                 exitButton,
-                startGameButton
+                startGameButton,
+                resetHighScore
             };
 
             exitButton.Click += ExitButton_Click;
             startGameButton.Click += StartButton_Click;
+            resetHighScore.Click += ResetHighScore_Click;
         }
 
         public void Update()
@@ -78,6 +88,15 @@ namespace RpgTowerDefense
             {
                 GameWorld._Instance.GameState = false;
             }
+        }
+
+        private void ResetHighScore_Click(object sender, System.EventArgs e)
+        {
+            //Drops Highscore tabel
+            Database._Instance.DropTable("HighScore");
+
+            //Creates database again
+            Database._Instance.CreateTables();
         }
     }
 }
