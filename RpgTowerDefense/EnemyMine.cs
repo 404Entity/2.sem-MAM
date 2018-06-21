@@ -46,7 +46,7 @@ namespace RpgTowerDefense
 
             animator = (gameobject.GetComponent("Animator") as Animator);
 
-            waitPos = new Vector2(3950, (GameWorld._Instance.GraphicsDevice.Viewport.Height / 2) - (animator.SpriteRenderer.Rectangle.Height / 2));
+            waitPos = new Vector2(3150, (GameWorld._Instance.GraphicsDevice.Viewport.Height / 2) - (animator.SpriteRenderer.Rectangle.Height / 2));
             moveTarget = waitPos;
             attackCooldown = 1.5f;
 
