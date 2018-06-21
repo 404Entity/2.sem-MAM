@@ -18,7 +18,7 @@ namespace RpgTowerDefense
             enemy.AddComponent(new Transform(enemy, position));
             enemy.AddComponent(new SpriteRenderer(enemy, "Enemy01_SpriteSheetv.02", 1, 0.1f));
             enemy.AddComponent(new Animator(enemy));
-            enemy.AddComponent(new Enemy(enemy, 10, 10, 20, 10, 7));
+            enemy.AddComponent(new Enemy(enemy, 10, 10, 20, 10, 3));
             enemy.LoadContent(GameWorld._Instance.Content);
             enemy.AddComponent(new Collider(enemy, true, 0.1f));
             SpriteRenderer sp = enemy.GetComponent("SpriteRenderer") as SpriteRenderer;
