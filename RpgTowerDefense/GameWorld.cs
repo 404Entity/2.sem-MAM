@@ -20,7 +20,7 @@ namespace RpgTowerDefense
 
         int playerGold, GoldGainEachRound = 4, highScore, gateHealth = 100;
         //Bestemmer om menu er på eller spillet kører
-        bool gameState = false, gameOver = false;
+        bool gameState = true, gameOver = false;
 
         //testing mobspawn
         float spawntime;
@@ -298,11 +298,12 @@ namespace RpgTowerDefense
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D2))
                 {
                     Mouse.SetPosition(screenWidth, 0);
-                    camera.Screenvalue = 2;
+                    camera.Screenvalue = 3;
+                    
                 }
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D3))
                 {
-                    camera.Screenvalue = 3;
+                    //camera.Screenvalue = 2;
                 }
 
                 

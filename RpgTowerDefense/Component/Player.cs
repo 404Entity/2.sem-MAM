@@ -51,6 +51,14 @@ namespace RpgTowerDefense
 
         public void Update()
         {
+            if (gameObject.Transform.Position.X > 1600 && 2000 > gameObject.Transform.Position.X)
+            {
+                gameObject.Transform.SetPosition(3201); 
+            }
+            else if (gameObject.Transform.Position.X > 2800 && 3200 > gameObject.Transform.Position.X)
+            {
+                gameObject.Transform.SetPosition(1600);
+            }
             MouseState mouseState = Mouse.GetState();
             KeyboardState keyState = Keyboard.GetState();
             if (canMove)
