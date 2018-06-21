@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/GateHealth.spritefont</SourceFile>
-  <SourceTime>2018-06-08T16:41:20.8106951+02:00</SourceTime>
-  <DestFile>C:/Users/MortenEllegaardHanse/Documents/GitHub/2.sem-MAM/RpgTowerDefense/Content/bin/Windows/GateHealth.xnb</DestFile>
-  <DestTime>2018-06-20T15:06:25.2352612+02:00</DestTime>
+  <SourceFile>C:/2.sem-MAM/RpgTowerDefense/Content/GateHealth.spritefont</SourceFile>
+  <SourceTime>2018-06-20T09:19:59.3244836+02:00</SourceTime>
+  <DestFile>C:/2.sem-MAM/RpgTowerDefense/Content/bin/Windows/GateHealth.xnb</DestFile>
+  <DestTime>2018-06-21T12:52:57.9451949+02:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Content;
 namespace RpgTowerDefense
 {
     #region Attacktype Enum
-    enum AttackType { heavy, Light, Tesla }
+    enum AttackType { heavy, Light, Tesla, fragment}
     #endregion
     class Towerobj : Component, ILoadable, IUpdate, IAnimateable
     {

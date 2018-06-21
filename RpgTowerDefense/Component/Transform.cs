@@ -45,5 +45,9 @@ namespace RpgTowerDefense
         {
             position += velocity;
         }
+        public void SetPosition(int position)
+        {
+            this.position.X = position;
+        }
     }
 }

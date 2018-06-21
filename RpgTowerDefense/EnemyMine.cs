@@ -46,7 +46,7 @@ namespace RpgTowerDefense
 
             animator = (gameobject.GetComponent("Animator") as Animator);
 
-            waitPos = new Vector2(3950, (GameWorld._Instance.GraphicsDevice.Viewport.Height / 2) - (animator.SpriteRenderer.Rectangle.Height / 2));
+            waitPos = new Vector2(3250, (GameWorld._Instance.GraphicsDevice.Viewport.Height / 2) - (animator.SpriteRenderer.Rectangle.Height / 2));
             moveTarget = waitPos;
             attackCooldown = 1.5f;
 
@@ -88,7 +88,20 @@ namespace RpgTowerDefense
 
         public void Update()
         {
-            Attack();
+            if (player == null)
+            {
+
+            }
+
+            if (Vector2.Distance(player.Transform.Position, gameObject.Transform.Position) <= lookRange && player.Transform.Position.X >= 3200)
+            {
+                 moveTarget = player.Transform.Position;
+            }
+            else
+            {
+                 moveTarget = waitPos;
+            }
+            //moveTarget = waitPos;
 
             if (Health <= 0)
             {
@@ -101,15 +114,8 @@ namespace RpgTowerDefense
                 //GameWorld._Instance.PlayerGold += goldGainOnKill;
             }
             
-            if (Vector2.Distance(player.Transform.Position, gameObject.Transform.Position) <= 300)
-            {
-                
-            }
-            else
-            {
-                moveTarget = waitPos;
-            }
-
+            
+            
             //Enemy Movement Thread
             if (mineThreadStarted == false)
             {
@@ -120,14 +126,8 @@ namespace RpgTowerDefense
 
         void Attack()
         {
-            //FollowPlayer
-            
-
-        }
-
-        private float Length()
-        {
-            return (float)Math.Sqrt((gameObject.Transform.Position.X * gameObject.Transform.Position.X) + (gameObject.Transform.Position.Y * gameObject.Transform.Position.Y));
+            Vector2 moveTo = player.Transform.Position - GameObject.Transform.Position;
+            GameObject.Transform.Position += Vector2.Normalize(moveTo);
         }
 
         #region Collision
@@ -177,7 +177,14 @@ namespace RpgTowerDefense
                     moveVector = Vector2.Normalize(moveVector);
                 }
                 //moves based on moveVector
-                gameObject.Transform.Translate(moveVector);
+                if (Vector2.Distance(player.Transform.Position, gameObject.Transform.Position) <= 600)
+                {
+                    Attack();
+                }
+                else
+                {
+                    gameObject.Transform.Translate(moveVector);
+                }
                 Thread.Sleep(threadSleep);
             }
 

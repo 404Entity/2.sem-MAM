@@ -11,13 +11,16 @@ namespace RpgTowerDefense
     public class GameWorld : Game
     {
         #region Fields
+        public WaveManager waveManager = new WaveManager();
+        MineMonsterHandler mmh = new MineMonsterHandler();
+
         Director dic;
         Director dic2;
         Director dic4;
 
-        int playerGold, GoldGainEachRound = 10, highScore, gateHealth = 100;
+        int playerGold, GoldGainEachRound = 4, highScore, gateHealth = 100;
         //Bestemmer om menu er på eller spillet kører
-        bool gameState = false, gameOver = false;
+        bool gameState = true, gameOver = false;
 
         //testing mobspawn
         float spawntime;
@@ -27,6 +30,8 @@ namespace RpgTowerDefense
         float mineInterval = 15;
         
         MineMonsterHandler mine;
+        public bool mineHalfway;
+        public bool mineDisabled;
         
         public Camera camera;
         private GameObject selectedGameObject;
@@ -68,6 +73,7 @@ namespace RpgTowerDefense
 
         //used to keep track of enemies seperately from other objects
         List<GameObject> mobList = new List<GameObject>();
+        List<GameObject> mineList = new List<GameObject>();
 
         //used to add to or remove from the seperated mob list
         void UpdateMobList(GameObject mob, bool newMob)
@@ -79,6 +85,17 @@ namespace RpgTowerDefense
             else
             {
                 MobList.Remove(mob);
+            }
+        }
+        void UpdateMineList(GameObject mob, bool newMob)
+        {
+            if (newMob)
+            {
+                MineList.Add(mob);
+            }
+            else
+            {
+                MineList.Remove(mob);
             }
         }
 
@@ -99,6 +116,7 @@ namespace RpgTowerDefense
         internal List<GameObject> AddGameObjects { get => addGameObjects; set => addGameObjects = value; }
         internal List<GameObject> RemoveGameObjects { get => removeGameObjects; set => removeGameObjects = value; }
         internal List<GameObject> MobList { get => mobList; set => mobList = value; }
+        internal List<GameObject> MineList { get => mineList; set => mineList = value; }
         internal List<Collider> Colliders
         {
             get { return colliders; }
@@ -122,6 +140,7 @@ namespace RpgTowerDefense
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
         }
 
         #endregion
@@ -171,7 +190,6 @@ namespace RpgTowerDefense
             gameObjects.Add(player);
             dic2 = new Director(new EnemyBuilder());
             dic4 = new Director(new EnemyMineBuilder());
-            
 
 
 
@@ -236,7 +254,8 @@ namespace RpgTowerDefense
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            
+            waveManager.Update();
+            mmh.Update();
             if (GameState == true)
             {
                 if (GameOver == true)
@@ -265,17 +284,7 @@ namespace RpgTowerDefense
                             selectedGameObject = gameObject;
                             break;
                         }
-
                     }
-                }
-                //test mob spawn
-                spawntime += deltaTime;
-                if (spawntime >= interval)
-                {
-                    spawntime = 0;
-                    SpawnMob();
-                    //Giver spilleren 10+ guld hvert enemy spawn
-                    PlayerGold += GoldGainEachRound;
                 }
 
                 deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -289,30 +298,15 @@ namespace RpgTowerDefense
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D2))
                 {
                     Mouse.SetPosition(screenWidth, 0);
-                    camera.Screenvalue = 2;
+                    camera.Screenvalue = 3;
+                    
                 }
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D3))
                 {
-                    camera.Screenvalue = 3;
+                    //camera.Screenvalue = 2;
                 }
 
-                //test mob spawn
-                spawntime += deltaTime;
-                if (spawntime >= interval)
-                {
-                    spawntime = 0;
-                    SpawnMob();
-                    //Giver spilleren 10+ guld hvert enemy spawn
-                    PlayerGold += GoldGainEachRound;
-                }
-                mineSpawntime += deltaTime;
-                if (mineSpawntime >= mineInterval)
-                {
-                    mineSpawntime = 0;
-                    SpawnMobMine();
-                }
-
-
+                
                 // TODO: Add your update logic here
                 foreach (GameObject go in addGameObjects)
                 {
@@ -398,22 +392,34 @@ namespace RpgTowerDefense
         //spawns enemy and adds to both gameobjects and moblist
         public void SpawnMob()
         {
-            if (mobList.Count < 120)
-            {
-                dic2.Construct(new Vector2(0, 270));
-                GameObject mob = dic2.Builder.GetResult();
-                UpdateMobList(mob, true);
-                gameObjects.Add(mob);
-            }
+            dic2.Construct(new Vector2(0, 270));
+            GameObject mob = dic2.Builder.GetResult();
+            UpdateMobList(mob, true);
+            gameObjects.Add(mob);
+            AddGold();
         }
 
         public void SpawnMobMine()
         {
-            if (mobList.Count < 80)
+            GameObject mob = dic4.Construct(new Vector2(graphics.GraphicsDevice.Viewport.Width * 3, 425), player);
+            UpdateMineList(mob, true);
+            gameObjects.Add(mob);
+            AddGold();
+        }
+
+        void AddGold()
+        {
+            if(mineDisabled)
             {
-                GameObject mob = dic4.Construct(new Vector2(graphics.GraphicsDevice.Viewport.Width * 3, 425), player);
-                UpdateMobList(mob, true);
-                gameObjects.Add(mob);
+                
+            }
+            else if(mineHalfway)
+            {
+                playerGold += GoldGainEachRound / 2;
+            }
+            else
+            {
+                playerGold += GoldGainEachRound;
             }
         }
     }
