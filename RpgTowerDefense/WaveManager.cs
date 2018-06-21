@@ -7,20 +7,20 @@ namespace RpgTowerDefense
 {
     public class WaveManager
     {
-        int waveNumber;
-        int mineWaveNumber;
+        int waveNumber = 1;
+        int mineWaveNumber = 1;
 
-        int monsterAmmount;
-        int monstersLeft;
-        int mineMonsterAmmount;
-        int mineLeft;
+        int monsterAmmount = 8;
+        int monstersLeft = 8;
+        int mineMonsterAmmount = 2;
+        int mineLeft = 2;
 
-        public float speedMod;
+        public float speedMod = 1;
         float lastAddedSpeed = 0.055f;
-        public float mineSpeedMod;
+        public float mineSpeedMod = 1;
         float mineLastAddedSpeed = 0.055f;
-        float healthMod;
-        public int addedHealth;
+        float healthMod = 1;
+        public int addedHealth = 1;
 
         float waveCountdown = 5;
         float waveDelay;
@@ -76,11 +76,11 @@ namespace RpgTowerDefense
                 }
             }
 
-            if (waveCountdown <= 0)
+            if (waveCountdown <= 0 && waveInProgress == false)
             {
                 waveInProgress = true;
             }
-            if (mineCountdown <= 0)
+            if (mineCountdown <= 0 && mineWaveInProgress == false)
             {
                 mineWaveInProgress = true;
             }
@@ -90,14 +90,15 @@ namespace RpgTowerDefense
         {
             waveNumber++;
             monsterAmmount += waveNumber + 1;
+            monstersLeft = monsterAmmount;
             healthMod += 0.75f;
             if (healthMod >= addedHealth + 1) { addedHealth++; }
             waveCountdown = 10;
-            if (mineSpeedMod < 1.275f)
+            if (speedMod < 1.275f)
             {
-                mineSpeedMod += mineLastAddedSpeed - 0.005f;
+                speedMod += lastAddedSpeed - 0.005f;
+                lastAddedSpeed -= 0.005f;
             }
-            monstersLeft = monsterAmmount;
         }
         public void MineWave()
         {
@@ -107,6 +108,7 @@ namespace RpgTowerDefense
             if (mineSpeedMod < 1.275f)
             {
                 mineSpeedMod += mineLastAddedSpeed - 0.005f;
+                mineLastAddedSpeed -= 0.005f;
             }
             mineLeft = mineMonsterAmmount;
         }

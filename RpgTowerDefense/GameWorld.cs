@@ -12,11 +12,13 @@ namespace RpgTowerDefense
     {
         #region Fields
         public WaveManager waveManager = new WaveManager();
+        MineMonsterHandler mmh = new MineMonsterHandler();
+
         Director dic;
         Director dic2;
         Director dic4;
 
-        int playerGold, GoldGainEachRound = 10, highScore, gateHealth = 100;
+        int playerGold, GoldGainEachRound = 4, highScore, gateHealth = 100;
         //Bestemmer om menu er på eller spillet kører
         bool gameState = false, gameOver = false;
 
@@ -28,6 +30,8 @@ namespace RpgTowerDefense
         float mineInterval = 15;
         
         MineMonsterHandler mine;
+        public bool mineHalfway;
+        public bool mineDisabled;
         
         public Camera camera;
         private GameObject selectedGameObject;
@@ -69,6 +73,7 @@ namespace RpgTowerDefense
 
         //used to keep track of enemies seperately from other objects
         List<GameObject> mobList = new List<GameObject>();
+        List<GameObject> mineList = new List<GameObject>();
 
         //used to add to or remove from the seperated mob list
         void UpdateMobList(GameObject mob, bool newMob)
@@ -80,6 +85,17 @@ namespace RpgTowerDefense
             else
             {
                 MobList.Remove(mob);
+            }
+        }
+        void UpdateMineList(GameObject mob, bool newMob)
+        {
+            if (newMob)
+            {
+                MineList.Add(mob);
+            }
+            else
+            {
+                MineList.Remove(mob);
             }
         }
 
@@ -100,6 +116,7 @@ namespace RpgTowerDefense
         internal List<GameObject> AddGameObjects { get => addGameObjects; set => addGameObjects = value; }
         internal List<GameObject> RemoveGameObjects { get => removeGameObjects; set => removeGameObjects = value; }
         internal List<GameObject> MobList { get => mobList; set => mobList = value; }
+        internal List<GameObject> MineList { get => mineList; set => mineList = value; }
         internal List<Collider> Colliders
         {
             get { return colliders; }
@@ -238,6 +255,7 @@ namespace RpgTowerDefense
         protected override void Update(GameTime gameTime)
         {
             waveManager.Update();
+            mmh.Update();
             if (GameState == true)
             {
                 if (GameOver == true)
@@ -377,13 +395,31 @@ namespace RpgTowerDefense
             GameObject mob = dic2.Builder.GetResult();
             UpdateMobList(mob, true);
             gameObjects.Add(mob);
+            AddGold();
         }
 
         public void SpawnMobMine()
         {
             GameObject mob = dic4.Construct(new Vector2(graphics.GraphicsDevice.Viewport.Width * 3, 425), player);
-            UpdateMobList(mob, true);
+            UpdateMineList(mob, true);
             gameObjects.Add(mob);
+            AddGold();
+        }
+
+        void AddGold()
+        {
+            if(mineDisabled)
+            {
+                
+            }
+            else if(mineHalfway)
+            {
+                playerGold += GoldGainEachRound / 2;
+            }
+            else
+            {
+                playerGold += GoldGainEachRound;
+            }
         }
     }
 }

@@ -24,6 +24,9 @@ namespace RpgTowerDefense
         bool threadStarted = false, enemyMovementBool = true;
         int dmg, pointGain, goldGainOnKill, threadSleep;
 
+        float speedModifier;
+        float baseSpeed = 10;
+
         //size of tiles, used to scale size of enemy
         int TileSize;
         //used to find and save destinations for pathing
@@ -48,7 +51,8 @@ namespace RpgTowerDefense
             {
                 gameObject.Transform.Position = new Vector2(-TileSize, moveTarget.Y);
             }
-            this.Health = GameWorld._Instance.waveManager.addedHealth;
+            Health = GameWorld._Instance.waveManager.addedHealth;
+            speedModifier = GameWorld._Instance.waveManager.speedMod;
             this.dmg = dmg;
             this.threadSleep = threadSleep;
             this.pointGain = pointGain;
@@ -227,7 +231,7 @@ namespace RpgTowerDefense
                     moveVector = Vector2.Normalize(moveVector);
                 }
                 //moves based on moveVector
-                gameObject.Transform.Translate(moveVector);
+                gameObject.Transform.Translate(moveVector * speedModifier);
                 animator.PlayAnimation("WalkBack");
                 Thread.Sleep(threadSleep);
             }
