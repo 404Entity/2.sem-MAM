@@ -48,7 +48,7 @@ namespace RpgTowerDefense
             {
                 gameObject.Transform.Position = new Vector2(-TileSize, moveTarget.Y);
             }
-            this.Health = health;
+            this.Health = GameWorld._Instance.waveManager.addedHealth;
             this.dmg = dmg;
             this.threadSleep = threadSleep;
             this.pointGain = pointGain;

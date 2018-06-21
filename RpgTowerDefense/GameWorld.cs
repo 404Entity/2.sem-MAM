@@ -11,6 +11,7 @@ namespace RpgTowerDefense
     public class GameWorld : Game
     {
         #region Fields
+        public WaveManager waveManager = new WaveManager();
         Director dic;
         Director dic2;
         Director dic4;
@@ -172,7 +173,6 @@ namespace RpgTowerDefense
             gameObjects.Add(player);
             dic2 = new Director(new EnemyBuilder());
             dic4 = new Director(new EnemyMineBuilder());
-            
 
 
 
@@ -237,7 +237,7 @@ namespace RpgTowerDefense
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            
+            waveManager.Update();
             if (GameState == true)
             {
                 if (GameOver == true)
@@ -266,18 +266,7 @@ namespace RpgTowerDefense
                             selectedGameObject = gameObject;
                             break;
                         }
-
                     }
-                }
-
-                //test mob spawn
-                spawntime += deltaTime;
-                if (spawntime >= interval)
-                {
-                    spawntime = 0;
-                    SpawnMob();
-                    //Giver spilleren 10+ guld hvert enemy spawn
-                    PlayerGold += GoldGainEachRound;
                 }
 
                 deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -298,23 +287,7 @@ namespace RpgTowerDefense
                     camera.Screenvalue = 3;
                 }
 
-                //test mob spawn
-                spawntime += deltaTime;
-                if (spawntime >= interval)
-                {
-                    spawntime = 0;
-                    SpawnMob();
-                    //Giver spilleren 10+ guld hvert enemy spawn
-                    PlayerGold += GoldGainEachRound;
-                }
-                mineSpawntime += deltaTime;
-                if (mineSpawntime >= mineInterval)
-                {
-                    mineSpawntime = 0;
-                    SpawnMobMine();
-                }
-
-
+                
                 // TODO: Add your update logic here
                 foreach (GameObject go in addGameObjects)
                 {
@@ -400,23 +373,17 @@ namespace RpgTowerDefense
         //spawns enemy and adds to both gameobjects and moblist
         public void SpawnMob()
         {
-            if (mobList.Count < 120)
-            {
-                dic2.Construct(new Vector2(0, 270));
-                GameObject mob = dic2.Builder.GetResult();
-                UpdateMobList(mob, true);
-                gameObjects.Add(mob);
-            }
+            dic2.Construct(new Vector2(0, 270));
+            GameObject mob = dic2.Builder.GetResult();
+            UpdateMobList(mob, true);
+            gameObjects.Add(mob);
         }
 
         public void SpawnMobMine()
         {
-            if (mobList.Count < 80)
-            {
-                GameObject mob = dic4.Construct(new Vector2(graphics.GraphicsDevice.Viewport.Width * 3, 425), player);
-                UpdateMobList(mob, true);
-                gameObjects.Add(mob);
-            }
+            GameObject mob = dic4.Construct(new Vector2(graphics.GraphicsDevice.Viewport.Width * 3, 425), player);
+            UpdateMobList(mob, true);
+            gameObjects.Add(mob);
         }
     }
 }
