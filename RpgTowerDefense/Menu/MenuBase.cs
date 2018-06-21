@@ -10,11 +10,13 @@ namespace RpgTowerDefense
 {
     abstract class MenuBase : ILoadable, IUpdate, IDrawable
     {
-        public abstract void Draw(SpriteBatch spriteBatch);
+   
 
         public abstract void LoadContent(ContentManager content);
 
         public abstract void Update();
-     
+
+        public abstract void Draw(SpriteBatch spriteBatch);
+
     }
 }

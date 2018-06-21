@@ -208,3 +208,5 @@ C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Win
 C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\EnterName.xnb
 C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\EnterText.xnb
 C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\GameOver.xnb
+C:\Users\MIKZU\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\EnterText.xnb
+C:\Users\MIKZU\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\GameOver.xnb
