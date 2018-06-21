@@ -23,7 +23,6 @@ namespace RpgTowerDefense
         {
             this.position = position;
             gameobject.Transform = this;
-        
         }
         public void  Translate(Vector2 translation)
         {

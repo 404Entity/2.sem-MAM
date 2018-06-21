@@ -88,20 +88,7 @@ namespace RpgTowerDefense
 
         public void Update()
         {
-            if (player == null)
-            {
-
-            }
-
-            if (Vector2.Distance(player.Transform.Position, gameObject.Transform.Position) <= lookRange && player.Transform.Position.X >= 3200)
-            {
-                 moveTarget = player.Transform.Position;
-            }
-            else
-            {
-                 moveTarget = waitPos;
-            }
-            moveTarget = waitPos;
+            Attack();
 
             if (Health <= 0)
             {
@@ -114,12 +101,15 @@ namespace RpgTowerDefense
                 //GameWorld._Instance.PlayerGold += goldGainOnKill;
             }
             
-            if (Vector2.Distance(player.Transform.Position, gameObject.Transform.Position) <= attackRange && attackCooldown <= 0)
+            if (Vector2.Distance(player.Transform.Position, gameObject.Transform.Position) <= 300)
             {
-                Attack();
-                attackCooldown = attackSpeed;
+                
             }
-            
+            else
+            {
+                moveTarget = waitPos;
+            }
+
             //Enemy Movement Thread
             if (mineThreadStarted == false)
             {
@@ -130,6 +120,14 @@ namespace RpgTowerDefense
 
         void Attack()
         {
+            //FollowPlayer
+            
+
+        }
+
+        private float Length()
+        {
+            return (float)Math.Sqrt((gameObject.Transform.Position.X * gameObject.Transform.Position.X) + (gameObject.Transform.Position.Y * gameObject.Transform.Position.Y));
         }
 
         #region Collision
