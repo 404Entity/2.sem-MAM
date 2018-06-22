@@ -89,6 +89,11 @@ namespace RpgTowerDefense
         public void NewWave()
         {
             waveNumber++;
+            //Gold Gained each wave
+            DatabaseData._Instance.IncomeEachLevel = GameWorld._Instance.PlayerGold / waveNumber;
+            //The wave the player loses at
+            DatabaseData._Instance.LoseLvl = waveNumber;
+
             monsterAmmount += waveNumber + 1;
             monstersLeft = monsterAmmount;
             healthMod += 0.75f;
