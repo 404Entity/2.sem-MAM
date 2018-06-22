@@ -158,7 +158,6 @@ C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Sharp
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\SharpDX.XInput.dll
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\MonoGame.Framework.xml
-C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\System.Data.SQLite.xml
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\SharpDX.xml
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
@@ -262,3 +261,6 @@ C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTower
 C:\Users\Allan\Documents\GitHub\2.sem-MAM\RpgTowerDefense\obj\x86\Debug\RpgTowerDefense.pdb
 C:\Users\MIKZU\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\EnterText.xnb
 C:\Users\MIKZU\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\GameOver.xnb
+C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\EnterName.xnb
+C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\EnterText.xnb
+C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\GameOver.xnb

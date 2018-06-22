@@ -204,6 +204,10 @@ namespace RpgTowerDefense
             tower_01ProxyButton.Click += Tower_01ProxyButton_Click;
             tower_02ProxyButton.Click += Tower_02ProxyButton_Click;
             tower_03ProxyButton.Click += Tower_03ProxyButton_Click;
+            tower_01ProxyButton.RightClick += RemoveProxyButton;
+            tower_02ProxyButton.RightClick += RemoveProxyButton;
+            tower_03ProxyButton.RightClick += RemoveProxyButton;
+
 
             upgrade_01Button.Click += UpgradeButton01_Click;
             upgrade_02Button.Click += UpgradeButton02_Click;
@@ -535,6 +539,10 @@ namespace RpgTowerDefense
 
             }
 
+        }
+        private void RemoveProxyButton(object sender, EventArgs e)
+        {
+            removeUIElements.Add(sender as UIComponent);
         }
 
         /// <summary>

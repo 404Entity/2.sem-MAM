@@ -103,7 +103,12 @@ namespace RpgTowerDefense
                 {
                     Click?.Invoke(this, new EventArgs());
                 }
+                if (currentState.RightButton == ButtonState.Released && previousState.RightButton == ButtonState.Pressed)
+                {
+                    RightClick?.Invoke(this, new EventArgs());
+                }
             }
+         
         }
         #endregion
     }
