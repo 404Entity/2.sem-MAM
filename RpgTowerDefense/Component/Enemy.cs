@@ -171,16 +171,18 @@ namespace RpgTowerDefense
                 else if (dmgObject.AttackType == AttackType.Tesla)
                 {
                     GameObject bounceTarget = this.gameObject;
+                    float distanceToTarget = 0;
                     foreach (GameObject enemy in GameWorld._Instance.MobList)
                     {
                         if (enemy != this.gameObject)
                         {
-                            if (Vector2.Distance(enemy.Transform.Position, this.gameObject.Transform.Position) < 50)
+                            if (Vector2.Distance(enemy.Transform.Position, this.gameObject.Transform.Position) < 200)
                             {
                                 bounceTarget = enemy;
                                 Vector2 shootdirection = bounceTarget.Transform.Position - gameObject.Transform.Position;
                                 dmgObject.DirectionVector = Vector2.Normalize(shootdirection);
                                 dmgObject.Bounces++;
+                                this.Health -= (int)dmgObject.Damage;
                                 break;
                             }
                         }
