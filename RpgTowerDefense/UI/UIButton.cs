@@ -27,6 +27,7 @@ namespace RpgTowerDefense
 
         //Properties
         public EventHandler Click;
+        public EventHandler RightClick;
         public Color PenColor { get => penColor; set => penColor = value; }
         public Vector2 Position { get => position; set => position = value; }
         public Rectangle Rectangle
@@ -102,7 +103,12 @@ namespace RpgTowerDefense
                 {
                     Click?.Invoke(this, new EventArgs());
                 }
+                if (currentState.RightButton == ButtonState.Released && previousState.RightButton == ButtonState.Pressed)
+                {
+                    RightClick?.Invoke(this, new EventArgs());
+                }
             }
+         
         }
         #endregion
     }

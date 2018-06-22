@@ -211,6 +211,10 @@ namespace RpgTowerDefense
             tower_01ProxyButton.Click += Tower_01ProxyButton_Click;
             tower_02ProxyButton.Click += Tower_02ProxyButton_Click;
             tower_03ProxyButton.Click += Tower_03ProxyButton_Click;
+            tower_01ProxyButton.RightClick += RemoveProxyButton;
+            tower_02ProxyButton.RightClick += RemoveProxyButton;
+            tower_03ProxyButton.RightClick += RemoveProxyButton;
+
 
             upgrade_01Button.Click += UpgradeButton01_Click;
             upgrade_02Button.Click += UpgradeButton02_Click;
@@ -544,6 +548,10 @@ namespace RpgTowerDefense
             }
 
         }
+        private void RemoveProxyButton(object sender, EventArgs e)
+        {
+            removeUIElements.Add(sender as UIComponent);
+        }
 
         /// <summary>
         /// Calculate the cost of the Upgrade for the Upgradebutton.
@@ -571,30 +579,39 @@ namespace RpgTowerDefense
         }
         private void UpdateAttackPower(object sender, System.EventArgs e)
         {
-            if (GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") != null)
+            if (GameWorld._Instance.SelectedGameObject != null)
             {
-                Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
-                attackPowerLabel.Text = tower.AttackPower.ToString();
+                if (GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") != null)
+                {
+                    Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
+                    attackPowerLabel.Text = tower.AttackPower.ToString();
+                }
             }
-
         }
+
         private void UpdateAttackSpeed(object sender, System.EventArgs e)
         {
-            if (GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") != null)
+            if (GameWorld._Instance.SelectedGameObject != null)
             {
-                Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
-                attackSpeedLabel.Text = tower.AttackSpeed.ToString();
+                if (GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") != null)
+                {
+                    Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
+                    attackSpeedLabel.Text = tower.AttackSpeed.ToString();
+                }
             }
-
         }
+
+
         private void UpdateAttackRange(object sender, System.EventArgs e)
         {
-            if (GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") != null)
+            if (GameWorld._Instance.SelectedGameObject != null)
             {
-                Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
-                attackRangeLabel.Text = tower.AttackRadius.ToString();
+                if (GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") != null)
+                {
+                    Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
+                    attackRangeLabel.Text = tower.AttackRadius.ToString();
+                }
             }
-
         }
         private void WaveNumberLabel(object sender, System.EventArgs e)
         {

@@ -68,6 +68,10 @@ namespace RpgTowerDefense
             {
                 gameObject.Transform.Translate(directionVector * 2);
             }
+            else if (attackType == AttackType.Tesla)
+            {
+                gameObject.Transform.Translate(directionVector * 5);
+            }
             else
             {
                 gameObject.Transform.Translate(directionVector * 10);

@@ -141,9 +141,9 @@ namespace RpgTowerDefense
                 {
                     SpriteRenderer sp = gameObject.GetComponent("SpriteRenderer") as SpriteRenderer;
                     Director director = new Director(new BulletBuilder());
-                    director.Construct(new Vector2(gameObject.Transform.Position.X + ((sp.Rectangle.Width / 2) * sp.Scale) , gameObject.Transform.Position.Y + ((sp.Rectangle.Height / 2) * sp.Scale)), 2, new Vector2(-1, 0), 2, AttackType.fragment);
+                    director.Construct(new Vector2(gameObject.Transform.Position.X + ((sp.Rectangle.Width / 2) * sp.Scale), gameObject.Transform.Position.Y + ((sp.Rectangle.Height / 2) * sp.Scale)), 2, new Vector2(-1, 0), 2, AttackType.fragment);
                     GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
-                    director.Construct(new Vector2(gameObject.Transform.Position.X + ((sp.Rectangle.Width / 2) * sp.Scale) , gameObject.Transform.Position.Y + ((sp.Rectangle.Height / 2) * sp.Scale)), 2, new Vector2(1, 0), 2, AttackType.fragment);
+                    director.Construct(new Vector2(gameObject.Transform.Position.X + ((sp.Rectangle.Width / 2) * sp.Scale), gameObject.Transform.Position.Y + ((sp.Rectangle.Height / 2) * sp.Scale)), 2, new Vector2(1, 0), 2, AttackType.fragment);
                     GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
                     director.Construct(new Vector2(gameObject.Transform.Position.X + ((sp.Rectangle.Width / 2) * sp.Scale), gameObject.Transform.Position.Y + ((sp.Rectangle.Height / 2) * sp.Scale)), 2, new Vector2(0, -1), 2, AttackType.fragment);
                     GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
@@ -175,24 +175,23 @@ namespace RpgTowerDefense
                 else if (dmgObject.AttackType == AttackType.Tesla)
                 {
                     GameObject bounceTarget = this.gameObject;
+                    float distanceToTarget = 0;
                     foreach (GameObject enemy in GameWorld._Instance.MobList)
                     {
                         if (enemy != this.gameObject)
                         {
-                            if (Vector2.Distance(enemy.Transform.Position, this.gameObject.Transform.Position) < 50)
+                            if (Vector2.Distance(enemy.Transform.Position, this.gameObject.Transform.Position) < 200)
                             {
                                 bounceTarget = enemy;
                                 Vector2 shootdirection = bounceTarget.Transform.Position - gameObject.Transform.Position;
-                                dmgObject.DirectionVector = Vector2.Normalize(shootdirection);
+                                dmgObject.DirectionVector += Vector2.Normalize(shootdirection);
                                 dmgObject.Bounces++;
+                                this.Health -= (int)dmgObject.Damage;
                                 break;
                             }
                         }
                     }
                 }
-
-
-
             }
         }
 
