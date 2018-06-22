@@ -286,8 +286,19 @@ namespace RpgTowerDefense
                         }
                     }
                 }
-
-                deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (Mouse.GetState().RightButton == ButtonState.Pressed && previouseMouseState.RightButton == ButtonState.Released)
+                {
+                    foreach (GameObject gameObject in GameObjects)
+                    {
+                        //SpriteRenderer sr = gameObject.GetComponent("SpriteRenderer") as SpriteRenderer;
+                        if (gameObject.GetComponent("Player") != null)
+                        {
+                            selectedGameObject = gameObject;
+                            break;
+                        }
+                    }
+                }
+                    deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                     Exit();
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.D1))
