@@ -24,6 +24,9 @@ namespace RpgTowerDefense
         bool threadStarted = false, enemyMovementBool = true;
         int dmg, pointGain, goldGainOnKill, threadSleep;
 
+        float speedModifier;
+        float baseSpeed = 10;
+
         //size of tiles, used to scale size of enemy
         int TileSize;
         //used to find and save destinations for pathing
@@ -48,7 +51,8 @@ namespace RpgTowerDefense
             {
                 gameObject.Transform.Position = new Vector2(-TileSize, moveTarget.Y);
             }
-            this.Health = health;
+            Health = GameWorld._Instance.waveManager.addedHealth;
+            speedModifier = GameWorld._Instance.waveManager.speedMod;
             this.dmg = dmg;
             this.threadSleep = threadSleep;
             this.pointGain = pointGain;
@@ -137,9 +141,9 @@ namespace RpgTowerDefense
                 {
                     SpriteRenderer sp = gameObject.GetComponent("SpriteRenderer") as SpriteRenderer;
                     Director director = new Director(new BulletBuilder());
-                    director.Construct(new Vector2(gameObject.Transform.Position.X + ((sp.Rectangle.Width / 2) * sp.Scale) , gameObject.Transform.Position.Y + ((sp.Rectangle.Height / 2) * sp.Scale)), 2, new Vector2(-1, 0), 2, AttackType.fragment);
+                    director.Construct(new Vector2(gameObject.Transform.Position.X + ((sp.Rectangle.Width / 2) * sp.Scale), gameObject.Transform.Position.Y + ((sp.Rectangle.Height / 2) * sp.Scale)), 2, new Vector2(-1, 0), 2, AttackType.fragment);
                     GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
-                    director.Construct(new Vector2(gameObject.Transform.Position.X + ((sp.Rectangle.Width / 2) * sp.Scale) , gameObject.Transform.Position.Y + ((sp.Rectangle.Height / 2) * sp.Scale)), 2, new Vector2(1, 0), 2, AttackType.fragment);
+                    director.Construct(new Vector2(gameObject.Transform.Position.X + ((sp.Rectangle.Width / 2) * sp.Scale), gameObject.Transform.Position.Y + ((sp.Rectangle.Height / 2) * sp.Scale)), 2, new Vector2(1, 0), 2, AttackType.fragment);
                     GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
                     director.Construct(new Vector2(gameObject.Transform.Position.X + ((sp.Rectangle.Width / 2) * sp.Scale), gameObject.Transform.Position.Y + ((sp.Rectangle.Height / 2) * sp.Scale)), 2, new Vector2(0, -1), 2, AttackType.fragment);
                     GameWorld._Instance.AddGameObjects.Add(director.Builder.GetResult());
@@ -180,7 +184,7 @@ namespace RpgTowerDefense
                             {
                                 bounceTarget = enemy;
                                 Vector2 shootdirection = bounceTarget.Transform.Position - gameObject.Transform.Position;
-                                dmgObject.DirectionVector = Vector2.Normalize(shootdirection);
+                                dmgObject.DirectionVector += Vector2.Normalize(shootdirection);
                                 dmgObject.Bounces++;
                                 this.Health -= (int)dmgObject.Damage;
                                 break;
@@ -188,9 +192,6 @@ namespace RpgTowerDefense
                         }
                     }
                 }
-
-
-
             }
         }
 
@@ -229,7 +230,7 @@ namespace RpgTowerDefense
                     moveVector = Vector2.Normalize(moveVector);
                 }
                 //moves based on moveVector
-                gameObject.Transform.Translate(moveVector);
+                gameObject.Transform.Translate(moveVector * speedModifier);
                 animator.PlayAnimation("WalkBack");
                 Thread.Sleep(threadSleep);
             }

@@ -150,7 +150,20 @@ namespace RpgTowerDefense
         }
         #endregion
 
+        #region dropTable
+        public void DropTable(string tableName)
+        {
+            //Drops table
+            sqlite2.Open();
 
+            string txtSqlQuery = "Drop table "+tableName;
+
+            SQLiteCommand command = new SQLiteCommand(txtSqlQuery, sqlite2);
+            command.ExecuteNonQuery();
+            sqlite2.Close();
+        }
+
+        #endregion
         #region CreateTables
         public void CreateTables()
         {

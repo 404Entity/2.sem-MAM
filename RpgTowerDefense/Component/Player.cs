@@ -51,6 +51,14 @@ namespace RpgTowerDefense
 
         public void Update()
         {
+            if (gameObject.Transform.Position.X > 1600 && 2000 > gameObject.Transform.Position.X)
+            {
+                gameObject.Transform.SetPosition(3201); 
+            }
+            else if (gameObject.Transform.Position.X > 2800 && 3200 > gameObject.Transform.Position.X)
+            {
+                gameObject.Transform.SetPosition(1600);
+            }
             MouseState mouseState = Mouse.GetState();
             KeyboardState keyState = Keyboard.GetState();
             if (canMove)
@@ -167,7 +175,14 @@ namespace RpgTowerDefense
 
         public void OnCollisionEnter(Collider other)
         {
-            throw new NotImplementedException();
+            if ((EnemyMine)other.GameObject.GetComponent("EnemyMine") != null)
+            {
+                //Loose game
+                GameWorld._Instance.GameState = true;
+                GameWorld._Instance.GameOver = true;
+                Database._Instance.AddHighScore(NameStringInput._Instance.MyName, GameWorld._Instance.HighScore);
+                Database._Instance.AddAnalyse(DatabaseData._Instance.IncomeEachLevel, GameWorld._Instance.PlayerGold, DatabaseData._Instance.LoseLvl, DatabaseData._Instance.TotalTowersPlaced);
+            }
         }
 
 

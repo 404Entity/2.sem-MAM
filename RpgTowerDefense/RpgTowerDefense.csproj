@@ -99,6 +99,7 @@
     <Compile Include="UI\UIComponent.cs" />
     <Compile Include="UI\UILabel.cs" />
     <Compile Include="UI\VersionControl.cs" />
+    <Compile Include="WaveManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

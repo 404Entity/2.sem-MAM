@@ -1,28 +1,48 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RpgTowerDefense
 {
 class MineMonsterHandler
     {
-        Random rnd;
-        
-        int pos;
+        List<GameObject> halfwayMine = new List<GameObject>();
+        List<GameObject> disabledMine = new List<GameObject>();
 
-        Director mobDic = new Director(new EnemyBuilder());
-
-        public void SpawnMob(int ammount)
+        public void Update()
         {
-            rnd = new Random();
-            
-            for (int i = 0; i < ammount;)
+            foreach(GameObject go in GameWorld._Instance.MineList)
             {
-                pos = rnd.Next(200, 651);
-                //GameWorld._Instance.SpawnMobMine(pos);
-                i++;
+                if(go.Transform.Position.X <= 3600)
+                {
+                    disabledMine.Add(go);
+                }
+                else if(go.Transform.Position.X <= 4000)
+                {
+                    halfwayMine.Add(go);
+                    disabledMine.Clear();
+                }
+                else
+                {
+                    disabledMine.Clear();
+                    halfwayMine.Clear();
+                }
+            }
+
+
+            if(disabledMine.Count != 0)
+            {
+                GameWorld._Instance.mineDisabled = true;
+            }
+            else if(halfwayMine.Count != 0)
+            {
+                GameWorld._Instance.mineHalfway = true;
+            }
+            else
+            {
+                GameWorld._Instance.mineDisabled = false;
+                GameWorld._Instance.mineHalfway = false;
             }
         }
     }

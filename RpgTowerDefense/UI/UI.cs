@@ -563,30 +563,39 @@ namespace RpgTowerDefense
         }
         private void UpdateAttackPower(object sender, System.EventArgs e)
         {
-            if (GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") != null)
+            if (GameWorld._Instance.SelectedGameObject != null)
             {
-                Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
-                attackPowerLabel.Text = tower.AttackPower.ToString();
+                if (GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") != null)
+                {
+                    Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
+                    attackPowerLabel.Text = tower.AttackPower.ToString();
+                }
             }
-
         }
+
         private void UpdateAttackSpeed(object sender, System.EventArgs e)
         {
-            if (GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") != null)
+            if (GameWorld._Instance.SelectedGameObject != null)
             {
-                Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
-                attackSpeedLabel.Text = tower.AttackSpeed.ToString();
+                if (GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") != null)
+                {
+                    Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
+                    attackSpeedLabel.Text = tower.AttackSpeed.ToString();
+                }
             }
-
         }
+
+
         private void UpdateAttackRange(object sender, System.EventArgs e)
         {
-            if (GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") != null)
+            if (GameWorld._Instance.SelectedGameObject != null)
             {
-                Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
-                attackRangeLabel.Text = tower.AttackRadius.ToString();
+                if (GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") != null)
+                {
+                    Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
+                    attackRangeLabel.Text = tower.AttackRadius.ToString();
+                }
             }
-
         }
 
 
