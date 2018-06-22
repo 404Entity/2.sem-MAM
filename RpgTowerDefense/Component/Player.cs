@@ -177,9 +177,11 @@ namespace RpgTowerDefense
         {
             if ((EnemyMine)other.GameObject.GetComponent("EnemyMine") != null)
             {
-                EnemyMine dmgObject = (EnemyMine)other.GameObject.GetComponent("EnemyMine");
+                //Loose game
                 GameWorld._Instance.GameState = true;
                 GameWorld._Instance.GameOver = true;
+                Database._Instance.AddHighScore(NameStringInput._Instance.MyName, GameWorld._Instance.HighScore);
+                Database._Instance.AddAnalyse(DatabaseData._Instance.IncomeEachLevel, GameWorld._Instance.PlayerGold, DatabaseData._Instance.LoseLvl, DatabaseData._Instance.TotalTowersPlaced);
             }
         }
 
