@@ -39,6 +39,7 @@ namespace RpgTowerDefense
         private UILabel attackPowerLabel;
         private UILabel attackSpeedLabel;
         private UILabel attackRangeLabel;
+        private UILabel waveNumberLabel;
 
         GameObject previousGameObject;
 
@@ -155,6 +156,11 @@ namespace RpgTowerDefense
                 Position = new Vector2(180, 18),
                 PenColor = Color.White
             };
+            waveNumberLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), "Wave Number:     "+DatabaseData._Instance.LoseLvl)
+            {
+                Position = new Vector2(700, 18),
+                PenColor = Color.White
+            };
             versionLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion + " Under Development")
             {
                 Position = new Vector2(5, 880),
@@ -183,6 +189,7 @@ namespace RpgTowerDefense
                 versionLabel,
                 gateHealthLabel,
                 scoreLabel,
+                waveNumberLabel,
                 goldLabel,
                 exitButton,
                 tower_01Button,
@@ -216,6 +223,7 @@ namespace RpgTowerDefense
             attackPowerLabel.updateMe += UpdateAttackPower;
             attackSpeedLabel.updateMe += UpdateAttackSpeed;
             attackRangeLabel.updateMe += UpdateAttackRange;
+            waveNumberLabel.updateMe += WaveNumberLabel;
 
         }
         #endregion
@@ -587,6 +595,10 @@ namespace RpgTowerDefense
                 attackRangeLabel.Text = tower.AttackRadius.ToString();
             }
 
+        }
+        private void WaveNumberLabel(object sender, System.EventArgs e)
+        {
+            waveNumberLabel.Text = "Wave Number:         " + DatabaseData._Instance.LoseLvl;
         }
 
 

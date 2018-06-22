@@ -22,7 +22,7 @@ namespace RpgTowerDefense
         }
         
         //Analyse data
-        int incomeEachWave, totalIncome, loseWave, totalTowersPlaced;
+        int incomeEachWave, totalIncome, loseWave = 1, totalTowersPlaced;
 
 
 
