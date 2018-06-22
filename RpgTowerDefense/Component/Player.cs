@@ -175,7 +175,12 @@ namespace RpgTowerDefense
 
         public void OnCollisionEnter(Collider other)
         {
-            throw new NotImplementedException();
+            if ((EnemyMine)other.GameObject.GetComponent("EnemyMine") != null)
+            {
+                EnemyMine dmgObject = (EnemyMine)other.GameObject.GetComponent("EnemyMine");
+                GameWorld._Instance.GameState = true;
+                GameWorld._Instance.GameOver = true;
+            }
         }
 
 
