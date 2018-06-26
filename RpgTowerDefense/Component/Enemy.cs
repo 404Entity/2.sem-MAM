@@ -33,6 +33,7 @@ namespace RpgTowerDefense
         int walkIndex;
         Vector2 moveTarget;
 
+        bool fragmentDamageTaken;
         public int Health { get; internal set; }
         public int Dmg { get => dmg; set => dmg = value; }
         #endregion
@@ -88,6 +89,7 @@ namespace RpgTowerDefense
 
         public void Update()
         {
+            fragmentDamageTaken = false;
             if (Health <= 0)
             {
                 GameWorld._Instance.RemoveGameObjects.Add(gameObject);
@@ -137,6 +139,8 @@ namespace RpgTowerDefense
             {
 
                 Projectile dmgObject = (Projectile)other.GameObject.GetComponent("Projectile");
+
+
                 if (dmgObject.AttackType == AttackType.heavy)
                 {
                     SpriteRenderer sp = gameObject.GetComponent("SpriteRenderer") as SpriteRenderer;
@@ -160,11 +164,17 @@ namespace RpgTowerDefense
                     this.Health -= (int)dmgObject.Damage;
                     GameWorld._Instance.RemoveGameObjects.Add(other.GameObject);
                     GameWorld._Instance.Colliders.Remove(other);
-
                 }
+
+
                 else if (dmgObject.AttackType == AttackType.fragment)
                 {
-                    this.Health -= (int)dmgObject.Damage;
+                    if (fragmentDamageTaken == false)
+                    {
+                        this.Health -= (int)dmgObject.Damage;
+                        fragmentDamageTaken = true;
+                    }
+                   
                 }
                 else if (dmgObject.AttackType == AttackType.Light)
                 {
