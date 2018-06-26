@@ -415,7 +415,6 @@ namespace RpgTowerDefense
             GameObject mob = dic4.Construct(new Vector2(graphics.GraphicsDevice.Viewport.Width * 3, 425), player);
             UpdateMineList(mob, true);
             gameObjects.Add(mob);
-            AddGold();
         }
 
         void AddGold()

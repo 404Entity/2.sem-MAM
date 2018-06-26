@@ -182,7 +182,6 @@ C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Enemy01_SpriteSheetv.
 C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\gate.xnb
 C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\playerSprite.xnb
 C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\RpgTowerDefense.exe.config
-C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\System.Data.SQLite.xml
 C:\Users\MIKZ\source\repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\RpgTowerDefense.exe.config
 C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\Enemy_01_SpriteSheet.xnb
 C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\CollisionTexture.xnb

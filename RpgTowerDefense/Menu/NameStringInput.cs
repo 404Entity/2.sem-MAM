@@ -28,7 +28,7 @@ namespace RpgTowerDefense
         #endregion
 
 
-        private Keys[] lastPressedKeys = new Keys[5];
+        private Keys[] lastPressedKeys = new Keys[1];
 
         private string myName = string.Empty;
         private string myNameEmpty = "Enter your name, before you can start the game!";
@@ -65,14 +65,6 @@ namespace RpgTowerDefense
 
         public override void Update()
         {
-            if (rec.Contains(new Point(Mouse.GetState().X,Mouse.GetState().Y))&& Mouse.GetState().LeftButton == ButtonState.Pressed)
-            {
-                
-            }
-
-
-
-
             GetKeys();
             if (MyName.Count() >= maxString)
             {
@@ -107,15 +99,7 @@ namespace RpgTowerDefense
             KeyboardState kbstate = Keyboard.GetState();
 
             Keys[] pressedkeys = kbstate.GetPressedKeys();
-
-            foreach (Keys key in lastPressedKeys)
-            {
-                if (!pressedkeys.Contains(key))
-                {
-                    //Key is no longer pressed
-                    OnKeyUp(key);
-                }
-            }
+            
             foreach (Keys key in pressedkeys)
             {
                 if (!lastPressedKeys.Contains(key))
@@ -127,13 +111,9 @@ namespace RpgTowerDefense
                     myName = string.Empty;
                 }
             }
-            lastPressedKeys = pressedkeys;
+           lastPressedKeys = pressedkeys;
         }
-
-        public void OnKeyUp(Keys key)
-        {
-            
-        }
+        
         public void OnKeyDown(Keys key)
         {
             myName += key.ToString();
