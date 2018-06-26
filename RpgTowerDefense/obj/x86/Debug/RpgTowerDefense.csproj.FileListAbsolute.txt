@@ -201,7 +201,6 @@ C:\Users\MIKZU\Source\Repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Cont
 C:\Users\MIKZU\Source\Repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\gate.xnb
 C:\Users\MIKZU\Source\Repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\playerSprite.xnb
 C:\Users\MIKZU\Source\Repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\RpgTowerDefense.exe.config
-C:\Users\MIKZU\Source\Repos\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\System.Data.SQLite.xml
 C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\EnterText.xnb
 C:\Users\MortenEllegaardHanse\Documents\GitHub\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\GameOver.xnb
 C:\2.sem-MAM\RpgTowerDefense\bin\Windows\x86\Debug\Content\EnterName.xnb

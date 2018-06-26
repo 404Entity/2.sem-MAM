@@ -30,6 +30,7 @@ namespace RpgTowerDefense
         private UIButton upgrade_01Button;
         private UIButton upgrade_02Button;
         private UIButton upgrade_03Button;
+        private UIButton sell_TowerButton;
 
         //Labels
         private UILabel goldLabel;
@@ -141,6 +142,15 @@ namespace RpgTowerDefense
                 TextScale = 0.8f
             };
 
+            sell_TowerButton = new UIButton(content.Load<Texture2D>("Controls/Button"), content.Load<SpriteFont>("Fonts/UiFont"), false)
+            {
+                Position = new Vector2(100, 824),
+                Text = "Sell",
+                Scale = 0.3f,
+                TextScale = 0.8f
+            };
+
+
             goldLabel = new UILabel(content.Load<SpriteFont>("Fonts/UiFont"), "0")
             {
                 Position = new Vector2(1280, 18),
@@ -207,6 +217,7 @@ namespace RpgTowerDefense
             tower_01Button.Click += Tower_01Button_Click;
             tower_02Button.Click += Tower_02Button_Click;
             tower_03Button.Click += Tower_03Button_Click;
+            
 
             tower_01ProxyButton.Click += Tower_01ProxyButton_Click;
             tower_02ProxyButton.Click += Tower_02ProxyButton_Click;
@@ -214,7 +225,7 @@ namespace RpgTowerDefense
             tower_01ProxyButton.RightClick += RemoveProxyButton;
             tower_02ProxyButton.RightClick += RemoveProxyButton;
             tower_03ProxyButton.RightClick += RemoveProxyButton;
-
+            sell_TowerButton.Click += SelltowerButton;
 
             upgrade_01Button.Click += UpgradeButton01_Click;
             upgrade_02Button.Click += UpgradeButton02_Click;
@@ -267,6 +278,7 @@ namespace RpgTowerDefense
                         addUIElements.Add(upgrade_01Button);
                         addUIElements.Add(upgrade_02Button);
                         addUIElements.Add(upgrade_03Button);
+                        addUIElements.Add(sell_TowerButton);
                         addUIElements.Add(attackPowerLabel);
                         addUIElements.Add(attackSpeedLabel);
                         addUIElements.Add(attackRangeLabel);
@@ -335,6 +347,7 @@ namespace RpgTowerDefense
                         RemoveUIElements.Add(attackPowerLabel);
                         RemoveUIElements.Add(attackSpeedLabel);
                         RemoveUIElements.Add(attackRangeLabel);
+                        RemoveUIElements.Add(sell_TowerButton);
 
                         addUIElements.Add(tower_01Button);
                         addUIElements.Add(tower_02Button);
@@ -551,6 +564,16 @@ namespace RpgTowerDefense
         private void RemoveProxyButton(object sender, EventArgs e)
         {
             removeUIElements.Add(sender as UIComponent);
+        }
+
+        private void SelltowerButton(object sender, EventArgs e)
+        {
+            if (GameWorld._Instance.SelectedGameObject != null)
+            {
+                Towerobj tower = GameWorld._Instance.SelectedGameObject.GetComponent("Towerobj") as Towerobj;
+                tower.SellTower();
+                GameWorld._Instance.SelectedGameObject = null;
+            }
         }
 
         /// <summary>

@@ -223,6 +223,14 @@ namespace RpgTowerDefense
             sp.Rotation += 0.05f;
         }
         //create tower animation
+        public void SellTower()
+        {
+            int sellValue = (40 * aPUpgradeLvl * ASUpgradeLvl * ARUpgradeLvl) / 3;
+
+            GameWorld._Instance.PlayerGold += sellValue;
+            GameWorld._Instance.RemoveGameObjects.Add(this.gameObject);
+
+        }
         private void CreateAnimation()
         {
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/MIKZ/source/repos/2.sem-MAM/RpgTowerDefense/Content/CollisionTexture.png</SourceFile>
-  <SourceTime>2018-06-18T10:12:24.8922+02:00</SourceTime>
-  <DestFile>C:/Users/MIKZ/source/repos/2.sem-MAM/RpgTowerDefense/Content/bin/Windows/CollisionTexture.xnb</DestFile>
-  <DestTime>2018-06-22T10:11:33.8795017+02:00</DestTime>
+  <SourceFile>C:/Users/MIKZU/Source/Repos/2.sem-MAM/RpgTowerDefense/Content/CollisionTexture.png</SourceFile>
+  <SourceTime>2018-06-21T19:36:15.5124953+02:00</SourceTime>
+  <DestFile>C:/Users/MIKZU/Source/Repos/2.sem-MAM/RpgTowerDefense/Content/bin/Windows/CollisionTexture.xnb</DestFile>
+  <DestTime>2018-06-23T17:12:26.1624319+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

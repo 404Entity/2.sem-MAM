@@ -53,6 +53,9 @@
     <Compile Include="Component\Animator.cs" />
     <Compile Include="Component\Collider.cs" />
     <Compile Include="Component\Component.cs" />
+    <Compile Include="Component\Item.cs" />
+    <Compile Include="Component\Weapons\Pistol.cs" />
+    <Compile Include="Component\Weapons\Weapon.cs" />
     <Compile Include="Database\DatabaseData.cs" />
     <Compile Include="Database\Database.cs" />
     <Compile Include="Component\Enemy.cs" />
