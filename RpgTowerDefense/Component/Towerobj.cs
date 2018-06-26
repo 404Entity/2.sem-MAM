@@ -135,6 +135,7 @@ namespace RpgTowerDefense
                 sp.Rotation = (float)GetAngle(gameObject.Transform.Position, target.Transform.Position);
             }
         }
+
         /// <summary>
         /// Claculate the angle between the point a and point b
         /// </summary>
@@ -146,6 +147,8 @@ namespace RpgTowerDefense
 
             return Math.Atan2(b.Y - a.Y, b.X - a.X);
         }
+
+
         public void LoadContent(ContentManager content)
         {
 
